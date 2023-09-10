@@ -13,7 +13,7 @@ ImageButton.Size = UDim2.new(0, 60, 0, 60)
 ImageButton.Draggable = true
 ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageButton.BackgroundTransparency = 1.000
-ImageButton.Image = ""
+ImageButton.Image = "rbxassetid://6403436054"
 local MCNRb = Instance.new("UICorner")
 MCNRb.Name = "MCNR"
 MCNRb.Parent = ImageButton
@@ -176,7 +176,7 @@ local Logo = Instance.new("ImageLabel")
 	Logo.BackgroundTransparency = 1.000
 	Logo.Position = UDim2.new(0, 10, 0, 0)
 	Logo.Size = UDim2.new(0, 32, 0, 32)
-	Logo.Image = "rbxassetid://13610504970"
+	Logo.Image = "rbxassetid://6403436054"
 
 local Name = Instance.new("TextLabel")
 Name.Parent = Top
@@ -239,7 +239,7 @@ local Logo = Instance.new("ImageLabel")
 	Logo.BackgroundTransparency = 1
 	Logo.Position = UDim2.new(0, 10, 0, 10)
 	Logo.Size = UDim2.new(0, 120, 0, 120)
-	Logo.Image = "rbxassetid://13607406183"
+	Logo.Image = "rbxassetid://6403436054"
 local Tab = Instance.new("Frame")
 Tab.Name = "Tab"
 Tab.Parent = Main
@@ -773,7 +773,7 @@ ImageButton.BackgroundTransparency = 1.000
 ImageButton.Position = UDim2.new(0, 357, 0, 3)
 ImageButton.Size = UDim2.new(0, 25, 0, 25)
 ImageButton.ZIndex = 2
-ImageButton.Image = "rbxassetid://3926311105"
+ImageButton.Image = "rbxassetid://6403436054"
 ImageButton.ImageColor3 = Color3.fromRGB(60,60,255)
 ImageButton.ImageRectOffset = Vector2.new(940, 784)
 ImageButton.ImageRectSize = Vector2.new(48, 48)
@@ -857,7 +857,7 @@ imgLabelIcon.Name = "Icon"
 				imgLabelIcon.BackgroundTransparency = 1.000
 				imgLabelIcon.Position = UDim2.new(0, 5, 0, 1)
 				imgLabelIcon.Size = UDim2.new(0, 30, 0, 30)
-				imgLabelIcon.Image = "rbxassetid://13610504970" 
+				imgLabelIcon.Image = "rbxassetid://6403436054" 
 
 Title.Parent = Button
 Title.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
@@ -1201,7 +1201,7 @@ end
                 ImageLabel.BorderSizePixel = 0
                 ImageLabel.Position = UDim2.new(0, 7.5, 0, 7.5)
                 ImageLabel.Size = UDim2.new(0, 30, 0, 30)
-                ImageLabel.Image = "rbxassetid://13610504970"
+                ImageLabel.Image = "rbxassetid://6403436054"
                 
                 
                 

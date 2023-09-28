@@ -53,7 +53,7 @@ local data = {
 	["avatar_url"] = "", -- ur discord logo url
 	["embeds"] = {
 		{
-			["description"] = "Moon & Mirrage",
+			["description"] = "Moon & Mirage",
 			["color"] = tonumber(0xff0000), -- color id		
 			["type"] = "rich",
 			["fields"] =  {

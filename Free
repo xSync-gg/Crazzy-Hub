@@ -1,0 +1,25 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({
+	Name = "Chose Language",
+	IntroText = "Crazzy Hub",
+	HidePremium = false,
+	SaveConfig = true,
+	ConfigFolder = "OrionTest"
+})
+local Script = Window:MakeTab({
+	Name = "Chose Language",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Script:AddButton({
+	Name = "English version",
+	Callback = function(value)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/kmmwhocare/Crazzy-Hub/main/Crazzy%20Hub%20English"))()
+	end
+})
+Script:AddButton({
+	Name = "Bản Tiếng Việt",
+	Callback = function(value)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/kmmwhocare/Crazzy-Hub/main/Crazzy%20Hub%20Ti%E1%BA%BFng%20Vi%E1%BB%87t"))()	
+	end
+})

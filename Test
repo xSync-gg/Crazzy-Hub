@@ -819,7 +819,7 @@ for i,v in pairs(game:GetService'Players':GetChildren()) do
 					name.BackgroundTransparency = 1
 					name.TextStrokeTransparency = 0.5
 					if v.Team == game.Players.LocalPlayer.Team then
-						name.TextColor3 = Color3.new(0,255,0)
+						name.TextColor3 = Color3.new(0, 0, 138)
 					else
 						name.TextColor3 = Color3.new(255,0,0)
 					end
@@ -3539,6 +3539,134 @@ spawn(function()
         end
     end
 end)
+
+Set:Toggle(
+	"Remove Notification",
+	false,
+	function(value)
+		_G.Remove_trct = value
+	end
+)
+spawn(function()
+	while wait() do
+		if _G.Remove_trct then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
+end)
+
+Set:Toggle(
+	"Remove Damage Text",
+	false,
+	function(value)
+		_G.KobenHeegeen = value
+	end
+)
+spawn(function()
+	while wait() do
+		if _G.KobenHeegeen then
+			game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+		else
+			game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
+		end
+	end
+end)
+
+Set:Toggle(
+	"Remove Hit And Level Up Sound",
+	true,
+	function(value)
+		_G.RemoveHit = value
+	end
+)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.RemoveHit == true then
+            game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
+            game:GetService("ReplicatedStorage").Util.Sound:Destroy()
+            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
+            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
+            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()        
+        end
+    end)
+end)
+
+Set:Toggle(
+	"Black Screen",
+	false,
+	function(value)
+		_G.StartBlackScreen = value
+	end
+)
+spawn(function()
+	while wait() do
+		if _G.StartBlackScreen then
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = UDim2.new(500, 0, 500, 500)
+		else
+			game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = UDim2.new(1, 0, 500, 500)
+		end
+	end
+end)
+
+Set:Toggle(
+	"White Screen",
+	false,
+	function(value)
+		_G.WhiteScreen = value
+		if _G.WhiteScreen == true then
+			game:GetService("RunService"):Set3dRenderingEnabled(false)
+		elseif _G.WhiteScreen == false then
+			game:GetService("RunService"):Set3dRenderingEnabled(true)
+		end
+	end
+)
+spawn(function()
+	while wait() do
+		if _G.WhiteScreen then
+	  		for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
+		  		if v.Name == "CurvedRing" or v.Name == "SlashHit" or v.Name == "DamageCounter" or v.Name == "SwordSlash" or v.Name == "SlashTail" or v.Name == "Sounds" then
+			  		v:Destroy() 
+		  		end
+	  		end
+  		end
+  	end
+end) 
+
+Set:Toggle(
+	"Invisible Monster",
+	false,
+	function(value)
+		_G.inv = value
+		while wait() do
+			if _G.inv then
+				pcall(function()
+					for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+						if v.ClassName == "MeshPart" then
+							v.Transparency = 1
+						end
+					end
+					for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+						if v.Name == "Head" then
+							v.Transparency = 1
+						end
+					end
+					for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+						if v.ClassName == "Accessory" then
+							v.Handle.Transparency = 1
+						end
+					end
+					for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+						if v.ClassName == "Decal" then
+							v.Transparency = 1
+			 			end
+		   			end
+		 		end)
+	   		end
+	 	end
+	end
+)
 ------------------------------------------------------------------------------------------------------------------------------------------------------Stats Tab
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------Teleport Tab

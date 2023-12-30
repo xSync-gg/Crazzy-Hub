@@ -2289,7 +2289,7 @@ Main:Dropdown(
 	end
 )
 if FarmMode == nil then
-	FarmMode =  "Normal"
+	FarmMode = "Quest"
 end
 
 Main:Toggle(
@@ -3312,6 +3312,8 @@ spawn(function()
 end)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------Setting Tab
+Set:Seperator("Mastery Farm Setting")
+
 Set:Toggle(
 	"Auto Set Spawn Point",
 	true,
@@ -3576,7 +3578,7 @@ end)
 
 Set:Toggle(
 	"Remove Hit And Level Up Sound",
-	true,
+	false,
 	function(value)
 		_G.RemoveHit = value
 	end
@@ -3665,6 +3667,16 @@ Set:Toggle(
 		 		end)
 	   		end
 	 	end
+	end
+)
+
+Set:Slider(
+	"Farm Distance",
+	0,
+	50,
+	35,
+	function(value)
+		PosY = value
 	end
 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------Stats Tab

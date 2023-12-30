@@ -3315,6 +3315,58 @@ end)
 Set:Seperator("Mastery Farm Setting")
 
 Set:Toggle(
+	"Use Skill Z",
+	true,
+	function(value)
+        _G.SkillZ = value
+	end
+)
+
+Set:Toggle(
+	"Use Skill X",
+	true,
+	function(value)
+        _G.SkillX = value
+	end
+)
+
+Set:Toggle(
+	"Use Skill C",
+	true,
+	function(value)
+        _G.SkillC = value
+	end
+)
+
+Set:Toggle(
+	"Use Skill V",
+	true,
+	function(value)
+        _G.SkillV = value
+	end
+)
+
+Set:Slider(
+	"Kill At ..% Mob Health",
+	0,
+	100,
+	30,
+	function(a)
+        _G.Kill_At = value
+	end
+)
+
+Set:Seperator("Auto Farm Setting")
+
+Set:Toggle(
+	"Auto Set Spawn Point",
+	true,
+	function(value)
+		_G.Set = value
+	end
+)
+
+Set:Toggle(
 	"Auto Set Spawn Point",
 	true,
 	function(value)
@@ -3377,13 +3429,14 @@ Set:Toggle(
 		_G.BringMonster = value
 	end
 )
+_G.BringMode = 300
 spawn(function()
 	while task.wait() do
 		pcall(function()
 			if _G.BringMonster then
 				CheckQuest()
 				for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff [Lv. 800]" or Mon == "Monkey [Lv. 14]" or Mon == "Dragon Crew Warrior [Lv. 1575]" or Mon == "Dragon Crew Archer [Lv. 1600]") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 220 then
+					if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 220 then
 						v.HumanoidRootPart.Size = Vector3.new(50,50,50)
 						v.HumanoidRootPart.CFrame = PosMon
 						v.Humanoid:ChangeState(14)
@@ -3409,16 +3462,6 @@ spawn(function()
 		end)
 	end
 end)
-
-Set:Slider(
-	"Bring Mob Distance",
-	0,
-	350,
-	300,
-	function(value)
-		_G.BringMode = value
-	end
-)
 
 Set:Toggle(
 	"Fast Attack",
@@ -3670,20 +3713,156 @@ Set:Toggle(
 	end
 )
 
-Set:Slider(
-	"Farm Distance",
-	0,
-	50,
-	35,
+PosY = 35
+------------------------------------------------------------------------------------------------------------------------------------------------------Other Farm Tab
+Farm:Toggle(
+	"Auto Second Sea",
+	false,
 	function(value)
-		PosY = value
+		_G.AutoSecondSea = value
+		StopTween(_G.AutoSecondSea)
 	end
 )
+spawn(function()
+	while wait() do 
+		if _G.AutoSecondSea then
+			pcall(function()
+				local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+				if MyLevel >= 700 and World1 then
+					if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+						local CFrame1 = CFrame.new(4849.29883, 5.65138149, 719.611877)
+						repeat topos(CFrame1) wait() until (CFrame1.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+						wait(1.1)
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+						wait(0.5)
+						EquipWeapon("Key")
+						repeat topos(CFrame.new(1347.7124, 37.3751602, -1325.6488)) wait() until (Vector3.new(1347.7124, 37.3751602, -1325.6488)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+						wait(0.5)
+					else
+						if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
+								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+									if v.Name == "Ice Admiral" then
+										if not v.Humanoid.Health <= 0 then
+											if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+												OldCFrameSecond = v.HumanoidRootPart.CFrame
+												repeat task.wait()
+													AutoHaki()
+													EquipWeapon(_G.SelectWeapon)
+													v.HumanoidRootPart.CanCollide = false
+													v.Humanoid.WalkSpeed = 0
+													v.Head.CanCollide = false
+													v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+													v.HumanoidRootPart.CFrame = OldCFrameSecond
+													topos(v.HumanoidRootPart.CFrame * Pos)
+													game:GetService("VirtualUser"):CaptureController()
+													game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+													sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+												until not _G.AutoSecondSea or not v.Parent or v.Humanoid.Health <= 0
+											end
+										else 
+											game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+										end
+									end
+								end
+							else
+								if game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
+									topos(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+								end
+							end
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
+
+Farm:Toggle(
+	"Auto Third Sea",
+	false,
+	function(value)
+		_G.AutoThirdSea = value
+		StopTween(_G.AutoThirdSea)
+	end
+)
+spawn(function()
+	while wait() do
+		if _G.AutoThirdSea then
+			pcall(function()
+				if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and World2 then
+					_G.AutoFarm = false
+					if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
+						topos(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
+						if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+							wait(1.5)
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
+						end
+						wait(1.8)
+						if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+								if v.Name == "rip_indra" then
+									OldCFrameThird = v.HumanoidRootPart.CFrame
+									repeat task.wait()
+										AutoHaki()
+										EquipWeapon(_G.SelectWeapon)
+										topos(v.HumanoidRootPart.CFrame * Pos)
+										v.HumanoidRootPart.CFrame = OldCFrameThird
+										v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+										v.HumanoidRootPart.CanCollide = false
+										v.Humanoid.WalkSpeed = 0
+										game:GetService'VirtualUser':CaptureController()
+										game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+										game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+										sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+									until _G.AutoThirdSea == false or v.Humanoid.Health <= 0 or not v.Parent
+								end
+							end
+						elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") and (CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+							topos(CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016))
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
+
+Farm:Toggle(
+	"Auto Factory",
+	false,
+	function(value)
+		_G.AutoFactory = value
+		StopTween(_G.AutoFactory)
+	end
+)
+spawn(function()
+	while wait() do
+		pcall(function()
+			if _G.AutoFactory then
+				if game:GetService("Workspace").Enemies:FindFirstChild("Core") then
+					for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if v.Name == "Core" and v.Humanoid.Health > 0 then
+							repeat task.wait()
+								AutoHaki()         
+								EquipWeapon(_G.SelectWeapon)           
+								topos(CFrame.new(448.46756, 199.356781, -441.389252))                                  
+								game:GetService("VirtualUser"):CaptureController()
+								game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+							until v.Humanoid.Health <= 0 or _G.AutoFactory == false
+						end
+					end
+				else
+					topos(CFrame.new(448.46756, 199.356781, -441.389252))
+				end
+			end
+		end)
+	end
+end)
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------Stats Tab
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------Teleport Tab
-
-------------------------------------------------------------------------------------------------------------------------------------------------------Combat Tab
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------ESP Tab
 
@@ -3696,5 +3875,18 @@ Set:Slider(
 ------------------------------------------------------------------------------------------------------------------------------------------------------Misc Tab
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------Race V4 Tab
+Race:Seperator("Mirage Island")
 
+Mirragecheck = Race:Label("")
+spawn(function()
+	pcall(function()
+		while wait() do
+			if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+				Mirragecheck:Set('🏝️: Mirage Island Is Spawning')
+			else
+  				Mirragecheck:Set('❌: Mirage Island Not Spawn ')
+			end
+		end
+	end)
+end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------Update Event Tab

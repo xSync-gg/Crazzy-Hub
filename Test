@@ -2928,10 +2928,22 @@ function TP1(Pos)
     
     function TP(Pos)
         Distance = (Pos.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-        if Distance < 250 then
+        if Distance < 10 then
+            Speed = 10000
+        elseif Distance < 25 then
+            Speed = 5000
+        elseif Distance < 50 then
+            Speed = 2000
+        elseif Distance < 150 then
+            Speed = 800
+        elseif Distance < 250 then
             Speed = 600
+        elseif Distance < 500 then
+            Speed = 400
+        elseif Distance < 750 then
+            Speed = 370
         elseif Distance >= 1000 then
-            Speed = 200
+            Speed = 350
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -13045,7 +13057,7 @@ end)
     
     Type = 1
 spawn(function()
-    while wait(.1) do
+    while wait(.0) do
         if Type == 1 then
             RaidPos = CFrame.new(0,25,0)
 		elseif Type == 2 then
@@ -13063,17 +13075,17 @@ spawn(function()
     end)
 
 spawn(function()
-    while wait(.1) do
+    while wait(.0) do
         Type = 1
-        wait(0.9)
+        wait(0.1)
         Type = 2
-        wait(0.9)
+        wait(0.1)
         Type = 3
-        wait(0.9)
+        wait(0.1)
         Type = 4
-        wait(0.9)
+        wait(0.1)
         Type = 5
-        wait(0.9)
+        wait(0.1)
     end
 end)
     

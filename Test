@@ -1112,7 +1112,7 @@ for i,v in pairs(game:GetService'Players':GetChildren()) do
 					name.BackgroundTransparency = 1
 					name.TextStrokeTransparency = 0.5
 					if v.Team == game.Players.LocalPlayer.Team then
-						name.TextColor3 = Color3.new(0,255,0)
+						name.TextColor3 = Color3.new(0, 0, 138)
 					else
 						name.TextColor3 = Color3.new(255,0,0)
 					end

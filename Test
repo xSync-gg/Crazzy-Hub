@@ -11,7 +11,6 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End -- Used when theres no MinimizeKeybind
 })
 local Tabs = {
-    About = Window:AddTab({ Title = "About", Icon = "code-2" }),
     Main = Window:AddTab({ Title = "Main", Icon = "home" }),
     Set = Window:AddTab({ Title = "Setting", Icon = "settings" }),
     Farm = Window:AddTab({ Title = "Other Farm", Icon = "swords" }),
@@ -24,7 +23,9 @@ local Tabs = {
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-cart" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "align-left" }),
     Race = Window:AddTab({ Title = "Race V4", Icon = "moon" }),
-    Sea = Window:AddTab({ Title = "Sea Event", Icon = "waves" })
+    Sea = Window:AddTab({ Title = "Sea Event", Icon = "waves" }),
+    Kit = Window:AddTab({ Title = "Kitsune Event", Icon = "cat" }),
+    Candy = Window:AddTab({ Title = "Candy Event", Icon = "candy" })
 }
 local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")

@@ -13,8 +13,8 @@
 ]]--
 
 -- Alchemy Hub V1.5 Chest Farm - Copyright © Alchemy Hub 2023 --
-
 repeat wait()   
+    Join("Marine")
     function Join(v2) 
         v2 = tostring(v2) or "Pirates"
         v2 = string.find(v2,"Marine") and "Marines" or "Pirates"

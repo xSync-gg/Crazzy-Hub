@@ -1,0 +1,379 @@
+--[[
+
+  ██╗  ██╗██████╗ ███╗   ██╗███████╗██████╗ ████████╗██╗   ██╗███╗   ██╗███████╗
+  ╚██╗██╔╝╚════██╗████╗  ██║██╔════╝██╔══██╗╚══██╔══╝██║   ██║████╗  ██║██╔════╝
+   ╚███╔╝  █████╔╝██╔██╗ ██║█████╗  ██████╔╝   ██║   ██║   ██║██╔██╗ ██║█████╗  
+   ██╔██╗ ██╔═══╝ ██║╚██╗██║██╔══╝  ██╔═══╝    ██║   ██║   ██║██║╚██╗██║██╔══╝  
+  ██╔╝ ██╗███████╗██║ ╚████║███████╗██║        ██║   ╚██████╔╝██║ ╚████║███████╗
+  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝        ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+  
+  This script was created by x2Neptune. Do not distribute it without permission.
+  --------------------------------------------------- x2neptune - on discord ---
+
+]]--
+
+-- Alchemy Hub V1.5 Chest Farm - Copyright © Alchemy Hub 2023 --
+
+repeat wait()   
+    repeat wait() until game.Players
+    repeat wait() until game.Players.LocalPlayer
+    repeat wait() until game.ReplicatedStorage
+    repeat wait() until game.ReplicatedStorage:FindFirstChild("Remotes");
+    repeat wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui");
+    repeat wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
+    repeat wait() until game:GetService("Players")
+    repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChild("Energy")
+    wait(0.1)
+    if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+        repeat wait()
+            if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+                if _G.Team == "Pirate" then
+                    for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+                        v.Function()
+                    end
+                elseif _G.Team == "Marine" then
+                    for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+                        v.Function()
+                    end
+                else
+                    for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+                        v.Function()
+                    end
+                end
+            end
+        until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+    end
+until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+function dragify(Frame, object)
+    dragToggle = nil
+    dragSpeed = .25
+    dragInput = nil
+    dragStart = nil
+    dragPos = nil
+    function updateInput(input)
+        Delta = input.Position - dragStart
+        Position =
+            UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+        game:GetService("TweenService"):Create(object, TweenInfo.new(dragSpeed), {Position = Position}):Play()
+    end
+    Frame.InputBegan:Connect(
+        function(input)
+            if
+                (input.UserInputType == Enum.UserInputType.MouseButton1 or
+                    input.UserInputType == Enum.UserInputType.Touch)
+            then
+                dragToggle = true
+                dragStart = input.Position
+                startPos = object.Position
+                input.Changed:Connect(
+                    function()
+                        if (input.UserInputState == Enum.UserInputState.End) then
+                            dragToggle = false
+                        end
+                    end
+                )
+            end
+        end
+    )
+    Frame.InputChanged:Connect(
+        function(input)
+            if
+                (input.UserInputType == Enum.UserInputType.MouseMovement or
+                    input.UserInputType == Enum.UserInputType.Touch)
+            then
+                dragInput = input
+            end
+        end
+    )
+    game:GetService("UserInputService").InputChanged:Connect(
+    function(input)
+        if (input == dragInput and dragToggle) then
+            updateInput(input)
+        end
+    end
+    )
+end
+local UI = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local NameHub = Instance.new("TextLabel")
+local Des = Instance.new("TextLabel")
+local Line = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local TargetImage = Instance.new("ImageLabel")
+local Toggle = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local DownLine = Instance.new("Frame")
+local UICorner_4 = Instance.new("UICorner")
+local ButtonTitle = Instance.new("TextLabel")
+local UiToggle_UiStroke1 = Instance.new("UIStroke")
+UI.Name = "XYZ"
+UI.Parent = game.CoreGui
+UI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Main.Name = "Main"
+Main.Parent = UI
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+Main.BackgroundTransparency = 0.360
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+Main.Size = UDim2.new(0, 250, 0, 360)
+UICorner.Parent = Main
+NameHub.Name = "NameHub"
+NameHub.Parent = Main
+NameHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NameHub.BackgroundTransparency = 1.000
+NameHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+NameHub.BorderSizePixel = 0
+NameHub.Position = UDim2.new(0, 0, 0.00833333377, 0)
+NameHub.Size = UDim2.new(0, 250, 0, 44)
+NameHub.Font = Enum.Font.GothamBold
+NameHub.Text = "Crazzy Hub"
+NameHub.TextColor3 = Color3.fromRGB(255, 255, 255)
+NameHub.TextSize = 26.000
+Des.Name = "Des"
+Des.Parent = Main
+Des.BackgroundColor3 = Color3.fromRGB(0, 115, 255)
+Des.BackgroundTransparency = 1.000
+Des.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Des.BorderSizePixel = 0
+Des.Position = UDim2.new(0, 0, 0.141666666, 0)
+Des.Size = UDim2.new(0, 250, 0, 33)
+Des.Font = Enum.Font.GothamBold
+Des.Text = "Blox Fruits Script"
+Des.TextColor3 = Color3.fromRGB(0, 115, 255)
+Des.TextSize = 20.000
+Line.Name = "Line"
+Line.Parent = Main
+Line.BackgroundColor3 = Color3.fromRGB(0, 115, 255)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Position = UDim2.new(0.0480000004, 0, 0.122222222, 0)
+Line.Size = UDim2.new(0, 225, 0, 3)
+UICorner_2.CornerRadius = UDim.new(0, 100)
+UICorner_2.Parent = Line
+TargetImage.AnchorPoint = Vector2.new(0.5, 0.5)
+TargetImage.Name = "TargetImage"
+TargetImage.Parent = Main
+TargetImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TargetImage.BackgroundTransparency = 1.000
+TargetImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TargetImage.BorderSizePixel = 0
+TargetImage.Position = UDim2.new(0.5, 0, 0.45, 0)
+TargetImage.Size = UDim2.new(0, 250, 0, 250)
+TargetImage.Image = "http://www.roblox.com/asset/?id=15024381811"
+Toggle.Name = "Toggle"
+Toggle.Parent = Main
+Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Toggle.BackgroundTransparency = 0.9
+Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.BorderSizePixel = 0
+Toggle.Position = UDim2.new(0.100000001, 0, 0.858333349, 0)
+Toggle.Size = UDim2.new(0, 200, 0, 34)
+Toggle.Font = Enum.Font.GothamBold
+Toggle.Text = "[ FALSE ]"
+Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Toggle.TextSize = 20.000
+UICorner_3.Parent = Toggle
+DownLine.Name = "DownLine"
+DownLine.Parent = Main
+DownLine.BackgroundColor3 = Color3.fromRGB(0, 115, 255)
+DownLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
+DownLine.BorderSizePixel = 0
+DownLine.Position = UDim2.new(0.0480000004, 0, 0.727777779, 0)
+DownLine.Size = UDim2.new(0, 225, 0, 3)
+UICorner_4.CornerRadius = UDim.new(0, 100)
+UICorner_4.Parent = DownLine
+ButtonTitle.Name = "ButtonTitle"
+ButtonTitle.Parent = Main
+ButtonTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ButtonTitle.BackgroundTransparency = 1.000
+ButtonTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ButtonTitle.BorderSizePixel = 0
+ButtonTitle.Position = UDim2.new(0, 0, 0.75555557, 0)
+ButtonTitle.Size = UDim2.new(0, 250, 0, 37)
+ButtonTitle.Font = Enum.Font.GothamBold
+ButtonTitle.Text = "- Chest Farm -"
+ButtonTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+ButtonTitle.TextSize = 22.000
+UiToggle_UiStroke1.Color = Color3.fromRGB(0, 115, 255)
+UiToggle_UiStroke1.Thickness = 3
+UiToggle_UiStroke1.Name = "UiToggle_UiStroke1"
+UiToggle_UiStroke1.Parent = Main
+dragify(Main, Main)
+_G.GuiToggleX = true
+Toggle.Text = "[ TRUE ]"
+Toggle.TextColor3 = Color3.fromRGB(64, 255, 0)
+_G.ChestBypass = true
+Toggle.MouseButton1Click:Connect(function()
+    if _G.GuiToggleX == false then
+        Toggle.Text = "[ TRUE ]"
+        _G.ChestBypass = true
+        _G.GuiToggleX = true
+        Toggle.TextColor3 = Color3.fromRGB(64, 255, 0)
+    elseif _G.GuiToggleX == true then
+        Toggle.Text = "[ FALSE ]"
+        _G.ChestBypass = false
+        _G.GuiToggleX = false
+        Toggle.TextColor3 = Color3.fromRGB(255, 82, 77)
+    end
+end)
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+function Teleport()
+    while wait() do
+        pcall(function()
+            TPReturner()
+            if foundAnything ~= "" then
+                TPReturner()
+            end
+        end)
+    end
+end
+local veryImportantWaitTime = 0.5
+task.spawn(function()
+    while task.wait(veryImportantWaitTime) do
+        pcall(function()
+            for i,v in pairs(game.CoreGui:GetDescendants()) do
+                pcall(function()
+                    if string.find(v.Name,"ErrorMessage") then
+                        if string.find(v.Text,"Security kick") then
+                            veryImportantWaitTime = 1e9
+                            Teleport()
+                        end
+                    end
+                end)
+            end
+        end)
+    end
+end)
+task.spawn(function()
+    while true do
+        if _G.ChestBypass == true then
+            local hasChar = game.Players.LocalPlayer:FindFirstChild("Character")
+            if not game.Players.LocalPlayer.Character then
+    
+            else
+                local hasCrewTag = game.Players.LocalPlayer.Character:FindFirstChild("CrewBBG",true)
+                if hasCrewTag then hasCrewTag:Destroy() end
+                local hasHumanoid = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+                if hasHumanoid then
+                    local Chest = game.Workspace:FindFirstChild("Chest4") or game.Workspace:FindFirstChild("Chest3") or game.Workspace:FindFirstChild("Chest2") or game.Workspace:FindFirstChild("Chest1") or game.Workspace:FindFirstChild("Chest")
+                    
+                    if Chest then
+                        game.Players.LocalPlayer.Character:PivotTo(Chest:GetPivot())
+                        firesignal(Chest.Touched,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                    else
+                        Teleport()
+                        break
+                    end
+                end 
+            end
+        end
+        task.wait() 
+    end
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.ChestBypass then
+                for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.Name == "Fist of Darkness" or v.Name == "God's Chalice" then
+                        _G.ChestBypass = false
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+            wait(8)
+            if _G.ChestBypass then
+                game.Players.LocalPlayer.Character.Humanoid.Health = 0
+            end
+        end)
+    end
+end)
+function Hop()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    function TPReturner()
+        local Site;
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0;
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _,Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile = pcall(function()
+                                AllIDs = {}
+                                table.insert(AllIDs, actualHour)
+                            end)
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(function()
+                        wait()
+                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                    end)
+                    wait(4)
+                end
+            end
+        end
+    end
+    function Teleport() 
+        while wait() do
+            pcall(function()
+                TPReturner()
+                if foundAnything ~= "" then
+                    TPReturner()
+                end
+            end)
+        end
+    end
+    Teleport()
+end
+spawn(function()
+    while wait() do
+        pcall(function()
+            wait(20)
+            if _G.ChestBypass then
+                Hop()
+            end
+        end)
+    end
+end)

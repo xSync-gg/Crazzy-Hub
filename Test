@@ -2241,8 +2241,67 @@ end)
 
 print("Function Loaded")
 -----------------------------------------------------------------------------------------------------------------------------Main Tab
+Main:Seperator("Farm Config")
+
+_G.SelectWeapon = _G.SelectWeapon or "Melee"
+Main:Dropdown("Select Weapon", {"Melee", "Sword", "Fruit", "Gun"}, function(value)
+    _G.SelectWeapon = value
+end)
+task.spawn(function()
+	while wait() do
+		pcall(function()
+			for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+				local toolTipMap = {
+					Melee = "Melee",
+					Sword = "Sword",
+					Gun = "Gun",
+					Fruit = "Blox Fruit"
+				}
+
+				if v.ToolTip == toolTipMap[_G.SelectWeapon] and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+					_G.SelectWeapon = v.Name
+				end
+			end
+		end)
+	end
+end)
+
+Main:Seperator("Main Farm")
+
+Main:Dropdown("Farm Mode", {"Quest", "No Quest"}, function(value) FarmMode = value end)
+FarmMode = FarmMode or "Quest"  -- Set default value concisely
+
+local MonsterStatus = Main:Label("")
+local QuestStatus = Main:Label("")
+spawn(function()
+    while task.wait() do
+        local questVisible = game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible
+        local text = questVisible and "Monster : "..Mon.." | Quest : "..NameQuest.." | Level : "..LevelQuest
+                       or "Monster : ...".." | Quest : ...".." | Level : ..."
+
+        pcall(function()
+            if questVisible then CheckQuest() end  -- Execute only if quest is visible
+            MonsterStatus:Set(text)
+            QuestStatus:Set(text)
+        end)
+    end
+end)
+
 
 -----------------------------------------------------------------------------------------------------------------------------Setting Tab
+Set:Toggle("Auto Set Spawn Point", true, function(value)
+     _G.Set = value
+end)
+spawn(function()
+    while wait() do
+        if _G.Set then
+            pcall(function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+            end)
+        end
+    end
+end)
+
 
 -----------------------------------------------------------------------------------------------------------------------------Other Farm Tab
 

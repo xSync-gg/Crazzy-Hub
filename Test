@@ -38,8 +38,8 @@ UICorner_11.Parent = buttonframe
 UICorner_12.Parent = ImageButton_2
 
 ImageButton_2.Parent = buttonframe
-ImageButton_2.BackgroundColor3 = Color3.fromRGB(0,255,0)
-ImageButton_2.BorderColor3 = Color3.fromRGB(0,255,0)
+ImageButton_2.BackgroundColor3 = Color3.fromRGB(86,255,255)
+ImageButton_2.BorderColor3 = Color3.fromRGB(86,255,255)
 ImageButton_2.BackgroundTransparency = 1.000
 ImageButton_2.BorderSizePixel = 0
 ImageButton_2.Position = UDim2.new(0.0242961459, 0, 0.0168576241, 0)
@@ -159,7 +159,11 @@ mainopens.Parent = mainopen
  _G.ColorDF = Color3.fromRGB(0, 255, 0)
  _G.ColorShop = Color3.fromRGB(0, 255, 0)
  _G.ColorMisc = Color3.fromRGB(0, 255, 0)
-
+	
+	local RippleFPS = Instance.new("ScreenGui")
+	local Rippletime = Instance.new("ScreenGui")
+	local Framefps = Instance.new("Frame")
+	local Frametime = Instance.new("Frame")
 	local UICorner213 = Instance.new("UICorner")
 	local UICorner214 = Instance.new("UICorner")
 	local TextLabelfps = Instance.new("TextLabel")
@@ -169,12 +173,32 @@ mainopens.Parent = mainopen
 	local Strokefps = Instance.new("UIStroke")
 	local Stroketime = Instance.new("UIStroke")
 	
+	RippleFPS.Name = "RippleFPS"
+	RippleFPS.Parent = game.CoreGui
+	RippleFPS.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	
 	Rippletime.Name = "Rippletime"
 	Rippletime.Parent = game.CoreGui
 	Rippletime.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	
+	Framefps.Name = "Framefps"
+	Framefps.Parent = RippleFPS
+	Framefps.AnchorPoint = Vector2.new(0.5, 0.5)
+	Framefps.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Framefps.BorderSizePixel = 0
+	Framefps.Position = UDim2.new(0.3, 0, -0.03, 0)
+	Framefps.Size = UDim2.new(0, 70, 0, 40)
+	
 	UICorner213.CornerRadius = UDim.new(0, 4)
 	UICorner213.Parent = Framefps
+	
+	Strokefps.Thickness = 1
+	Strokefps.Name = ""
+	Strokefps.Parent = Framefps
+	Strokefps.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	Strokefps.LineJoinMode = Enum.LineJoinMode.Round
+	Strokefps.Color = _G.StrokeColor
+	Strokefps.Transparency = 0
 	
 	Frametime.Name = "Frametime"
 	Frametime.Parent = Rippletime
@@ -195,6 +219,18 @@ mainopens.Parent = mainopen
 	Stroketime.Color = _G.StrokeColor
 	Stroketime.Transparency = 0
 	
+	TextLabelfps.Name = "TextLabelfps"
+	TextLabelfps.Parent = Framefps
+	TextLabelfps.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabelfps.BackgroundTransparency = 1.000
+	TextLabelfps.Position = UDim2.new(0,0,0,0)
+	TextLabelfps.Size = UDim2.new(1,0,1,0)
+	TextLabelfps.Font = Enum.Font.Ubuntu
+	TextLabelfps.Text = "FPS : N/A"
+	TextLabelfps.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabelfps.TextSize = 16.000
+	TextLabelfps.TextXAlignment = Enum.TextXAlignment.Center
+	
 	TextLabeltime.Name = "TextLabeltime"
 	TextLabeltime.Parent = Frametime
 	TextLabeltime.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -214,8 +250,16 @@ mainopens.Parent = mainopen
 				local seconds = scripttime%60
 				local minutes = math.floor(scripttime/60%60)
 				local hours = math.floor(scripttime/3600)
-				local tempo = string.format("%.0f Hour's , %.0f Minute , %.0f Second", hours ,minutes, seconds)
+				local tempo = string.format("[ %.0f Hour's , %.0f Minute , %.0f Second ]", hours ,minutes, seconds)
 				TextLabeltime.Text = tempo
+			end)
+		end
+	end)
+	
+	spawn(function()
+		while wait() do
+			pcall(function()
+				TextLabelfps.Text = "[ FPS ]"..string.format("%d",workspace:GetRealPhysicsFPS())
 			end)
 		end
 	end)
@@ -946,7 +990,7 @@ function main:Toggle(text,clr,config,callback)
     ImageSTR1.Name = "ImageSTR"
 	 ImageSTR1.Parent = ToggleImage
 	 ImageSTR1.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	 ImageSTR1.Color = Color3.fromRGB(0,255,0)
+	 ImageSTR1.Color = Color3.fromRGB(86,255,255)
 	 ImageSTR1.LineJoinMode = Enum.LineJoinMode.Round
 	 ImageSTR1.Thickness = 1.5
 	 ImageSTR1.Transparency = 0
@@ -1371,7 +1415,7 @@ posta.Archivable = true
  posto.Name = "posto"
  posto.Parent = TextBox
  posto.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
- posto.Color = Color3.fromRGB(0,255,0)
+ posto.Color = Color3.fromRGB(86,255,255)
  posto.LineJoinMode = Enum.LineJoinMode.Round
  posto.Thickness = 1.5
  posto.Transparency = 0

@@ -122,7 +122,7 @@ function Update:Window(text,logo,keybind)
 	Hub.Position = UDim2.new(0, 086, 0, 0)
 	Hub.Size = UDim2.new(0, 81, 0, 27)
 	Hub.Font = Enum.Font.GothamSemibold
-	Hub.Text = "       Medusa"
+	Hub.Text = "      Medusa"
 	Hub.TextColor3 = Color3.fromRGB(255, 20, 0)
 	Hub.TextSize = 17.000
 	Hub.TextXAlignment = Enum.TextXAlignment.Left
@@ -5096,14 +5096,75 @@ end)
 Main:Seperator("Farming")
 
 Main:Toggle("Auto Farm Level",false,function(v)
-    _G.Settings.Main["Auto Farm Level"] = v
-    getgenv().noclip = v
-    Auto_Farm_Level = v
-    
-    if v == false then
-        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-    end
-    if _G.Settings.Main["Auto Farm Level"] then
+    _G.AutoFarm = v
+end)
+spawn(function()
+    while wait() do
+        if _G.AutoFarm then
+            pcall(function()
+                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(QuestTitle, NameMon) then
+                    StartMagnet = false
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    StartMagnet = false
+                    CheckQuest()
+                    if BypassTP then
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 1500 then
+                    BTP(CFrameQuest)
+                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 1500 then
+                        toTarget(CFrameQuest)
+                    end
+                else
+                    toTarget(CFrameQuest)
+                end
+                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 5 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    CheckQuest()
+                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Mon then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
+                                        repeat task.wait()
+                                            EquipWeapon(_G.Settings.Configs["Select Weapon"])
+                                            if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                                                local args = {
+                                                    [1] = "Buso"
+                                                }
+                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                            end                                       
+                                            PosMon = v.HumanoidRootPart.CFrame
+                                            TP1(v.HumanoidRootPart.CFrame * Pos)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                            StartMagnet = true
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        until not _G.AutoFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    else
+                                        StartMagnet = false
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                    end
+                                end
+                            end
+                        end
+                    else
+                        toTarget(CFrameMon)
+                        UnEquipWeapon(_G.Settings.Configs["Select Weapon"])
+                        StartMagnet = false
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
+                            toTarget(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(15,10,2))
+                        end
+                    end
+                end
+            end)
+        end
     end
 end)
 

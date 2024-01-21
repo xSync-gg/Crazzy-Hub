@@ -122,7 +122,7 @@ function Update:Window(text,logo,keybind)
 	Hub.Position = UDim2.new(0, 086, 0, 0)
 	Hub.Size = UDim2.new(0, 81, 0, 27)
 	Hub.Font = Enum.Font.GothamSemibold
-	Hub.Text = "       Premium"
+	Hub.Text = "       Medusa"
 	Hub.TextColor3 = Color3.fromRGB(255, 20, 0)
 	Hub.TextSize = 17.000
 	Hub.TextXAlignment = Enum.TextXAlignment.Left
@@ -1380,7 +1380,7 @@ spawn(function()
 end)
 -------------------------------------------------------------------------------------------------------------------------
 --Tab
-local PadoUi = Update:Window("Limitless Medusa","",Enum.KeyCode.RightControl);
+local PadoUi = Update:Window("    Limitless","",Enum.KeyCode.RightControl);
 local Main = PadoUi:Tab("Main","6026568198")
 local Setting = PadoUi:Tab("Setting","6026568198")
 local Raid = PadoUi:Tab("Raid","6026568198")

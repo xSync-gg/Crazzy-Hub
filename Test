@@ -1464,6 +1464,8 @@ local function CheckMaterial(v1)
 end
 
 -----------------------------------------------------------------------------------------------------------------------------Main Tab
+Main:Seperator("Config Farm")
+
 Weapon = {"Melee", "Sword", "Fruit"}
 Main:Dropdown("Select Weapon", Weapon, function(value)
     SelectWeapon = value
@@ -1556,6 +1558,27 @@ task.spawn(function()
                         end)
                     end
                 end
+            end
+        end)
+    end
+end)
+
+local Method = {"Upper", "Behind","Below"}
+Main:Dropdown("Farm Method", Method, function(value)
+    _G.Method = value
+end)
+_G.Method = _G.Method or "Upper"
+task.spawn(function()
+    while task.wait(0) do
+        pcall(function()
+            if _G.Method == "Behind" then
+                MethodFarm = CFrame.new(0, 0,  _G.DistanceAutoFarm)
+            elseif _G.Method == "Below" then
+                MethodFarm = CFrame.new(0, - _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(90), 0, 0)
+            elseif _G.Method == "Upper" then
+                MethodFarm = CFrame.new(0,  _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(0), 0, 0)
+            else
+                MethodFarm = CFrame.new(0,  _G.DistanceAutoFarm, 0)
             end
         end)
     end
@@ -2214,6 +2237,30 @@ spawn(function()
             end
         end)
     end) 
+end)
+
+Set:Slider("Farm Distance", 0, 50, 30, function(value)
+    _G.DistanceAutoFarm = value
+end)
+_G.DistanceAutoFarm = 30
+
+Set:Toggle("Fast Attack", true, function(value)
+    _G.FastAttack = value
+end)
+
+Set:Toggle("Auto Turn On Buso Haki", true, function(value)
+    _G.AutoHaki = value
+end)
+task.spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.AutoHaki then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
+            end
+        end)
+    end
 end)
 -----------------------------------------------------------------------------------------------------------------------------Other Farm Tab
 Farm:Toggle("Auto Second Sea", _G.AutoNewWorld, function(value)

@@ -38,13 +38,13 @@ UICorner_11.Parent = buttonframe
 UICorner_12.Parent = ImageButton_2
 
 ImageButton_2.Parent = buttonframe
-ImageButton_2.BackgroundColor3 = Color3.fromRGB(86,255,255)
-ImageButton_2.BorderColor3 = Color3.fromRGB(86,255,255)
+ImageButton_2.BackgroundColor3 = Color3.fromRGB(0,255,0)
+ImageButton_2.BorderColor3 = Color3.fromRGB(0,255,0)
 ImageButton_2.BackgroundTransparency = 1.000
 ImageButton_2.BorderSizePixel = 0
 ImageButton_2.Position = UDim2.new(0.0242961459, 0, 0.0168576241, 0)
 ImageButton_2.Size = UDim2.new(0, 49, 0, 48)
-ImageButton_2.Image = "http://www.roblox.com/asset/?id=15412746657"
+ImageButton_2.Image = "rbxassetid://16058297648"
 ImageButton_2.MouseButton1Click:Connect(function()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,305,false,game)
 	game:GetService("VirtualInputManager"):SendKeyEvent(false,305,false,game)
@@ -219,18 +219,6 @@ mainopens.Parent = mainopen
 	Stroketime.Color = _G.StrokeColor
 	Stroketime.Transparency = 0
 	
-	TextLabelfps.Name = "TextLabelfps"
-	TextLabelfps.Parent = Framefps
-	TextLabelfps.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabelfps.BackgroundTransparency = 1.000
-	TextLabelfps.Position = UDim2.new(0,0,0,0)
-	TextLabelfps.Size = UDim2.new(1,0,1,0)
-	TextLabelfps.Font = Enum.Font.Ubuntu
-	TextLabelfps.Text = "FPS : N/A"
-	TextLabelfps.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabelfps.TextSize = 16.000
-	TextLabelfps.TextXAlignment = Enum.TextXAlignment.Center
-	
 	TextLabeltime.Name = "TextLabeltime"
 	TextLabeltime.Parent = Frametime
 	TextLabeltime.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -250,16 +238,8 @@ mainopens.Parent = mainopen
 				local seconds = scripttime%60
 				local minutes = math.floor(scripttime/60%60)
 				local hours = math.floor(scripttime/3600)
-				local tempo = string.format("[ %.0f Hour's , %.0f Minute , %.0f Second ]", hours ,minutes, seconds)
+				local tempo = string.format("%.0f Hour's , %.0f Minute , %.0f Second", hours ,minutes, seconds)
 				TextLabeltime.Text = tempo
-			end)
-		end
-	end)
-	
-	spawn(function()
-		while wait() do
-			pcall(function()
-				TextLabelfps.Text = "[ FPS ]"..string.format("%d",workspace:GetRealPhysicsFPS())
 			end)
 		end
 	end)
@@ -480,7 +460,7 @@ HubName.BorderSizePixel = 0
 HubName.Position = UDim2.new(0.5, 3, 0.5, 0)
 HubName.Size = UDim2.new(0, 150, 1, 0)
 HubName.Font = Enum.Font.Ubuntu
-HubName.Text = "ayBack"
+HubName.Text = " Limitless Medusa"
 HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
 HubName.TextSize = 16.000
 HubName.TextStrokeTransparency = 0.000
@@ -495,7 +475,7 @@ HubLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
 HubLogo.BorderSizePixel = 0
 HubLogo.Position = UDim2.new(0, 60, 0, 0)
 HubLogo.Size = UDim2.new(0, 30, 1, 0)
-HubLogo.Image = "http://www.roblox.com/asset/?id=15412746657"
+HubLogo.Image = "rbxassetid://16058297648"
 
 local Name = Instance.new("TextLabel")
 
@@ -990,7 +970,7 @@ function main:Toggle(text,clr,config,callback)
     ImageSTR1.Name = "ImageSTR"
 	 ImageSTR1.Parent = ToggleImage
 	 ImageSTR1.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	 ImageSTR1.Color = Color3.fromRGB(86,255,255)
+	 ImageSTR1.Color = Color3.fromRGB(0,255,0)
 	 ImageSTR1.LineJoinMode = Enum.LineJoinMode.Round
 	 ImageSTR1.Thickness = 1.5
 	 ImageSTR1.Transparency = 0
@@ -1415,7 +1395,7 @@ posta.Archivable = true
  posto.Name = "posto"
  posto.Parent = TextBox
  posto.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
- posto.Color = Color3.fromRGB(86,255,255)
+ posto.Color = Color3.fromRGB(0,255,0)
  posto.LineJoinMode = Enum.LineJoinMode.Round
  posto.Thickness = 1.5
  posto.Transparency = 0

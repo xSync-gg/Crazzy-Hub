@@ -1,23 +1,4 @@
-repeat
-    wait()
-until game.Players.LocalPlayer
-local a = "https://raw.githubusercontent.com/"
-local b = "xSync-gg/Source/main/Annie%20Hub%20UI.lua"
-local a = a .. b
-local a = loadstring(game:HttpGet(a))()
-local a = a:Window("Blox Fruit")
-local Main = a:Tab("Main", "rbxassetid://15712703260")
-local Set = a:Tab("Setting", "rbxassetid://15712711639")
-local Farm = a:Tab("Other Farm", "rbxassetid://15712717270")
-local Stats = a:Tab("Stats", "rbxassetid://15712723981")
-local Tele = a:Tab("Teleport", "rbxassetid://15712738876")
-local Player = a:Tab("Player", "rbxassetid://15712750195")
-local Fruit = a:Tab("Devil Fruit", "rbxassetid://15712758182")
-local Raid = a:Tab("Raid", "rbxassetid://15712763124")
-local Shop = a:Tab("Shop", "rbxassetid://15712767144")
-local Misc = a:Tab("Misc", "rbxassetid://15712771666")
-local Race = a:Tab("Race V4", "rbxassetid://15712776421")
-local Event = a:Tab("Update Event", "rbxassetid://15806749681")
+
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({

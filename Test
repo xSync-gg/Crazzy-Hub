@@ -1,19 +1,42 @@
-local SlayerzLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/x2-Neptune/SlayerzUI/main/BetaLibrary.script"))()
--- Window Setting
-local Name = "SlayerzUI" -- Name Hub
-local Description = "This ui made by Slayerz - API" -- Description in script
-local Image = "rbxassetid://15110884615" -- Image Id
-local Color = Color3.fromRGB(255, 0, 0) -- Color in UI
--- Create Window
-local Window = SlayerzLibrary:Window(Name,Description,Image,Color)
-local Tab1 = Window:Tab("Tab 1") -- Tab Name
--- Create Section on Left Side
-local Section = Tab1:Section("- Section 1 -","Left")
--- Create Section on Right Side
-local Section2 = Tab1:Section("- Section 2 -","Right")
--- Text , Default [ true / false ] , Callback
-Section:Toggle("Toggle",false,function(v)
-    print("Toggle - "..tostring(v)) -- Callback Function "v" is bool value
+repeat
+    wait()
+until game.Players.LocalPlayer
+local a = "https://raw.githubusercontent.com/"
+local b = "xSync-gg/Source/main/V3%20Ui"
+local a = a .. b
+local a = loadstring(game:HttpGet(a))()
+local a = a:Window("Blox Fruit")
+local Main = a:Tab("Main", "rbxassetid://15712703260")
+local Set = a:Tab("Setting", "rbxassetid://15712711639")
+local Farm = a:Tab("Other Farm", "rbxassetid://15712717270")
+local Stats = a:Tab("Stats", "rbxassetid://15712723981")
+local Tele = a:Tab("Teleport", "rbxassetid://15712738876")
+local Player = a:Tab("Player", "rbxassetid://15712750195")
+local Fruit = a:Tab("Devil Fruit", "rbxassetid://15712758182")
+local Raid = a:Tab("Raid", "rbxassetid://15712763124")
+local Shop = a:Tab("Shop", "rbxassetid://15712767144")
+local Misc = a:Tab("Misc", "rbxassetid://15712771666")
+local Race = a:Tab("Race V4", "rbxassetid://15712776421")
+local Event = a:Tab("Update Event", "rbxassetid://15806749681")
+
+Main:Seperator("")
+
+Main:Label("")
+
+Main:Button("", function()
+    setclipboard("https://discord.gg/A7jhrH94rX")
+end)
+
+Main:Dropdown("", WeaponList, function(value)
+    SelectWeapon = value
+end)
+
+Main:Toggle("", false, function(value)
+    FastAttack = value
+end)
+
+Main:Slider("", 0, 100, 30, function(value)
+     _G.DistanceAutoFarm = value
 end)
 -----------------------------------------------------------------------------------------------------------------------------Function
 assert(getrawmetatable)
@@ -261,103 +284,6 @@ _G.Settings = {
     AutoRaids = false,
     AutoNextPlace = false
 }
-
-function Vec(text)
-    local Notification = require(game.ReplicatedStorage.Notification)
-    local notification = Notification.new(text)
-    notification.Duration = 10
-    notification:Display()
-end
-
---[[Perpid]]
-local Ui = game.CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):FindFirstChild("dsfwefwfwdfsfasdadaxczcw")
-if Ui then
-    Ui:Destroy()
-end
-local UserInputService = game:GetService("UserInputService")
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local TweenService = game:GetService("TweenService")
-local tween = game:service"TweenService"
-local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local GuiService = game:GetService("GuiService")
-local SoundClick2 = Instance.new("Sound")
-SoundClick2.Name = "Sound Effect"
-SoundClick2.SoundId = "rbxassetid://3398620867"
-SoundClick2.Volume = 1
-SoundClick2.Parent = game.Workspace
-local UIStroke = Instance.new("UIStroke")
-local UICorner = Instance.new("UICorner")
-local ScreenGui = Instance.new("ScreenGui")
-local ImageButton = Instance.new("ImageButton")
-local RobloxButton = Enum.ButtonStyle.RobloxButton
-ScreenGui.Parent = game.CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules")
-ScreenGui.Name = "dsfwefwfwdfsfasdadaxczcw"
--- กำหนดตำแหน่งและขนาดของ ImageButton
-ImageButton.Parent = ScreenGui
-ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-ImageButton.Size = UDim2.new(0, 45, 0, 45)
--- กำหนดค่าอื่นๆ ของ ImageButton
-ImageButton.Draggable = true
-ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BackgroundTransparency = 1
-ImageButton.Image = "rbxassetid://14645512457" -- กำหนดรูปภาพให้กับ ImageButton 
--- เมื่อคลิกปุ่มใน ImageButton
-function LoadFunction()    
-        ImageButton.MouseEnter:Connect(function()
-        TweenService:Create(
-            ImageButton,
-            TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-            {Size = UDim2.new(0, 80, 0, 80)}
-        ):Play()
-    end)
-    ImageButton.MouseLeave:Connect(function()
-        TweenService:Create(
-            ImageButton,
-            TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-            {Size = UDim2.new(0, 50, 0, 50)}
-        ):Play()
-    end)
-    
-    local LoadFocus = false
-    
-    ImageButton.MouseButton1Down:Connect(function()
-        if LoadFocus == false then 
-            LoadFocus = false
-            TweenService:Create(
-                ImageButton,
-                TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-                {Rotation = 180}
-            ):Play()
-            SoundClick2:Play()
-            TweenService:Create(
-                ImageButton,
-                TweenInfo.new(.4, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-                {ImageTransparency = 0}
-            ):Play()
-            wait(.5)
-            TweenService:Create(
-                ImageButton,
-                TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-                {Rotation = 0}
-            ):Play()
-            TweenService:Create(
-                ImageButton,
-                TweenInfo.new(.4, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-                {ImageTransparency = 0}
-            ):Play()
-            wait(.5)	
-            
-        end
-    end)
-end
-    LoadFunction()
-    ImageButton.MouseButton1Down:connect(function()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.F1,false,game)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,Enum.KeyCode.F1,false,game)
-    end)
---[[UIPERPID]]
 
 
 -- [Save Settings]

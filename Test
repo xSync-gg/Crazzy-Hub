@@ -1,24 +1,20 @@
-
-
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({
-    Name = "Annie Hub", 
-    HidePremium = false, 
-    SaveConfig = true, 
-    ConfigFolder = "Annie",
-    IntroEnabled = true,
-    IntroText = "Annie Hub",
-    IntroIcon = "rbxassetid://15454993118",
-    Icon = "rbxassetid://15454993118"
-})
-
-local Main = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://15712703260",
-	PremiumOnly = false
-})
-
-
+local SlayerzLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/x2-Neptune/SlayerzUI/main/BetaLibrary.script"))()
+-- Window Setting
+local Name = "SlayerzUI" -- Name Hub
+local Description = "This ui made by Slayerz - API" -- Description in script
+local Image = "rbxassetid://15110884615" -- Image Id
+local Color = Color3.fromRGB(255, 0, 0) -- Color in UI
+-- Create Window
+local Window = SlayerzLibrary:Window(Name,Description,Image,Color)
+local Tab1 = Window:Tab("Tab 1") -- Tab Name
+-- Create Section on Left Side
+local Section = Tab1:Section("- Section 1 -","Left")
+-- Create Section on Right Side
+local Section2 = Tab1:Section("- Section 2 -","Right")
+-- Text , Default [ true / false ] , Callback
+Section:Toggle("Toggle",false,function(v)
+    print("Toggle - "..tostring(v)) -- Callback Function "v" is bool value
+end)
 -----------------------------------------------------------------------------------------------------------------------------Function
 assert(getrawmetatable)
     grm = getrawmetatable(game)
@@ -1644,22 +1640,7 @@ end
 end
 end
 -----------------------------------------------------------------------------------------------------------------------------Main Tab
-Main:AddToggle({
-	Name = "mmb",
-	Default = false,
-	Callback = function(Value)
-        saveSettings()
-	end    
-})
 
-Main:AddDropdown({
-	Name = "Dropdown",
-	Default = "1",
-	Options = {"1", "2"},
-	Callback = function(Value)
-        saveSettings()
-	end    
-})
 -----------------------------------------------------------------------------------------------------------------------------Setting Tab
 
 -----------------------------------------------------------------------------------------------------------------------------Other Farm Tab

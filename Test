@@ -18,26 +18,6 @@ local Shop = a:Tab("Shop", "rbxassetid://15712767144")
 local Misc = a:Tab("Misc", "rbxassetid://15712771666")
 local Race = a:Tab("Race V4", "rbxassetid://15712776421")
 local Event = a:Tab("Update Event", "rbxassetid://15806749681")
-
-Main:Seperator("")
-
-Main:Label("")
-
-Main:Button("", function()
-    setclipboard("https://discord.gg/A7jhrH94rX")
-end)
-
-Main:Dropdown("", WeaponList, function(value)
-    SelectWeapon = value
-end)
-
-Main:Toggle("", false, function(value)
-    FastAttack = value
-end)
-
-Main:Slider("", 0, 100, 30, function(value)
-     _G.DistanceAutoFarm = value
-end)
 -----------------------------------------------------------------------------------------------------------------------------Function
 assert(getrawmetatable)
     grm = getrawmetatable(game)
@@ -117,68 +97,6 @@ spawn(function()
         end
     end
 end)
-
-if debug.info(1, "l") ~= 1 then
-    game.Players.LocalPlayer:Kick("Safe dude..")
-        while true do end
-else
-    ---handle----
-end
-
-local CheckHttp
-CheckHttp = hookfunction(appendfile, function(file, content)
-    if(string.find(string.lower(content), 'https://') or string.find(string.lower(content), '//')) then
-        while true do end
-        return
-    end
-    return CheckHttp(file, content)
-end)
-
-hookfunction(print, function(a)
-	if string.find(a:lower(), "http") then
-	while true do end
-	end
-	end)
-pcall(game.HttpGet, game, setmetatable({}, {
-    __tostring = function()
-        print("Kick Player")
-        return ""
-    end,
-}))
-
-local functions = {print,warn,error,rconsoleprint,setclipboard,rconsoleerr,rconsolewarn}
-local hell_nah = {"githubusercontent","Yourgithubusername"}
-for i,v in pairs(functions) do
-    local old
-    old = hookfunction(v, function(...)
-        local content = {...}
-        for i2,v2 in pairs(content) do
-            for i3,v3 in pairs(hell_nah) do
-                if string.find(string.lower(tostring(i2)),string.lower(tostring(v3))) or string.find(string.lower(tostring(v2)),string.lower(tostring(v3))) then
-                    content = " So Let's raise the bar"
-                    while true do end
-                    return
-                end
-            end
-        end
-        return old(...)
-    end)
-end
-
-local function CheckForSpy()
-    local core = game:GetService("CoreGui")
-    local keyword = "spy"
-    
-    for _, v in pairs(core:GetDescendants()) do
-        if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
-            if string.find(string.lower(v.Name), string.lower(keyword)) or string.find(string.lower(v.Text), string.lower(keyword)) then
-                       while true do end
-                end
-            end
-        end
-    end
-
-CheckForSpy()
 
 game:GetService("CoreGui").ChildAdded:Connect(function()
 CheckForSpy()
@@ -285,52 +203,6 @@ _G.Settings = {
     AutoNextPlace = false
 }
 
-
--- [Save Settings]
-
-function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfolder("VectorHub") then
-            makefolder("VectorHub")
-        end
-        if not isfolder("VectorHub/Blox Fruits/") then
-            makefolder("VectorHub/Blox Fruits/")
-        end
-        if not isfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            writefile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(_G.Settings))
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("VectorHub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            for i, v in pairs(Decode) do
-                _G.Settings[i] = v
-            end
-        end
-    else
-        return 
-    end
-end
-
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("VectorHub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            local Array = {}
-            for i, v in pairs(_G.Settings) do
-                Array[i] = v
-            end
-            writefile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(Array))
-        end
-    else
-        return 
-    end
-end
-
-LoadSettings()
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TweenService = game:GetService("TweenService")
 local tween = game:service"TweenService"

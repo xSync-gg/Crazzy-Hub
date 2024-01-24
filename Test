@@ -203,6 +203,50 @@ _G.Settings = {
     AutoNextPlace = false
 }
 
+function LoadSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfolder("VectorHub") then
+            makefolder("VectorHub")
+        end
+        if not isfolder("VectorHub/Blox Fruits/") then
+            makefolder("VectorHub/Blox Fruits/")
+        end
+        if not isfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            writefile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(_G.Settings))
+        else
+            local Decode = game:GetService("HttpService"):JSONDecode(readfile("VectorHub/Blox Fruits/" ..
+                game.Players.LocalPlayer.Name .. ".json"))
+            for i, v in pairs(Decode) do
+                _G.Settings[i] = v
+            end
+        end
+    else
+        return 
+    end
+end
+
+function SaveSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            LoadSettings()
+        else
+            local Decode = game:GetService("HttpService"):JSONDecode(readfile("VectorHub/Blox Fruits/" ..
+                game.Players.LocalPlayer.Name .. ".json"))
+            local Array = {}
+            for i, v in pairs(_G.Settings) do
+                Array[i] = v
+            end
+            writefile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(Array))
+        end
+    else
+        return 
+    end
+end
+
+LoadSettings()
+
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TweenService = game:GetService("TweenService")
 local tween = game:service"TweenService"
@@ -1438,7 +1482,14 @@ end
 end
 end
 -----------------------------------------------------------------------------------------------------------------------------Main Tab
-
+Main:Toggle("Auto Farm Level", _G.Settings.AutoFarm, function(value)
+    _G.AutoFarm = value
+    _G.Settings.AutoFarm = value
+    SaveSettings()
+    if value == false then
+        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+end)
 -----------------------------------------------------------------------------------------------------------------------------Setting Tab
 
 -----------------------------------------------------------------------------------------------------------------------------Other Farm Tab

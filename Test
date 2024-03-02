@@ -1225,20 +1225,14 @@ local function toTarget(...)
     
     local tweenfunc = {}
     local Distance = (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
-    if Distance < 10 then
-        Speed = 20000
-    elseif Distance < 25 then
-        Speed = 10000
-    elseif Distance < 50 then
-        Speed = 5000
-    elseif Distance < 150 then
-        Speed = 2500
+    if Distance < 50 then
+        Speed = 650
     elseif Distance < 250 then
-        Speed = 1250
+        Speed = 590
     elseif Distance < 500 then
-        Speed = 625
+        Speed = 500
     elseif Distance < 750 then
-        Speed = 450
+        Speed = 400
     elseif Distance >= 1000 then
         Speed = 350
     end
@@ -1356,20 +1350,14 @@ local function toTarget(...)
             Highlight.OutlineColor = Color3.new(0,0,0)
             Highlight.Parent = game.Players.LocalPlayer.Character
         end
-        if TweenPlay < 10 then
-            TweeSpeed = 20000
-        elseif TweenPlay < 25 then
-            TweeSpeed = 10000
-        elseif TweenPlay < 50 then
-            TweeSpeed = 5000
-        elseif TweenPlay < 150 then
-            TweeSpeed = 2500
+        if TweenPlay < 50 then
+            TweeSpeed = 650
         elseif TweenPlay < 250 then
-            TweeSpeed = 1250
+            TweeSpeed = 590
         elseif TweenPlay < 500 then
-            TweeSpeed = 625
+            TweeSpeed = 500
         elseif TweenPlay < 750 then
-            TweeSpeed = 450
+            TweeSpeed = 400
         elseif TweenPlay >= 1000 then
             TweeSpeed = 350
         end
@@ -1935,11 +1923,11 @@ SetAttack:SetValue("Fast")
 SetAttack:OnChanged(function(a)
 SelectSpeedFast = a
 if SelectSpeedFast == "Slow" then
-    _G.Fast_Delay = 5
+    _G.Fast_Delay = 10
 elseif SelectSpeedFast == "Fast" then
-    _G.Fast_Delay = 0.25
+    _G.Fast_Delay = 0.05
 elseif SelectSpeedFast == "Extreme" then
-    _G.Fast_Delay = 0.1
+    _G.Fast_Delay = 0.025
 end
 end)
 

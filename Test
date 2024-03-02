@@ -24,31 +24,31 @@ assert(getrawmetatable)
     setreadonly(grm, false)
     old = grm.__namecall
     grm.__namecall = newcclosure(function(self, ...)
-        local args = {...}
-        if tostring(args[1]) == "TeleportDetect" then
-            return
-        elseif tostring(args[1]) == "CHECKER_1" then
-            return
-        elseif tostring(args[1]) == "CHECKER" then
-            return
-        elseif tostring(args[1]) == "GUI_CHECK" then
-            return
-        elseif tostring(args[1]) == "OneMoreTime" then
-            return
-        elseif tostring(args[1]) == "checkingSPEED" then
-            return
-        elseif tostring(args[1]) == "BANREMOTE" then
-            return
-        elseif tostring(args[1]) == "PERMAIDBAN" then
-            return
-        elseif tostring(args[1]) == "KICKREMOTE" then
-            return
-        elseif tostring(args[1]) == "BR_KICKPC" then
-            return
-        elseif tostring(args[1]) == "BR_KICKMOBILE" then
-            return
-        end
-        return old(self, ...)
+    local args = {...}
+    if tostring(args[1]) == "TeleportDetect" then
+        return
+    elseif tostring(args[1]) == "CHECKER_1" then
+        return
+    elseif tostring(args[1]) == "CHECKER" then
+        return
+    elseif tostring(args[1]) == "GUI_CHECK" then
+        return
+    elseif tostring(args[1]) == "OneMoreTime" then
+        return
+    elseif tostring(args[1]) == "checkingSPEED" then
+        return
+    elseif tostring(args[1]) == "BANREMOTE" then
+        return
+    elseif tostring(args[1]) == "PERMAIDBAN" then
+        return
+    elseif tostring(args[1]) == "KICKREMOTE" then
+        return
+    elseif tostring(args[1]) == "BR_KICKPC" then
+        return
+    elseif tostring(args[1]) == "BR_KICKMOBILE" then
+        return
+    end
+    return old(self, ...)
 end)
 
 getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync
@@ -1612,6 +1612,25 @@ function Check_Sword(Sword_Name)
     end
 end
 
+spawn(function()
+    game:GetService("RunService").Heartbeat:Connect(function()
+        pcall(function()
+            if _G.BringNormal then
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if _G.Auto_Farm_Level and BringMobFarm and v.Name == Mon and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.HumanoidRootPart.CanCollide = false
+                        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
+                    end
+                end
+            end
+        end)
+    end) 
+end)
 ----------------------------------------------------------------------------------------------------------------------------Main Tab
 Main:Seperator("Config")
 
@@ -1693,8 +1712,144 @@ task.spawn(function()
     end
 end)
 
+Main:Seperator("Main Farm")
+
+Main:Toggle("Auto Farm Level", false, function(value)
+    _G.Auto_Farm_Level = value 
+end)
+local SetCFarme = 1
+spawn(function()
+while wait() do
+    local MyLevel = game.Players.LocalPlayer.Data.Level.Value
+    local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
+    pcall(function()
+        if _G.Auto_Farm_Level then
+                if QuestC.Visible == true then
+                    if game:GetService("Workspace").Enemies:FindFirstChild(QuestCheck()[3]) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == QuestCheck()[3] then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat task.wait()
+                                        if _G.Auto_CFrame then
+                                            SetCFarme = 1
+                                        end
+                                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, QuestCheck()[6]) then
+                                            --game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                        else
+                                            PosMon = v.HumanoidRootPart.CFrame
+                                            v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            BringMobFarm = true
+                                            EquipWeapon(_G.Select_Weapon)
+                                            v.HumanoidRootPart.Transparency = 1
+                                            getgenv().ToTarget(v.HumanoidRootPart.CFrame * MethodFarm)
+
+                                            if not _G.Auto_Farm_Level or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO then
+                                                _G.FastAttack = true
+                                            end
+                                        end
+                                    until not _G.Auto_Farm_Level or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                end
+                            end
+                        end
+                    else
+                        --UnEquipWeapon(_G.Select_Weapon)
+                        if _G.Auto_CFrame and not _G.AutoFarmFast then
+                            getgenv().ToTarget(QuestCheck()[7][SetCFarme] * MethodFarm)
+                            if (QuestCheck()[7][SetCFarme].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+                                if SetCFarme == nil or SetCFarme == '' then
+                                    SetCFarme = 1
+                                elseif SetCFarme >= #QuestCheck()[7] then
+                                    SetCFarme = 1
+                                end
+                                SetCFarme =  SetCFarme + 1
+                                wait(0.5)
+                            end
+                        else
+                            if not _G.AutoFarmFast then
+                                if AttackRandomType_MonCFrame == 1 then
+                                    getgenv().ToTarget(QuestCheck()[7][1] * CFrame.new(0,30,20))
+                                elseif AttackRandomType_MonCFrame == 2 then
+                                    getgenv().ToTarget(QuestCheck()[7][1] * CFrame.new(0,30,-20))
+                                elseif AttackRandomType_MonCFrame == 3 then
+                                    getgenv().ToTarget(QuestCheck()[7][1] * CFrame.new(20,30,0))
+                                elseif AttackRandomType_MonCFrame == 4 then
+                                    getgenv().ToTarget(QuestCheck()[7][1] * CFrame.new(0,30,-20))
+                                elseif AttackRandomType_MonCFrame == 5 then
+                                    getgenv().ToTarget(QuestCheck()[7][1] * CFrame.new(-20,30,0))
+                                else
+                                    getgenv().ToTarget(QuestCheck()[7][1] * CFrame.new(0,30,20))
+                                end
+                            end
+                        end
+                    end
+                else
+                    getgenv().ToTarget(QuestCheck()[2])
+                    if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+                        BringMobFarm = false
+                        wait(0.2)
+                        game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", QuestCheck()[4], QuestCheck()[1]) wait(0.5)
+                        getgenv().ToTarget(QuestCheck()[7][1] * MethodFarm)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+Main:Toggle("Auto Farm Nearest", false, function(value)
+    _G.NeareastFarm = value
+end)
+spawn(function()
+    while task.wait() do
+        if _G.NeareastFarm then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 2000 and v.Humanoid.Health > 0 then
+                        repeat
+                            wait() 
+                            EquipWeapon(_G.Select_Weapon)
+                            PosMon = v.HumanoidRootPart.CFrame
+                            v.HumanoidRootPart.CanCollide = false 
+                            v.Head.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                            StartMagnet = true
+                            FastAttack = true
+                            toTarget(v.HumanoidRootPart.CFrame * MethodFarm)
+                            if not FastAttack then
+                                game:GetService 'VirtualUser':CaptureController()
+                                game:GetService 'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            end 
+                        until not _G.NeareastFarm or not v.Parent or v.Humanoid.Health <= 0 
+                    end
+                end
+            end)
+        end
+    end
+end)
+AttackRandomType_MonCFrame = 1
+spawn(function()
+    while wait() do 
+        AttackRandomType_MonCFrame = math.random(1,5)
+        wait(0.3)
+    end
+end)
 
 ----------------------------------------------------------------------------------------------------------------------------Settings Tab
+Set:Toggle("Fast Attack", true, function(value)
+    _G.FastAttack = value
+end)
+task.spawn(function()
+    pcall(function()
+        while task.wait(_G.Fast_Delay) do
+            if FastAttack and _G.FastAttack then
+                AttackFunction()
+           end
+        end
+    end)
+end)
 
 ----------------------------------------------------------------------------------------------------------------------------Other Farm Tab
 

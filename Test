@@ -1897,7 +1897,7 @@ SelectSpeedFast = a
 if SelectSpeedFast == "Slow" then
     _G.Fast_Delay = 5
 elseif SelectSpeedFast == "Fast" then
-    _G.Fast_Delay = 0.1
+    _G.Fast_Delay = 0.25
 elseif SelectSpeedFast == "Extreme" then
     _G.Fast_Delay = 0.025
 end

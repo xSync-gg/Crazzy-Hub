@@ -579,46 +579,6 @@ return old(unpack(args))
 end
 end
 
-function LoadSettings()
-if readfile and writefile and isfile and isfolder then
-    if not isfolder("SpeedHubX_V2") then
-        makefolder("SpeedHubX_V2")
-    end
-    if not isfolder("SpeedHubX_V2/Blox Fruits/") then
-        makefolder("SpeedHubX_V2/Blox Fruits/")
-    end
-    if not isfile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-        writefile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Settings))
-    else
-        local Decode = game:GetService("HttpService"):JSONDecode(readfile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-        for i,v in pairs(Decode) do
-            _G.Settings[i] = v
-        end
-    end
-else
-    return warn("Status: error")
-end
-end
-
-function SaveSettings()
-if readfile and writefile and isfile and isfolder then
-    if not isfile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-        LoadSettings()
-    else
-        local Decode = game:GetService("HttpService"):JSONDecode(readfile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-        local Array = {}
-        for i,v in pairs(_G.Settings) do
-            Array[i] = v
-        end
-        writefile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(Array))
-    end
-else
-    return warn("Status: error")
-end
-end
-
-LoadSettings()
-
 local id = game.PlaceId
 if id == 2753915549 then
 World1 = true; 

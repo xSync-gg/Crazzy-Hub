@@ -1895,9 +1895,9 @@ SetAttack:SetValue("Fast")
 SetAttack:OnChanged(function(a)
 SelectSpeedFast = a
 if SelectSpeedFast == "Slow" then
-    _G.Fast_Delay = 5
+    _G.Fast_Delay = 1
 elseif SelectSpeedFast == "Fast" then
-    _G.Fast_Delay = 0.3
+    _G.Fast_Delay = 0.25
 elseif SelectSpeedFast == "Extreme" then
     _G.Fast_Delay = 0.025
 end

@@ -137,9 +137,9 @@ spawn(function()
 			end)
 		end)
 
-		local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-		local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-		local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local SpeedHubX = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Library.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Interface.lua"))()
 repeat wait() until game:IsLoaded()
 local Window = SpeedHubX:CreateWindow({
     Title = "Dinoz Hub",
@@ -366,7 +366,6 @@ spawn(function()
 	
 	local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
 	local CombatFrameworkR = getupvalues(CombatFramework)[2]
-
 	function CurrentWeapon()
 		local ac = CombatFrameworkR.activeController 
 		local val = ac.blades[1]
@@ -529,7 +528,8 @@ DamageModule.Run = function(...)
     return old(unpack(args))
 end
 end
-	
+
+
 local id = game.PlaceId
 if id == 2753915549 then
 World1 = true; 

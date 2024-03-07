@@ -147,7 +147,7 @@ local Window = SpeedHubX:CreateWindow({
     TabWidth = 160,
     Size = UDim2.fromOffset(560, 350),
     Acrylic = true, 
-    Theme = "Vampire",
+    Theme = "Aqua",
     MinimizeKey = Enum.KeyCode.Delete 
 })
 

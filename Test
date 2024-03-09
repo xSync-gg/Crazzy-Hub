@@ -1,7 +1,6 @@
 
 
 
-
 --[[
     getgenv().Config = {
         ["Team"] = "Marines",
@@ -141,7 +140,7 @@ MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 MainFrame.Size = UDim2.new(0, 305, 0, 250)
 
 MainFrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-MainFrameStroke.Color = Color3.fromRGB(166, 43, 177)
+MainFrameStroke.Color = Color3.fromRGB(0, 0, 138)
 MainFrameStroke.Thickness = 1.7000000476837158
 MainFrameStroke.Name = "MainFrameStroke"
 MainFrameStroke.Parent = MainFrame
@@ -163,7 +162,7 @@ HopServer.Text = "SERVER HOP"
 HopServer.TextColor3 = Color3.fromRGB(255, 255, 255)
 HopServer.TextSize = 18.000
 
-HopServerStroke.Color = Color3.fromRGB(166, 43, 177)
+HopServerStroke.Color = Color3.fromRGB(0, 0, 138)
 HopServerStroke.Name = "HopServerStroke"
 HopServerStroke.Parent = HopServer
 
@@ -188,7 +187,7 @@ StarHubToggle.Text = "ON"
 StarHubToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
 StarHubToggle.TextSize = 18.000
 
-StarHubToggleStroke.Color = Color3.fromRGB(166, 43, 177)
+StarHubToggleStroke.Color = Color3.fromRGB(0, 0, 138)
 StarHubToggleStroke.Name = "StarHubToggleStroke"
 StarHubToggleStroke.Parent = StarHubToggle
 
@@ -203,7 +202,7 @@ StarHubToggleShadow.Size = UDim2.new(0, 137, 0, 36)
 
 Logo.Name = "Logo"
 Logo.Parent = MainFrame
-Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Logo.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Logo.BorderSizePixel = 0
 Logo.Position = UDim2.new(0.0299999993, 0, 0.0320000015, 0)
@@ -232,7 +231,7 @@ DescriptionPadding.Name = "DescriptionPadding"
 DescriptionPadding.Parent = Description
 DescriptionPadding.PaddingTop = UDim.new(0, 4)
 
-DescriptionStroke.Color = Color3.fromRGB(166, 43, 177)
+DescriptionStroke.Color = Color3.fromRGB(0, 0, 138)
 DescriptionStroke.Name = "DescriptionStroke"
 DescriptionStroke.Parent = Description
 
@@ -254,7 +253,7 @@ Load2Padding.Name = "Load2Padding"
 Load2Padding.Parent = Load2
 Load2Padding.PaddingLeft = UDim.new(0, 5)
 
-Load2Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load2Stroke.Color = Color3.fromRGB(0, 0, 138)
 Load2Stroke.Name = "Load2Stroke"
 Load2Stroke.Parent = Load2
 
@@ -285,7 +284,7 @@ Load4Padding.Name = "Load4Padding"
 Load4Padding.Parent = Load4
 Load4Padding.PaddingLeft = UDim.new(0, 5)
 
-Load4Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load4Stroke.Color = Color3.fromRGB(0, 0, 138)
 Load4Stroke.Name = "Load4Stroke"
 Load4Stroke.Parent = Load4
 
@@ -316,7 +315,7 @@ Load3Padding.Name = "Load3Padding"
 Load3Padding.Parent = Load3
 Load3Padding.PaddingLeft = UDim.new(0, 5)
 
-Load3Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load3Stroke.Color = Color3.fromRGB(0, 0, 138)
 Load3Stroke.Name = "Load3Stroke"
 Load3Stroke.Parent = Load3
 
@@ -343,7 +342,7 @@ Load3_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Load3_2.TextSize = 17.000
 Load3_2.TextXAlignment = Enum.TextXAlignment.Left
 
-Load3_2Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load3_2Stroke.Color = Color3.fromRGB(0, 0, 138)
 Load3_2Stroke.Name = "Load3_2Stroke"
 Load3_2Stroke.Parent = Load3_2
 
@@ -356,11 +355,11 @@ HubName.BorderSizePixel = 0
 HubName.Position = UDim2.new(0.223000005, 0, 0.0320000015, 0)
 HubName.Size = UDim2.new(0, 226, 0, 25)
 HubName.Font = Enum.Font.GothamBold
-HubName.Text = "CRAZZY HUB V3"
+HubName.Text = "Crazzy Hub V3"
 HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
 HubName.TextSize = 25.000
 
-HubNameStroke.Color = Color3.fromRGB(166, 43, 177)
+HubNameStroke.Color = Color3.fromRGB(0, 0, 138)
 HubNameStroke.Name = "HubNameStroke"
 HubNameStroke.Parent = HubName
 
@@ -398,7 +397,7 @@ Load1Padding.Name = "Load1Padding"
 Load1Padding.Parent = Load1
 Load1Padding.PaddingLeft = UDim.new(0, 5)
 
-Load1Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load1Stroke.Color = Color3.fromRGB(0, 0, 138)
 Load1Stroke.Name = "Load1Stroke"
 Load1Stroke.Parent = Load1
 
@@ -425,7 +424,7 @@ Load1_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Load1_2.TextSize = 16.000
 Load1_2.TextXAlignment = Enum.TextXAlignment.Left
 
-Load1_2Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load1_2Stroke.Color = Color3.fromRGB(0, 0, 138)
 Load1_2Stroke.Name = "Load1_2Stroke"
 Load1_2Stroke.Parent = Load1_2
 

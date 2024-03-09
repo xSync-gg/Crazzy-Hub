@@ -1,1 +1,726 @@
 
+
+
+
+--[[
+    getgenv().Config = {
+        ["Team"] = "Marines",
+        ["Farm Chest"] = true,
+        ["Time Reset"] = 5.5,
+        ["Screen"] = {
+            ["White Screen"] = false,
+            ["Black Screen"] = false
+        },
+        ["Stop"] = {
+            ["God's Chalice"] = true,
+            ["Fist of Darkness"] = true,
+        },
+        ["Hop Server"] = {
+            ["Region"] = "Singapore"
+        },
+    }
+    repeat
+        wait()
+    until game:IsLoaded()
+    loadstring(game:HttpGet("https://github.com/x2P-Verta/StarHub/raw/main/ChestFarmBeta",true))()
+]]
+
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    repeat task.wait()
+        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+            if getgenv().Config["Team"] == "Marines" then
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
+                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                       b:Fire() 
+                    end
+                    v.Function()
+                end 
+            else
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
+                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                       b:Fire() 
+                    end
+                    v.Function()
+                end 
+            end
+        end
+        
+    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+end
+
+_G.SaveData = {
+    TotalEarn = 0
+}
+local BeliWhenJoin = game:GetService("Players").LocalPlayer.Data.Beli.Value
+local ThenBeli = game:GetService("Players").LocalPlayer.Data.Beli.Value
+
+local foldername = "Sync_Hub"
+local filename = "Counter.json"
+function saveSettings()
+    local HttpService = game:GetService("HttpService")
+    local json = HttpService:JSONEncode(_G.SaveData)
+    if (writefile) then
+        if isfolder(foldername) then
+            if isfile(foldername.."\\"..filename) then
+                writefile(foldername.."\\"..filename, json)
+            else
+                writefile(foldername.."\\"..filename, json)
+            end
+        else
+            makefolder(foldername)
+            writefile(foldername.."\\"..filename, json)
+        end
+    end
+end
+function loadSettings()
+    local HttpService = game:GetService("HttpService")
+    if isfile(foldername.."\\"..filename) then
+        _G.SaveData = HttpService:JSONDecode(readfile(foldername.."\\"..filename))
+    end
+end
+function RewriteData(value)
+    _G.SaveData.TotalEarn = value
+    saveSettings()
+end
+loadSettings()
+print("Saved Total Earn : ".._G.SaveData.TotalEarn)
+
+local BeliSaved = _G.SaveData.TotalEarn
+local StarHubC = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local MainFrameStroke = Instance.new("UIStroke")
+local MainFrameCorner = Instance.new("UICorner")
+local HopServer = Instance.new("TextButton")
+local HopServerStroke = Instance.new("UIStroke")
+local HopServerShadow = Instance.new("Frame")
+local StarHubToggle = Instance.new("TextButton")
+local StarHubToggleStroke = Instance.new("UIStroke")
+local StarHubToggleShadow = Instance.new("Frame")
+local Logo = Instance.new("ImageLabel")
+local LogoStroke = Instance.new("UIStroke")
+local Description = Instance.new("TextLabel")
+local DescriptionPadding = Instance.new("UIPadding")
+local DescriptionStroke = Instance.new("UIStroke")
+local Load2 = Instance.new("TextLabel")
+local Load2Padding = Instance.new("UIPadding")
+local Load2Stroke = Instance.new("UIStroke")
+local Load2Shadow = Instance.new("Frame")
+local Load4 = Instance.new("TextLabel")
+local Load4Padding = Instance.new("UIPadding")
+local Load4Stroke = Instance.new("UIStroke")
+local Load4Shadow = Instance.new("Frame")
+local Load3 = Instance.new("TextLabel")
+local Load3Padding = Instance.new("UIPadding")
+local Load3Stroke = Instance.new("UIStroke")
+local Load3Shadow = Instance.new("Frame")
+local Load3_2 = Instance.new("TextLabel")
+local Load3_2Stroke = Instance.new("UIStroke")
+local HubName = Instance.new("TextLabel")
+local HubNameStroke = Instance.new("UIStroke")
+local HubNamePadding = Instance.new("UIPadding")
+local FrameLoadShadow = Instance.new("ImageLabel")
+local Load1 = Instance.new("TextLabel")
+local Load1Padding = Instance.new("UIPadding")
+local Load1Stroke = Instance.new("UIStroke")
+local Load1Shadow = Instance.new("Frame")
+local Load1_2 = Instance.new("TextLabel")
+local Load1_2Stroke = Instance.new("UIStroke")
+
+StarHubC.Name = "StarHubC"
+StarHubC.Parent = game:GetService("CoreGui")
+StarHubC.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = StarHubC
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.BackgroundTransparency = -0.010
+MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Size = UDim2.new(0, 305, 0, 250)
+
+MainFrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+MainFrameStroke.Color = Color3.fromRGB(166, 43, 177)
+MainFrameStroke.Thickness = 1.7000000476837158
+MainFrameStroke.Name = "MainFrameStroke"
+MainFrameStroke.Parent = MainFrame
+
+MainFrameCorner.CornerRadius = UDim.new(0, 2)
+MainFrameCorner.Name = "MainFrameCorner"
+MainFrameCorner.Parent = MainFrame
+
+HopServer.Name = "HopServer"
+HopServer.Parent = MainFrame
+HopServer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HopServer.BackgroundTransparency = 0.900
+HopServer.BorderColor3 = Color3.fromRGB(0, 0, 0)
+HopServer.BorderSizePixel = 0
+HopServer.Position = UDim2.new(0.516999364, 0, 0.832000017, 0)
+HopServer.Size = UDim2.new(0, 134, 0, 36)
+HopServer.Font = Enum.Font.GothamBold
+HopServer.Text = "SERVER HOP"
+HopServer.TextColor3 = Color3.fromRGB(255, 255, 255)
+HopServer.TextSize = 18.000
+
+HopServerStroke.Color = Color3.fromRGB(166, 43, 177)
+HopServerStroke.Name = "HopServerStroke"
+HopServerStroke.Parent = HopServer
+
+HopServerShadow.Name = "HopServerShadow"
+HopServerShadow.Parent = HopServer
+HopServerShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HopServerShadow.BackgroundTransparency = 0.900
+HopServerShadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+HopServerShadow.BorderSizePixel = 0
+HopServerShadow.Size = UDim2.new(0, 133, 0, 36)
+
+StarHubToggle.Name = "StarHubToggle"
+StarHubToggle.Parent = MainFrame
+StarHubToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+StarHubToggle.BackgroundTransparency = 0.900
+StarHubToggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+StarHubToggle.BorderSizePixel = 0
+StarHubToggle.Position = UDim2.new(0.0267213918, 0, 0.832000017, 0)
+StarHubToggle.Size = UDim2.new(0, 138, 0, 36)
+StarHubToggle.Font = Enum.Font.GothamBold
+StarHubToggle.Text = "ON"
+StarHubToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+StarHubToggle.TextSize = 18.000
+
+StarHubToggleStroke.Color = Color3.fromRGB(166, 43, 177)
+StarHubToggleStroke.Name = "StarHubToggleStroke"
+StarHubToggleStroke.Parent = StarHubToggle
+
+StarHubToggleShadow.Name = "StarHubToggleShadow"
+StarHubToggleShadow.Parent = StarHubToggle
+StarHubToggleShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+StarHubToggleShadow.BackgroundTransparency = 0.900
+StarHubToggleShadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+StarHubToggleShadow.BorderSizePixel = 0
+StarHubToggleShadow.Position = UDim2.new(0.00381779321, 0, 0, 0)
+StarHubToggleShadow.Size = UDim2.new(0, 137, 0, 36)
+
+Logo.Name = "Logo"
+Logo.Parent = MainFrame
+Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Logo.BorderSizePixel = 0
+Logo.Position = UDim2.new(0.0299999993, 0, 0.0320000015, 0)
+Logo.Size = UDim2.new(0, 50, 0, 50)
+Logo.Image = "rbxassetid://15689000757"
+
+LogoStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LogoStroke.Color = Color3.fromRGB(255, 255, 255)
+LogoStroke.Name = "LogoStroke"
+LogoStroke.Parent = Logo
+
+Description.Name = "Description"
+Description.Parent = MainFrame
+Description.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Description.BackgroundTransparency = 1.000
+Description.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Description.BorderSizePixel = 0
+Description.Position = UDim2.new(0.223000005, 0, 0.131999999, 0)
+Description.Size = UDim2.new(0, 226, 0, 25)
+Description.Font = Enum.Font.ArialBold
+Description.Text = "Farm Chests"
+Description.TextColor3 = Color3.fromRGB(255, 255, 255)
+Description.TextSize = 23.000
+
+DescriptionPadding.Name = "DescriptionPadding"
+DescriptionPadding.Parent = Description
+DescriptionPadding.PaddingTop = UDim.new(0, 4)
+
+DescriptionStroke.Color = Color3.fromRGB(166, 43, 177)
+DescriptionStroke.Name = "DescriptionStroke"
+DescriptionStroke.Parent = Description
+
+Load2.Name = "Load2"
+Load2.Parent = MainFrame
+Load2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load2.BackgroundTransparency = 0.900
+Load2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load2.BorderSizePixel = 0
+Load2.Position = UDim2.new(0.0299999993, 0, 0.43599999, 0)
+Load2.Size = UDim2.new(0, 284, 0, 31)
+Load2.Font = Enum.Font.Highway
+Load2.Text = "Time Elapsed: 00:00:00(s)"
+Load2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load2.TextSize = 18.000
+Load2.TextXAlignment = Enum.TextXAlignment.Left
+
+Load2Padding.Name = "Load2Padding"
+Load2Padding.Parent = Load2
+Load2Padding.PaddingLeft = UDim.new(0, 5)
+
+Load2Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load2Stroke.Name = "Load2Stroke"
+Load2Stroke.Parent = Load2
+
+Load2Shadow.Name = "Load2Shadow"
+Load2Shadow.Parent = Load2
+Load2Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load2Shadow.BackgroundTransparency = 0.900
+Load2Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load2Shadow.BorderSizePixel = 0
+Load2Shadow.Position = UDim2.new(-0.0179211479, 0, 0, 0)
+Load2Shadow.Size = UDim2.new(0, 283, 0, 33)
+
+Load4.Name = "Load4"
+Load4.Parent = MainFrame
+Load4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load4.BackgroundTransparency = 0.900
+Load4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load4.BorderSizePixel = 0
+Load4.Position = UDim2.new(0.0270000007, 0, 0.699999988, 0)
+Load4.Size = UDim2.new(0, 284, 0, 31)
+Load4.Font = Enum.Font.Highway
+Load4.Text = "Current Beli: N/A"
+Load4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load4.TextSize = 18.000
+Load4.TextXAlignment = Enum.TextXAlignment.Left
+
+Load4Padding.Name = "Load4Padding"
+Load4Padding.Parent = Load4
+Load4Padding.PaddingLeft = UDim.new(0, 5)
+
+Load4Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load4Stroke.Name = "Load4Stroke"
+Load4Stroke.Parent = Load4
+
+Load4Shadow.Name = "Load4Shadow"
+Load4Shadow.Parent = Load4
+Load4Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load4Shadow.BackgroundTransparency = 0.900
+Load4Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load4Shadow.BorderSizePixel = 0
+Load4Shadow.Position = UDim2.new(-0.0179211479, 0, 0, 0)
+Load4Shadow.Size = UDim2.new(0, 283, 0, 31)
+
+Load3.Name = "Load3"
+Load3.Parent = MainFrame
+Load3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load3.BackgroundTransparency = 0.900
+Load3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load3.BorderSizePixel = 0
+Load3.Position = UDim2.new(0.0270000007, 0, 0.568000019, 0)
+Load3.Size = UDim2.new(0, 284, 0, 31)
+Load3.Font = Enum.Font.Highway
+Load3.Text = "Earned: N/A"
+Load3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load3.TextSize = 17.000
+Load3.TextXAlignment = Enum.TextXAlignment.Left
+
+Load3Padding.Name = "Load3Padding"
+Load3Padding.Parent = Load3
+Load3Padding.PaddingLeft = UDim.new(0, 5)
+
+Load3Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load3Stroke.Name = "Load3Stroke"
+Load3Stroke.Parent = Load3
+
+Load3Shadow.Name = "Load3Shadow"
+Load3Shadow.Parent = Load3
+Load3Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load3Shadow.BackgroundTransparency = 0.900
+Load3Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load3Shadow.BorderSizePixel = 0
+Load3Shadow.Position = UDim2.new(-0.0179211479, 0, 0, 0)
+Load3Shadow.Size = UDim2.new(0, 284, 0, 33)
+
+Load3_2.Name = "Load3_2"
+Load3_2.Parent = Load3
+Load3_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load3_2.BackgroundTransparency = 1.000
+Load3_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load3_2.BorderSizePixel = 0
+Load3_2.Position = UDim2.new(0.372401536, 0, -0.0126451058, 0)
+Load3_2.Size = UDim2.new(0, 160, 0, 31)
+Load3_2.Font = Enum.Font.Highway
+Load3_2.Text = "| Total Earned: N/A"
+Load3_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load3_2.TextSize = 17.000
+Load3_2.TextXAlignment = Enum.TextXAlignment.Left
+
+Load3_2Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load3_2Stroke.Name = "Load3_2Stroke"
+Load3_2Stroke.Parent = Load3_2
+
+HubName.Name = "HubName"
+HubName.Parent = MainFrame
+HubName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HubName.BackgroundTransparency = 1.000
+HubName.BorderColor3 = Color3.fromRGB(0, 0, 0)
+HubName.BorderSizePixel = 0
+HubName.Position = UDim2.new(0.223000005, 0, 0.0320000015, 0)
+HubName.Size = UDim2.new(0, 226, 0, 25)
+HubName.Font = Enum.Font.GothamBold
+HubName.Text = "CRAZZY HUB V3"
+HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
+HubName.TextSize = 25.000
+
+HubNameStroke.Color = Color3.fromRGB(166, 43, 177)
+HubNameStroke.Name = "HubNameStroke"
+HubNameStroke.Parent = HubName
+
+HubNamePadding.Name = "HubNamePadding"
+HubNamePadding.Parent = HubName
+HubNamePadding.PaddingLeft = UDim.new(0, 5)
+
+FrameLoadShadow.Name = "FrameLoadShadow"
+FrameLoadShadow.Parent = MainFrame
+FrameLoadShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+FrameLoadShadow.BackgroundTransparency = 1.000
+FrameLoadShadow.Position = UDim2.new(0.504999995, 0, 0.505999982, 2)
+FrameLoadShadow.Size = UDim2.new(0.896666646, 147, 0.828000009, 147)
+FrameLoadShadow.ZIndex = 0
+FrameLoadShadow.Image = "rbxassetid://297694300"
+FrameLoadShadow.ImageTransparency = 0.500
+FrameLoadShadow.ScaleType = Enum.ScaleType.Slice
+FrameLoadShadow.SliceCenter = Rect.new(85, 85, 427, 427)
+
+Load1.Name = "Load1"
+Load1.Parent = MainFrame
+Load1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load1.BackgroundTransparency = 0.900
+Load1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load1.BorderSizePixel = 0
+Load1.Position = UDim2.new(0.0299999993, 0, 0.30399999, 0)
+Load1.Size = UDim2.new(0, 161, 0, 31)
+Load1.Font = Enum.Font.Highway
+Load1.Text = "Collected: N/A Chests"
+Load1.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load1.TextSize = 16.000
+Load1.TextXAlignment = Enum.TextXAlignment.Left
+
+Load1Padding.Name = "Load1Padding"
+Load1Padding.Parent = Load1
+Load1Padding.PaddingLeft = UDim.new(0, 5)
+
+Load1Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load1Stroke.Name = "Load1Stroke"
+Load1Stroke.Parent = Load1
+
+Load1Shadow.Name = "Load1Shadow"
+Load1Shadow.Parent = Load1
+Load1Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load1Shadow.BackgroundTransparency = 0.900
+Load1Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load1Shadow.BorderSizePixel = 0
+Load1Shadow.Position = UDim2.new(-0.0320512839, 0, 0, 0)
+Load1Shadow.Size = UDim2.new(0, 284, 0, 33)
+
+Load1_2.Name = "Load1_2"
+Load1_2.Parent = Load1
+Load1_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Load1_2.BackgroundTransparency = 0.900
+Load1_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Load1_2.BorderSizePixel = 0
+Load1_2.Position = UDim2.new(1, 0, 0.0136777814, 0)
+Load1_2.Size = UDim2.new(0, 123, 0, 31)
+Load1_2.Font = Enum.Font.Highway
+Load1_2.Text = " | Total: N/A"
+Load1_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Load1_2.TextSize = 16.000
+Load1_2.TextXAlignment = Enum.TextXAlignment.Left
+
+Load1_2Stroke.Color = Color3.fromRGB(166, 43, 177)
+Load1_2Stroke.Name = "Load1_2Stroke"
+Load1_2Stroke.Parent = Load1_2
+
+-- Function A
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+function StarDragify(Frame, Object)
+    dragToggle = nil
+    dragSpeed = .25
+    dragInput = nil
+    dragStart = nil
+    dragPos = nil
+    function updateInput(input)
+        Delta = input.Position - dragStart
+        Position =
+            UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+        game:GetService("TweenService"):Create(Object, TweenInfo.new(dragSpeed), {Position = Position}):Play()
+    end
+    Frame.InputBegan:Connect(
+        function(input)
+            if
+                (input.UserInputType == Enum.UserInputType.MouseButton1 or
+                    input.UserInputType == Enum.UserInputType.Touch)
+            then
+                dragToggle = true
+                dragStart = input.Position
+                startPos = Object.Position
+                input.Changed:Connect(
+                    function()
+                        if (input.UserInputState == Enum.UserInputState.End) then
+                            dragToggle = false
+                        end
+                    end
+                )
+            end
+        end
+    )
+    Frame.InputChanged:Connect(
+        function(input)
+            if
+                (input.UserInputType == Enum.UserInputType.MouseMovement or
+                    input.UserInputType == Enum.UserInputType.Touch)
+            then
+                dragInput = input
+            end
+        end
+    )
+    game:GetService("UserInputService").InputChanged:Connect(
+    function(input)
+        if (input == dragInput and dragToggle) then
+            updateInput(input)
+        end
+    end
+    )
+end
+-- Moving Draggify
+StarDragify(MainFrame, MainFrame)
+
+-- White Screen
+spawn(function()
+    while true do
+        game.RunService:Set3dRenderingEnabled(not getgenv().Config["Screen"]["White Screen"])
+        if game.Players.LocalPlayer.Team ~= nil and game:IsLoaded() then
+            break
+        end
+        wait()
+    end
+end)
+
+-- Black Screen
+spawn(function()
+    while wait() do
+        getgenv().BlackScreen = {
+            ["BS_A"] = UDim2.new(0, 500, 0, 500),
+            ["BS_B"] = UDim2.new(1, 0, 1, 0),
+        }
+        if getgenv().Config["Screen"]["Black Screen"] then
+            game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = getgenv().BlackScreen["BS_A"]
+        else
+            game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = getgenv().BlackScreen["BS_B"]
+        end
+    end
+end)
+
+-- Toggle 
+
+_G.StarHubToggle = getgenv().Config["Farm Chest"]
+local FarmChest = getgenv().Config["Farm Chest"]
+StarHubToggle.Text = "ON"
+StarHubToggle.MouseButton1Click:Connect(function()
+    if _G.StarHubToggle == true then
+        StarHubToggle.Text = "ON"
+        FarmChest = true
+        _G.StarHubToggle = false
+    elseif _G.StarHubToggle == false then
+        StarHubToggle.Text = "OFF"
+        FarmChest = false
+        _G.StarHubToggle = true
+    end
+end)
+
+HopServer.MouseButton1Click:Connect(function()
+    hopserver = true
+end)
+
+-- Removing Script In Workspace
+for _, v in pairs(game.Workspace:GetChildren()) do
+    if v.Name == "Script" then
+        v:Destroy()
+    end
+end
+
+-- Counter
+collected = 0
+function CountChest()
+    local count = collected
+    Load1.Text = "Collected: " .. tostring(count) .. " Chests"
+end
+beli = game:GetService("Players").LocalPlayer.Data.Beli.Value
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            beli2 = game:GetService("Players").LocalPlayer.Data.Beli.Value
+            if beli2 > beli then
+                beli = game:GetService("Players").LocalPlayer.Data.Beli.Value
+                collected = collected + 1
+                CountChest()
+                Load4.Text = "Current Beli: "..game:GetService("Players").LocalPlayer.Data.Beli.Value
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            local NowBeli = game:GetService("Players").LocalPlayer.Data.Beli.Value
+            Load3.Text = "Earned: "..NowBeli - ThenBeli
+        end)
+    end
+end)
+
+chestintotal = 0
+othercollected = 0
+
+function CountChest2()
+    local number = othercollected
+    Load1_2.Text = "| Total: " .. tostring(number) .. " Chests"
+end
+
+spawn(function()
+    while task.wait() do
+        if FarmChest then
+            othercollected = 0
+            for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                if v:IsA("BasePart") and string.find(v.Name, "Chest") then
+                    othercollected = othercollected + 1
+                    CountChest2()
+                end
+            end
+
+            if othercollected ~= 0 then
+                chestintotal = othercollected
+            else
+                RewriteData(EarnedAllServer)
+                hopserver = true
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            BeliRightNow = game:GetService("Players").LocalPlayer.Data.Beli.Value
+            BeliGetFormThisServer = BeliRightNow - BeliWhenJoin
+            EarnedAllServer = BeliGetFormThisServer + BeliSaved
+            Load3_2.Text = "| Total Earned: "..EarnedAllServer
+        end)
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        if FarmChest then
+            local Chest = game.Workspace:FindFirstChild("Chest") or game.Workspace:FindFirstChild("Chest1") or game.Workspace:FindFirstChild("Chest4") or game.Workspace:FindFirstChild("Chest3") or game.Workspace:FindFirstChild("Chest2")
+            if Chest then
+                game.Players.LocalPlayer.Character:PivotTo(Chest:GetPivot())
+                firesignal(Chest.Touched, game.Players.LocalPlayer.Character.HumanoidRootPart)
+            else
+                RewriteData(EarnedAllServer)
+                hopserver = true
+                FarmChest = false
+                StarHubToggle.Text = "OFF"
+            end
+        end
+    end
+end)
+spawn(function()
+    while task.wait() do
+        if FarmChest and game:GetService("Players").LocalPlayer.Character:FindFirstChild("Head") then
+            task.wait(getgenv().Config["Time Reset"])
+            if (getgenv().Config["Stop"]["God's Chalice"] or getgenv().Config["Stop"]["Fist of Darkness"]) and
+                (game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") or
+                game.Players.LocalPlayer.Character:FindFirstChild("Fist of Darkness") or
+                game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or
+                game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice")) then
+                    FarmChest = false
+                    FarmChest = false
+                if getgenv().Config["Screen"]["White Screen"] == true then
+                    game:GetService("RunService"):Set3dRenderingEnabled(true)
+                elseif getgenv().Config["Screen"]["Black Screen"] == true then
+                    game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = getgenv().BlackScreen["BS_B"]
+                end
+                break
+            else
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", getgenv().Config["Team"])
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        if hopserver then
+            HopServer()
+        end
+    end
+end)
+
+function HopServer(bO)
+    if not bO then
+        bO = 10
+    end
+    ticklon = tick()
+    repeat
+        task.wait()
+    until tick() - ticklon >= 1
+
+    local function Hop()
+        for r = 1, math.huge do
+            if getgenv().Config["Hop Server"]["Region"] == nil or getgenv().Config["Hop Server"]["Region"] == "" then
+                getgenv().Config["Hop Server"]["Region"] = "Singapore" -- Fix the assignment
+            else
+                game:GetService("Players").LocalPlayer.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text =
+                    getgenv().Config["Hop Server"]["Region"]
+            end
+
+            local bP = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(r)
+            for k, v in pairs(bP) do
+                if k ~= game.JobId and v["Count"] < bO then
+                    game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", k)
+                end
+            end
+        end
+        return false
+    end
+
+    if not getgenv().Loaded then
+        local function bQ(v)
+            if v.Name == "ErrorPrompt" then
+                if v.Visible then
+                    if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                        HopServer()
+                        v.Visible = false
+                    end
+                end
+                v:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if v.Visible then
+                            if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                HopServer()
+                                v.Visible = false
+                            end
+                        end
+                    end
+                )
+            end
+        end
+        for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+            bQ(v)
+        end
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+        getgenv().Loaded = true
+    end
+    while not Hop() do
+        task.wait()
+    end
+end
+game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+    if not hopserver and child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and
+        child.MessageArea:FindFirstChild("ErrorFrame") then
+        game:GetService("TeleportService"):Teleport(game.PlaceId)
+    end
+end)

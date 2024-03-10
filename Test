@@ -2337,11 +2337,11 @@ spawn(function()
     while wait() do
         pcall(function()
             if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
-                MobKilled:Set("Defeated : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
+                MobKilled:Set("Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
             elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
-                MobKilled:Set("Defeated : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
+                MobKilled:Set("Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
             elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
-                MobKilled:Set("Defeated : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
+                MobKilled:Set("Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
             else
                 MobKilled:Set("Boss Is Spawning")
             end
@@ -2352,7 +2352,7 @@ end)
 Main:Dropdown("Farm Mode", {"No Quest", "Quest", "Mastery"}, function(value)
     CakeFMode = value
 end)
-CakeFMode = CakeFMode or "No Quest"
+CakeFMode = CakeFMode or "Quest"
 
 Main:Toggle("Auto Farm Cake Prince", false, function(value)
     _G.AutoDoughtBoss = value
@@ -2705,7 +2705,7 @@ end)
 Main:Dropdown("Farm Mode", {"No Quest", "Quest", "Mastery"}, function(value)
     BoneFMode = value
 end)
-BoneFMode = BoneFMode or "No Quest"
+BoneFMode = BoneFMode or "Quest"
 
 Main:Toggle("Auto Farm Bone", false, function(value)
     _G.Auto_Bone = value
@@ -2915,7 +2915,7 @@ Main:Toggle("Auto Random Surprise", false, function(value)
 end)
 spawn(function()
     pcall(function()
-        while wait(.0) do
+        while wait() do
             if _G.Auto_Random_Bone then    
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
             end
@@ -2954,13 +2954,6 @@ spawn(function()
 end)
 
 Main:Seperator("Mastery Farm")
-
-if _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery then
-    _G.Fastattack = false
-    _G.FastAttack = false
-    _G.FastAttack = false
-    _G.NormalAttack = true
-end
 
 Main:Toggle("Auto Farm Fruit Mastery", false, function(value)
     _G.AutoFarmFruitMastery = value
@@ -3956,7 +3949,10 @@ task.spawn(function()
         while task.wait(_G.Fast_Delay) do
             if Fastattack or FastAttack or _G.FastAttack then
                 AttackFunction()
-           end
+            end
+            if _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery then
+                NormalAttack()
+            end
         end
     end)
 end)

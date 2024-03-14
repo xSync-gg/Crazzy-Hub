@@ -3166,7 +3166,7 @@ task.spawn(function()
 end)
 
 FastAttack = {"Slow", "Fast", "Extreme"}
-Main:Dropdown("Fast Attack Speed", MethodFarm, function(value)
+Main:Dropdown("Fast Attack Speed", FastAttack, function(value)
 	SelectSpeedFast = value
 	if SelectSpeedFast == "Slow" then
 		_G.Fast_Delay = 0.01

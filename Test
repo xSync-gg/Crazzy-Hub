@@ -3822,10 +3822,210 @@ function AutoFarmLevel()
 		end
 	end
 end
+function CheckNotifyComplete()
+	for a, a in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui:FindFirstChild("Notifications"):GetChildren()) do
+		if a.Name == "NotificationTemplate" then
+			if string.lower(a.Text):find("quest completed") then
+				pcall(function()
+					a:Destroy()
+				end)
+				return true
+			end
+		end
+	end
+	return false
+end
+local o = false
+local p = false
+local q = Name
+local r = NameMon
+task.spawn(function()
+	while task.wait() do
+		pcall(function()
+			if _G.Settings.AutoFarm then
+				if _G.DoubleQuest then
+					if p == true then
+						if LevelFarm then
+							if tonumber(LevelFarm - 1) ~= 0 then
+								CheckOldQuest(tonumber(LevelFarm - 1))
+							end
+						end
+					else
+						CheckQuest()
+						q = Name
+						r = NameMon
+						spawn(function()
+							pcall(function()
+								if o == false then
+									if CheckNotifyComplete() and _G.AutoFarm then
+										o = true
+										while task.wait() do
+											p = true
+											if CheckNotifyComplete() or _G.AutoFarm == false then
+												break
+											end
+										end
+										p = false
+										o = false
+									end
+								end
+							end)
+						end)
+						if p == true then
+							if LevelFarm then
+								if tonumber(LevelFarm - 1) ~= 0 then
+									CheckOldQuest(tonumber(LevelFarm - 1))
+								end
+							end
+						end
+					end
+				else
+					CheckQuest()
+				end
+				AutoFarmLevel()
+			end
+		end)
+	end
+end)
+spawn(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+		if _G.Settings.AutoFarm then
+			if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
+				setfflag("HumanoidParallelRemoveNoPhysics", "False")
+				setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+				game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+			end
+		end
+	end)
+end)
+
+Main:Toggle("Auto Farm Nearest", false, function(value)
+	_G.NeareastFarm = value
+	_G.Settings.NeareastFarm = value
+	if a == false then
+		e(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+	end
+end)
+spawn(function()
+	while wait(.1) do
+		if _G.Settings.NeareastFarm then
+			pcall(function()
+				for a, a in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+					if a.Name and a:FindFirstChild("Humanoid") then
+						if a.Humanoid.Health > 0 and (a.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 1500 then
+							repeat
+								game:GetService("RunService").Heartbeat:wait()
+								EquipWeapon(_G.SelectWeapon)
+								if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+									local a = {[1] = "Buso"}
+									game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+								end
+								PosMon = a.HumanoidRootPart.CFrame
+								a.HumanoidRootPart.CanCollide = false
+								a.Humanoid.WalkSpeed = 0
+								a.Head.CanCollide = false
+								a.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+								a.Humanoid:ChangeState(11)
+								a.Humanoid:ChangeState(14)
+								a.Humanoid:ChangeState(16)
+								StartMagnet = true
+								FastAttack = true
+								e(a.HumanoidRootPart.CFrame * MethodFarm)
+								if not FastAttack then
+									game:GetService "VirtualUser":CaptureController()
+									game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
+								end
+								PosMon = a.HumanoidRootPart.CFrame
+							until not _G.NeareastFarm or not a.Parent or a.Humanoid.Health == 0 or not game.Workspace.Enemies:FindFirstChild(a.Name)
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
+function CheckNotifyComplete()
+	for a, a in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui:FindFirstChild("Notifications"):GetChildren()) do
+		if a.Name == "NotificationTemplate" then
+			if string.lower(a.Text):find("quest completed") then
+				pcall(
+					function()
+					a:Destroy()
+				end
+				)
+				return true
+			end
+		end
+	end
+	return false
+end
 --------------------------------------------------------------------------------------Setting Tab
 Set:Toggle("Fast Attack", true, function(value)
     FastAttack = value
 end)
+
+Set:Toggle("Safe Farm", true, function(value)
+	_G.SafeMode = value
+	_G.Settings.SafeMode = value
+	spawn(function()
+		while _G.Settings.SafeMode do
+			task.wait()
+			if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+				local a = game.Players.LocalPlayer.Character.Humanoid.Health / game.Players.LocalPlayer.Character.Humanoid.MaxHealth * 100
+				if a < 20 then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 100, 0)
+				end
+			end
+			task.wait()
+		end
+	end)
+end)
+spawn(function()
+	while wait() do
+		if _G.SafeMode then
+			pcall(function()
+				if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+					local a = game.Players.LocalPlayer.Character.Humanoid.Health / game.Players.LocalPlayer.Character.Humanoid.MaxHealth * 100
+					if a < 20 then
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 100, 0)
+					end
+				end
+				task.wait()
+			end)
+		end
+	end
+end)
+local o = game:GetService("Players")
+local function p(a)
+	local function b(a)
+		local a = a:WaitForChild("Humanoid")
+		a.Died:Connect(
+			function()
+		end
+		)
+	end
+	a.CharacterAdded:Connect(b)
+	if a.Character then
+		b(a.Character)
+	end
+end
+o.PlayerAdded:Connect(p)
+for a, a in ipairs(o:GetPlayers()) do
+	p(a)
+end
+function CheckNotifyComplete()
+	for a, a in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui:FindFirstChild("Notifications"):GetChildren()) do
+		if a.Name == "NotificationTemplate" then
+			if string.lower(a.Text):find("quest completed") then
+				pcall(function()
+					a:Destroy()
+				end)
+				return true
+			end
+		end
+	end
+	return false
+end
 
 Set:Slider("Distance Farm", 0, 100, 30, function(value)
 	_G.DistanceAutoFarm = value

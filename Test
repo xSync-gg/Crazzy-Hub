@@ -522,45 +522,6 @@ getgenv().FakeDamage = function(Damage)
     end
 end
 
-function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfolder("Crazzy_Hub_V4") then
-            makefolder("Crazzy_Hub_V4")
-        end
-        if not isfolder("Crazzy_Hub_V4/Blox Fruits/") then
-            makefolder("Crazzy_Hub_V4/Blox Fruits/")
-        end
-        if not isfile("Crazzy_Hub_V4/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            writefile("Crazzy_Hub_V4/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Settings))
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Crazzy_Hub_V4/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-            for i,v in pairs(Decode) do
-                _G.Settings[i] = v
-            end
-        end
-    else
-        return warn("Status: Error")
-    end
-end
-
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("Crazzy_Hub_V4/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("SpeedHubX_V2/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-            local Array = {}
-            for i,v in pairs(_G.Settings) do
-                Array[i] = v
-            end
-            writefile("Crazzy_Hub_V4/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(Array))
-        end
-    else
-        return warn("Status: Error")
-    end
-end
-LoadSettings()
-
 local id = game.PlaceId
 if id == 2753915549 then
     World1 = true
@@ -1821,7 +1782,25 @@ end)
 
 Main1:Label("Chest Farm")
 
-
+Main1:Toggle("Auto Farm Chest [Tween]",false,function(value)
+    _G.AutoFarmChest = value
+end)
+spawn(function() 
+    while wait() do 
+        if _G.AutoFarmChest then
+            for _, child in ipairs(Workspace:GetChildren()) do
+                if string.find(child.Name, "Chest") then
+                    toTarget(child.CFrame * CFrame.new(0,0,0))
+                    if (child.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+                        UnEquipWeapon(_G.SelectWeapon)
+                    else
+                        EquipWeapon(_G.SelectWeapon)
+                    end
+                    end
+                end
+            end
+        end
+end)
 -----Main 2
 Main2:Dropdown("Select Weapon",{"Melee","Sword","Devil Fruit"},{""},function(value)
     SelectWeapon = value

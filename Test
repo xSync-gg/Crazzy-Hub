@@ -153,43 +153,6 @@ u.MouseButton1Down:connect(function()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.F1, false, game)
 	game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.F1, false, game)
 end)
-function LoadSettings()
-	if readfile and writefile and isfile and isfolder then
-		if not isfolder("VectorHub") then
-			makefolder("VectorHub")
-		end;
-		if not isfolder("VectorHub/Blox Fruits/") then
-			makefolder("VectorHub/Blox Fruits/")
-		end;
-		if not isfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-			writefile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Settings))
-		else
-			local x = game:GetService("HttpService"):JSONDecode(readfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-			for y, z in pairs(x) do
-				_G.Settings[y] = z
-			end
-		end
-	else
-		return
-	end
-end;
-function SaveSettings()
-	if readfile and writefile and isfile and isfolder then
-		if not isfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-			LoadSettings()
-		else
-			local x = game:GetService("HttpService"):JSONDecode(readfile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-			local A = {}
-			for y, z in pairs(_G.Settings) do
-				A[y] = z
-			end;
-			writefile("VectorHub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(A))
-		end
-	else
-		return
-	end
-end;
-LoadSettings()
 local i = game:GetService("VirtualInputManager")
 local j = game:GetService("TweenService")
 local l = game:service"TweenService"

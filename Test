@@ -1,14 +1,3 @@
-local KeySystemUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/xrer_mstudio45.lua"))()
-KeySystemUI.New({
-    ApplicationName = "WatermelonHub", -- Your Key System Application Name
-    Name = "WatermelonHub", -- Your Script name
-    Info = "Get Key For WatermelonHub", -- Info text in the GUI, keep empty for default text.
-    DiscordInvite = "https://discord.com/invite/yjGkJc7fBf" -- Optional.
-})
-repeat task.wait() until KeySystemUI.Finished() or KeySystemUI.Closed
-if KeySystemUI.Finished() and KeySystemUI.Closed == false then
-    print("Key verified, can load script")
-    local getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, stringlower = getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, string.lower
 
 --// Loaded check
 

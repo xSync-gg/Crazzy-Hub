@@ -2733,7 +2733,7 @@ end)
 
 Main1:Label("Cày thông thạo")
 
-Main2:Dropdown("Chọn chế độ cày",{"Cày theo cấp độ","Cày quái gần nhất"},{""},function(Value)
+Main1:Dropdown("Chọn chế độ cày",{"Cày theo cấp độ","Cày quái gần nhất"},{""},function(Value)
     TypeMastery = Value
 end)
 TypeMastery = "Cày theo cấp độ" or TypeMastery
@@ -2835,7 +2835,8 @@ if Second_Sea then
     Main1:Toggle("Tự động nhặt rương",false,function(Value)
         _G.chestsea2 = Value
     end)
-elseif Third_Sea then
+end
+if Third_Sea then
     Main1:Toggle("Tự động nhặt rương",false,function(Value)
         _G.chestsea3 = Value
     end)
@@ -2931,7 +2932,7 @@ end)
 -----Other 2
 ----------------------------------------------------------------------------------------------------------Misc Tab
 -----Misc 1
-Main1:Button("Nhập tất cả code",function()
+Misc1:Button("Nhập tất cả code",function()
     UseCode()
 end)
 function UseCode(Text)
@@ -2953,7 +2954,7 @@ UseCode("Axiore")
 UseCode("TantaiGaming")
 UseCode("STRAWHATMAINE")
 -----Misc 2
-Main2:Button("Giảm lag",function()
+Misc2:Button("Giảm lag",function()
     FPSBooster()
 end)
 function FPSBooster()

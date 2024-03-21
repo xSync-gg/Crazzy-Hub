@@ -9,6 +9,9 @@ local Window = SlayerzLibrary:Window(Name,Description,Image,Color)
 local Main = Window:Tab("Trang chủ")
 local Main1 = Main:Section("","Left")
 local Main2 = Main:Section("","Right")
+local Other = Window:Tab("Cày khác")
+local Other1 = OTher:Section("","Left")
+local Other2 = Other:Section("","Right")
 ----------------------------------------------------------------------------------------------------------Function
 local id = game.PlaceId
 if id == 2753915549 then 
@@ -2534,7 +2537,7 @@ spawn(function()
 end)
 
 -----Main 2
-Main2:Dropdown("Chọn vũ khí :",{'Melee','Sword','Blox Fruit'},{"Chọn vũ khí :"},function(Value)
+Main2:Dropdown("Chọn vũ khí",{'Melee','Sword','Blox Fruit'},{""},function(Value)
     ChooseWeapon = Value
 end)
 ChooseWeapon = "Melee" or ChooseWeapon
@@ -2578,7 +2581,7 @@ task.spawn(function()
     end
 end)
 
-Main2:Dropdown("Tốc độ đánh :",{'Chậm','Nhanh','Siêu nhanh'},{"Tốc độ đánh :"},function(Value)
+Main2:Dropdown("Tốc độ đánh",{'Chậm','Nhanh','Siêu nhanh'},{""},function(Value)
     _G.FastAttackFaiFao_Mode = Value
 end)
 _G.FastAttackFaiFao_Mode = "Nhanh" or _G.FastAttackFaiFao_Mode
@@ -2589,3 +2592,36 @@ elseif _G.FastAttackFaiFao_Mode == "Nhanh" then
 elseif _G.FastAttackFaiFao_Mode == "Siêu nhanh" then
     _G.Fast_Delay = 0.05
 end
+----------------------------------------------------------------------------------------------------------Other Tab
+-----Other 1
+OTher1:Toggle("Tự động đánh hải tặc ở pháo đài",false,function(Value)
+    _G.CastleRaid = Value
+end)
+spawn(function()
+    while wait() do
+        if _G.CastleRaid then
+            pcall(function()
+                local CFrameCastleRaid = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
+                if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.CastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.CastleRaid
+                            end
+                        end
+                    end
+                else
+                    toTarget(CFrameCastleRaid)
+                end
+            end)
+        end
+    end
+end)
+-----Other 2

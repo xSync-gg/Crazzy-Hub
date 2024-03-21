@@ -10,7 +10,7 @@ local Main = Window:Tab("Trang chủ")
 local Main1 = Main:Section("","Left")
 local Main2 = Main:Section("","Right")
 local Other = Window:Tab("Cày khác")
-local Other1 = OTher:Section("","Left")
+local Other1 = Other:Section("","Left")
 local Other2 = Other:Section("","Right")
 ----------------------------------------------------------------------------------------------------------Function
 local id = game.PlaceId

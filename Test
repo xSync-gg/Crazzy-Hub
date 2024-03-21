@@ -9,9 +9,12 @@ local Window = SlayerzLibrary:Window(Name,Description,Image,Color)
 local Main = Window:Tab("Trang chủ")
 local Main1 = Main:Section("","Left")
 local Main2 = Main:Section("","Right")
-local Other = Window:Tab("Cày khác")
+local Other = Window:Tab("Cày đồ")
 local Other1 = Other:Section("","Left")
 local Other2 = Other:Section("","Right")
+local Misc = Window:Tab("Khác")
+local Misc1 = Misc:Section("","Left")
+local Misc2 = Misc:Section("","Right")
 ----------------------------------------------------------------------------------------------------------Function
 local id = game.PlaceId
 if id == 2753915549 then 
@@ -2440,6 +2443,130 @@ if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn
 	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
+game:GetService('RunService').RenderStepped:connect(function()           
+    if _G.chestsea3 then
+        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then 
+            _G.chestsea3 = false                      
+        elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then 
+            if game:GetService("Workspace"):FindFirstChild("Chest1") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest2") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest3") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+            end
+        end
+    end
+end)
+
+if game.PlaceId == 7449423635 then -- sea3
+    spawn(function()
+        while task.wait(3.5) do
+            pcall(function()
+                if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then
+                    if _G.chestsea3 then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"Q",false,game)
+                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                    end
+                    wait(5)
+                end 
+            end)
+        end
+    end) 
+end
+
+game:GetService('RunService').RenderStepped:connect(function()           
+    if _G.chestsea2 then
+        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then 
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Q",false,game)
+            _G.chestsea2 = false                         
+        elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then 
+            if game:GetService("Workspace"):FindFirstChild("Chest1") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest2") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest3") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+            end
+        end
+    end
+end)
+
+if game.PlaceId == 4442272183 then -- sea2
+    spawn(function()
+        while task.wait(3.5) do
+            pcall(function()
+                if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+                    if _G.chestsea2 then
+                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                    end
+                    wait(5)
+                end 
+            end) 
+        end 
+    end) 
+end
+
+function TPchest(P1)          
+    local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance >= 0 then
+        Speed = 1200000
+    end
+    local tween =  game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed), {CFrame = P1  }) tween:Play()                                    
+end
+
+spawn(function()
+    while task.wait(1) do
+        if _G.UseSkill then
+            pcall(function()
+                if _G.UseSkill then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health <= v.Humanoid.MaxHealth * KillPercent / 100 then
+                            repeat game:GetService("RunService").Heartbeat:wait()
+                            EquipTool(game.Players.LocalPlayer.Data.DevilFruit.Value)
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                            PositionSkillMasteryDevilFruit = v.HumanoidRootPart.Position
+                            if game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value) then
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).MousePos.Value = PositionSkillMasteryDevilFruit
+                                local DevilFruitMastery = game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).Level.Value
+                                if SkillZ and DevilFruitMastery >= 1 then
+                                    game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+                                    wait(0.1)
+                                    game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+                                end
+                                if SkillX and DevilFruitMastery >= 2 then
+                                    game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                                    wait(0.2)
+                                    game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                                end
+                                if SkillC and DevilFruitMastery >= 3 then
+                                    game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+                                    wait(0.3)
+                                    game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+                                end
+                                if SkillV and DevilFruitMastery >= 4 then
+                                    game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+                                    wait(0.4)
+                                    game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+                                end
+                                if SkillF and DevilFruitMastery >= 5 then
+                                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "F", false, game)
+                                    wait(0.5)
+                                    game:GetService("VirtualInputManager"):SendKeyEvent(false, "F", false, game)
+                                end
+                            end
+                            until not AutoFarmMasDevilFruit or not _G.UseSkill or v.Humanoid.Health == 0
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
 ----------------------------------------------------------------------------------------------------------Main Tab
 -----Main 1
 Main1:Toggle("Tự động cày cấp",false,function(Value)
@@ -2536,6 +2663,183 @@ spawn(function()
     end
 end)
 
+Main1:Label("Cày xương")
+
+Main1:Toggle("Tự động cày xương",false,function(Value)
+    _G.AutoBone = Value
+    if Value == false then
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+    end
+end)
+local BoneCFrame = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
+local BoneCFrame2 = CFrame.new(-9359.453125, 141.32679748535156, 5446.81982421875)
+spawn(function()
+    while wait() do
+        if _G.AutoBone then
+            pcall(function()
+                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(QuestTitle, "Demonic Soul") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    if BypassTP then
+                       if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - BoneCFrame2.Position).Magnitude > 2500 then
+                       to(BoneCFrame2)
+                       elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - BoneCFrame.Position).Magnitude < 2500 then
+                       Tween(BoneCFrame)
+                       end
+                             else
+                         Tween(BoneCFrame)
+                         end
+                if (BoneCFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then    
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest","HauntedQuest2",1)
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Demonic Soul") then
+                                        repeat wait(_G.Fast_Delay)
+                                            AttackNoCoolDown()
+                                            AutoHaki()
+                                            bringmob = true
+                                            EquipTool(SelectWeapon)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+			                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                            v.HumanoidRootPart.Transparency = 1
+                                            v.Humanoid.JumpPower = 0
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.HumanoidRootPart.CanCollide = false
+                                            FarmPos = v.HumanoidRootPart.CFrame
+                                            MonFarm = v.Name
+                                        until not _G.AutoBone or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    else
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                        bringmob = false
+                                    end
+                                end
+                            end
+                        end
+                    else
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+Main1:Label("Cày thông thạo")
+
+Main2:Dropdown("Chọn chế độ cày",{"Cày theo cấp độ","Cày quái gần nhất"},{""},function(Value)
+    TypeMastery = Value
+end)
+TypeMastery = "Cày theo cấp độ" or TypeMastery
+
+Main1:Toggle("Tự động cày thông thạo trái",false,function(Value)
+    AutoFarmMasDevilFruit = Value
+end)
+spawn(function()
+    while task.wait(.1) do
+        if AutoFarmMasDevilFruit and TypeMastery == 'Cày theo cấp độ' then
+            pcall(function()
+                CheckLevel(SelectMonster)
+                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                    if BypassTP then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
+                            to(CFrameQ)
+                            wait(0.2)
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
+                            Tween(CFrameQ)
+                        end
+                    else
+                        Tween(CFrameQ)
+                    end
+                    if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,QuestLv)
+                    end
+                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                            if v.Name == Ms then
+                                repeat wait(_G.Fast_Delay)
+                                if v.Humanoid.Health <= v.Humanoid.MaxHealth * KillPercent / 100 then
+                                    _G.UseSkill = true
+                                else
+                                    _G.UseSkill = false
+                                    AutoHaki()
+                                    bringmob = true
+                                    EquipTool(SelectWeapon)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                    v.HumanoidRootPart.Transparency = 1
+                                    v.Humanoid.JumpPower = 0
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    FarmPos = v.HumanoidRootPart.CFrame
+                                    MonFarm = v.Name
+                                    NormalAttack()
+                                end
+                                until not AutoFarmMasDevilFruit or not v.Parent or v.Humanoid.Health == 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or not TypeMastery == 'Cày theo cấp độ'
+                                bringmob = false
+                                _G.UseSkill = false
+                            end
+                        end
+                    end
+                end
+            end)
+        elseif AutoFarmMasDevilFruit and TypeMastery == 'Cày quái gần nhất' then
+            pcall(function()
+                for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+                    if v.Name and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
+                            repeat wait(_G.Fast_Delay)
+                            if v.Humanoid.Health <= v.Humanoid.MaxHealth * KillPercent / 100 then
+                                _G.UseSkill = true
+                            else
+                                _G.UseSkill = false
+                                AutoHaki()
+                                bringmob = true
+                                EquipTool(SelectWeapon)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                v.HumanoidRootPart.Transparency = 1
+                                v.Humanoid.JumpPower = 0
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                            --v.Humanoid:ChangeState(11)
+                            --v.Humanoid:ChangeState(14)
+                                FarmPos = v.HumanoidRootPart.CFrame
+                                MonFarm = v.Name
+                                NormalAttack()
+                            end
+                            until not AutoFarmMasDevilFruit or not MasteryType == 'Cày quái gần nhất' or not v.Parent or v.Humanoid.Health == 0 or not TypeMastery == 'Cày quái gần nhất'
+                            bringmob = false
+                            _G.UseSkill = false
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+Main1:Slider("Phần trăm máu quái",1,100,25,function(v)
+    KillPercent = Value
+end)
+
+if Second_Sea then
+    Main1:Toggle("Tự động nhặt rương",false,function(Value)
+        _G.chestsea2 = Value
+    end)
+elseif Third_Sea then
+    Main1:Toggle("Tự động nhặt rương",false,function(Value)
+        _G.chestsea3 = Value
+    end)
+end
 -----Main 2
 Main2:Dropdown("Chọn vũ khí",{'Melee','Sword','Blox Fruit'},{""},function(Value)
     ChooseWeapon = Value
@@ -2625,3 +2929,71 @@ spawn(function()
     end
 end)
 -----Other 2
+----------------------------------------------------------------------------------------------------------Misc Tab
+-----Misc 1
+Main1:Button("Nhập tất cả code",function()
+    UseCode()
+end)
+function UseCode(Text)
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Text)
+end
+UseCode("Sub2Fer999")
+UseCode("Enyu_is_Pro")
+UseCode("Magicbus")
+UseCode("JCWK")
+UseCode("Starcodeheo")
+UseCode("Bluxxy")
+UseCode("THEGREATACE")
+UseCode("SUB2GAMERROBOT_EXP1")
+UseCode("StrawHatMaine")
+UseCode("Sub2OfficialNoobie")
+UseCode("SUB2NOOBMASTER123")
+UseCode("Sub2Daigrock")
+UseCode("Axiore")
+UseCode("TantaiGaming")
+UseCode("STRAWHATMAINE")
+-----Misc 2
+Main2:Button("Giảm lag",function()
+    FPSBooster()
+end)
+function FPSBooster()
+    local decalsyeeted = true
+    local g = game
+    local w = g.Workspace
+    local l = g.Lighting
+    local t = w.Terrain
+    sethiddenproperty(l,"Technology",2)
+    sethiddenproperty(t,"Decoration",false)
+    t.WaterWaveSize = 0
+    t.WaterWaveSpeed = 0
+    t.WaterReflectance = 0
+    t.WaterTransparency = 0
+    l.GlobalShadows = false
+    l.FogEnd = 9e9
+    l.Brightness = 0
+    settings().Rendering.QualityLevel = "Level01"
+    for i, v in pairs(g:GetDescendants()) do
+        if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+        elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+            v.Enabled = false
+        elseif v:IsA("MeshPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+            v.TextureID = 10385902758728957
+        end
+    end
+    for i, e in pairs(l:GetChildren()) do
+        if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+            e.Enabled = false
+        end
+    end
+end

@@ -2594,7 +2594,7 @@ elseif _G.FastAttackFaiFao_Mode == "Siêu nhanh" then
 end
 ----------------------------------------------------------------------------------------------------------Other Tab
 -----Other 1
-OTher1:Toggle("Tự động đánh hải tặc ở pháo đài",false,function(Value)
+Other1:Toggle("Tự động đánh hải tặc ở pháo đài",false,function(Value)
     _G.CastleRaid = Value
 end)
 spawn(function()

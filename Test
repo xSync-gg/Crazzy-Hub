@@ -2534,7 +2534,7 @@ spawn(function()
 end)
 
 -----Main 2
-Main2:Dropdown("Chọn vũ khí",{'Melee','Sword','Blox Fruit'},{""},function(Value)
+Main2:Dropdown("Chọn vũ khí :",{'Melee','Sword','Blox Fruit'},{"Chọn vũ khí :"},function(Value)
     ChooseWeapon = Value
 end)
 ChooseWeapon = "Melee" or ChooseWeapon
@@ -2578,7 +2578,7 @@ task.spawn(function()
     end
 end)
 
-Main2:Dropdown("Tốc độ đánh",{'Chậm','Nhanh','Siêu nhanh'},{""},function(Value)
+Main2:Dropdown("Tốc độ đánh :",{'Chậm','Nhanh','Siêu nhanh'},{"Tốc độ đánh :"},function(Value)
     _G.FastAttackFaiFao_Mode = Value
 end)
 _G.FastAttackFaiFao_Mode = "Nhanh" or _G.FastAttackFaiFao_Mode

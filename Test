@@ -7,8 +7,8 @@ local Image = "rbxassetid://16813434313"
 local Color = Color3.fromRGB(0, 0, 0)
 local Window = SlayerzLibrary:Window(Name,Description,Image,Color)
 local Main = Window:Tab("Main")
-local Main1 = Tab1:Section("","Left")
-local Main2 = Tab1:Section("","Right")
+local Main1 = Main:Section("","Left")
+local Main2 = Main:Section("","Right")
 Main1:Label("mmb")
 Main1:Button("fuck",function()
     print("Click") -- Callback Function

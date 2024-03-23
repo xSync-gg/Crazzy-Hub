@@ -5,10 +5,6 @@ local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/S
 --    UI.Config.DropColor <color3>
 --    UI.Config["UI Size"] <udim2>
 
-UI.Config.MainColor <Color3.fromRGB(0, 0, 0)>
-UI.Config.DropColor <Color3.fromRGB(0, 0, 138)>
-
-
 -- Window ( name <string> , descr <string> , logo <string> ) --
 local Window = UI:NewWindow('CRAZZY HUB V3','- NEXT GENERATION -','rbxassetid://15689000757')
 

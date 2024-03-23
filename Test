@@ -1,21 +1,14 @@
 local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Switch%20Hub%20UI"))()
-
--- CONFIG --
---    UI.Config.MainColor <color3>
---    UI.Config.DropColor <color3>
---    UI.Config["UI Size"] <udim2>
-
--- Window ( name <string> , descr <string> , logo <string> ) --
 local Window = UI:NewWindow('CRAZZY HUB V3','- NEXT GENERATION -','rbxassetid://15689000757')
-
--- Menu ( name <string> , descr <string> , icon <string> icon name in https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json) --
-
-local MenuChangeLog = Window:AddMenu('Change Log',"i don't know",'hash','change')
 local MenuFunctions = Window:AddMenu('Functions',"Script Auto Fuck",'ticket','tab')
+local MenuFarm = Window:AddMenu('Farming Tab',"",'menu','tab')
 
 -- Tab ( name <string> , descr <bool> , icon <string> ) --
 local TabFunctions = MenuFunctions:AddTab('Main','Auto Kaitun','box-select')
 local TabTeleport = MenuFunctions:AddTab('Teleport','Teleport (anti chaet)','list')
+
+--------
+local Main = MenuFarm:AddTab('Main','','menu')
 
 -- Section ( name <string> , descr <string> , text <string> , icon <string> ) --
 local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Change Log' , 'Idk')

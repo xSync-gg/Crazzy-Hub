@@ -1,9 +1,11 @@
 local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Switch%20Hub%20UI"))()
 local Window = UI:NewWindow('CRAZZY HUB V3', '- NEXT GENERATION -', 'rbxassetid://15689000757')
+local MenuChangeLog = Window:AddMenu('Welcome',"...",'hash','change')
 local MenuFarm = Window:AddMenu('Farming Tab', "...", 'menu', 'tab')
 local MainTab = MenuFarm:AddTab('Main', '...', 'menu')
 local Set = MenuFarm:AddTab('Setting', '...', 'menu')
 
+local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to Crazzy Hub V3 Script', 'discord.gg/4ENnwm9wEQ')
 local MainTabSection = TabFunctions:AddSection('Main Tab','Auto farming everything','menu')
 
 MainTabSection:AddLabel('Config Farm')

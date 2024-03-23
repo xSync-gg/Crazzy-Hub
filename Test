@@ -1,13 +1,16 @@
-local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/initc/02bb6e33f7c3cbf304a26023723c588d884f89a3/Lib.lua"))()
+local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Switch%20Hub%20UI"))()
 
 -- CONFIG --
 --    UI.Config.MainColor <color3>
 --    UI.Config.DropColor <color3>
 --    UI.Config["UI Size"] <udim2>
 
+UI.Config.MainColor <Color3.fromRGB(0, 0, 0)>
+UI.Config.DropColor <Color3.fromRGB(0, 0, 138)>
+
 
 -- Window ( name <string> , descr <string> , logo <string> ) --
-local Window = UI:NewWindow('SWITCH HUB','Series A B C D','rbxassetid://6886692638')
+local Window = UI:NewWindow('CRAZZY HUB V3','- NEXT GENERATION -','rbxassetid://15689000757')
 
 -- Menu ( name <string> , descr <string> , icon <string> icon name in https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json) --
 

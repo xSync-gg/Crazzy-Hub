@@ -2116,17 +2116,20 @@ spawn(function()
     end
 end)
 
-local c = game:service "TweenService"
-local d = TweenInfo.new((e.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude / Speed, Enum.EasingStyle.Linear)
-local c, c = pcall(function()
-    if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
-        local a = Instance.new("Highlight")
-        a.FillColor = Color3.new(0, 0, 0)
-        a.OutlineColor = Color3.new(0, 0, 0)
-        a.Parent = game.Players.LocalPlayer.Character
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local distance = (e.Position - Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
+local tweenInfo = TweenInfo.new(distance / Speed, Enum.EasingStyle.Linear)
+pcall(function()
+    if not Players.LocalPlayer.Character:FindFirstChild("Highlight") then
+        local highlight = Instance.new("Highlight")
+        highlight.FillColor = Color3.new(0, 0, 0)
+        highlight.OutlineColor = Color3.new(0, 0, 0)
+        highlight.Parent = Players.LocalPlayer.Character
     end
-    b = c:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], d, {CFrame = e})
-    b:Play()
+
+    local tween = TweenService:Create(Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = e})
+    tween:Play()
 end)
 
 local function f(a)

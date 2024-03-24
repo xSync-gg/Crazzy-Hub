@@ -2585,7 +2585,7 @@ end
 local ConfigFarm = Tabs.Main:AddSection("Config Farm")
 
 local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
-    Title = "Weapon",
+    Title = "Select Weapon",
     Description = "Chọn Vũ Khí",
     Values = {'Melee','Sword','Blox Fruit'},
     Multi = false,
@@ -2637,6 +2637,7 @@ end)
 
 local SelectFastAttackSpeedDrop = Tabs.Main:AddDropdown("SelectFastAttackSpeedDrop", {
     Title = "Fast Attack Speed",
+    Description = "Tốc Độ Đánh",
     Values = {"Normal", "Fast", "Extreme"},
     Multi = false,
     Default = 1,
@@ -2655,7 +2656,7 @@ end)
 
 local MainFarm = Tabs.Main:AddSection("Main Farm")
 
-local AutoFarmLevelToggle = Tabs.Main:AddToggle("AutoFarmLevelToggle", {Title = "Auto Farm Level", Default = false })
+local AutoFarmLevelToggle = Tabs.Main:AddToggle("AutoFarmLevelToggle", {Title = "Auto Farm Level", Description = "Tự Động Cày Cấp", Default = false })
 AutoFarmLevelToggle:OnChanged(function(Value)
     _G.AutoLevel = Value
     if Value == false then
@@ -2712,7 +2713,7 @@ spawn(function()
     end
 end)
 
-local AutoFarmNearestToggle = Tabs.Main:AddToggle("AutoFarmNearestToggle", {Title = "Auto Farm Nearest", Default = false })
+local AutoFarmNearestToggle = Tabs.Main:AddToggle("AutoFarmNearestToggle", {Title = "Auto Farm Nearest", Description = "Tự Động Cày Quái Gần Nhất", Default = false })
 AutoFarmNearestToggle:OnChanged(function(Value)
     _G.AutoNear = Value
     if Value == false then
@@ -2757,7 +2758,7 @@ end)
 
 local ChestFarm = Tabs.Main:AddSection("Chest Farm")
 
-local AutoFarmChestToggle = Tabs.Main:AddToggle("AutoFarmChestToggle", {Title = "Auto Farm Chest", Default = false })
+local AutoFarmChestToggle = Tabs.Main:AddToggle("AutoFarmChestToggle", {Title = "Auto Farm Chest", Description = "Tự Động Nhặt Rương", Default = false })
 AutoFarmChestToggle:OnChanged(function(Value)
     AutoFarmChest = Value
 end)
@@ -2787,7 +2788,7 @@ spawn(function()
 end)
 
 if Second_Sea then
-    local AutoFarmChestStopToggle = Tabs.Main:AddToggle("AutoFarmChestStopToggle", {Title = "Auto Chest Stop If Found Key", Default = false })
+    local AutoFarmChestStopToggle = Tabs.Main:AddToggle("AutoFarmChestStopToggle", {Title = "Auto Chest Stop If Found Key", Description = "Tự Động Nhặt Rương Dừng Khi Tìm Thấy Key", Default = false })
     AutoFarmChestStopToggle:OnChanged(function(Value)
         _G.chestsea2 = Value
     end)
@@ -2795,7 +2796,7 @@ if Second_Sea then
 end
 
 if Third_Sea then
-    local AutoFarmChestStopToggle = Tabs.Main:AddToggle("AutoFarmChestStopToggle", {Title = "Auto Chest Stop If Found Cup", Default = false })
+    local AutoFarmChestStopToggle = Tabs.Main:AddToggle("AutoFarmChestStopToggle", {Title = "Auto Chest Stop If Found Cup", Description = "Tự Động Nhặt Rương Dừng Khi Tìm Thấy Cup", Default = false })
     AutoFarmChestStopToggle:OnChanged(function(Value)
         _G.chestsea3 = Value
     end)
@@ -2804,7 +2805,7 @@ end
 -------------------------------------------------------------------------------------------------------------------Setting Tab
 
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
-local AutoCastleRaidToggle = Tabs.Farm:AddToggle("AutoCastleRaidToggle", {Title = "Auto Castle Raid", Default = false })
+local AutoCastleRaidToggle = Tabs.Farm:AddToggle("AutoCastleRaidToggle", {Title = "Auto Castle Raid", Description = "Tự Động Đánh Hải Tặc ở Pháo Đài", Default = false })
 AutoCastleRaidToggle:OnChanged(function(Value)
     _G.CastleRaid = Value
 end)

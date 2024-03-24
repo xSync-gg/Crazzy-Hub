@@ -42,6 +42,56 @@ elseif b == 7449423635 then
     ThreeWorld = true
 end
 
+function LoadSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfolder("Crazzy_Hub_V3") then
+            makefolder("Crazzy_Hub_V3")
+        end
+        if not isfolder("Crazzy_Hub_V3/Blox Fruits/") then
+            makefolder("Crazzy_Hub_V3/Blox Fruits/")
+        end
+        if not isfile("Crazzy_Hub_V3/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            writefile(
+                "Crazzy_Hub_V3/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(_G.Settings)
+            )
+        else
+            local a =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Crazzy_Hub_V3/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            for a, b in pairs(a) do
+                _G.Settings[a] = b
+            end
+        end
+    else
+        return warn("Status : Undetected Executor")
+    end
+end
+function SaveSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfile("Crazzy_Hub_V3/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            LoadSettings()
+        else
+            local a =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Crazzy_Hub_V3/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            local a = {}
+            for b, c in pairs(_G.Settings) do
+                a[b] = c
+            end
+            writefile(
+                "Crazzy_Hub_V3/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(a)
+            )
+        end
+    else
+        return warn("Status : Undetected Executor")
+    end
+end
+LoadSettings()
+
 function CheckQuest()
 	local MyLevel = game.Players.LocalPlayer.Data.Level.Value
 	if World1 then
@@ -2724,9 +2774,12 @@ task.spawn(function()
     end
 end)
 
-MainSection:AddToggle('Auto Farm Level',false,function(value)
+MainSection:AddLabel('Main Farm')
+
+MainSection:AddToggle('Auto Farm Level',_G.Settings.AutoFarm,function(value)
     _G.AutoFarm = value
     _G.Settings.AutoFarm = value
+    SaveSettings()
     _G.DoubleQuest = value
     getgenv().noclip = value
     if value == false then

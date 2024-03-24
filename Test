@@ -1979,7 +1979,7 @@ end
   function Tween2(P1)
     local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance >= 1 then
-    Speed = 300
+    Speed = 350
     end
     game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
       CFrame = P1
@@ -2068,10 +2068,22 @@ end
     local tweenfunc = {}
     local Distance = (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
         .Magnitude
-    if Distance < 1000 then
-        Speed = 315
+    if Distance < 10 then
+        Speed = 20000
+    elseif Distance < 25 then
+        Speed = 10000
+    elseif Distance < 50 then
+        Speed = 5000
+    elseif Distance < 150 then
+        Speed = 2500
+    elseif Distance < 250 then
+        Speed = 1250
+    elseif Distance < 500 then
+        Speed = 700
+    elseif Distance < 750 then
+        Speed = 500
     elseif Distance >= 1000 then
-        Speed = 300
+        Speed = 350
     end
     if BypassTP then
         if Distance > 3000 and not AutoNextIsland and not (game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice")) and not (Name == "Fishman Commando" or Name == "Fishman Warrior") then
@@ -2572,48 +2584,49 @@ end
 -------------------------------------------------------------------------------------------------------------------Main Tab
 local ConfigFarm = Tabs.Main:AddSection("Config Farm")
 
-local SelectWeaponDrop = Tabs.Main:AddDropdown("SelectWeaponDrop", {
-    Title = "Select Weapon",
-    Values = {"Melee", "Sword", "Devil Fruit"},
+local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
+    Title = "Weapon",
+    Description = "Chọn Vũ Khí",
+    Values = {'Melee','Sword','Blox Fruit'},
     Multi = false,
     Default = 1,
 })
-SelectWeaponDrop:SetValue("Melee")
-SelectWeaponDrop:OnChanged(function(Value)
-    SelectWeapon = Value
+DropdownSelectWeapon:SetValue('Melee')
+DropdownSelectWeapon:OnChanged(function(Value)
+    ChooseWeapon = Value
 end)
 task.spawn(function()
     while wait() do
         pcall(function()
-            if SelectWeapon == "Melee" then
-                for a, a in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if a.ToolTip == "Melee" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(a.Name)) then
-                            _G.SelectWeapon = a.Name
+            if ChooseWeapon == "Melee" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWeapon = v.Name
                         end
                     end
                 end
-            elseif SelectWeapon == "Sword" then
-                for a, a in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if a.ToolTip == "Sword" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(a.Name)) then
-                            _G.SelectWeapon = a.Name
+            elseif ChooseWeapon == "Sword" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Sword" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWeapon = v.Name
                         end
                     end
                 end
-            elseif SelectWeapon == "Devil Fruit" then
-                for a, a in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if a.ToolTip == "Blox Fruit" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(a.Name)) then
-                            _G.SelectWeapon = a.Name
+            elseif ChooseWeapon == " Blox Fruit" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Blox Fruit" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWeapon = v.Name
                         end
                     end
                 end
             else
-                for a, a in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if a.ToolTip == "Melee" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(a.Name)) then
-                            _G.SelectWeapon = a.Name
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWeapon = v.Name
                         end
                     end
                 end

@@ -1,21 +1,21 @@
---Icon at : https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json
---Create Windows
-local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Switch%20Hub%20UI"))()
-local Window = UI:NewWindow('Crazzy Hub V3','- NEXT GENERATION -','rbxassetid://15689000757')
---Create Menu
-local MenuChangeLog = Window:AddMenu('Welcome to',"Crazzy Hub V3",'hash','change')
-local MenuFunctions = Window:AddMenu('Menu Farm',"Many Functions",'menu','tab')
---Create Tab
-local MainTab = MenuFunctions:AddTab('Main','Auto Level,...','box-select')
-local SettingTab = MenuFunctions:AddTab('Setting','Setting Farm,...','list')
-local OtherFarmTab = MenuFunctions:AddTab('Other Farm','Auto Items,...','list')
-local StatsTab = MenuFunctions:AddTab('Stats','Auto Add Stats','list')
---Create Section
-local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to', 'Crazzy Hub V3 Script')
-local MainSection = MainTab:AddSection('Main Tab','Auto farm level','And many auto functions')
-local SettingSection = SettingTab:AddSection('Setting Tab','Setting farm','And setting functions','server')
-local OtherFarmSection = OtherFarmTab:AddSection('Other Farm Tab','Auto items','Auto sword,...','server')
-local StatsSection = StatsTab:AddSection('Stats Tab','Auto add','Stats','server')
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local Window = Fluent:CreateWindow({
+    Title = "Crazzy Hub V3",
+    SubTitle = "- NEXT GENERATION -",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Set = Window:AddTab({ Title = "Setting", Icon = "settings" })
+}
+local Options = Fluent.Options
+do
 -------------------------------------------------------------------------------------------------------------------Function
 repeat wait() until game.Players
 repeat wait() until game.Players.LocalPlayer
@@ -2116,20 +2116,17 @@ spawn(function()
     end
 end)
 
-local TweenService = game:GetService("TweenService")
-local Players = game:GetService("Players")
-local distance = (e.Position - Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
-local tweenInfo = TweenInfo.new(distance / Speed, Enum.EasingStyle.Linear)
-pcall(function()
-    if not Players.LocalPlayer.Character:FindFirstChild("Highlight") then
-        local highlight = Instance.new("Highlight")
-        highlight.FillColor = Color3.new(0, 0, 0)
-        highlight.OutlineColor = Color3.new(0, 0, 0)
-        highlight.Parent = Players.LocalPlayer.Character
+local c = game:service "TweenService"
+local d = TweenInfo.new((e.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude / Speed, Enum.EasingStyle.Linear)
+local c, c = pcall(function()
+    if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
+        local a = Instance.new("Highlight")
+        a.FillColor = Color3.new(0, 0, 0)
+        a.OutlineColor = Color3.new(0, 0, 0)
+        a.Parent = game.Players.LocalPlayer.Character
     end
-
-    local tween = TweenService:Create(Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = e})
-    tween:Play()
+    b = c:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], d, {CFrame = e})
+    b:Play()
 end)
 
 local function f(a)
@@ -2595,9 +2592,19 @@ local function d(a)
     end
 end
 -------------------------------------------------------------------------------------------------------------------Main Tab
-MainSection:AddLabel('Config Farm')
+Tabs.Main:AddParagraph({
+    Title = "Config Farm",
+    Content = ""
+})
 
-MainSection:AddDropdown('Select Weapon', {"Melee", "Sword", "Devil Fruit"}, 'Melee', 1, function(value)
+local SelectWeaponDrop = Tabs.Main:AddDropdown("SelectWeaponDrop", {
+    Title = "Select Weapon",
+    Values = {"Melee", "Sword", "Devil Fruit"},
+    Multi = false,
+    Default = 1,
+})
+SelectWeaponDrop:SetValue("Melee")
+SelectWeaponDrop:OnChanged(function(value)
     SelectWeapon = value
 end)
 task.spawn(function()
@@ -2639,8 +2646,90 @@ task.spawn(function()
         end)
     end
 end)
--------------------------------------------------------------------------------------------------------------------Setting Tab
 
+local SelectFastAttackSpeedDrop = Tabs.Main:AddDropdown("SelectFastAttackSpeedDrop", {
+    Title = "Select Fast Attack Speed",
+    Values = {"Slow", "Fast", "Extreme"},
+    Multi = false,
+    Default = 1,
+})
+SelectFastAttackSpeedDrop:SetValue("Fast")
+SelectFastAttackSpeedDrop:OnChanged(function(value)
+    SelectSpeedFast = value
+end)
+if SelectSpeedFast == "Slow" then
+    _G.Fast_Delay = 0.080
+elseif SelectSpeedFast == "Fast" then
+    _G.Fast_Delay = 0.029
+elseif SelectSpeedFast == "Extreme" then
+    _G.Fast_Delay = 0
+end
+
+local SelectFarmMethodDrop = Tabs.Main:AddDropdown("SelectFarmMethodDrop", {
+    Title = "Select Farm Method",
+    Values = {"Upper", "Behind", "Below"},
+    Multi = false,
+    Default = 1,
+})
+SelectWeaponDrop:SetValue("Upper")
+SelectWeaponDrop:OnChanged(function(value)
+    _G.Method = value
+end)
+task.spawn(function()
+    while task.wait(0) do
+        pcall(function()
+            if _G.Method == "Behind" then
+                MethodFarm = CFrame.new(0, 0, _G.DistanceAutoFarm)
+            elseif _G.Method == "Below" then
+                MethodFarm = CFrame.new(0, -_G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(90), 0, 0)
+            elseif _G.Method == "Upper" then
+                MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(0), 0, 0)
+            else
+                MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0)
+            end
+        end)
+    end
+end)
+
+Tabs.Main:AddParagraph({
+    Title = "Main Farm",
+    Content = ""
+})
+
+local AutoFarmLevelToggle = Tabs.Main:AddToggle("AutoFarmLevelToggle", {Title = "Auto Farm Level", Default = false })
+AutoFarmLevelToggle:OnChanged(function(value)
+    _G.AutoFarm = value
+    _G.Settings.AutoFarm = value
+    _G.DoubleQuest = value
+    getgenv().noclip = value
+    if value == false then
+        e(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+end)
+Options.AutoFarmLevelToggle:SetValue(false)
+-------------------------------------------------------------------------------------------------------------------Setting Tab
+local FastAttackToggle = Tabs.Set:AddToggle("FastAttackToggle", {Title = "Fast Attack", Default = true })
+FastAttackToggle:OnChanged(function(value)
+    FastAttack = value
+end)
+Options.FastAttackToggle:SetValue(true)
+
+local DistanceFarmSlider = Tabs.Set:AddSlider("DistanceFarmSlider", {
+    Title = "Distance Farm",
+    Description = "",
+    Default = 30,
+    Min = 0,
+    Max = 100,
+    Rounding = 1,
+    Callback = function(value)
+        _G.DistanceAutoFarm = value
+    end
+})
+DistanceFarmSlider:OnChanged(function(value)
+    _G.DistanceAutoFarm = value
+end)
+DistanceFarmSlider:SetValue(30)
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
 
 -------------------------------------------------------------------------------------------------------------------Stats Tab
+end

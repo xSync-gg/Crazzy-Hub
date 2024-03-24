@@ -2724,7 +2724,7 @@ AutoFarmNearestToggle:OnChanged(function(Value)
 end)
 Options.AutoFarmNearestToggle:SetValue(false)
 spawn(function()
-    while wait(.1) do
+    while wait(.0) do
         if _G.AutoNear then
             pcall(function()
                 for i,v in pairs (game.Workspace.Enemies:GetChildren()) do

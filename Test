@@ -9,13 +9,25 @@ local MenuFunctions = Window:AddMenu('Menu Farm',"Many Functions",'menu','tab')
 local MainTab = MenuFunctions:AddTab('Main','Auto Level,...','box-select')
 local SettingTab = MenuFunctions:AddTab('Setting','Setting Farm,...','list')
 local OtherFarmTab = MenuFunctions:AddTab('Other Farm','Auto Items,...','list')
-local StatsTab = MenuFunctions:AddTab('Stats','Auto Add Stats','list')
+local StatsTab = MenuFunctions:AddTab('Stats','Auto Add Stats,...','list')
+local TeleportTab = MenuFunctions:AddTab('Teleport','Teleport To All Sea,...','list')
+local PlayerTab = MenuFunctions:AddTab('Player','PVP And ESP,..','list')
+local DevilFruitTab = MenuFunctions:AddTab('Devil Fruit','Auto Collect Fruit,...','list')
+local RaidTab = MenuFunctions:AddTab('Raid','Auto Raid,...','list')
+local ShopTab = MenuFunctions:AddTab('Shop','Buy Everything,...','list')
+local MiscTab = MenuFunctions:AddTab('Misc','Miscellaneous,...','list')
 --Create Section
 local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to', 'Crazzy Hub V3 Script')
 local MainSection = MainTab:AddSection('Main Tab','Auto farm level','And many auto functions')
 local SettingSection = SettingTab:AddSection('Setting Tab','Setting farm','And setting functions','server')
 local OtherFarmSection = OtherFarmTab:AddSection('Other Farm Tab','Auto items','Auto sword,...','server')
 local StatsSection = StatsTab:AddSection('Stats Tab','Auto add','Stats','server')
+local TeleportSection = TeleportTab:AddSection('Teleport Tab','Auto teleport','To island','server')
+local PlayerSection = PlayerTab:AddSection('Player Tab','Auto kill player','And ESP','server')
+local DevilFruitSection = DevilFruitTab:AddSection('Devil Fruit Tab','Auto random fruit','And auto eat fruits','server')
+local RaidSection = RaidTab:AddSection('Raid Tab','Kill aura','And auto next island','server')
+local ShopSection = ShopTab:AddSection('Shop Tab','Auto buy melee','And auto buy swords','server')
+local MiscSection = MiscTab:AddSection('Misc Tab','Auto add code','And player boost','server')
 -------------------------------------------------------------------------------------------------------------------Function
 local id = game.PlaceId
 if id == 2753915549 then 
@@ -2692,25 +2704,11 @@ spawn(function()
 	end
 end)
 
-MainSection:AddToggle('Auto Chest',false,function(Value)
-    AutoFarmChest = Value
-end)
-
-MainSection:AddToggle('Auto Chest',false,function(Value)
-    AutoFarmChest = Value
-end)
-
-MainSection:AddToggle('Auto Chest',false,function(Value)
-    AutoFarmChest = Value
-end)
-
 if Third_Sea then
     MainSection:AddToggle('Auto Chest Stop If Has Cup',false,function(Value)
         _G.chestsea3 = Value
     end)
-end
-
-if Second_Sea then
+elseif Second_Sea then
     MainSection:AddToggle('Auto Chest Stop If Has Key',false,function(Value)
         _G.chestsea2 = Value
     end)
@@ -2749,3 +2747,19 @@ spawn(function()
     end
 end)
 -------------------------------------------------------------------------------------------------------------------Stats Tab
+
+-------------------------------------------------------------------------------------------------------------------Teleport Tab
+
+-------------------------------------------------------------------------------------------------------------------Player Tab
+
+-------------------------------------------------------------------------------------------------------------------Devil Fruit Tab
+
+-------------------------------------------------------------------------------------------------------------------Raid Tab
+
+-------------------------------------------------------------------------------------------------------------------Shop Tab
+
+-------------------------------------------------------------------------------------------------------------------Misc Tab
+
+-------------------------------------------------------------------------------------------------------------------Race V4 Tab
+
+-------------------------------------------------------------------------------------------------------------------Event Tab

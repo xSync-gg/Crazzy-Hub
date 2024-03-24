@@ -12,16 +12,16 @@ local Window = UI:NewWindow('Crazzy Hub V3','- NEXT GENERATION -','rbxassetid://
 -- Menu ( name <string> , descr <string> , icon <string> icon name in https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json) --
 
 local MenuChangeLog = Window:AddMenu('Welcome to',"Crazzy Hub V3",'hash','change')
+local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to' , 'Crazzy Hub V3 Script')
 local MenuFunctions = Window:AddMenu('Menu Farm',"Many Functions",'menu','tab')
 
 -- Tab ( name <string> , descr <bool> , icon <string> ) --
-local TabFunctions = MenuFunctions:AddTab('Main','Auto Level,...','box-select')
-local TabTeleport = MenuFunctions:AddTab('Setting','Setting Farm,...','list')
+local MainTab = MenuFunctions:AddTab('Main','Auto Level,...','box-select')
+local SettingTab = MenuFunctions:AddTab('Setting','Setting Farm,...','list')
+local OtherFarmTab = MenuFunctions:AddTab('Other Farm','Auto Items,...','list')
 
--- Section ( name <string> , descr <string> , text <string> , icon <string> ) --
-local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to' , 'Crazzy Hub V3 Script')
-local MainSection = TabFunctions:AddSection('Main Tab','Auto farm level and many functions','book-open')
-local TeleportSection = TabTeleport:AddSection('Teleports','teleport to porn hub','teleport and steal your discord token','server')
+local MainSection = MainTab:AddSection('Main Tab','Auto farm level','and many auto functions')
+local SettingSection = SettingTab:AddSection('Setting Tab','Setting farm','And setting functions','server')
 
 -- Label ( name <string> ) --
 MainSection:AddLabel('Auto Farm')
@@ -46,26 +46,26 @@ MainSection:AddButton('Kill all',function(v)
     print(v)
 end)
 
-TeleportSection:AddButton('Blox Fruit',function()
+SettingSection:AddButton('Blox Fruit',function()
     print('TP!')
 end)
 
-TeleportSection:AddButton('The Mimic',function()
+SettingSection:AddButton('The Mimic',function()
     print('TP!')
 end)
 
-TeleportSection:AddButton('DOORS',function()
+SettingSection:AddButton('DOORS',function()
     print('TP!')
 end)
 
-TeleportSection:AddButton('Blade Ball',function()
+SettingSection:AddButton('Blade Ball',function()
     print('TP!')
 end)
 
-TeleportSection:AddButton('Phantom Force',function()
+SettingSection:AddButton('Phantom Force',function()
     print('TP!')
 end)
 
-TeleportSection:AddButton('Cry Of Fear',function()
+SettingSection:AddButton('Cry Of Fear',function()
     print('TP!')
 end)

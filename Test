@@ -2692,6 +2692,18 @@ spawn(function()
 	end
 end)
 
+MainSection:AddToggle('Auto Chest',false,function(Value)
+    AutoFarmChest = Value
+end)
+
+MainSection:AddToggle('Auto Chest',false,function(Value)
+    AutoFarmChest = Value
+end)
+
+MainSection:AddToggle('Auto Chest',false,function(Value)
+    AutoFarmChest = Value
+end)
+
 if Third_Sea then
     MainSection:AddToggle('Auto Chest Stop If Has Cup',false,function(Value)
         _G.chestsea3 = Value

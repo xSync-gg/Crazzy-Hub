@@ -2693,8 +2693,54 @@ task.spawn(function()
         end)
     end
 end)
--------------------------------------------------------------------------------------------------------------------Setting Tab
 
+MainSection:AddDropdown('Select Fast Attack Speed', {"Slow", "Fast", "Extreme"}, 'Fast', 1, function(value)
+    SelectSpeedFast = value
+    if SelectSpeedFast == "Slow" then
+        _G.Fast_Delay = 0.080
+    elseif SelectSpeedFast == "Fast" then
+        _G.Fast_Delay = 0.029
+    elseif SelectSpeedFast == "Extreme" then
+        _G.Fast_Delay = 0
+    end
+end)
+
+MainSection:AddDropdown('Select Method Farm', {"Upper", "Behind", "Below"}, 'Upper', 1, function(value)
+    _G.Method = value
+end)
+task.spawn(function()
+    while task.wait(0) do
+        pcall(function()
+            if _G.Method == "Behind" then
+                MethodFarm = CFrame.new(0, 0, _G.DistanceAutoFarm)
+            elseif _G.Method == "Below" then
+                MethodFarm = CFrame.new(0, -_G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(90), 0, 0)
+            elseif _G.Method == "Upper" then
+                MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(0), 0, 0)
+            else
+                MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0)
+            end
+        end)
+    end
+end)
+
+MainSection:AddToggle('Auto Farm Level',false,function(value)
+    _G.AutoFarm = value
+    _G.Settings.AutoFarm = value
+    _G.DoubleQuest = value
+    getgenv().noclip = value
+    if value == false then
+        e(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+end)
+-------------------------------------------------------------------------------------------------------------------Setting Tab
+SettingSection:AddToggle('Fast Attack',true,function(value)
+    FastAttack = value
+end)
+
+SettingSection:AddSlider('Distance Farm',{Min = 1, Max = 100, Default = 30, VALUE = '%'},function(value)
+    _G.DistanceAutoFarm = value
+end)
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
 
 -------------------------------------------------------------------------------------------------------------------Stats Tab

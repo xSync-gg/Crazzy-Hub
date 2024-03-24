@@ -12,7 +12,8 @@ local Window = Fluent:CreateWindow({
 })
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Set = Window:AddTab({ Title = "Setting", Icon = "settings" })
+    Set = Window:AddTab({ Title = "Setting", Icon = "settings" }),
+    Farm = Window:AddTab({ Title = "Other Farm", Icon = "settings" })
 }
 local Options = Fluent.Options
 do
@@ -2505,9 +2506,145 @@ SelectFastAttackSpeedDrop:OnChanged(function(Value)
 		_G.Fast_Delay = 0.05
 	end
 end)
+
+Tabs.Main:AddParagraph({
+    Title = "Main Farm",
+    Content = ""
+})
+
+local AutoFarmLevelToggle = Tabs.Main:AddToggle("AutoFarmLevelToggle", {Title = "Auto Farm Level", Default = false })
+AutoFarmLevelToggle:OnChanged(function(Value)
+    _G.AutoLevel = Value
+    if Value == false then
+        wait()
+        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+    end
+end)
+Options.AutoFarmLevelToggle:SetValue(false)
+spawn(function()
+    while task.wait() do
+        if _G.AutoLevel then
+            pcall(function()
+                CheckLevel()
+                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                    toTarget(CFrameQ)
+                    if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,QuestLv)
+                    end
+                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            if v.Name == Ms then
+                                repeat wait(_G.Fast_Delay)
+                                AttackNoCoolDown()
+                                bringmob = true
+                                AutoHaki()
+                                EquipTool(SelectWeapon)
+                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                v.HumanoidRootPart.Transparency = 1
+                                v.Humanoid.JumpPower = 0
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                FarmPos = v.HumanoidRootPart.CFrame
+                                MonFarm = v.Name
+                                --Click
+                                until not _G.AutoLevel or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                bringmob = false
+                            end   
+                        end
+                    end
+                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name,NameMon) then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+                                toTarget(v.CFrame * CFrame.new(posX,posY,posZ))
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local AutoFarmNearestToggle = Tabs.Main:AddToggle("AutoFarmNearestToggle", {Title = "Auto Farm Nearest", Default = false })
+AutoFarmNearestToggle:OnChanged(function(Value)
+    _G.AutoNear = Value
+    if Value == false then
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+    end
+end)
+Options.AutoFarmNearestToggle:SetValue(false)
+spawn(function()
+    while wait(.1) do
+        if _G.AutoNear then
+            pcall(function()
+                for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                        if v.Name then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
+                                repeat wait(_G.Fast_Delay)
+                                AttackNoCoolDown()
+                                bringmob = true
+                                AutoHaki()
+                                EquipTool(SelectWeapon)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                v.HumanoidRootPart.Transparency = 1
+                                v.Humanoid.JumpPower = 0
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                FarmPos = v.HumanoidRootPart.CFrame
+                                MonFarm = v.Name
+                                --Click
+                                until not _G.AutoNear or not v.Parent or v.Humanoid.Health <= 0 or not game.Workspace.Enemies:FindFirstChild(v.Name)
+                                bringmob = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
 -------------------------------------------------------------------------------------------------------------------Setting Tab
 
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
-
+local AutoCastleRaidToggle = Tabs.Farm:AddToggle("AutoCastleRaidToggle", {Title = "Auto Castle Raid", Default = false })
+AutoCastleRaidToggle:OnChanged(function(Value)
+    _G.CastleRaid = Value
+end)
+Options.AutoCastleRaidToggle:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.CastleRaid then
+            pcall(function()
+                local CFrameCastleRaid = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
+                if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.CastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.CastleRaid
+                            end
+                        end
+                    end
+                else
+                    toTarget(CFrameCastleRaid)
+                end
+            end)
+        end
+    end
+end)
 -------------------------------------------------------------------------------------------------------------------Stats Tab
 end

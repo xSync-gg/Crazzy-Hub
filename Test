@@ -12,15 +12,15 @@ local Window = UI:NewWindow('Crazzy Hub V3','- NEXT GENERATION -','rbxassetid://
 -- Menu ( name <string> , descr <string> , icon <string> icon name in https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json) --
 
 local MenuChangeLog = Window:AddMenu('Welcome to',"Crazzy Hub V3",'hash','change')
-local MenuFunctions = Window:AddMenu('Functions',"Menu Farm",'menu','tab')
+local MenuFunctions = Window:AddMenu('Menu Farm',"Many Functions",'menu','tab')
 
 -- Tab ( name <string> , descr <bool> , icon <string> ) --
 local TabFunctions = MenuFunctions:AddTab('Main','Auto Level,...','box-select')
 local TabTeleport = MenuFunctions:AddTab('Setting','Setting Farm,...','list')
 
 -- Section ( name <string> , descr <string> , text <string> , icon <string> ) --
-local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Change Log' , 'Idk')
-local MainSection = TabFunctions:AddSection('Auto Farm','auto kaitun, level from 1 to 700 levels in 10s','afk farm kaitun script','book-open')
+local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to' , 'Crazzy Hub V3 Script')
+local MainSection = TabFunctions:AddSection('Main Tab','Auto farm level and many functions','book-open')
 local TeleportSection = TabTeleport:AddSection('Teleports','teleport to porn hub','teleport and steal your discord token','server')
 
 -- Label ( name <string> ) --

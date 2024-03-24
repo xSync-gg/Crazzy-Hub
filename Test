@@ -2432,6 +2432,82 @@ end
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
 	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
+
+game:GetService('RunService').RenderStepped:connect(function()           
+    if _G.chestsea3 then
+        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then 
+            _G.chestsea3 = false                      
+        elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then 
+            if game:GetService("Workspace"):FindFirstChild("Chest1") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest2") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest3") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+            end
+        end
+    end
+end)
+
+if game.PlaceId == 7449423635 then -- sea3
+    spawn(function()
+        while task.wait(3.5) do
+            pcall(function()
+                if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then
+                    if _G.chestsea3 then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"Q",false,game)
+                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                    end
+                    wait(5)
+                end 
+            end)
+        end
+    end) 
+end
+
+game:GetService('RunService').RenderStepped:connect(function()           
+    if _G.chestsea2 then
+        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then 
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Q",false,game)
+            _G.chestsea2 = false                         
+        elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then 
+            if game:GetService("Workspace"):FindFirstChild("Chest1") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest2") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
+            end
+            if game:GetService("Workspace"):FindFirstChild("Chest3") then
+                TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+            end
+        end
+    end
+end)
+
+if game.PlaceId == 4442272183 then -- sea2
+    spawn(function()
+        while task.wait(3.5) do
+            pcall(function()
+                if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+                    if _G.chestsea2 then
+                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                    end
+                    wait(5)
+                end 
+            end) 
+        end 
+    end) 
+end
+
+function TPchest(P1)          
+    local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance >= 0 then
+        Speed = 1200000
+    end
+    local tween =  game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed), {CFrame = P1  }) tween:Play()                                    
+end
 -------------------------------------------------------------------------------------------------------------------Main Tab
 MainSection:AddLabel('Config Farm')
 
@@ -2586,8 +2662,78 @@ spawn(function()
         end
     end
 end)
+
+MainSection:AddLabel('Chest Farm')
+
+MainSection:AddToggle('Auto Chest',false,function(Value)
+    AutoFarmChest = Value
+end)
+_G.MagnitudeAdd = 0
+spawn(function()
+	while wait() do 
+		if AutoFarmChest then
+			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
+				if v.Name:find("Chest") then
+					if game:GetService("Workspace"):FindFirstChild(v.Name) then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
+							repeat wait()
+								if game:GetService("Workspace"):FindFirstChild(v.Name) then
+									Tween(v.CFrame)
+								end
+							until AutoFarmChest == false or not v.Parent
+							Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
+							break
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+
+if Third_Sea then
+    MainSection:AddToggle('Auto Chest Stop If Has Cup',false,function(Value)
+        _G.chestsea3 = Value
+    end)
+end
+
+if Second_Sea then
+    MainSection:AddToggle('Auto Chest Stop If Has Key',false,function(Value)
+        _G.chestsea2 = Value
+    end)
+end
 -------------------------------------------------------------------------------------------------------------------Setting Tab
 
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
-
+OtherFarmSection:AddToggle('Auto Castle Raid',false,function(Value)
+    _G.CastleRaid = Value
+end)
+spawn(function()
+    while wait() do
+        if _G.CastleRaid then
+            pcall(function()
+                local CFrameCastleRaid = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
+                if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.CastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                repeat wait(_G.Fast_Delay)
+                                    AttackNoCoolDown()
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.CastleRaid
+                            end
+                        end
+                    end
+                else
+                    toTarget(CFrameCastleRaid)
+                end
+            end)
+        end
+    end
+end)
 -------------------------------------------------------------------------------------------------------------------Stats Tab

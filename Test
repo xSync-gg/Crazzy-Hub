@@ -14,15 +14,15 @@ local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }),
     Set = Window:AddTab({ Title = "Setting", Icon = "settings" }),
     Farm = Window:AddTab({ Title = "Other Farm", Icon = "swords" }),
-    Stats = Window:AddTab({ Title = "Stats", Icon = "user-round-plus" }),
-    Tele = Window:AddTab({ Title = "Teleport", Icon = "tree-palm" }),
+    Stats = Window:AddTab({ Title = "Stats", Icon = "user-plus" }),
+    Tele = Window:AddTab({ Title = "Teleport", Icon = "land-plot" }),
     Player = Window:AddTab({ Title = "Player", Icon = "users" }),
     Fruit = Window:AddTab({ Title = "Devil Fruit", Icon = "apple" }),
     Raid = Window:AddTab({ Title = "Raid", Icon = "flame" }),
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-cart" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }),
-    Race = Window:AddTab({ Title = "Race V4", Icon = "rabbit" }),
-    Event = Window:AddTab({ Title = "Event", Icon = "rabbit" })
+    Race = Window:AddTab({ Title = "Race V4", Icon = "person-standing" }),
+    Event = Window:AddTab({ Title = "Event", Icon = "fish" })
 }
 local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")

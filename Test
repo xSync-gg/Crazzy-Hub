@@ -1,21 +1,21 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-local Window = Fluent:CreateWindow({
-    Title = "Crazzy Hub V3",
-    SubTitle = "- NEXT GENERATION -",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
-})
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Set = Window:AddTab({ Title = "Setting", Icon = "settings" })
-}
-local Options = Fluent.Options
-do
+--Icon at : https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json
+--Create Windows
+local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Switch%20Hub%20UI"))()
+local Window = UI:NewWindow('Crazzy Hub V3','- NEXT GENERATION -','rbxassetid://15689000757')
+--Create Menu
+local MenuChangeLog = Window:AddMenu('Welcome to',"Crazzy Hub V3",'hash','change')
+local MenuFunctions = Window:AddMenu('Menu Farm',"Many Functions",'menu','tab')
+--Create Tab
+local MainTab = MenuFunctions:AddTab('Main','Auto Level,...','box-select')
+local SettingTab = MenuFunctions:AddTab('Setting','Setting Farm,...','list')
+local OtherFarmTab = MenuFunctions:AddTab('Other Farm','Auto Items,...','list')
+local StatsTab = MenuFunctions:AddTab('Stats','Auto Add Stats','list')
+--Create Section
+local ChangeLogSection = MenuChangeLog:AddTab():AddSection('Welcome to', 'Crazzy Hub V3 Script')
+local MainSection = MainTab:AddSection('Main Tab','Auto farm level','And many auto functions')
+local SettingSection = SettingTab:AddSection('Setting Tab','Setting farm','And setting functions','server')
+local OtherFarmSection = OtherFarmTab:AddSection('Other Farm Tab','Auto items','Auto sword,...','server')
+local StatsSection = StatsTab:AddSection('Stats Tab','Auto add','Stats','server')
 -------------------------------------------------------------------------------------------------------------------Function
 repeat wait() until game.Players
 repeat wait() until game.Players.LocalPlayer
@@ -2017,7 +2017,8 @@ local function e(...)
         if b then
             b:Cancel()
         end
-        repeat wait()
+        repeat
+            wait()
         until game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
         wait(0.2)
     end
@@ -2025,109 +2026,165 @@ local function e(...)
     local c =
         (e.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
     if c < 1000 then
-        Speed = 350
+        Speed = 315
     elseif c >= 1000 then
-        Speed = 350
+        Speed = 300
     end
     if _G.BypassTP then
-        if c>3000 and not AutoFarmMaterial and not _G.AutoGodHumanand and not _G.AutoRaids and not(game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip")or game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip")or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice")or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice")or game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence")or game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence")or game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice")or game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice"))and not(Name=="Fishman Commando"or Name=="Fishman Warrior")then
-            pcall(function()
-                b:Cancel()
-                fkwarp = false
-                if game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("SpawnPoint").Value == tostring(d(e)) then
-                    wait(.1)
-                    Com("F_", "TeleportToSpawn")
-                elseif game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("LastSpawnPoint").Value == tostring(d(e)) then
-                    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
-                    wait(0.1)
-                    repeat wait()
-                    until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+        if
+            c > 3000 and not AutoFarmMaterial and not _G.AutoGodHumanand and not _G.AutoRaids and
+                not (game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or
+                    game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") or
+                    game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or
+                    game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or
+                    game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or
+                    game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence") or
+                    game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice") or
+                    game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice")) and
+                not (Name == "Fishman Commando" or Name == "Fishman Warrior")
+         then
+            pcall(
+                function()
+                    b:Cancel()
+                    fkwarp = false
+                    if
+                        game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("SpawnPoint").Value ==
+                            tostring(d(e))
+                     then
+                        wait(.1)
+                        Com("F_", "TeleportToSpawn")
+                    elseif
+                        game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("LastSpawnPoint").Value ==
+                            tostring(d(e))
+                     then
+                        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+                        wait(0.1)
+                        repeat
+                            wait()
+                        until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+                    else
+                        if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 then
+                            if fkwarp == false then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = e
+                            end
+                            fkwarp = true
+                        end
+                        wait(.08)
+                        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+                        repeat
+                            wait()
+                        until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+                        wait(.1)
+                        Com("F_", "SetSpawnPoint")
+                    end
+                    wait(0.2)
+                    return
+                end
+            )
+        end
+    end
+    local function c(a)
+        return math.floor(tonumber(a) + 0.5)
+    end
+    Number = math.random(1, 1000000)
+    function ESPKisuneIsland()
+        pcall(
+            function()
+                if _G.EspKitsuneIsland then
+                    for a, a in pairs(game:GetService("Workspace").Map.KitsuneIsland:GetChildren()) do
+                        pcall(
+                            function()
+                                if a.Name == "Center" then
+                                    if not a:FindFirstChild("EspKitsune") then
+                                        local b = Instance.new("BillboardGui", a)
+                                        b.Name = "EspKitsune"
+                                        b.ExtentsOffset = Vector3.new(0, 1, 0)
+                                        b.Size = UDim2.new(1, 200, 1, 30)
+                                        b.Adornee = a
+                                        b.AlwaysOnTop = true
+                                        local b = Instance.new("TextLabel", b)
+                                        b.Font = "GothamBold"
+                                        b.FontSize = "Size14"
+                                        b.TextWrapped = true
+                                        b.Size = UDim2.new(1, 0, 1, 0)
+                                        b.TextYAlignment = "Top"
+                                        b.BackgroundTransparency = 1
+                                        b.TextStrokeTransparency = 0.5
+                                        b.TextColor3 = Color3.fromRGB(255, 255, 255)
+                                        b.Text =
+                                            ("Kitsune Island" ..
+                                            " \n" ..
+                                                " [ " ..
+                                                    c(
+                                                        (game:GetService("Players").LocalPlayer.Character.Head.Position -
+                                                            a.Position).Magnitude / 3
+                                                    ) ..
+                                                        " M" .. " ] ")
+                                    else
+                                        a.EspKitsune.TextLabel.Text =
+                                            ("Kitsune Island" ..
+                                            " \n" ..
+                                                " [ " ..
+                                                    c(
+                                                        (game:GetService("Players").LocalPlayer.Character.Head.Position -
+                                                            a.Position).Magnitude / 3
+                                                    ) ..
+                                                        " M" .. " ] ")
+                                        a.EspKitsune.TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+                                    end
+                                end
+                            end
+                        )
+                    end
                 else
-                    if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 then
-                        if fkwarp == false then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = e
+                    for a, a in pairs(game:GetService("Workspace").Map.KitsuneIsland:GetChildren()) do
+                        if a.Name == "Center" then
+                            if a:FindFirstChild("EspKitsune") then
+                                a:FindFirstChild("EspKitsune"):Destroy()
+                            end
                         end
-                        fkwarp = true
-                    end
-                    wait(.08)
-                    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
-                    repeat wait()
-                    until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
-                    wait(.1)
-                    Com("F_", "SetSpawnPoint")
-                end
-                wait(0.2)
-                return
-            end)
-        end
-    end
-end
-
-local function c(a)
-    return math.floor(tonumber(a) + 0.5)
-end
-Number = math.random(1, 1000000)
-function ESPKisuneIsland()
-    pcall(function()
-        if _G.EspKitsuneIsland then
-            for a, a in pairs(game:GetService("Workspace").Map.KitsuneIsland:GetChildren()) do
-                pcall(function()
-                    if a.Name == "Center" then
-                        if not a:FindFirstChild("EspKitsune") then
-                            local b = Instance.new("BillboardGui", a)
-                            b.Name = "EspKitsune"
-                            b.ExtentsOffset = Vector3.new(0, 1, 0)
-                            b.Size = UDim2.new(1, 200, 1, 30)
-                            b.Adornee = a
-                            b.AlwaysOnTop = true
-                            local b = Instance.new("TextLabel", b)
-                            b.Font = "GothamBold"
-                            b.FontSize = "Size14"
-                            b.TextWrapped = true
-                            b.Size = UDim2.new(1, 0, 1, 0)
-                            b.TextYAlignment = "Top"
-                            b.BackgroundTransparency = 1
-                            b.TextStrokeTransparency = 0.5
-                            b.TextColor3 = Color3.fromRGB(255, 255, 255)
-                            b.Text = ("Kitsune Island" .. " \n" .. " [ " .. c((game:GetService("Players").LocalPlayer.Character.Head.Position - a.Position).Magnitude / 3) .. " M" .. " ] ")
-                        else
-                            a.EspKitsune.TextLabel.Text = ("Kitsune Island" .. " \n" .. " [ " .. c((game:GetService("Players").LocalPlayer.Character.Head.Position - a.Position).Magnitude / 3) .. " M" .. " ] ")
-                            a.EspKitsune.TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        end
-                    end
-                end)
-            end
-        else
-            for a, a in pairs(game:GetService("Workspace").Map.KitsuneIsland:GetChildren()) do
-                if a.Name == "Center" then
-                    if a:FindFirstChild("EspKitsune") then
-                        a:FindFirstChild("EspKitsune"):Destroy()
                     end
                 end
             end
+        )
+    end
+    spawn(
+        function()
+            while wait() do
+                if _G.EspKitsuneIsland then
+                    EspKitsuneIsland()
+                end
+            end
         end
-    end)
+    )
+    local c = game:service "TweenService"
+    local d =
+        TweenInfo.new(
+        (e.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude /
+            Speed,
+        Enum.EasingStyle.Linear
+    )
+    local c, c =
+        pcall(
+        function()
+            if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
+                local a = Instance.new("Highlight")
+                a.FillColor = Color3.new(0, 0, 0)
+                a.OutlineColor = Color3.new(0, 0, 0)
+                a.Parent = game.Players.LocalPlayer.Character
+            end
+            b = c:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], d, {CFrame = e})
+            b:Play()
+        end
+    )
+    function a:Stop()
+        b:Cancel()
+    end
+    function a:Wait()
+        b.Completed:Wait()
+    end
+    return a
 end
-spawn(function()
-    while wait() do
-        if _G.EspKitsuneIsland then
-            EspKitsuneIsland()
-        end
-    end
-end)
-
-local c = game:service "TweenService"
-local d = TweenInfo.new((e.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude / Speed, Enum.EasingStyle.Linear)
-local c, c = pcall(function()
-    if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
-        local a = Instance.new("Highlight")
-        a.FillColor = Color3.new(0, 0, 0)
-        a.OutlineColor = Color3.new(0, 0, 0)
-        a.Parent = game.Players.LocalPlayer.Character
-    end
-    b = c:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], d, {CFrame = e})
-    b:Play()
-end)
 
 local function f(a)
     local b = a
@@ -2592,19 +2649,9 @@ local function d(a)
     end
 end
 -------------------------------------------------------------------------------------------------------------------Main Tab
-Tabs.Main:AddParagraph({
-    Title = "Config Farm",
-    Content = ""
-})
+MainSection:AddLabel('Config Farm')
 
-local SelectWeaponDrop = Tabs.Main:AddDropdown("SelectWeaponDrop", {
-    Title = "Select Weapon",
-    Values = {"Melee", "Sword", "Devil Fruit"},
-    Multi = false,
-    Default = 1,
-})
-SelectWeaponDrop:SetValue("Melee")
-SelectWeaponDrop:OnChanged(function(value)
+MainSection:AddDropdown('Select Weapon', {"Melee", "Sword", "Devil Fruit"}, 'Melee', 1, function(value)
     SelectWeapon = value
 end)
 task.spawn(function()
@@ -2646,90 +2693,8 @@ task.spawn(function()
         end)
     end
 end)
-
-local SelectFastAttackSpeedDrop = Tabs.Main:AddDropdown("SelectFastAttackSpeedDrop", {
-    Title = "Select Fast Attack Speed",
-    Values = {"Slow", "Fast", "Extreme"},
-    Multi = false,
-    Default = 1,
-})
-SelectFastAttackSpeedDrop:SetValue("Fast")
-SelectFastAttackSpeedDrop:OnChanged(function(value)
-    SelectSpeedFast = value
-end)
-if SelectSpeedFast == "Slow" then
-    _G.Fast_Delay = 0.080
-elseif SelectSpeedFast == "Fast" then
-    _G.Fast_Delay = 0.029
-elseif SelectSpeedFast == "Extreme" then
-    _G.Fast_Delay = 0
-end
-
-local SelectFarmMethodDrop = Tabs.Main:AddDropdown("SelectFarmMethodDrop", {
-    Title = "Select Farm Method",
-    Values = {"Upper", "Behind", "Below"},
-    Multi = false,
-    Default = 1,
-})
-SelectWeaponDrop:SetValue("Upper")
-SelectWeaponDrop:OnChanged(function(value)
-    _G.Method = value
-end)
-task.spawn(function()
-    while task.wait(0) do
-        pcall(function()
-            if _G.Method == "Behind" then
-                MethodFarm = CFrame.new(0, 0, _G.DistanceAutoFarm)
-            elseif _G.Method == "Below" then
-                MethodFarm = CFrame.new(0, -_G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(90), 0, 0)
-            elseif _G.Method == "Upper" then
-                MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(0), 0, 0)
-            else
-                MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0)
-            end
-        end)
-    end
-end)
-
-Tabs.Main:AddParagraph({
-    Title = "Main Farm",
-    Content = ""
-})
-
-local AutoFarmLevelToggle = Tabs.Main:AddToggle("AutoFarmLevelToggle", {Title = "Auto Farm Level", Default = false })
-AutoFarmLevelToggle:OnChanged(function(value)
-    _G.AutoFarm = value
-    _G.Settings.AutoFarm = value
-    _G.DoubleQuest = value
-    getgenv().noclip = value
-    if value == false then
-        e(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-    end
-end)
-Options.AutoFarmLevelToggle:SetValue(false)
 -------------------------------------------------------------------------------------------------------------------Setting Tab
-local FastAttackToggle = Tabs.Set:AddToggle("FastAttackToggle", {Title = "Fast Attack", Default = true })
-FastAttackToggle:OnChanged(function(value)
-    FastAttack = value
-end)
-Options.FastAttackToggle:SetValue(true)
 
-local DistanceFarmSlider = Tabs.Set:AddSlider("DistanceFarmSlider", {
-    Title = "Distance Farm",
-    Description = "",
-    Default = 30,
-    Min = 0,
-    Max = 100,
-    Rounding = 1,
-    Callback = function(value)
-        _G.DistanceAutoFarm = value
-    end
-})
-DistanceFarmSlider:OnChanged(function(value)
-    _G.DistanceAutoFarm = value
-end)
-DistanceFarmSlider:SetValue(30)
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
 
 -------------------------------------------------------------------------------------------------------------------Stats Tab
-end

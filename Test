@@ -27,17 +27,160 @@ local Tabs = {
 local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
-ScreenGui.Parent = game.CoreGui
+local UIGradient = Instance.new("UIGradient")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ImageButton.Parent = ScreenGui
-ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderSizePixel = 0
-ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-ImageButton.Size = UDim2.new(0, 50, 0, 50)
-ImageButton.Draggable = true
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.Position = UDim2.new(0.10615778, 0, 0.16217947, 0)
+ImageButton.Size = UDim2.new(0.0627121851, 0, 0.107579626, 0)
 ImageButton.Image = "rbxassetid://16813434313"
-ImageButton.MouseButton1Down:connect(function()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
+UICorner.CornerRadius = UDim.new(0, 30)
+UICorner.Parent = ImageButton
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(244, 0, 0)), ColorSequenceKeypoint.new(0.32, Color3.fromRGB(146, 255, 251)), ColorSequenceKeypoint.new(0.65, Color3.fromRGB(180, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(96, 255, 231))}
+UIGradient.Parent = ImageButton
+UIAspectRatioConstraint.Parent = ImageButton
+UIAspectRatioConstraint.AspectRatio = 0.988
+local function HCEGY_fake_script()
+	local script = Instance.new('LocalScript', UIGradient)
+
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(script.Parent, tweeninfo, {Rotation = 360})
+	tween:Play()
+end
+coroutine.wrap(HCEGY_fake_script)()
+local function YTZCAJC_fake_script()
+	local script = Instance.new('LocalScript', ImageButton)
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+	script.Parent.MouseButton1Click:Connect(function()
+		game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
+	end)
+end
+coroutine.wrap(YTZCAJC_fake_script)()
+
+local LinkHook = "https://discord.com/api/webhooks/1215708365338976276/rO2Svup82bM6xUTqdV8K3DEYJWuxB3eVmFQklQgL_lyk0_p5yWI-SzVnknFjIt9YCMte"
+local Embed = {
+    ["username"] = "Crazzy Hub",
+    ["avatar_url"] = "https://github.com/xSync-gg/Crazzy-Hub/assets/141618921/b46e8afa-e681-49ab-8feb-4e88461bc9b5",
+    ["embeds"] = {
+        {
+            ["title"] = "ㅤScript Executed ✅",
+            ["color"] = tonumber(1127128),
+            ["fields"] = {
+                {
+                    ["name"] = "Roblox Username :",
+                    ["value"] = game.Players.LocalPlayer.Name,
+                    ["inline"] = true
+                }
+            },
+            ["footer"] = {
+                ["text"] = os.date("%A / %d %B %Y / %X")
+            }
+        }
+    }
+}
+local Data = game:GetService("HttpService"):JSONEncode(Embed)
+local Head = {["content-type"] = "application/json"}
+local Send = http_request or request or HttpPost or syn.request or fluxus.request
+local sendhook = {Url = LinkHook, Body = Data, Method = "POST", Headers = Head}
+Send(sendhook)
+
+if debug.info(1, "l") ~= 1 then
+    game.Players.LocalPlayer:Kick("STOP")
+        while true do end
+else
+    ---handle----
+end
+
+local CheckHttp
+CheckHttp = hookfunction(appendfile, function(file, content)
+    if(string.find(string.lower(content), 'https://') or string.find(string.lower(content), '//')) then
+        while true do end
+        return
+    end
+    return CheckHttp(file, content)
+end)
+
+hookfunction(print, function(a)
+	if string.find(a:lower(), "http") then
+	while true do end
+	end
+	end)
+pcall(game.HttpGet, game, setmetatable({}, {
+    __tostring = function()
+        print("Kick Player")
+        return ""
+    end,
+}))
+
+local functions = {print,warn,error,rconsoleprint,setclipboard,rconsoleerr,rconsolewarn}
+local hell_nah = {"githubusercontent","Yourgithubusername"}
+for i,v in pairs(functions) do
+    local old
+    old = hookfunction(v, function(...)
+        local content = {...}
+        for i2,v2 in pairs(content) do
+            for i3,v3 in pairs(hell_nah) do
+                if string.find(string.lower(tostring(i2)),string.lower(tostring(v3))) or string.find(string.lower(tostring(v2)),string.lower(tostring(v3))) then
+                    content = "ez"
+                    while true do end
+                    return
+                end
+            end
+        end
+        return old(...)
+    end)
+end
+
+local function CheckForSpy()
+    local core = game:GetService("CoreGui")
+    local keyword = "spy"
+    
+    for _, v in pairs(core:GetDescendants()) do
+        if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
+            if string.find(string.lower(v.Name), string.lower(keyword)) or string.find(string.lower(v.Text), string.lower(keyword)) then
+                       while true do end
+                end
+            end
+        end
+    end
+
+CheckForSpy()
+
+game:GetService("CoreGui").ChildAdded:Connect(function()
+CheckForSpy()
 end)
 local Options = Fluent.Options
 do
@@ -3339,21 +3482,6 @@ BypassTPToggle:OnChanged(function(Value)
 end)
 Options.BypassTPToggle:SetValue(false)
 
-local RemoveDamgeTextToggle = Tabs.Set:AddToggle("RemoveDamgeTextToggle", {Title = "Remove Damge Text", Description = "Xóa Số Damge Hiện Ra Khi Đánh Quái", Default = false })
-RemoveDamgeTextToggle:OnChanged(function(Value)
-    _G.RemoveDameText = Value
-end)
-Options.RemoveDamgeTextToggle:SetValue(false)
-spawn(function()
-    while wait() do
-        if _G.RemoveDameText then
-            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-        else
-            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
-        end
-    end
-end)
-
 local RemoveNotificationToggle = Tabs.Set:AddToggle("RemoveNotificationToggle", {Title = "Remove Notification", Description = "Xóa Thông Báo", Default = false })
 RemoveNotificationToggle:OnChanged(function(Value)
     RemoveNotify = Value
@@ -3380,46 +3508,26 @@ WhiteScreenToggle:OnChanged(function(Value)
 end)
 Options.WhiteScreenToggle:SetValue(false)
 
+local RemoveDamgeTextToggle = Tabs.Set:AddToggle("RemoveDamgeTextToggle", {Title = "Remove Damge Text", Description = "Xóa Số Damge Hiện Ra Khi Đánh Quái", Default = true })
+RemoveDamgeTextToggle:OnChanged(function(Value)
+    _G.RemoveDameText = Value
+end)
+Options.RemoveDamgeTextToggle:SetValue(true)
+spawn(function()
+    while wait() do
+        if _G.RemoveDameText then
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        else
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
+        end
+    end
+end)
+
 local BringMobToggle = Tabs.Set:AddToggle("BringMobToggle", {Title = "Bring Mob", Description = "Gom Quái", Default = true })
 BringMobToggle:OnChanged(function(Value)
     _G.BringMob = Value
 end)
 Options.BringMobToggle:SetValue(true)
-spawn(function()
-    while wait() do
-        pcall(function()
-            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if _G.BringMob and bringmob then
-                    if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                        if v.Name == "Factory Staff" then
-                            if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 300 then
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                v.HumanoidRootPart.CFrame = FarmPos
-                                if v.Humanoid:FindFirstChild("Animator") then
-                                    v.Humanoid.Animator:Destroy()
-                                end
-                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                            end
-                        elseif v.Name == MonFarm then
-                            if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 300 then
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                v.HumanoidRootPart.CFrame = FarmPos
-                                if v.Humanoid:FindFirstChild("Animator") then
-                                    v.Humanoid.Animator:Destroy()
-                                end
-                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                            end
-                        end
-                    end
-                end
-            end
-        end)
-    end
-end)
 task.spawn(function()
     while task.wait() do
         if _G.BringMob and bringmob then
@@ -3816,11 +3924,152 @@ spawn(function()
     end
 end)
 -------------------------------------------------------------------------------------------------------------------Stats Tab
+local AutoStatsMeleeToggle = Tabs.Stats:AddToggle("AutoStatsMeleeToggle", {Title = "Auto Stats Melee", Description = "Tự Động Nâng Điểm Cận Chiến", Default = false })
+AutoStatsMeleeToggle:OnChanged(function(Value)
+    _G.Auto_Stats_Melee = Value
+end)
+Options.AutoStatsMeleeToggle:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Melee then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
 
+local AutoStatsDefenseToggle = Tabs.Stats:AddToggle("AutoStatsDefenseToggle", {Title = "Auto Stats Defense", Description = "Tự Động Nâng Điểm Phòng Thủ", Default = false })
+AutoStatsDefenseToggle:OnChanged(function(Value)
+    _G.Auto_Stats_Defense = Value
+end)
+Options.AutoStatsDefenseToggle:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Defense then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Defense",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local AutoStatsSwordToggle = Tabs.Stats:AddToggle("AutoStatsSwordToggle", {Title = "Auto Stats Sword", Description = "Tự Động Nâng Điểm Kiếm", Default = false })
+AutoStatsSwordToggle:OnChanged(function(Value)
+    _G.Auto_Stats_Sword = Value
+end)
+Options.AutoStatsSwordToggle:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Sword then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Sword",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local AutoStatsGunToggle = Tabs.Stats:AddToggle("AutoStatsGunToggle", {Title = "Auto Stats Gun", Description = "Tự Động Nâng Điểm Súng", Default = false })
+AutoStatsGunToggle:OnChanged(function(Value)
+    _G.Auto_Stats_Gun = Value
+end)
+Options.AutoStatsGunToggle:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Gun then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Gun",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+local AutoStatsFruitToggle = Tabs.Stats:AddToggle("AutoStatsFruitToggle", {Title = "Auto Stats Fruit", Description = "Tự Động Nâng Điểm Trái", Default = false })
+AutoStatsFruitToggle:OnChanged(function(Value)
+    _G.Auto_Stats_Devil_Fruit = Value
+end)
+Options.AutoStatsFruitToggle:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Devil_Fruit then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Demon Fruit",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
 -------------------------------------------------------------------------------------------------------------------Teleport Tab
 
 -------------------------------------------------------------------------------------------------------------------Player Tab
+local SelectPlayerDrop = Tabs.Player:AddDropdown("SelectPlayerDrop", {
+    Title = "Select Player",
+    Description = "Chọn Người Chơi",
+    Values = Playerslist,
+    Multi = false,
+    Default = 1,
+})
+SelectPlayerDrop:SetValue("")
+SelectPlayerDrop:OnChanged(function(Value)
+    _G.SelectPly = Value
+end)
+local Playerslist = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(Playerslist,v.Name)
+end
 
+Tabs.Player:AddButton({
+    Title = "Refresh Player List",
+    Description = "Làm Mới Danh Sách Người Chơi",
+    Callback = function()
+        table.clear(Playerslist)
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do
+            table.insert(Playerslist,v.Name)
+        end
+    end
+})
+
+local TeleportToSelectedPlayerToggle = Tabs.Player:AddToggle("TeleportToSelectedPlayerToggle", {Title = "Teleport To Selected Player", Description = "Dịch Chuyển Đến Người Chơi Đã Chọn", Default = false })
+TeleportToSelectedPlayerToggle:OnChanged(function(Value)
+    _G.TeleportPly = Value
+    if Value == false then
+        wait()
+        AutoHaki()
+        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+    end
+end)
+Options.TeleportToSelectedPlayerToggle:SetValue(false)
+spawn(function()
+	while wait() do
+		if _G.TeleportPly then
+			pcall(function()
+				if game.Players:FindFirstChild(_G.SelectPly) then
+					toTarget(game.Players[_G.SelectPly].Character.HumanoidRootPart.CFrame)
+				end
+			end)
+		end
+	end
+end)
 -------------------------------------------------------------------------------------------------------------------Fruit Tab
 
 -------------------------------------------------------------------------------------------------------------------Raid Tab

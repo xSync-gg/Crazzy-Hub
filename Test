@@ -45,6 +45,141 @@ end)
 L_93_.CornerRadius = UDim.new(0, 10)
 L_93_.Parent = L_92_
 
+spawn(function()
+    pcall(function()
+        hookfunction(print, function(...)
+            game.Players.LocalPlayer:Kick("Fuck you")
+            game:Shutdown()
+            while true do end
+            return
+        end)
+        hookfunction(warn, function(...)
+            game.Players.LocalPlayer:Kick("Fuck you")
+            game:Shutdown()
+            while true do end
+            return
+        end)
+        hookfunction(error, function(...)
+            game.Players.LocalPlayer:Kick("Anti Http Spy")
+            game:Shutdown()
+            while true do end
+            return
+        end)
+        hookfunction(print, function(a)
+            if string.find(a:lower(), "http") then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+            end
+        end)
+        hookfunction(warn, function(a)
+            if string.find(a:lower(), "http") then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+            end
+        end)
+        hookfunction(error, function(a)
+            if string.find(a:lower(), "http") then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+            end
+        end)
+        local oldwrite
+        oldwrite = hookfunction(writefile, function(file, content)
+            if(string.find(string.lower(content), 'http') or string.find(string.lower(content), '//') or string.find(string.lower(content), 'https://discord.com/api/webhooks/')) then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return
+            end
+            return oldwrite(file, content)
+        end)
+        local oldappend
+        oldappend = hookfunction(appendfile, function(file, content)
+            if(string.find(string.lower(content), 'http') or string.find(string.lower(content), '//') or string.find(string.lower(content), 'https://discord.com/api/webhooks/')) then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return
+            end
+            return oldappend(file, content)
+        end)
+        game.DescendantAdded:Connect(function(c)
+            if c and c:IsA('TextLabel') or c:IsA('TextButton') or c:IsA('Message') then
+                if string.find(string.lower(c.Text), 'http') then
+                    game.Players.LocalPlayer:Kick("Fuck you")
+                    game:Shutdown()
+                    while true do end
+                    c:Destroy()
+                end
+            end
+        end)
+        getgenv().rconsoletitle = nil
+        getgenv().rconsoleprint = nil
+        getgenv().rconsolewarn = nil
+        getgenv().rconsoleinfo = nil
+        getgenv().rconsolerr = nil
+        getgenv().clonefunction = function(...) while true do end return end
+        game.CoreGui.ChildAdded:Connect(function(c)
+            if(string.lower(c.Name) == 'devconsolemaster') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                c:Destroy()
+            end
+        end)
+        local oldNamecall
+        oldNamecall = hookmetamethod(game, '__namecall', newcclosure(function(self, ...)
+            local method = getnamecallmethod()
+            if(string.lower(method) == 'rconsoleprint') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return 
+            end
+            if(string.lower(method) == 'rconsoleinfo') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return 
+            end
+            if(string.lower(method) == 'rconsolewarn') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return 
+            end
+            if(string.lower(method) == 'rconsoleerr') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return
+            end
+            if(string.lower(method) == 'warn') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return
+            end
+            if(string.lower(method) == 'error') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return
+            end
+            if(string.lower(method) == 'rendernametag') then
+                game.Players.LocalPlayer:Kick("Fuck you")
+                game:Shutdown()
+                while true do end
+                return 
+            end
+            return oldNamecall(self, ...)
+        end))
+    end)
+end)
+
 local Options = Fluent.Options
 do
 -------------------------------------------------------------------------------------------------------------------Function

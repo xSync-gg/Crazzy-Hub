@@ -3107,6 +3107,36 @@ spawn(function()
     end
 end)
 
+local UseSkillZToggle = Tabs.Main:AddToggle("UseSkillZToggle", {Title = "Use Skill Z", Description = "Dùng Chiêu Z", Default = true })
+UseSkillZToggle:OnChanged(function(Value)
+    SkillZ = Value
+end)
+Options.UseSkillZToggle:SetValue(true)
+
+local UseSkillXToggle = Tabs.Main:AddToggle("UseSkillXToggle", {Title = "Use Skill X", Description = "Dùng Chiêu X", Default = true })
+UseSkillXToggle:OnChanged(function(Value)
+    SkillX = Value
+end)
+Options.UseSkillXToggle:SetValue(true)
+
+local UseSkillCToggle = Tabs.Main:AddToggle("UseSkillCToggle", {Title = "Use Skill C", Description = "Dùng Chiêu C", Default = true })
+UseSkillCToggle:OnChanged(function(Value)
+    SkillC = Value
+end)
+Options.UseSkillCToggle:SetValue(true)
+
+local UseSkillVToggle = Tabs.Main:AddToggle("UseSkillVToggle", {Title = "Use Skill V", Description = "Dùng Chiêu V", Default = true })
+UseSkillVToggle:OnChanged(function(Value)
+    SkillV = Value
+end)
+Options.UseSkillVToggle:SetValue(true)
+
+local UseSkillFToggle = Tabs.Main:AddToggle("UseSkillFToggle", {Title = "Use Skill F", Description = "Dùng Chiêu F", Default = false })
+UseSkillFToggle:OnChanged(function(Value)
+    SkillF = Value
+end)
+Options.UseSkillFToggle:SetValue(false)
+
 local SliderHealt = Tabs.Main:AddSlider("SliderHealt", {
     Title = "Kill Mob At (%) Health",
     Description = "Giết Quái Ở (%) Máu",
@@ -3339,6 +3369,17 @@ spawn(function()
     end
 end)
 
+local WhiteScreenToggle = Tabs.Set:AddToggle("WhiteScreenToggle", {Title = "White Screen", Description = "Màn Hình Trắng", Default = false })
+WhiteScreenToggle:OnChanged(function(Value)
+    _G.WhiteScreen = Value
+    if _G.WhiteScreen == true then
+        game:GetService("RunService"):Set3dRenderingEnabled(false)
+    elseif _G.WhiteScreen == false then
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+    end
+end)
+Options.WhiteScreenToggle:SetValue(false)
+
 local BringMobToggle = Tabs.Set:AddToggle("BringMobToggle", {Title = "Bring Mob", Description = "Gom Quái", Default = true })
 BringMobToggle:OnChanged(function(Value)
     _G.BringMob = Value
@@ -3422,6 +3463,24 @@ function InMyNetWork(object)
         return false
     end
 end
+
+local DistanceFarmToggle = Tabs.Set:AddSlider("DistanceFarmToggle", {
+    Title = "Distance Farm",
+    Description = "Vị Trí Cày",
+    Default = 30,
+    Min = 1,
+    Max = 60,
+    Rounding = 1,
+    Callback = function(Value)
+        posY = Value
+    end
+})
+DistanceFarmToggle:OnChanged(function(Value)
+    posY = Value
+end)
+DistanceFarmToggle:SetValue(30)
+posX = 0
+posZ = 0
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab
 local AutoFactoryToggle = Tabs.Farm:AddToggle("AutoFactoryToggle", {Title = "Auto Factory", Description = "Tự Động Đánh Nhà Máy", Default = false })
 AutoFactoryToggle:OnChanged(function(Value)

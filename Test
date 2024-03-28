@@ -3362,16 +3362,26 @@ else
             a.OutlineColor = Color3.new(0, 0, 0)
             a.Parent = game.Players.LocalPlayer.Character
         end
-        if TweenPlay < 250 then
-            TweeSpeed = 352
+        if TweenPlay < 10 then
+            TweeSpeed = 20000
+        elseif TweenPlay < 25 then
+            TweeSpeed = 10000
+        elseif TweenPlay < 50 then
+            TweeSpeed = 5000
+        elseif TweenPlay < 150 then
+            TweeSpeed = 2500
+        elseif TweenPlay < 250 then
+            TweeSpeed = 1250
         elseif TweenPlay < 500 then
-            TweeSpeed = 395
+            TweeSpeed = 700
+        elseif TweenPlay < 750 then
+            TweeSpeed = 500
         elseif TweenPlay >= 1000 then
-            TweeSpeed = 255
+            TweeSpeed = 350
         end
         if _G.StopTween then
             tot:Cancel()
-            BringMobFarm = false
+            _G.BringMob = false
             UseSkillGun = false
             _G.UseSkill = false
         elseif game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
@@ -19302,37 +19312,49 @@ else
             end
         }
     )
-    task.spawn(
-        function()
-            while task.wait() do
-                if _G.BringMob then
-                    pcall(
-                        function()
-                            for a, a in pairs(game.Workspace.Enemies:GetChildren()) do
-                                if
-                                    not string.find(a.Name, "Boss") and a.Name == MonFarm and
-                                        (a.HumanoidRootPart.Position -
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                            350
-                                 then
-                                    if InMyNetWork(a.HumanoidRootPart) then
-                                        if InMyNetWork(a.HumanoidRootPart) then
-                                            a.HumanoidRootPart.CFrame = FarmPos
-                                            a.HumanoidRootPart.CanCollide = false
-                                            a.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                            if a.Humanoid:FindFirstChild("Animator") then
-                                                a.Humanoid.Animator:Destroy()
-                                            end
-                                        end
-                                    end
+    task.spawn(function()
+        while task.wait() do
+            if _G.BringMob then
+                pcall(function()
+                    for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                        if v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                            if InMyNetWork(v.HumanoidRootPart) then
+                                v.HumanoidRootPart.CFrame = FarmPos
+                                v.Humanoid.JumpPower = 0
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                if v.Humanoid:FindFirstChild("Animator") then
+                                    v.Humanoid.Animator:Destroy()
                                 end
                             end
                         end
-                    )
-                end
+                    end
+                end)
             end
         end
-    )
+    end)
+    task.spawn(function()
+        while true do wait()
+            if setscriptable then
+                setscriptable(game.Players.LocalPlayer,"SimulationRadius",true)
+            end
+            if sethiddenproperty then
+                sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+            end
+        end
+    end)
+    function InMyNetWork(object)
+        if isnetworkowner then
+            return isnetworkowner(object)
+        else
+            if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                return true
+            end
+            return false
+        end
+    end
     a:addButton(
         {Section = 1, title = "Remove Sound", disabled = false, corner = 5, callback = function()
                 for a, a in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do

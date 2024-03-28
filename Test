@@ -1,3 +1,4 @@
+--dit
 if _G.Chest_Farm then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/ahmadsgamer2/main/ChestFarm_BF.lua"))()
 elseif _G.FruitFinder then
@@ -3866,9 +3867,9 @@ else
             callback = function(a)
                 SelectSpeedFast = a
                 if SelectSpeedFast == "Slow" then
-                    _G.Fast_Delay = 0.080
+                    _G.Fast_Delay = 0.5
                 elseif SelectSpeedFast == "Fast" then
-                    _G.Fast_Delay = 0.029
+                    _G.Fast_Delay = 0.01
                 elseif SelectSpeedFast == "Extreme" then
                     _G.Fast_Delay = 0
                 end
@@ -19317,7 +19318,7 @@ else
             if _G.BringMob then
                 pcall(function()
                     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                        if v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                        if v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                             if InMyNetWork(v.HumanoidRootPart) then
                                 v.HumanoidRootPart.CFrame = FarmPos
                                 v.Humanoid.JumpPower = 0
@@ -19349,7 +19350,7 @@ else
         if isnetworkowner then
             return isnetworkowner(object)
         else
-            if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+            if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                 return true
             end
             return false

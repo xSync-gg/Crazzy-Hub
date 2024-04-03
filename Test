@@ -1,3 +1,4 @@
+--fuck 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -179,13 +180,21 @@ spawn(function()
         end))
     end)
 end)
+
+local Options = Fluent.Options
+do
 --------------------------------------------------------------------------------------------------------------Function
 _G.antiscan = true
-getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync
-getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
+spawn(function()
+    while wait() do
+        if _G.antiscan then
+            getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync
+            getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
+        end
+    end
+end)
 
 _G.setfflag = true
-end
 spawn(function()
     while wait() do
         if _G.setfflag then
@@ -2488,3 +2497,4 @@ Options.FastAttack:SetValue(true)
 --------------------------------------------------------------------------------------------------------------Race V4 Tab
 
 --------------------------------------------------------------------------------------------------------------Event Tab
+end

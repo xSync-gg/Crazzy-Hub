@@ -1,8 +1,3 @@
---discord.gg/boronide, code generated using luamin.js™
-
-
-
-
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -2925,7 +2920,7 @@ spawn(function()
 								z.Humanoid:ChangeState(14)
 								z.Humanoid:ChangeState(16)
 								BringMob = true;
-								FastAttack = true;
+								yakmefan();
 								aw(z.HumanoidRootPart.CFrame * MethodFarm)
 								if not FastAttack then
 									game:GetService'VirtualUser':CaptureController()
@@ -2991,7 +2986,7 @@ spawn(function()
 												z.HumanoidRootPart.Transparency = 1;
 												aw(z.HumanoidRootPart.CFrame * MethodFarm)
 												if not _G.AutoFarm or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO then
-													_G.FastAttack = true
+													_G.yakmefan()
 												end
 											end
 										until not _G.AutoFarm or not z.Parent or z.Humanoid.Health <= 0 or dM.Visible == false or not z:FindFirstChild("HumanoidRootPart")
@@ -3081,7 +3076,7 @@ function Auto_Farm_Level_Fast()
 							z.HumanoidRootPart.Transparency = 1;
 							aw(z.HumanoidRootPart.CFrame * MethodFarm)
 							if not _G.AutoFarm or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO or _G.SuperFastAttack then
-								_G.FastAttack = true
+								_G.yakmefan()
 							end
 						until not z.Parent or not _G.AutoFarm or z.Humanoid.Health < 0;
 						aw(CFrameMon)
@@ -3116,7 +3111,7 @@ function Auto_Farm_Level_Fast()
 							game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
 						end;
 						if not _G.AutoFarm or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO or _G.SuperFastAttack then
-							_G.FastAttack = true
+							_G.yakmefan()
 						end
 					until game.Players[getgenv().SelectPly].Character.Humanoid.Health <= 0 or not Auto_Farm_Level_Fast() or dL >= 310
 				end
@@ -3244,7 +3239,7 @@ if World1 then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
 											aw(z.HumanoidRootPart.CFrame * MethodFarm)
-											FastAttack = true;
+											yakmefan();
 											if not _G.FastAttack then
 												game:GetService'VirtualUser':CaptureController()
 												game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -3340,7 +3335,7 @@ if World1 then
 													repeat
 														task.wait()
 														BringMob = true;
-														FastAttack = true;
+														yakmefan();
 														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 															task.wait()
 															EquipWeapon(_G.SelectWeapon)
@@ -3380,7 +3375,7 @@ if World1 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -3435,7 +3430,7 @@ if World1 then
 											Farmtween:Stop()
 										end;
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										EquipWeapon(_G.SelectWeapon)
 										aw(z.HumanoidRootPart.CFrame * MethodFarm)
 										PosMon = z.HumanoidRootPart.CFrame;
@@ -3586,7 +3581,7 @@ elseif World2 then
 														if Farmtween then
 															Farmtween:Stop()
 														end;
-														FastAttack = true;
+														yakmefan();
 														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 															task.wait()
 															EquipWeapon(_G.SelectWeapon)
@@ -3633,7 +3628,7 @@ elseif World2 then
 														if Farmtween then
 															Farmtween:Stop()
 														end;
-														FastAttack = true;
+														yakmefan();
 														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 															task.wait()
 															EquipWeapon(_G.SelectWeapon)
@@ -3715,7 +3710,7 @@ elseif World2 then
 															if Farmtween then
 																Farmtween:Stop()
 															end;
-															FastAttack = true;
+															yakmefan();
 															BringMob = true;
 															if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 																task.wait()
@@ -3772,7 +3767,7 @@ elseif World2 then
 													if Farmtween then
 														Farmtween:Stop()
 													end;
-													FastAttack = true;
+													yakmefan();
 													if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 														task.wait()
 														EquipWeapon(_G.SelectWeapon)
@@ -3934,7 +3929,7 @@ elseif World2 then
 														if Farmtween then
 															Farmtween:Stop()
 														end;
-														FastAttack = true;
+														yakmefan();
 														BringMob = true;
 														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 															task.wait()
@@ -3997,7 +3992,7 @@ elseif World2 then
 											if Farmtween then
 												Farmtween:Stop()
 											end;
-											FastAttack = true;
+											yakmefan();
 											if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 												task.wait()
 												EquipWeapon(_G.SelectWeapon)
@@ -4077,7 +4072,7 @@ elseif World2 then
 								repeat
 									task.wait()
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 										task.wait()
 										EquipWeapon(_G.SelectWeapon)
@@ -4126,7 +4121,7 @@ elseif World2 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -4173,7 +4168,7 @@ elseif World2 then
 					if workspace.Map.Dressrosa.SmileFactory.Door.Transparency == 1 then
 						repeat
 							task.wait()
-							FastAttack = true;
+							yakmefan();
 							EquipWeapon(_G.SelectWeapon)
 							if not _G.FastAttack then
 								game:GetService'VirtualUser':CaptureController()
@@ -4228,7 +4223,7 @@ elseif World2 then
 								repeat
 									task.wait()
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 										task.wait()
 										EquipWeapon(_G.SelectWeapon)
@@ -4276,7 +4271,7 @@ elseif World2 then
 								repeat
 									task.wait()
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									EquipWeapon(_G.SelectWeapon)
 									PosMon = z.HumanoidRootPart.CFrame;
 									if not _G.FastAttack then
@@ -4364,7 +4359,7 @@ elseif World2 then
 									end;
 									z.Humanoid:ChangeState(11)
 									z.Humanoid:ChangeState(14)
-									_G.FastAttack = true;
+									_G.yakmefan();
 									aw(z.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0))
 								until not _G.Auto_Kill_Law or z.Humanoid.Health <= 0 or not z.Parent
 							end
@@ -4401,7 +4396,7 @@ elseif World3 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -4434,7 +4429,7 @@ elseif World3 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -4467,7 +4462,7 @@ elseif World3 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -4500,7 +4495,7 @@ elseif World3 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -4533,7 +4528,7 @@ elseif World3 then
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -4684,7 +4679,7 @@ elseif World3 then
 													Farmtween:Stop()
 												end;
 												game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = z.HumanoidRootPart.CFrame * MethodFarm;
-												FastAttack = true;
+												yakmefan();
 												EquipWeapon(_G.SelectWeapon)
 											end
 										until not _G.AutoEliteHunter or not z.Parent or z.Humanoid.Health <= 0;
@@ -4700,7 +4695,7 @@ elseif World3 then
 													Farmtween:Stop()
 												end;
 												game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = z.HumanoidRootPart.CFrame * MethodFarm;
-												FastAttack = true;
+												yakmefan();
 												EquipWeapon(_G.SelectWeapon)
 											end
 										until not _G.AutoEliteHunter or not z.Parent or z.Humanoid.Health <= 0;
@@ -4716,7 +4711,7 @@ elseif World3 then
 													Farmtween:Stop()
 												end;
 												game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = z.HumanoidRootPart.CFrame * MethodFarm;
-												FastAttack = true;
+												yakmefan();
 												EquipWeapon(_G.SelectWeapon)
 											end
 										until not _G.AutoEliteHunter or not z.Parent or z.Humanoid.Health <= 0;
@@ -4915,7 +4910,7 @@ elseif World3 then
 											BringMob = true;
 											aw(ec.HumanoidRootPart.CFrame * MethodFarm)
 											if (ec.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
-												_G.FastAttack = true
+												_G.yakmefan()
 											end
 										until not _G.AutoFarmBone or ec.Humanoid.Health <= 0 or not ec.Parent or ec.Humanoid.Health <= 0;
 										BringMob = false
@@ -4963,7 +4958,7 @@ elseif World3 then
 															BringMob = true;
 															aw(z.HumanoidRootPart.CFrame * MethodFarm)
 															if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
-																_G.FastAttack = true
+																_G.yakmefan()
 															end
 														until not _G.AutoFarmBone or z.Humanoid.Health <= 0 or not z.Parent or z.Humanoid.Health <= 0
 													elseif (CFrame.new(-9513.88477, 172.1306, 6073.37061, -0.906221628, 7.55508509e-08, 0.422802985, 5.79426853e-08, 1, -5.44980487e-08, -0.422802985, -2.48889691e-08, -0.906221628).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false and _G.AceetpQuestBone then
@@ -5071,7 +5066,7 @@ elseif World3 then
 										BringMob = true;
 										aw(z.HumanoidRootPart.CFrame * MethodFarm)
 										if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
-											_G.FastAttack = true
+											_G.yakmefan()
 										end;
 										sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
 									until not _G.AutoCakePrince or not z.Parent or z.Humanoid.Health <= 0
@@ -5109,7 +5104,7 @@ elseif World3 then
 											BringMob = true;
 											aw(z.HumanoidRootPart.CFrame * MethodFarm)
 											if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
-												_G.FastAttack = true
+												_G.yakmefan()
 											end
 										until _G.AutoCakePrince == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not z.Parent or z.Humanoid.Health <= 0
 									end
@@ -5157,7 +5152,7 @@ dl:Toggle("Farm Material", AutoFarmMaterial, function(value)
 													el.Humanoid:ChangeState(14)
 													el.Humanoid:ChangeState(11)
 													el.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-													FastAttack = true;
+													yakmefan();
 													game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = W.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1)
 												end
 											end
@@ -5865,7 +5860,7 @@ task.spawn(function()
 														if Farmtween then
 															Farmtween:Stop()
 														end;
-														FastAttack = true;
+														yakmefan();
 														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 															task.wait()
 															EquipWeapon(_G.SelectWeapon)
@@ -5958,7 +5953,7 @@ task.spawn(function()
 														if Farmtween then
 															Farmtween:Stop()
 														end;
-														FastAttack = true;
+														yakmefan();
 														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 															task.wait()
 															EquipWeapon(_G.SelectWeapon)
@@ -6368,7 +6363,7 @@ task.spawn(function()
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -6404,7 +6399,7 @@ task.spawn(function()
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 											task.wait()
 											EquipWeapon(_G.SelectWeapon)
@@ -6591,7 +6586,7 @@ task.spawn(function()
 									task.wait()
 									EquipWeapon(_G.SelectWeapon)
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									z.HumanoidRootPart.CanCollide = false;
 									z.Humanoid.WalkSpeed = 0;
 									z.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
@@ -6631,7 +6626,7 @@ task.spawn(function()
 						repeat
 							task.wait()
 							BringMob = true;
-							FastAttack = true;
+							yakmefan();
 							EquipWeapon(_G.SelectWeapon)
 							z.Humanoid.WalkSpeed = 0;
 							z.HumanoidRootPart.CanCollide = false;
@@ -6673,7 +6668,7 @@ dq:Toggle("Auto Hallow Scythe", _G.AutoFarmBossHallow, function(value)
 									repeat
 										task.wait()
 										BringMob = true;
-										FastAttack = true;
+										yakmefan();
 										EquipWeapon(_G.SelectWeapon)
 										PosMon = z.HumanoidRootPart.CFrame;
 										if not _G.FastAttack then
@@ -6717,7 +6712,7 @@ dq:Toggle("Auto Buddy Swords", _G.AutoBuddySwords, function(value)
 								repeat
 									task.wait()
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 										task.wait()
 										EquipWeapon(_G.SelectWeapon)
@@ -6765,7 +6760,7 @@ dq:Toggle("Auto Musketeer Hat", _G.AutoMusketeerHat, function(value)
 										repeat
 											task.wait()
 											BringMob = true;
-											FastAttack = true;
+											yakmefan();
 											if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 												task.wait()
 												EquipWeapon(_G.SelectWeapon)
@@ -6807,7 +6802,7 @@ dq:Toggle("Auto Musketeer Hat", _G.AutoMusketeerHat, function(value)
 										repeat
 											task.wait()
 											BringMob = true;
-											FastAttack = true;
+											yakmefan();
 											if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 												task.wait()
 												EquipWeapon(_G.SelectWeapon)
@@ -6865,7 +6860,7 @@ dq:Toggle("Auto Cavander", _G.AutoCavander, function(value)
 								repeat
 									task.wait()
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 										task.wait()
 										EquipWeapon(_G.SelectWeapon)
@@ -6927,7 +6922,7 @@ dq:Toggle("Auto Tushita Sword", _G.AutoTushitaSword, function(value)
 							repeat
 								task.wait()
 								BringMob = true;
-								FastAttack = true;
+								yakmefan();
 								if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 									task.wait()
 									EquipWeapon(_G.SelectWeapon)
@@ -6973,7 +6968,7 @@ dq:Toggle("Auto Serpent Bow", _G.AutoSerpentBow, function(value)
 							repeat
 								task.wait()
 								BringMob = true;
-								FastAttack = true;
+								yakmefan();
 								if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 									task.wait()
 									EquipWeapon(_G.SelectWeapon)
@@ -7020,7 +7015,7 @@ dq:Toggle("Auto Dark Dagger", _G.AutoDarkDagger, function(value)
 								repeat
 									task.wait()
 									BringMob = true;
-									FastAttack = true;
+									yakmefan();
 									if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
 										task.wait()
 										EquipWeapon(_G.SelectWeapon)
@@ -7291,7 +7286,7 @@ dr:Toggle("Auto Farm MasteryGun {Click the mouse to shoot}", _G.Settings.AutoFar
 												z.HumanoidRootPart.CanCollide = false;
 												z.Head.CanCollide = false;
 												BringMobFarm = true;
-												FastAttack = true;
+												yakmefan();
 												EquipWeapon(_G.SelectWeapon)
 												z.HumanoidRootPart.Transparency = 1;
 												aw(z.HumanoidRootPart.CFrame * MethodFarm)
@@ -7476,7 +7471,7 @@ dr:Toggle("Auto Farm MasteryFruit", _G.Settings.AutoFarmFruitMastery, function(v
 													z.HumanoidRootPart.CanCollide = false;
 													z.Head.CanCollide = false;
 													BringMobFarm = true;
-													FastAttack = true;
+													yakmefan();
 													EquipWeapon(_G.SelectWeapon)
 													z.HumanoidRootPart.Transparency = 1;
 													aw(z.HumanoidRootPart.CFrame * MethodFarm)
@@ -7976,11 +7971,11 @@ spawn(function()
 							if (z.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
 								aw(z.HumanoidRootPart.CFrame * MethodFarmPlayer)
 								EquipWeapon(_G.SelectWeapon)
-								FastAttack = true;
+								yakmefan();
 								z.HumanoidRootPart.CanCollide = false;
 								z.Humanoid.WalkSpeed = 0;
 								z.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-								_G.FastAttack = true;
+								_G.yakmefan();
 								game:GetService'VirtualUser':CaptureController()
 								game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 							end
@@ -8859,7 +8854,7 @@ dx:Toggle("Auto Kill All Fish {Need Spawn}", _G.AutoEvent, function(value)
 								PosMon = z.HumanoidRootPart.CFrame;
 								z.Head.CanCollide = false;
 								z.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
-								FastAttack = true;
+								yakmefan();
 								aw(z.HumanoidRootPart.CFrame * MethodFarm)
 								if not FastAttack then
 									game:GetService'VirtualUser':CaptureController()

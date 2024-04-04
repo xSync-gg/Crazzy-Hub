@@ -1,7 +1,6 @@
---fuck 
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Fluent%20Library%20Custom.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Fluent%20Save%20Manager%20Custom.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/xSync-gg/Source/main/Fluent%20Interface%20Manager%20Custom.lua"))()
 local Window = Fluent:CreateWindow({
     Title = "Ngáo Gaming Premium",
     SubTitle = "by ! xSync",
@@ -214,7 +213,7 @@ end
 
 
 function CheckQuest() 
-    MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+    MyLevel = game:GetService("Players").LocalPlayer.Data.Level.value
     if World1 then
         if MyLevel == 1 or MyLevel <= 9 then
             Mon = "Bandit"
@@ -1650,11 +1649,11 @@ function InfAb()
 end
 
 local LocalPlayer = game:GetService'Players'.LocalPlayer
-local originalstam = LocalPlayer.Character.Energy.Value
+local originalstam = LocalPlayer.Character.Energy.value
 function infinitestam()
     LocalPlayer.Character.Energy.Changed:connect(function()
         if InfiniteEnergy then
-            LocalPlayer.Character.Energy.Value = originalstam
+            LocalPlayer.Character.Energy.value = originalstam
         end 
     end)
 end
@@ -1664,7 +1663,7 @@ spawn(function()
         while wait(.1) do
             if InfiniteEnergy then
                 wait(0.1)
-                originalstam = LocalPlayer.Character.Energy.Value
+                originalstam = LocalPlayer.Character.Energy.value
                 infinitestam()
             end
         end
@@ -2195,13 +2194,13 @@ local ConfigFarm = Tabs.Main:AddSection("Config Farm")
 local SelectWeapon = Tabs.Main:AddDropdown("SelectWeapon", {
     Title = "Select Weapon",
     Description = "Chọn Vũ Khí",
-    Values = {"Melee","Sword","Fruit","Gun"},
+    values = {"Melee","Sword","Fruit","Gun"},
     Multi = false,
     Default = 1,
 })
-SelectWeapon:SetValue('Melee')
-SelectWeapon:OnChanged(function(Value)
-    _G.SelectWeapon = Value
+SelectWeapon:Setvalue('Melee')
+SelectWeapon:OnChanged(function(value)
+    _G.SelectWeapon = value
 end)
 task.spawn(function()
 	while wait() do
@@ -2246,13 +2245,13 @@ end)
 local FastAttackSpeed = Tabs.Main:AddDropdown("FastAttackSpeed", {
     Title = "Fast Attack Speed",
     Description = "Chọn Vũ Khí",
-    Values = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
+    values = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
     Multi = false,
     Default = 1,
 })
-FastAttackSpeed:SetValue('0.175')
-FastAttackSpeed:OnChanged(function(Value)
-    _G.FastAttackDelay = Value
+FastAttackSpeed:Setvalue('0.175')
+FastAttackSpeed:OnChanged(function(value)
+    _G.FastAttackDelay = value
 end)
 spawn(function()
     while wait(.1) do
@@ -2289,11 +2288,11 @@ end)
 local MainFarm = Tabs.Main:AddSection("Main Farm")
 
 local AutoFarmLevel = Tabs.Main:AddToggle("AutoFarmLevel", {Title = "Auto Farm Level", Description = "Tự động cày cấp", Default = false })
-AutoFarmLevel:OnChanged(function(Value)
+AutoFarmLevel:OnChanged(function(value)
     _G.AutoFarm = value
     StopTween(_G.AutoFarm)
 end)
-Options.AutoFarmLevel:SetValue(false)
+Options.AutoFarmLevel:Setvalue(false)
 spawn(function()
     while wait() do
         if _G.AutoFarm then
@@ -2393,11 +2392,11 @@ spawn(function()
 end)
 
 local AutofarmNearestMob = Tabs.Main:AddToggle("AutofarmNearestMob", {Title = "Auto Farm Nearest Mob", Description = "Tự động cày quái gần nhất", Default = false })
-AutofarmNearestMob:OnChanged(function(Value)
+AutofarmNearestMob:OnChanged(function(value)
     _G.AutoFarmNearest = value
     StopTween(_G.AutoFarmNearest)
 end)
-Options.AutofarmNearestMob:SetValue(false)
+Options.AutofarmNearestMob:Setvalue(false)
 spawn(function()
 	while wait() do
 		if _G.AutoFarmNearest then
@@ -2430,19 +2429,534 @@ spawn(function()
 	end
 end)
 
-local ChestFarm = Tabs.Main:AddSection("Chest Farm")
---------------------------------------------------------------------------------------------------------------Setting Tab
-local BypassTP = Tabs.Set:AddToggle("BypassTP", {Title = "Bypass TP", Description = "Dịch chuyển dạng reset nhanh", Default = false })
-BypassTP:OnChanged(function(Value)
-    BypassTP = Value
+local CakeFarm = Tabs.Main:AddSection("Cake Farm")
+
+local NeedKill = Tabs.Main:AddParagraph({Title = "Need Kill : ", Content = ""})
+spawn(function()
+    while wait() do
+        pcall(function()
+            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                NeedKill:Set("Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                NeedKill:Set("Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                NeedKill:Set("Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
+            else
+                NeedKill:Set("Boss Is Spawning")
+            end
+        end)
+    end
 end)
-Options.BypassTP:SetValue(false)
+
+local AutoFarmCakePrince = Tabs.Main:AddToggle("AutoFarmCakePrince", {Title = "Auto Farm Cake Prince", Description = "Tự động cày tư lệnh bột", Default = false })
+AutoFarmCakePrince:OnChanged(function(value)
+    _G.AutoDoughtBoss = value
+    StopTween(_G.AutoDoughtBoss)
+end)
+Options.AutoFarmCakePrince:Setvalue(false)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                KillMob = (tonumber(string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41)) - 500)
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                KillMob = (tonumber(string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),40,41)) - 500)
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                KillMob = (tonumber(string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),41,41)) - 500)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while wait() do
+        if _G.AutoDoughtBoss then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Cake Prince" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    AutoHaki()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                    sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+                                until not _G.AutoDoughtBoss or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
+                        HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                    else
+                        if KillMob == 0 then
+                        end                    
+                        if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+                            if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff") or game:GetService("Workspace").Enemies:FindFirstChild("Head Baker") then
+                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
+                                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                            repeat task.wait()
+                                                AutoHaki()
+                                                EquipWeapon(_G.SelectWeapon)
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.Head.CanCollide = false 
+                                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                                MagnetDought = true
+                                                PosMonDoughtOpenDoor = v.HumanoidRootPart.CFrame
+                                                HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                                game:GetService("VirtualUser"):CaptureController()
+                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                            until not _G.AutoDoughtBoss or not v.Parent or v.Humanoid.Health <= 0 or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0 or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or KillMob == 0
+                                        end
+                                    end
+                                end
+                            else
+                                MagnetDought = false
+                                HyperCahaya(CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375))
+                                if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
+                                    HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
+                                else
+                                    if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
+                                        HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
+                                    else
+                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
+                                            HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                        else
+                                            if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
+                                                HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                            end
+                                        end
+                                    end
+                                end                       
+                            end
+                        else
+                            if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+                                HyperCahaya(game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                            else
+                                if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
+                                    HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)    
+
+local AutoFarmCakePrinceV2 = Tabs.Main:AddToggle("AutoFarmCakePrinceV2", {Title = "Auto Farm Cake Prince V2", Description = "Tự động cày tư lệnh bột V2", Default = false })
+AutoFarmCakePrinceV2:OnChanged(function(value)
+    _G.Autodoughking = value
+    StopTween( _G.Autodoughking)
+end)
+Options.AutoFarmCakePrinceV2:Setvalue(false)
+spawn(function()
+    while wait() do
+        if  _G.Autodoughking and World3 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Dough King" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    AutoHaki()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                    sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+                                until not  _G.Autodoughking or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                HyperCahaya(CFrame.new(-2662.818603515625, 1062.3480224609375, -11853.6953125))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
+                        HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                    else
+                        if  _G.AutodoughkingHop then
+                            Hop()
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local AutoSpawnCakePrince = Tabs.Main:AddToggle("AutoSpawnCakePrince", {Title = "Auto Spawn Cake Prince", Description = "Tự động triệu hồi tư lệnh bột", Default = true })
+AutoSpawnCakePrince:OnChanged(function(value)
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner",value)
+end)
+Options.AutoSpawnCakePrince:Setvalue(true)
+
+local ChestFarm = Tabs.Main:AddSection("Chest Farm")
+
+local AutoFarmChestTween = Tabs.Main:AddToggle("AutoFarmChestTween", {Title = "Auto Farm Chest [Tween]", Description = "Tự động nhặt rương [Dịch chuyển thường]", Default = false })
+AutoFarmChestTween:OnChanged(function(value)
+    AutoFarmChest = value
+    StopTween(AutoFarmChest)
+end)
+Options.AutoFarmChestTween:Setvalue(false)
+_G.MagnitudeAdd = 0
+spawn(function()
+	while wait() do 
+		if AutoFarmChest then
+			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
+				if v.Name:find("Chest") then
+					if game:GetService("Workspace"):FindFirstChild(v.Name) then
+						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
+							repeat wait()
+								if game:GetService("Workspace"):FindFirstChild(v.Name) then
+									HyperCahaya(v.CFrame)
+								end
+							until AutoFarmChest == false or not v.Parent
+							HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+							_G.MagnitudeAdd = _G.MagnitudeAdd+1500
+							break
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+
+local AutoFarmChestBypass = Tabs.Main:AddToggle("AutoFarmChestBypass", {Title = "Auto Farm Chest [Bypass]", Description = "Tự động nhặt rương [Dịch chuyển nhanh]", Default = false })
+AutoFarmChestBypass:OnChanged(function(value)
+	_G.ChestBypass = value
+end)
+Options.AutoFarmChestBypass:Setvalue(false)
+spawn(function()
+    while wait() do
+        if _G.ChestBypass then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if string.find(v.Name, "Chest") then
+                        print(v.Name)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                        wait(.15)
+                    end
+                end
+                game.Players.LocalPlayer.Character.Head:Destroy()
+                for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+                    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
+                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+                        wait()
+                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+                    end
+                end
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait() do
+    if _G.ChestBypass then
+            local ohString1 = "SetTeam"
+            local ohString2 = "Pirates"
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(ohString1, ohString2)
+        end
+    end
+end)
+
+local BossFarm = Tabs.Main:AddSection("Boss Farm")
+
+local Boss = {}
+for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+    if string.find(v.Name, "Boss") then
+        if v.Name == "Ice Admiral" then
+            else
+            table.insert(Boss, v.Name)
+        end
+    end
+end
+local bossCheck = {}
+local bossNames = {"The Gorilla King", "Bobby", "The Saw", "Yeti", "Mob Leader", "Vice Admiral", "Warden", "Chief Warden", "Swan", "Saber Expert", "Magma Admiral", "Fishman Lord", "Wysper", "Thunder God", "Cyborg", "Greybeard", "Diamond", "Jeremy", "Fajita", "Don Swan", "Smoke Admiral", "Awakened Ice Admiral", "Tide Keeper", "Order", "Darkbeard", "Cursed Captain", "Stone", "Island Empress", "Kilo Admiral", "Captain Elephant", "Beautiful Pirate", "Longma", "Cake Queen", "Soul Reaper", "Rip_Indra", "Cake Prince", "Dough King" }
+if World1 or World2 or World3 then
+    for _, bossName in pairs(bossNames) do
+        if game:GetService("ReplicatedStorage"):FindFirstChild(bossName) then
+            table.insert(bossCheck, bossName)
+        end
+    end
+end
+for _, name in pairs(Boss) do
+    table.insert(bossCheck, name)
+end
+
+local SelectBoss = Tabs.Main:AddDropdown("SelectBoss", {
+    Title = "Select Boss",
+    Description = "Chọn boss",
+    Values = bossCheck,
+    Multi = false,
+    Default = 1,
+})
+SelectBoss:SetValue('')
+SelectBoss:OnChanged(function(Value)
+    _G.SelectBoss = value
+end)
+
+Tabs.Main:AddButton({
+    Title = "Refresh Boss List",
+    Description = "Làm mới danh sách boss",
+    Callback = function()
+        SelectBoss:Clear()
+        wait(0.1)
+        for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+            if (v.Name == "rip_indra" or v.Name == "Ice Admiral") or (v.Name == "Saber Expert" or v.Name == "The Saw" or v.Name == "Greybeard" or v.Name == "Mob Leader" or v.Name == "The Gorilla King" or v.Name == "Bobby" or v.Name == "Yeti" or v.Name == "Vice Admiral" or v.Name == "Warden" or v.Name == "Chief Warden" or v.Name == "Swan" or v.Name == "Magma Admiral" or v.Name == "Fishman Lord" or v.Name == "Wysper" or v.Name == "Thunder God" or v.Name == "Cyborg") or (v.Name == "Don Swan" or v.Name == "Diamond" or v.Name == "Jeremy" or v.Name == "Fajita" or v.Name == "Smoke Admiral" or v.Name == "Awakened Ice Admiral" or v.Name == "Tide Keeper" or v.Name == "Order" or v.Name == "Darkbeard") or (v.Name == "Stone" or v.Name == "Island Empress" or v.Name == "Kilo Admiral" or v.Name == "Captain Elephant" or v.Name == "Beautiful Pirate" or v.Name == "Cake Queen" or v.Name == "rip_indra True Form" or v.Name == "Longma" or v.Name == "Soul Reaper" or v.Name == "Cake Prince" or v.Name == "Dough King") then
+                SelectBoss:Add(v.Name)
+            end
+        end
+    end
+})
+
+local AutoFarmSelectedBoss = Tabs.Main:AddToggle("AutoFarmSelectedBoss", {Title = "Auto Farm Selected Boss", Description = "Tự động cày boss đã chọn", Default = false })
+AutoFarmSelectedBoss:OnChanged(function(value)
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+    _G.AutoFarmBoss = value
+    StopTween(_G.AutoFarmBoss)
+end)
+Options.AutoFarmSelectedBoss:Setvalue(false)
+spawn(function()
+    while wait() do
+        if _G.AutoFarmBoss then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == _G.SelectBoss then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    AutoHaki()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
+                                    HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                    sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                until not _G.AutoFarmBoss or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    if game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss) then
+                        HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local AutoFarmAllBoss = Tabs.Main:AddToggle("AutoFarmAllBoss", {Title = "Auto Farm All Boss", Description = "Tự động cày tất cả boss", Default = false })
+AutoFarmAllBoss:OnChanged(function(value)
+    _G.AutoAllBoss = value
+    StopTween(_G.AutoAllBoss)
+end)
+Options.AutoFarmAllBoss:Setvalue(false)
+spawn(function()
+    while wait() do
+        if _G.AutoAllBoss then
+            pcall(function()
+                for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
+                    if (v.Name == "rip_indra" or v.Name == "Ice Admiral")
+                        or (v.Name == "Saber Expert" or v.Name == "The Saw" or v.Name == "Greybeard" or v.Name == "Mob Leader" or v.Name == "The Gorilla King" or v.Name == "Bobby" or v.Name == "Yeti" or v.Name == "Vice Admiral" or v.Name == "Warden" or v.Name == "Chief Warden" or v.Name == "Swan" or v.Name == "Magma Admiral" or v.Name == "Fishman Lord" or v.Name == "Wysper" or v.Name == "Thunder God" or v.Name == "Cyborg")
+                        or (v.Name == "Don Swan" or v.Name == "Diamond" or v.Name == "Jeremy" or v.Name == "Fajita" or v.Name == "Smoke Admiral" or v.Name == "Awakened Ice Admiral" or v.Name == "Tide Keeper" or v.Name == "Order" or v.Name == "Darkbeard")
+                        or (v.Name == "Stone" or v.Name == "Island Empress" or v.Name == "Kilo Admiral" or v.Name == "Captain Elephant" or v.Name == "Beautiful Pirate" or v.Name == "Cake Queen" or v.Name == "rip_indra True Form" or v.Name == "Longma" or v.Name == "Soul Reaper" or v.Name == "Cake Prince" or v.Name == "Dough King") then
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 17000 then
+                            repeat
+                                task.wait()
+                                AutoHaki()
+                                EquipWeapon(_G.SelectWeapon)
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)
+                                HyperCahaya(v.HumanoidRootPart.CFrame*CFrame.new(PosX, PosY, PosZ))
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                            until v.Humanoid.Health <= 0 or _G.AutoAllBoss == false or not v.Parent
+                        end
+                    else
+                        if _G.AutoAllBossHop then
+                            Hop()
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+--------------------------------------------------------------------------------------------------------------Setting Tab
+local InvisibleMonster = Tabs.Set:AddToggle("InvisibleMonster", {Title = "Invisible Monster", Description = "Quái tàng hình", Default = false })
+InvisibleMonster:OnChanged(function(value)
+    _G.inv = value
+    while wait() do
+        if _G.inv then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "MeshPart" then
+                        v.Transparency = 1
+                    end
+                end
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.Name == "Head" then
+                        v.Transparency = 1
+                    end
+                end
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "Accessory" then
+                        v.Handle.Transparency = 1
+                    end
+                end
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "Decal" then
+                        v.Transparency = 1
+                    end
+                end
+            end)
+        end
+    end
+end)
+Options.InvisibleMonster:Setvalue(false)
+
+local WhiteScreen = Tabs.Set:AddToggle("WhiteScreen", {Title = "White Screen", Description = "Màn hình trắng", Default = false })
+WhiteScreen:OnChanged(function(value)
+    _G.WhiteScreen = value
+    if _G.WhiteScreen == true then
+        game:GetService("RunService"):Set3dRenderingEnabled(false)
+    elseif _G.WhiteScreen == false then
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+    end
+end)
+Options.WhiteScreen:Setvalue(false)
+spawn(function()
+    while wait() do
+        if _G.WhiteScreen then
+            for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
+                if v.Name == "CurvedRing" or v.Name == "SlashHit" or v.Name == "DamageCounter" or v.Name == "SwordSlash" or v.Name == "SlashTail" or v.Name == "Sounds" then
+                    v:Destroy() 
+                end
+            end
+        end
+    end
+end) 
+
+local RemoveAttackEffect = Tabs.Set:AddToggle("RemoveAttackEffect", {Title = "Remove Attack Effect", Description = "Xóa hiệu ứng đánh", Default = false })
+RemoveAttackEffect:OnChanged(function(value)
+    getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync 
+    getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
+    spawn(function()
+        while wait() do
+            pcall(function()
+                require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync =function(a1,a2,a3,a4,a5)
+                    local GetBladeHits = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).getBladeHits(a2,a3,a4)
+                    if GetBladeHits then
+                         require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).play = function() end
+                        a1:Play(0.2, 0.2, 0.2)
+                        a5(GetBladeHits)
+                         require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).play = getgenv().B 
+                        wait(.5)
+                        a1:Stop()
+                    end
+                end
+            end)
+        end
+    end)
+end)
+Options.RemoveAttackEffect:Setvalue(false)
+
+local RemoveNotification = Tabs.Set:AddToggle("RemoveNotification", {Title = "Remove Notification", Description = "Xóa thông báo", Default = false })
+RemoveNotification:OnChanged(function(value)
+    _G.Remove_trct = value
+end)
+Options.RemoveNotification:Setvalue(false)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.Remove_trct == true then
+            game:GetService("ReplicatedStorage").Notification:Destroy()        
+        end
+    end)
+end)
+
+local AutoClick = Tabs.Set:AddToggle("AutoClick", {Title = "Auto Click", Description = "Tự động ấn", Default = false })
+AutoClick:OnChanged(function(value)
+    _G.AutoClick = value
+end)
+Options.AutoClick:Setvalue(false)
+
+local FastFarm = Tabs.Set:AddToggle("FastFarm", {Title = "Fast Farm (Kick Risk)", Description = "Cày Nhanh (Có thể bị kick)", Default = false })
+FastFarm:OnChanged(function(value)
+    _G.HyperSonic = value
+end)
+Options.FastFarm:Setvalue(false)
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack or _G.HyperSonic then
+            if typeof(y) == "table" then
+                pcall(function()
+                    CameraShaker:Stop()
+                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    y.activeController.timeToNextAttack = 0
+                    y.activeController.hitboxMagnitude = 60
+                    y.activeController.active = false
+                    y.activeController.timeToNextBlock = 0
+                    y.activeController.focusStart = 1655503339.0980349
+                    y.activeController.increment = 1
+                    y.activeController.blocking = false
+                    y.activeController.attacking = false
+                    y.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack == true or _G.HyperSonic == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
+end)
+spawn(function()
+    while wait(.1) do
+        if _G.HyperSonic then
+            pcall(function()
+                repeat task.wait(0,09)
+                    AttackHit()
+                until not _G.HyperSonic
+            end)
+        end
+    end
+end)  
+
+local BypassTP = Tabs.Set:AddToggle("BypassTP", {Title = "Bypass TP", Description = "Dịch chuyển dạng reset nhanh", Default = false })
+BypassTP:OnChanged(function(value)
+    BypassTP = value
+end)
+Options.BypassTP:Setvalue(false)
 
 local AutoTurnOnRaceV4 = Tabs.Set:AddToggle("AutoTurnOnRaceV4", {Title = "Auto Turn On Race V4", Description = "Tự động bật tộc V4", Default = true })
 AutoTurnOnRaceV4:OnChanged(function(value)
     AutoAwakeningRace = value
 end)
-Options.AutoTurnOnRaceV4:SetValue(true)
+Options.AutoTurnOnRaceV4:Setvalue(true)
 spawn(function()
     while wait() do
         pcall(function()
@@ -2459,7 +2973,7 @@ local AutoSetSpawnPoint = Tabs.Set:AddToggle("AutoSetSpawnPoint", {Title = "Auto
 AutoSetSpawnPoint:OnChanged(function(value)
     _G.Set = value
 end)
-Options.AutoSetSpawnPoint:SetValue(true)
+Options.AutoSetSpawnPoint:Setvalue(true)
 spawn(function()
     while wait() do
         if _G.Set then
@@ -2473,11 +2987,101 @@ spawn(function()
     end
 end)
 
+local AutoTurnOnBusoHaki = Tabs.Set:AddToggle("AutoTurnOnBusoHaki", {Title = "Auto Turn On Buso Haki", Description = "Tự động bật haki", Default = true })
+AutoTurnOnBusoHaki:OnChanged(function(value)
+    _G.AutoHaki = value
+end)
+Options.AutoTurnOnBusoHaki:Setvalue(true)
+spawn(function()
+    while wait(.1) do
+        if _G.AutoHaki then 
+            if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                local args = {
+                    [1] = "Buso"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+end)
+
 local FastAttack = Tabs.Set:AddToggle("FastAttack", {Title = "Fast Attack", Description = "Đánh nhanh", Default = true })
 FastAttack:OnChanged(function(value)
     _G.FastAttack = value
 end)
-Options.FastAttack:SetValue(true)
+Options.FastAttack:Setvalue(true)
+
+local BringMob = Tabs.Set:AddToggle("BringMob", {Title = "Bring Mob", Description = "Gom quái", Default = true })
+BringMob:OnChanged(function(value)
+    _G.BringMonster = value
+end)
+Options.BringMob:Setvalue(true)
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.BringMonster then
+                CheckQuest()
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 220 then
+                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                    elseif _G.AutoFarm and StartMagnet and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.BringMode then
+                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+local BringMobDistance = Tabs.Set:AddSlider("BringMobDistance", {
+    Title = "Bring Mob Distance",
+    Description = "Khoảng cách gom quái",
+    Default = 300,
+    Min = 0,
+    Max = 350,
+    Rounding = 1,
+    Callback = function(Value)
+        _G.BringMode = value
+    end
+})
+BringMobDistance:OnChanged(function(Value)
+    _G.BringMode = value
+end)
+BringMobDistance:SetValue(300)
+
+local FarmDistance = Tabs.Set:AddSlider("FarmDistance", {
+    Title = "Farm Distance",
+    Description = "Khoảng cách cày",
+    Default = 30,
+    Min = 0,
+    Max = 50,
+    Rounding = 1,
+    Callback = function(Value)
+        PosY = value
+    end
+})
+FarmDistance:OnChanged(function(Value)
+    PosY = value
+end)
+FarmDistance:SetValue(30)
+PosX = 1
+PosZ = 10
 --------------------------------------------------------------------------------------------------------------Other Farm Tab
 
 --------------------------------------------------------------------------------------------------------------Stats Tab

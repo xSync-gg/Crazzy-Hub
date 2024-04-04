@@ -1,3 +1,4 @@
+--ac
 repeat
     wait()
 until game.Players.LocalPlayer
@@ -2732,6 +2733,140 @@ spawn(function()
     end
 end)
 --------------------------------------------------------------------------------------------------------------Setting Tab
+Set:Toggle("Quái tàng hình", false, function(value)
+    _G.inv = value
+    while wait() do
+        if _G.inv then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "MeshPart" then
+                        v.Transparency = 1
+                    end
+                end
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.Name == "Head" then
+                        v.Transparency = 1
+                    end
+                end
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "Accessory" then
+                        v.Handle.Transparency = 1
+                    end
+                end
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "Decal" then
+                        v.Transparency = 1
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+Set:Toggle("Màn hình trắng", false, function(value)
+    _G.WhiteScreen = value
+    if _G.WhiteScreen == true then
+        game:GetService("RunService"):Set3dRenderingEnabled(false)
+    elseif _G.WhiteScreen == false then
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+    end
+end)
+spawn(function()
+    while wait() do
+        if _G.WhiteScreen then
+            for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
+                if v.Name == "CurvedRing" or v.Name == "SlashHit" or v.Name == "DamageCounter" or v.Name == "SwordSlash" or v.Name == "SlashTail" or v.Name == "Sounds" then
+                    v:Destroy() 
+                end
+            end
+        end
+    end
+end) 
+
+Set:Toggle("Xóa hiệu ứng đánh", false, function(value)
+    getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync 
+    getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
+    spawn(function()
+        while wait() do
+            pcall(function()
+                require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync =function(a1,a2,a3,a4,a5)
+                    local GetBladeHits = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).getBladeHits(a2,a3,a4)
+                    if GetBladeHits then
+                         require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).play = function() end
+                        a1:Play(0.2, 0.2, 0.2)
+                        a5(GetBladeHits)
+                         require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).play = getgenv().B 
+                        wait(.5)
+                        a1:Stop()
+                    end
+                end
+            end)
+        end
+    end)
+end)
+
+Set:Toggle("Xóa thông báo", false, function(value)
+    _G.Remove_trct = value
+end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.Remove_trct == true then
+            game:GetService("ReplicatedStorage").Notification:Destroy()        
+        end
+    end)
+end)
+
+Set:Toggle("Tự động ấn", false, function(value)
+    _G.AutoClick = value
+end)
+
+Set:Toggle("Cày nhanh (Có thể bị kick)", false, function(value)
+    _G.HyperSonic = value
+end)
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack or _G.HyperSonic then
+            if typeof(y) == "table" then
+                pcall(function()
+                    CameraShaker:Stop()
+                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    y.activeController.timeToNextAttack = 0
+                    y.activeController.hitboxMagnitude = 60
+                    y.activeController.active = false
+                    y.activeController.timeToNextBlock = 0
+                    y.activeController.focusStart = 1655503339.0980349
+                    y.activeController.increment = 1
+                    y.activeController.blocking = false
+                    y.activeController.attacking = false
+                    y.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttack == true or _G.HyperSonic == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
+end)
+spawn(function()
+    while wait(.1) do
+        if _G.HyperSonic then
+            pcall(function()
+                repeat task.wait(0,09)
+                    AttackHit()
+                until not _G.HyperSonic
+            end)
+        end
+    end
+end)   
+
 Set:Toggle("Dịch chuyển nhanh dạng reset", false, function(value)
     BypassTP = value
 end)
@@ -2767,9 +2902,71 @@ spawn(function()
     end
 end)
 
+Set:Toggle("Tự động bật haki", true, function(value)
+    _G.AutoHaki = value
+end)
+spawn(function()
+    while wait(.1) do
+        if _G.AutoHaki then 
+            if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                local args = {
+                    [1] = "Buso"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+end)
+
 Set:Toggle("Đánh nhanh", true, function(value)
     _G.FastAttack = value
 end)
+
+Set:Toggle("Gom quái", true, function(value)
+    _G.BringMonster = value
+end)
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.BringMonster then
+                CheckQuest()
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 220 then
+                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                    elseif _G.AutoFarm and StartMagnet and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.BringMode then
+                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+Set:Slider("Khoảng cách gom quái", 0, 350, 300, function(value)
+    _G.BringMode = value
+end)
+
+Set:Slider("Khoảng cách cày", 0, 50, 30, function(value)
+    PosY = value
+end)
+PosX = 1
+PosZ = 10
 --------------------------------------------------------------------------------------------------------------Other Farm Tab
 
 --------------------------------------------------------------------------------------------------------------Stats Tab

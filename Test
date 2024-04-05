@@ -1,3 +1,4 @@
+--fuck
 _G.Color = Color3.fromRGB(0, 86, 255)
 if game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("VVV") then
 	game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("VVV"):Destroy()
@@ -1411,7 +1412,7 @@ u.Size = UDim2.new(0, 65, 0, 65)
 u.Draggable = true;
 u.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 u.BackgroundTransparency = 1;
-u.Image = "rbxassetid://16129235054"
+u.Image = "rbxassetid://15418687340"
 function LoadFunction()
 	u.MouseEnter:Connect(function()
 		j:Create(u, TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 80, 0, 80)}):Play()
@@ -1476,7 +1477,7 @@ function SaveSettings()
 end;
 LoadSettings()
 
-local dj = bm:Window("Vector Hub", "", Enum.KeyCode.F1)
+local dj = bm:Window("Sync Hub", "", Enum.KeyCode.F1)
 local dk = dj:Tab("Trạng thái", "rbxassetid://11446900930")
 local dl = dj:Tab("chính", "rbxassetid://6034798461")
 local dm = dj:Tab("cài đặt", "rbxassetid://11446835336")
@@ -1492,105 +1493,3 @@ local dw = dj:Tab("RaceV4", "rbxassetid://7558782590")
 local dx = dj:Tab("Update 20", "rbxassetid://7052520309")
 local dy = dj:Tab("cửa hàng", "rbxassetid://6031265976")
 local dz = dj:Tab("khác", "rbxassetid://11447063791")
-dk:Seperator("Vector Hub")
-Time = dk:Label("..")
-dk:Label("[tên tài khoản] : " .. game.Players.LocalPlayer.DisplayName)
-function UpdateTime()
-	local dA = math.floor(workspace.DistributedGameTime + 0.5)
-	local dB = math.floor(dA / 60 ^ 2) % 24;
-	local dC = math.floor(dA / 60 ^ 1) % 60;
-	local dD = math.floor(dA / 60 ^ 0) % 60;
-	Time:Set("[thời gian chơi] : giờ : " .. dB .. " phút : " .. dC .. " thứ hai : " .. dD)
-end;
-spawn(function()
-	while task.wait() do
-		pcall(function()
-			UpdateTime()
-		end)
-	end
-end)
-Client = dk:Label1("Client")
-function UpdateClient()
-	local dE = workspace:GetRealPhysicsFPS()
-	Client:Refresh("[Fps] : " .. dE)
-end;
-spawn(function()
-	while true do
-		wait(.1)
-		UpdateClient()
-	end
-end)
-Client1 = dk:Label1("Client")
-function UpdateClient1()
-	local dF = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
-	Client1:Refresh("[Ping] : " .. dF)
-end;
-spawn(function()
-	while true do
-		wait(.1)
-		UpdateClient1()
-	end
-end)
-local dG = dk:Label('...')
-spawn(function()
-	pcall(function()
-		while task.wait() do
-			if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-				dG:Set('Tình trạng đảo bí mật : 🟢')
-			else
-				dG:Set('Tình trạng đảo bí mật : 🔴')
-			end
-		end
-	end)
-end)
-local dH = dk:Label('...')
-spawn(function()
-	pcall(function()
-		while task.wait() do
-			if game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island') then
-				dH:Set('Tình trạng đảo Fox : 🟢')
-			else
-				dH:Set('Tình trạng đảo Fox : 🔴')
-			end
-		end
-	end)
-end)
-local dI = dk:Label('...')
-task.spawn(function()
-	while task.wait() do
-		pcall(function()
-			if game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149431" then
-				dI:Set("Tình trạng Moon : 5/5 🌕")
-			elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149052" then
-				dI:Set("Tình trạng Moon : 4/5 🌖")
-			elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709143733" then
-				dI:Set("Tình trạng Moon : 3/5 🌗")
-			elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709150401" then
-				dI:Set("Tình trạng Moon : 2/5 🌘")
-			elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149680" then
-				dI:Set("Tình trạng Moon : 1/5 🌘")
-			else
-				dI:Set("Tình trạng Moon : 0/5 🌘")
-			end
-		end)
-	end
-end)
-dk:Label("Vào Discord để nhận thông báo")
-dk:Button("Sao chép liên kết Bất hòa", function()
-	setclipboard("https://discord.gg/977JQXX82w")
-	game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = "VectorHub",
-		Text = "Đã sao chép thành công",
-		Icon = "rbxassetid://16129235054",
-		Duration = 3
-	})
-end)
-dl:Seperator("<<chính>>")
-dl:Toggle("cày cấp độ", _G.Settings.AutoFarm, function(value)
-	_G.AutoFarm = value;
-	_G.Settings.AutoFarm = value;
-	SaveSettings()
-	if value == false then
-		aw(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-	end
-end)

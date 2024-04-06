@@ -1,3 +1,4 @@
+--aa
 _G.Color = Color3.fromRGB(0, 86, 255)
 if game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("VVV") then
 	game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("VVV"):Destroy()
@@ -4385,6 +4386,390 @@ end)
 Farm:Toggle("Auto Spawn Cake Prince", true, function(value)
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner",value)
 end)
+
+Farm:Seperator("Other Farm")
+
+Farm:Toggle("Auto Second Sea", false, function(value)
+    _G.AutoSecondSea = value
+	StopTween(_G.AutoSecondSea)
+end)
+spawn(function()
+	while wait() do 
+		if _G.AutoSecondSea then
+			pcall(function()
+				local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+				if MyLevel >= 700 and World1 then
+					if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+						local CFrame1 = CFrame.new(4849.29883, 5.65138149, 719.611877)
+						repeat HyperCahaya(CFrame1) wait() until (CFrame1.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+						wait(1.1)
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+						wait(0.5)
+						EquipWeapon("Key")
+						repeat HyperCahaya(CFrame.new(1347.7124, 37.3751602, -1325.6488)) wait() until (Vector3.new(1347.7124, 37.3751602, -1325.6488)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+						wait(0.5)
+					else
+						if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
+								for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+									if v.Name == "Ice Admiral" then
+										if not v.Humanoid.Health <= 0 then
+											if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+												OldCFrameSecond = v.HumanoidRootPart.CFrame
+												repeat task.wait()
+													AutoHaki()
+													EquipWeapon(_G.SelectWeapon)
+													v.HumanoidRootPart.CanCollide = false
+													v.Humanoid.WalkSpeed = 0
+													v.Head.CanCollide = false
+													v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+													v.HumanoidRootPart.CFrame = OldCFrameSecond
+													HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+													game:GetService("VirtualUser"):CaptureController()
+													game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+													sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+												until not _G.AutoSecondSea or not v.Parent or v.Humanoid.Health <= 0
+											end
+										else 
+											game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+										end
+									end
+								end
+							else
+								if game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
+									HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+								end
+							end
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
+
+Farm:Toggle("Auto Third Sea", false, function(value)
+    _G.AutoSecondSea = value
+	StopTween(_G.AutoSecondSea)
+end)
+task.spawn(function()
+	while task.wait() do
+		pcall(function()
+			if _G.AutoThirdSea then
+				if game.Players.LocalPlayer.Data.Level.Value >= 1500 then
+					if _G.AutoFarm then
+						_G.AutoFarm = false
+					end
+					if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress", "Bartilo") == 3 then
+						if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables").FlamingoAccess ~= nil then
+							Com("F_", "TravelZou")
+							if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "Check") == 0 then
+								if game.Workspace.Enemies:FindFirstChild("rip_indra") then
+									for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+										if v.Name == "rip_indra" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+											repeat
+												task.wait()
+												if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
+													Farmtween = HyperCahaya(v.HumanoidRootPart.Position,
+														v.HumanoidRootPart.CFrame)
+												elseif (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+													if Farmtween then Farmtween:Stop() end
+													FastAttack = true
+													if _G.AutoHaki then
+														if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+															game:GetService("ReplicatedStorage").Remotes
+																.CommF_:InvokeServer("Buso")
+														end
+													end
+													if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
+														task.wait()
+														EquipWeapon(_G.SelectWeapon)
+													end
+													PosMon = v.HumanoidRootPart.CFrame
+													if not _G.FastAttack then
+														game:GetService 'VirtualUser':CaptureController()
+														game:GetService 'VirtualUser':Button1Down(Vector2.new(1280, 672))
+													end
+													v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+													v.Humanoid.JumpPower = 0
+													v.HumanoidRootPart.CanCollide = false
+													v.Humanoid.WalkSpeed = 0
+													v.Humanoid:ChangeState(11)
+													v.Humanoid:ChangeState(14)
+													v.Humanoid:ChangeState(16)
+													HyperCahaya(v.HumanoidRootPart.CFrame * MethodFarm)
+												end
+											until not _G.AutoThirdSea or not v.Parent or v.Humanoid.Health <= 0
+											wait(.5)
+											Check = 2
+											repeat
+												task.wait()
+												Com("F_", "TravelZou")
+											until Check == 1
+												FastAttack = false
+										end
+									end
+								else
+									Com("F_", "ZQuestProgress", "Check")
+									Com("F_", "ZQuestProgress", "Begin")
+								end
+							elseif game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "Check") == 1 then
+								Com("F_", "TravelZou")
+							else
+								if game.Workspace.Enemies:FindFirstChild("Don Swan") then
+									for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+										if v.Name == "Don Swan" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+											repeat
+												task.wait()
+												if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
+													Farmtween = HyperCahaya(v.HumanoidRootPart.Position,
+														v.HumanoidRootPart.CFrame)
+												elseif (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+													if Farmtween then Farmtween:Stop() end
+													FastAttack = true
+													if _G.AutoHaki then
+														if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+															game:GetService("ReplicatedStorage").Remotes
+																.CommF_:InvokeServer("Buso")
+														end
+													end
+													if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
+														task.wait()
+														EquipWeapon(_G.SelectWeapon)
+													end
+													PosMon = v.HumanoidRootPart.CFrame
+													if not _G.FastAttack then
+														game:GetService 'VirtualUser':CaptureController()
+														game:GetService 'VirtualUser':Button1Down(Vector2.new(1280, 672))
+													end
+													v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+													v.Humanoid.JumpPower = 0
+													v.HumanoidRootPart.CanCollide = false
+													v.Humanoid.WalkSpeed = 0
+													v.Humanoid:ChangeState(14)
+													v.Humanoid:ChangeState(16)
+													v.Humanoid:ChangeState(11)
+													HyperCahaya(v.HumanoidRootPart.CFrame * MethodFarm)
+												end
+											until not _G.AutoThirdSea or not v.Parent or v.Humanoid.Health <= 0
+											FastAttack = false
+										end
+									end
+								else
+									TweenDonSwanthireworld = HyperCahaya(
+										CFrame.new(2288.802, 15.1870775, 863.034607).Position,CFrame.new(2288.802, 15.1870775, 863.034607))
+									if (CFrame.new(2288.802, 15.1870775, 863.034607).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+										if TweenDonSwanthireworld then TweenDonSwanthireworld:Stop()
+											game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2288.802, 15.1870775, 863.034607)
+										end
+									end
+								end
+							end
+						else
+							if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables").FlamingoAccess == nil then
+								TabelDevilFruitStore = {}
+								TabelDevilFruitOpen = {}
+
+								for i, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
+									for i1, v1 in pairs(v) do
+										if i1 == "Name" then
+											table.insert(TabelDevilFruitStore, v1)
+										end
+									end
+								end
+
+								for i, v in next, game.ReplicatedStorage:WaitForChild("Remotes").CommF_:InvokeServer("GetFruits") do
+									if v.Price >= 1000000 then
+										table.insert(TabelDevilFruitOpen, v.Name)
+									end
+								end
+
+								for i, DevilFruitOpenDoor in pairs(TabelDevilFruitOpen) do
+									for i1, DevilFruitStore in pairs(TabelDevilFruitStore) do
+										if DevilFruitOpenDoor == DevilFruitStore and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables").FlamingoAccess == nil then
+											if not game.Players.LocalPlayer.Backpack:FindFirstChild(DevilFruitStore) then
+												Com("F_", "LoadFruit", DevilFruitStore)
+											else
+												Com("F_", "TalkTrevor", "1")
+												Com("F_", "TalkTrevor", "2")
+												Com("F_", "TalkTrevor", "3")
+											end
+										end
+									end
+								end
+
+								Com("F_", "TalkTrevor", "1")
+								Com("F_", "TalkTrevor", "2")
+								Com("F_", "TalkTrevor", "3")
+							end
+						end
+					else
+						if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress", "Bartilo") == 0 then
+							if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Swan Pirates") and string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+								if game.Workspace.Enemies:FindFirstChild("Swan Pirate") then
+									for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+										if v.Name == "Swan Pirate" then
+											pcall(function()
+												repeat
+													task.wait()
+													if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
+														Farmtween = HyperCahaya(v.HumanoidRootPart.Position,
+															v.HumanoidRootPart.CFrame)
+													elseif (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+														if Farmtween then Farmtween:Stop() end
+														FastAttack = true
+														StartMagnet = true
+														if _G.AutoHaki then
+															if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+																game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+															end
+														end
+														if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
+															task.wait()
+															EquipWeapon(_G.FastType)
+														end
+														PosMon = v.HumanoidRootPart.CFrame
+														if not _G.FastAttack then
+															game:GetService 'VirtualUser':CaptureController()
+															game:GetService 'VirtualUser':Button1Down(Vector2.new(1280, 672))
+														end
+														v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+														v.Humanoid.JumpPower = 0
+														v.HumanoidRootPart.CanCollide = false
+														v.Humanoid.WalkSpeed = 0
+														v.Humanoid:ChangeState(11)
+														v.Humanoid:ChangeState(14)
+														v.Humanoid:ChangeState(16)
+														HyperCahaya(v.HumanoidRootPart.CFrame * MethodFarm)
+													end
+												until not v.Parent or v.Humanoid.Health <= 0 or _G.AutoThirdSea == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+													FastAttack = false
+												StartMagnet = false
+											end)
+										end
+									end
+								else
+									Questtween = HyperCahaya(
+										CFrame.new(960.9769897460938, 141.33583068847656, 1216.1959228515625).Position,CFrame.new(960.9769897460938, 141.33583068847656, 1216.1959228515625))
+									if (CFrame.new(960.9769897460938, 141.33583068847656, 1216.1959228515625).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+										if Bartilotween then Bartilotween:Stop() end
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(960.9769897460938, 141.33583068847656, 1216.1959228515625)
+									end
+								end
+							else
+								Bartilotween = HyperCahaya(
+									CFrame.new(-456.28952, 73.0200958, 299.895966).Position,CFrame.new(-456.28952, 73.0200958, 299.895966))
+								if (CFrame.new(-456.28952, 73.0200958, 299.895966).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+									if Bartilotween then Bartilotween:Stop() end
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-456.28952, 73.0200958, 299.895966)
+									Com("F_", "StartQuest", "BartiloQuest", 1)
+								end
+							end
+						elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress", "Bartilo") == 1 then
+							if game.Workspace.Enemies:FindFirstChild("Jeremy") then
+								for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+									if v.Name == "Jeremy" then
+										repeat
+											task.wait()
+											if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
+												Farmtween = HyperCahaya(v.HumanoidRootPart.Position,
+													v.HumanoidRootPart.CFrame)
+											elseif (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+												if Farmtween then Farmtween:Stop() end
+												FastAttack = true
+												if _G.AutoHaki then
+													if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+														game:GetService("ReplicatedStorage").Remotes.CommF_
+															:InvokeServer("Buso")
+													end
+												end
+												if not game.Players.LocalPlayer.Character:FindFirstChild(_G.SelectWeapon) then
+													task.wait()
+													EquipWeapon(_G.SelectWeapon)
+												end
+												PosMon = v.HumanoidRootPart.CFrame
+												if not _G.FastAttack then
+													game:GetService 'VirtualUser':CaptureController()
+													game:GetService 'VirtualUser':Button1Down(Vector2.new(1280, 672))
+												end
+												v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+												v.Humanoid.JumpPower = 0
+												v.Humanoid.WalkSpeed = 0
+												v.HumanoidRootPart.CanCollide = false
+												v.Humanoid:ChangeState(11)
+												v.Humanoid:ChangeState(14)
+												v.Humanoid:ChangeState(16)
+												HyperCahaya(v.HumanoidRootPart.CFrame * MethodFarm)
+											end
+										until not v.Parent or v.Humanoid.Health <= 0 or _G.AutoThirdSea == false
+											FastAttack = false
+									end
+								end
+							else
+								Bartilotween = HyperCahaya(CFrame.new(2099.88159, 448.931, 648.997375).Position,CFrame.new(2099.88159, 448.931, 648.997375))
+								if (CFrame.new(2099.88159, 448.931, 648.997375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+									if Bartilotween then Bartilotween:Stop() end
+									game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2099.88159, 448.931, 648.997375)
+								end
+							end
+						elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress", "Bartilo") == 2 then
+							if (CFrame.new(-1836, 11, 1714).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude > 300 then
+								Bartilotween = HyperCahaya(CFrame.new(-1836, 11, 1714).Position,CFrame.new(-1836, 11, 1714))
+							elseif (CFrame.new(-1836, 11, 1714).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+								if Bartilotween then Bartilotween:Stop() end
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1836, 11, 1714)
+								wait(.5)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1850.49329, 13.1789551, 1750.89685)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1858.87305, 19.3777466, 1712.01807)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1803.94324, 16.5789185, 1750.89685)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1858.55835, 16.8604317, 1724.79541)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1869.54224, 15.987854, 1681.00659)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1800.0979, 16.4978027, 1684.52368)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1819.26343, 14.795166, 1717.90625)
+								wait(.1)
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1813.51843, 14.8604736, 1724.79541)
+							end
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+
+Main:Toggle("Auto Factory", false, function(value)
+	_G.AutoFactory = value
+	StopTween(_G.AutoFactory)
+end)
+spawn(function()
+	while wait() do
+		pcall(function()
+			if _G.AutoFactory then
+				if game:GetService("Workspace").Enemies:FindFirstChild("Core") then
+					for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if v.Name == "Core" and v.Humanoid.Health > 0 then
+							repeat task.wait()
+								AutoHaki()         
+								EquipWeapon(_G.SelectWeapon)           
+								HyperCahaya(CFrame.new(448.46756, 199.356781, -441.389252))                                  
+								game:GetService("VirtualUser"):CaptureController()
+								game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+							until v.Humanoid.Health <= 0 or _G.AutoFactory == false
+						end
+					end
+				else
+					HyperCahaya(CFrame.new(448.46756, 199.356781, -441.389252))
+				end
+			end
+		end)
+	end
+end)
 ---------------------------------------------------------------------------------------------------------------------------Stats Tab
 
 ---------------------------------------------------------------------------------------------------------------------------Teleport Tab
@@ -4400,5 +4785,18 @@ end)
 ---------------------------------------------------------------------------------------------------------------------------Misc Tab
 
 ---------------------------------------------------------------------------------------------------------------------------Race V4 Tab
+Race:Seperator("Mirage Island")
 
+Mirragecheck = Race:Label("")
+spawn(function()
+	pcall(function()
+		while wait() do
+			if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+				Mirragecheck:Set('Mirage Check : Mirage Island Spawning')
+			else
+  				Mirragecheck:Set('Mirage Check : Mirage Island Not Found')
+			end
+		end
+	end)
+end)
 ---------------------------------------------------------------------------------------------------------------------------Event Tab

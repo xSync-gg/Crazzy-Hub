@@ -1,3 +1,4 @@
+--a
 _G.Color = Color3.fromRGB(0, 86, 255)
 if game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("VVV") then
 	game:GetService("CoreGui").RobloxGui.Modules:FindFirstChild("VVV"):Destroy()
@@ -8838,75 +8839,56 @@ end)
 
 Stats:Seperator("Auto Stats")
 
-Stats:Toggle("Auto Stats Melee", false, function(value)
-	melee = value
+Stats:Dropdown("Select Stats", {"Melee","Defense","Sword","Gun","Fruit"}, function(value)
+	_G.SelectStats = value
 end)
 
-Stats:Toggle("Auto Stats Defense", false, function(value)
-	defense = value
+Stats:Toggle("Auto Stats Selected", false, function(value)
+    _G.EnabledAutoStats = value
 end)
-
-Stats:Toggle("Auto Stats Sword", false, function(value)
-	sword = value
-end)
-
-Stats:Toggle("Auto Stats Gun", false, function(value)
-	gun = Value
-end)
-
-Stats:Toggle("Auto Stats Fruit", false, function(value)
-	demonfruit = value
-end)
-
-Stats:Slider("Point To Add", 1, 2550, 1, function(value)
-	PointStats = value
-end)
-PointStats = 1
 spawn(function()
-	while wait() do
-		if game.Players.localPlayer.Data.Points.Value >= PointStats then
-			if melee then
-				local args = {
-					[1] = "AddPoint",
-					[2] = "Melee",
-					[3] = PointStats
-				}
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-			end 
-			if defense then
-				local args = {
-					[1] = "AddPoint",
-					[2] = "Defense",
-					[3] = PointStats
-				}
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-			end 
-			if sword then
-				local args = {
-					[1] = "AddPoint",
-					[2] = "Sword",
-					[3] = PointStats
-				}
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-			end 
-			if gun then
-				local args = {
-					[1] = "AddPoint",
-					[2] = "Gun",
-					[3] = PointStats
-				}
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-			end 
-			if demonfruit then
-				local args = {
-					[1] = "AddPoint",
-					[2] = "Demon Fruit",
-					[3] = PointStats
-				}
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-			end
-		end
-	end
+    pcall(function()
+        while task.wait() do
+            if _G.EnabledAutoStats then
+                if _G.SelectStats == "Melee" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Melee",
+                        [3] = 100
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                elseif _G.SelectStats == "Defense" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Defense",
+                        [3] = 100
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                elseif _G.SelectStats == "Sword" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Sword",
+                        [3] = 100
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                elseif _G.SelectStats == "Gun" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Gun",
+                        [3] = 100
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                elseif _G.SelectStats == "Fruit" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Demon Fruit",
+                        [3] = 100
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+            end
+        end
+    end)
 end)
 ---------------------------------------------------------------------------------------------------------------------------Teleport Tab
 

@@ -1,4 +1,3 @@
---a
 ----------------------------------------------------------------------------------------------------------------------------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
@@ -4923,6 +4922,7 @@ Camera:Stop()
             end)
         end
     end)
+    _G.BringMode = 350
 
     local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enable Bypass Tp", Default = false })
     ToggleBypassTP:OnChanged(function(Value)

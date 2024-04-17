@@ -1,3 +1,4 @@
+--a
 ----------------------------------------------------------------------------------------------------------------------------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
@@ -4639,48 +4640,86 @@ Camera:Stop()
         _G.BringMob = Value
     end)
     Options.ToggleBringMob:SetValue(true)
-	task.spawn(function()
-        while task.wait() do
-        if _G.BringMob then
-        pcall(function()
-          for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-          if not string.find(v.Name,"Boss") and v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
-          if InMyNetWork(v.HumanoidRootPart) then
-            if InMyNetWork(v.HumanoidRootPart) then
-          v.HumanoidRootPart.CFrame = FarmPos
-          v.HumanoidRootPart.CanCollide = false
-          v.HumanoidRootPart.Size = Vector3.new(1,1,1)
-		  if v.Humanoid:FindFirstChild("Animator") then
-			v.Humanoid.Animator:Destroy()
-		end
-          end
-        end
-          end
-          end
-          end)
-        end
-    end
-        end)
-      task.spawn(function()
-        while true do wait()
-        if setscriptable then
-        setscriptable(game.Players.LocalPlayer,"SimulationRadius",true)
-        end
-        if sethiddenproperty then
-        sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
-        end
-        end
-        end)
-      function InMyNetWork(object)
-      if isnetworkowner then
-      return isnetworkowner(object)
-      else
-        if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
-      return true
-      end
-      return false
-      end
-      end
+    spawn(function()
+        while wait() do
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if _G.BringMob and bringmob then
+                        if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                            if v.Name == "Factory Staff" then
+                                if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 300 then
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                    v.HumanoidRootPart.CFrame = FarmPos
+                                    if v.Humanoid:FindFirstChild("Animator") then
+                                        v.Humanoid.Animator:Destroy()
+                                    end
+                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                end
+                            elseif v.Name == MonFarm then
+                                if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 300 then
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                    v.HumanoidRootPart.CFrame = FarmPos
+                                    if v.Humanoid:FindFirstChild("Animator") then
+                                        v.Humanoid.Animator:Destroy()
+                                    end
+                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                end
+                            end
+                        end
+                                end
+                            end
+                        end)
+                end
+            end)
+            task.spawn(function()
+                while task.wait() do
+             if _G.BringMob and bringmob then
+            pcall(function()
+                for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                if v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                if InMyNetWork(v.HumanoidRootPart) then
+                v.HumanoidRootPart.CFrame = FarmPos
+                v.Humanoid.JumpPower = 0
+                v.Humanoid.WalkSpeed = 0
+                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                v.HumanoidRootPart.CanCollide = false
+                v.Head.CanCollide = false
+                if v.Humanoid:FindFirstChild("Animator") then
+                v.Humanoid.Animator:Destroy()
+                end
+                end
+                end
+                end
+                end)
+              end
+              end
+              end)
+            
+            task.spawn(function()
+              while true do wait()
+              if setscriptable then
+              setscriptable(game.Players.LocalPlayer,"SimulationRadius",true)
+              end
+              if sethiddenproperty then
+              sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+              end
+              end
+              end)
+            
+            function InMyNetWork(object)
+            if isnetworkowner then
+            return isnetworkowner(object)
+            else
+              if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+            return true
+            end
+            return false
+            end
+            end
 
     local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enable Bypass Tp", Default = false })
     ToggleBypassTP:OnChanged(function(Value)

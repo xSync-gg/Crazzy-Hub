@@ -3007,7 +3007,7 @@ AutoSpawnCakePrince:OnChanged(function(Value)
 end)
 Options.AutoSpawnCakePrince:SetValue(true)
 -------------------------------------------------------------------------------------------------------------------Setting Tab
-local FastAttack = Tabs.Main:AddToggle("FastAttack", {Title = "Fast Attack", Description = "Đánh nhanh", Default = true })
+local FastAttack = Tabs.Set:AddToggle("FastAttack", {Title = "Fast Attack", Description = "Đánh nhanh", Default = true })
 FastAttack:OnChanged(function(Value)
     _G.FastAttackFaiFao = Value
 end)
@@ -3024,7 +3024,7 @@ spawn(function()
 	end
 end)
 
-local BringMob = Tabs.Main:AddToggle("BringMob", {Title = "Bring Mob", Description = "Gom quái", Default = true })
+local BringMob = Tabs.Set:AddToggle("BringMob", {Title = "Bring Mob", Description = "Gom quái", Default = true })
 BringMob:OnChanged(function(Value)
     _G.BringMob = Value
 end)
@@ -3107,7 +3107,7 @@ function InMyNetWork(object)
     end
 end
 
-local BringMobDistance = Tabs.Main:AddSlider("BringMobDistance", {
+local BringMobDistance = Tabs.Set:AddSlider("BringMobDistance", {
     Title = "Bring Mob Distance",
     Description = "Khoảng cách gom quái",
     Default = 350,

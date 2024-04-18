@@ -1,4 +1,3 @@
---a
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -3109,7 +3108,7 @@ spawn(function()
                 if _G.BringMob then
                     if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                         if v.Name == "Factory Staff" then
-                            if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= _G.DistanceBring then
+                            if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 350 then
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
@@ -3120,7 +3119,7 @@ spawn(function()
                                 sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                             end
                         elseif v.Name == MonFarm then
-                            if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= _G.DistanceBring then
+                            if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 350 then
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
@@ -3142,7 +3141,7 @@ task.spawn(function()
         if _G.BringMob then
             pcall(function()
                 for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if not string.find(v.Name,"Boss") and v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.DistanceBring then
+                    if not string.find(v.Name,"Boss") and v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                         if InMyNetWork(v.HumanoidRootPart) then
                             if InMyNetWork(v.HumanoidRootPart) then
                                 v.HumanoidRootPart.CFrame = FarmPos
@@ -3173,28 +3172,12 @@ function InMyNetWork(object)
     if isnetworkowner then
         return isnetworkowner(object)
     else
-        if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.DistanceBring then
+        if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
             return true
         end
         return false
     end
 end
-
-local BringMobDistance = Tabs.Set:AddSlider("BringMobDistance", {
-    Title = "Bring Mob Distance",
-    Description = "Khoảng cách gom quái",
-    Default = 350,
-    Min = 0,
-    Max = 350,
-    Rounding = 1,
-    Callback = function(Value)
-        _G.DistanceBring = Value
-    end
-})
-BringMobDistance:OnChanged(function(Value)
-    _G.DistanceBring = Value
-end)
-BringMobDistance:SetValue(350)
 
 local FarmDistance = Tabs.Set:AddSlider("FarmDistance", {
     Title = "Farm Distance",
@@ -3210,7 +3193,7 @@ local FarmDistance = Tabs.Set:AddSlider("FarmDistance", {
 FarmDistance:OnChanged(function(Value)
     posY = Value
 end)
-FarmDistance:SetValue(50)
+FarmDistance:SetValue(30)
 posX = 10
 posZ = 10
 -------------------------------------------------------------------------------------------------------------------Other Farm Tab

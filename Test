@@ -20,6 +20,6 @@ end);
 print(syn.request({ Url = "https://httpbin.org/get" }).Body);
 
 HttpSpy:UnHookSynRequest("https://httpbin.org/get");
-HttpSpy:ProxyHost("httpbin.org", "google.com");
+HttpSpy:ProxyHost("httpbin.org", "https://raw.githubusercontent.com/xSync-gg/Source/main/English");
 
 print(syn.request({ Url = "https://httpbin.org/get" }).Body);

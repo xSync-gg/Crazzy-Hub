@@ -1,3 +1,4 @@
+--a
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -1837,19 +1838,19 @@ end
 function Tween2(P1)
     local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 10 then
-		Speed = 20000
+		Speed = 10
 	elseif Distance < 25 then
-		Speed = 10000
+		Speed = 50
 	elseif Distance < 50 then
-		Speed = 5000
+		Speed = 100
 	elseif Distance < 150 then
-		Speed = 2500
+		Speed = 200
 	elseif Distance < 250 then
-		Speed = 1250
+		Speed = 300
 	elseif Distance < 500 then
-		Speed = 700
+		Speed = 350
 	elseif Distance < 750 then
-		Speed = 500
+		Speed = 350
 	elseif Distance >= 1000 then
 		Speed = 350
 	end
@@ -1883,20 +1884,20 @@ function toTarget(...)
 	end
 	local tweenfunc = {}
 	local Distance = (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
-	if Distance < 10 then
-		Speed = 20000
+    if Distance < 10 then
+		Speed = 10
 	elseif Distance < 25 then
-		Speed = 10000
+		Speed = 50
 	elseif Distance < 50 then
-		Speed = 5000
+		Speed = 100
 	elseif Distance < 150 then
-		Speed = 2500
+		Speed = 200
 	elseif Distance < 250 then
-		Speed = 1250
+		Speed = 300
 	elseif Distance < 500 then
-		Speed = 700
+		Speed = 350
 	elseif Distance < 750 then
-		Speed = 500
+		Speed = 350
 	elseif Distance >= 1000 then
 		Speed = 350
 	end

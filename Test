@@ -12,14 +12,14 @@ HttpSpy.OnRequest:Connect(function(req)
     warn("request made:", req.Url);    
 end);
 
-HttpSpy:HookSynRequest("https://httpbin.org/get", function(response) 
+HttpSpy:HookSynRequest("https://raw.githubusercontent.com/xSync-gg/Source/main/dac%20cau", function(response) 
     response.Body = "hooked!";
     return response;
 end);
 
-print(syn.request({ Url = "https://httpbin.org/get" }).Body);
+print(syn.request({ Url = "https://raw.githubusercontent.com/xSync-gg/Source/main/dac%20cau" }).Body);
 
-HttpSpy:UnHookSynRequest("https://httpbin.org/get");
-HttpSpy:ProxyHost("httpbin.org", "https://raw.githubusercontent.com/xSync-gg/Source/main/English");
+HttpSpy:UnHookSynRequest("https://raw.githubusercontent.com/xSync-gg/Source/main/dac%20cau");
+HttpSpy:ProxyHost("raw.githubusercontent.com", "google.com");
 
-print(syn.request({ Url = "https://httpbin.org/get" }).Body);
+print(syn.request({ Url = "https://raw.githubusercontent.com/xSync-gg/Source/main/dac%20cau" }).Body);

@@ -1,3 +1,4 @@
+--a
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
@@ -530,7 +531,7 @@ function BypassTeleport(is)
         WaitHRP(lp).CFrame = is
         lp.Character.PartTele.CFrame = WaitHRP(lp).CFrame
         lp.Character:WaitForChild("Humanoid"):ChangeState(15)
-        task.wait(1)
+        task.wait(0.5)
         repeat task.wait() until lp.Character:WaitForChild("Humanoid").Health <= 0
         repeat task.wait()
             if lp.Character:FindFirstChild("HumanoidRootPart") then
@@ -546,7 +547,7 @@ function BypassTeleport(is)
         if lp.Character:FindFirstChild("PartTele") then
             lp.Character.PartTele.CFrame = WaitHRP(lp).CFrame 
         end
-        task.wait(1)
+        task.wait(0.5)
     end
 end
 function GetBypassPos(pos)
@@ -814,10 +815,7 @@ while task.wait() do
         end
     end
 end
-wait(10)
 game:GetService("VirtualInputManager"):SendKeyEvent(true,"T",false,game)
-game:GetService("VirtualInputManager"):SendKeyEvent(false,"T",false,game)
 game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
-game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
 wait(180)
 Hop()

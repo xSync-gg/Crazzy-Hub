@@ -1,3 +1,4 @@
+--a
 local centerPosition = Vector3.new(0, 0, 0)
 local proximityRadius = 10
 local plr = game:GetService("Players"):GetPlayers()
@@ -18,7 +19,7 @@ local AngelZTeleport = game:GetService("ReplicatedStorage").Effect.Container.Ang
 local Utils = require(game.ReplicatedStorage.Util)
 local plr = game.Players.LocalPlayer
 local char = plr.Character
-local target = nearplayer -- mục tiêu bị xích
+local target = game.Players.LocalPlayer.Name -- mục tiêu bị xích
 local tool = Instance.new("Tool", plr.Backpack)
 tool.Name = "Z"
 tool.RequiresHandle = false

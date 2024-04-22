@@ -1,3 +1,4 @@
+--a
 ScreenGui = Instance.new("ScreenGui")
 Frame = Instance.new("Frame")
 Discord = Instance.new("TextLabel")
@@ -135,7 +136,7 @@ logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
 logo.BorderSizePixel = 0
 logo.Position = UDim2.new(0.110701106, 0, 0.0727969334, 0)
 logo.Size = UDim2.new(0, 221, 0, 61)
-logo.Image = "rbxassetid://17213144419"
+logo.Image = "rbxassetid://17253133953"
 
 cre.Name = "cre"
 cre.Parent = Frame

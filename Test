@@ -1,3 +1,4 @@
+--a
 ScreenGui = Instance.new("ScreenGui")
 Frame = Instance.new("Frame")
 Discord = Instance.new("TextLabel")
@@ -35,7 +36,7 @@ Discord.BorderSizePixel = 0
 Discord.Position = UDim2.new(-0.000912261603, 0, 0.421922952, 0)
 Discord.Size = UDim2.new(0, 282, 0, 42)
 Discord.Font = Enum.Font.SourceSans
-Discord.Text = "discord.gg/sscaBFAsAb   "
+Discord.Text = "Discord : discord.gg/4ENnwm9wEQ"
 Discord.TextColor3 = Color3.fromRGB(0, 81, 255)
 Discord.TextSize = 20.000
 Discord.TextWrapped = true
@@ -146,7 +147,7 @@ cre.BorderSizePixel = 0
 cre.Position = UDim2.new(0.0848708451, 0, 0.843378901, 0)
 cre.Size = UDim2.new(0, 234, 0, 39)
 cre.Font = Enum.Font.SourceSans
-cre.Text = "you can buy other melee in melee panel"
+cre.Text = "Crazzy Hub Auto Bounty Script By ! xSync"
 cre.TextColor3 = Color3.fromRGB(102, 102, 102)
 cre.TextSize = 15.000
 

@@ -1,28 +1,3 @@
-local AngelZ = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.Z)
-local AngelZCharge = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.ZCharge)
-local AngelZTeleport = game:GetService("ReplicatedStorage").Effect.Container.Angel.ZTeleport
-local Utils = require(game.ReplicatedStorage.Util)
-local plr = game.Players.LocalPlayer
-
-local char = plr.Character
-
-local target = game.Players[nearplayer].Character -- mục tiêu bị xích
-
-local tool = Instance.new("Tool", plr.Backpack)
-tool.Name = "Z"
-tool.RequiresHandle = false
-
-tool.Activated:Connect(function()
-    spawn(function()
-        AngelZ({
-            hrp = char.PrimaryPart,
-            player = plr,
-            origin = char.PrimaryPart.Position,
-            targetPos = target.PrimaryPart.Position,
-            victimRoot = target.PrimaryPart
-        })
-    end)
-end)
 local centerPosition = Vector3.new(0, 0, 0)
 local proximityRadius = 10
 local plr = game:GetService("Players"):GetPlayers()
@@ -36,3 +11,63 @@ for _, player in ipairs(plr) do
         end
     end
 end
+
+local AngelZ = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.Z)
+local AngelZCharge = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.ZCharge)
+local AngelZTeleport = game:GetService("ReplicatedStorage").Effect.Container.Angel.ZTeleport
+local Utils = require(game.ReplicatedStorage.Util)
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local target = nearplayer -- mục tiêu bị xích
+local tool = Instance.new("Tool", plr.Backpack)
+tool.Name = "Z"
+tool.RequiresHandle = false
+tool.Activated:Connect(function()
+    spawn(function()
+        AngelZ({
+            hrp = char.PrimaryPart,
+            player = plr,
+            origin = char.PrimaryPart.Position,
+            targetPos = target.PrimaryPart.Position,
+            victimRoot = target.PrimaryPart
+        })
+    end)
+end)
+
+local AngelX = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.X)
+local Utils = require(game.ReplicatedStorage.Util)
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local tool = Instance.new("Tool", plr.Backpack)
+tool.Name = "X"
+tool.RequiresHandle = false
+tool.Activated:Connect(function()
+    AngelX({
+        hrp = char.PrimaryPart,
+        player = plr,
+        impactPos = char.PrimaryPart.Position,
+        delayUntilImpact = 0.2,
+    })
+end)
+
+local AngelC = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.C)
+local Utils = require(game.ReplicatedStorage.Util)
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local tool = Instance.new("Tool", plr.Backpack)
+tool.Name = "C"
+tool.RequiresHandle = false
+tool.Activated:Connect(function()
+    AngelC({
+        hrp = char.PrimaryPart,
+        player = plr,
+        minRadius = 30,
+        maxRadius = 100,
+        hitRadius = 100,
+        freezeFrameFor = 15,
+        maxChargeTime = 0,
+        origin = char.PrimaryPart.Position,
+        hitEnemyTable = {},
+        ButtonDown = os.time(),
+    })
+end)

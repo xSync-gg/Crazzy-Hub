@@ -1,469 +1,540 @@
-local AlchemyHubUIB = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local MainFrameStroke = Instance.new("UIStroke")
-local MainFrameCorner = Instance.new("UICorner")
-local ServerHop = Instance.new("TextButton")
-local ServerHopStroke = Instance.new("UIStroke")
-local ServerHopShadow = Instance.new("Frame")
-local AlchemyHubUIToggle = Instance.new("TextButton")
-local AlchemyHubUIToggleStroke = Instance.new("UIStroke")
-local ServerHopShadow_2 = Instance.new("Frame")
-local Logo = Instance.new("ImageLabel")
-local LogoStroke = Instance.new("UIStroke")
-local Description = Instance.new("TextLabel")
-local DescriptionPadding = Instance.new("UIPadding")
-local DescriptionStroke = Instance.new("UIStroke")
-local Load4 = Instance.new("TextLabel")
-local Load4Padding = Instance.new("UIPadding")
-local Load4Stroke = Instance.new("UIStroke")
-local TextCurrentBounty = Instance.new("TextLabel")
-local TextCurrentBountyPadding = Instance.new("UIPadding")
-local TextCurrentBountyStroke = Instance.new("UIStroke")
-local Load4Shadow = Instance.new("TextLabel")
-local Load4ShadowPadding = Instance.new("UIPadding")
-local Load4ShadowStroke = Instance.new("UIStroke")
-local HubName = Instance.new("TextLabel")
-local HubNameStroke = Instance.new("UIStroke")
-local HubNamePadding = Instance.new("UIPadding")
-local FrameLoadShadow = Instance.new("ImageLabel")
-local Load1 = Instance.new("TextLabel")
-local Load1Padding = Instance.new("UIPadding")
-local Load1Stroke = Instance.new("UIStroke")
-local TextEarned = Instance.new("TextLabel")
-local TextEarnedPadding = Instance.new("UIPadding")
-local TextEarnedStroke = Instance.new("UIStroke")
-local Load1Shadow = Instance.new("TextLabel")
-local Load1ShadowPadding = Instance.new("UIPadding")
-local Load1ShadowStroke = Instance.new("UIStroke")
-local Load2 = Instance.new("TextLabel")
-local Load2Padding = Instance.new("UIPadding")
-local Load2Stroke = Instance.new("UIStroke")
-local TextTime = Instance.new("TextLabel")
-local TextTimePadding = Instance.new("UIPadding")
-local TextTimeStroke = Instance.new("UIStroke")
-local Load2Shadow = Instance.new("TextLabel")
-local Load2ShadowPadding = Instance.new("UIPadding")
-local Load2ShadowStroke = Instance.new("UIStroke")
-local Load3 = Instance.new("TextLabel")
-local Load3Padding = Instance.new("UIPadding")
-local Load3Stroke = Instance.new("UIStroke")
-local TextTotalEarned = Instance.new("TextLabel")
-local TextTotalEarnedStroke = Instance.new("UIStroke")
-local TextTotalEarnedPadding = Instance.new("UIPadding")
-local Load3Shadow = Instance.new("TextLabel")
-local Load3ShadowPadding = Instance.new("UIPadding")
-local Load3ShadowStroke = Instance.new("UIStroke")
-
-AlchemyHubUIB.Name = "AlchemyHubUIB"
-AlchemyHubUIB.Parent = game:GetService("CoreGui")
-AlchemyHubUIB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = AlchemyHubUIB
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainFrame.BackgroundTransparency = -0.010
-MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-MainFrame.Size = UDim2.new(0, 305, 0, 250)
-
-MainFrameStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-MainFrameStroke.Color = Color3.fromRGB(0, 255, 149)
-MainFrameStroke.Thickness = 1.7000000476837158
-MainFrameStroke.Name = "MainFrameStroke"
-MainFrameStroke.Parent = MainFrame
-
-MainFrameCorner.CornerRadius = UDim.new(0, 2)
-MainFrameCorner.Name = "MainFrameCorner"
-MainFrameCorner.Parent = MainFrame
-
-ServerHop.Name = "ServerHop"
-ServerHop.Parent = MainFrame
-ServerHop.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ServerHop.BackgroundTransparency = 0.900
-ServerHop.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ServerHop.BorderSizePixel = 0
-ServerHop.Position = UDim2.new(0.516999364, 0, 0.832000017, 0)
-ServerHop.Size = UDim2.new(0, 134, 0, 36)
-ServerHop.Font = Enum.Font.GothamBold
-ServerHop.Text = "Discord"
-ServerHop.TextColor3 = Color3.fromRGB(255, 255, 255)
-ServerHop.TextSize = 18.000
-
-ServerHopStroke.Color = Color3.fromRGB(0, 255, 149)
-ServerHopStroke.Name = "ServerHopStroke"
-ServerHopStroke.Parent = ServerHop
-
-ServerHopShadow.Name = "ServerHopShadow"
-ServerHopShadow.Parent = ServerHop
-ServerHopShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ServerHopShadow.BackgroundTransparency = 0.900
-ServerHopShadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ServerHopShadow.BorderSizePixel = 0
-ServerHopShadow.Size = UDim2.new(0, 133, 0, 36)
-
-AlchemyHubUIToggle.Name = "AlchemyHubUIToggle"
-AlchemyHubUIToggle.Parent = MainFrame
-AlchemyHubUIToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-AlchemyHubUIToggle.BackgroundTransparency = 0.900
-AlchemyHubUIToggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-AlchemyHubUIToggle.BorderSizePixel = 0
-AlchemyHubUIToggle.Position = UDim2.new(0.0267213918, 0, 0.832000017, 0)
-AlchemyHubUIToggle.Size = UDim2.new(0, 138, 0, 36)
-AlchemyHubUIToggle.Font = Enum.Font.GothamBold
-AlchemyHubUIToggle.Text = "Skip Player"
-AlchemyHubUIToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-AlchemyHubUIToggle.TextSize = 18.000
-
-AlchemyHubUIToggleStroke.Color = Color3.fromRGB(0, 255, 149)
-AlchemyHubUIToggleStroke.Name = "AlchemyHubUIToggleStroke"
-AlchemyHubUIToggleStroke.Parent = AlchemyHubUIToggle
-
-ServerHopShadow_2.Name = "ServerHopShadow"
-ServerHopShadow_2.Parent = AlchemyHubUIToggle
-ServerHopShadow_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ServerHopShadow_2.BackgroundTransparency = 0.900
-ServerHopShadow_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ServerHopShadow_2.BorderSizePixel = 0
-ServerHopShadow_2.Size = UDim2.new(0, 138, 0, 36)
-
-Logo.Name = "Logo"
-Logo.Parent = MainFrame
-Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Logo.BorderSizePixel = 0
-Logo.Position = UDim2.new(0.0299999993, 0, 0.0320000015, 0)
-Logo.Size = UDim2.new(0, 50, 0, 50)
-Logo.Image = "rbxassetid://15780186180"
-
-LogoStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-LogoStroke.Color = Color3.fromRGB(255, 255, 255)
-LogoStroke.Name = "LogoStroke"
-LogoStroke.Parent = Logo
-
-Description.Name = "Description"
-Description.Parent = MainFrame
-Description.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Description.BackgroundTransparency = 1.000
-Description.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Description.BorderSizePixel = 0
-Description.Position = UDim2.new(0.223000005, 0, 0.131999999, 0)
-Description.Size = UDim2.new(0, 226, 0, 25)
-Description.Font = Enum.Font.ArialBold
-Description.Text = "Auto Bounty"
-Description.TextColor3 = Color3.fromRGB(255, 255, 255)
-Description.TextSize = 23.000
-
-DescriptionPadding.Name = "DescriptionPadding"
-DescriptionPadding.Parent = Description
-DescriptionPadding.PaddingTop = UDim.new(0, 4)
-
-DescriptionStroke.Color = Color3.fromRGB(0, 255, 149)
-DescriptionStroke.Name = "DescriptionStroke"
-DescriptionStroke.Parent = Description
-
-Load4.Name = "Load4"
-Load4.Parent = MainFrame
-Load4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load4.BackgroundTransparency = 0.900
-Load4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load4.BorderSizePixel = 0
-Load4.Position = UDim2.new(0.0270000007, 0, 0.699999988, 0)
-Load4.Size = UDim2.new(0, 284, 0, 31)
-Load4.Font = Enum.Font.Highway
-Load4.Text = "Current Bounty:"
-Load4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load4.TextSize = 18.000
-Load4.TextXAlignment = Enum.TextXAlignment.Left
-
-Load4Padding.Name = "Load4Padding"
-Load4Padding.Parent = Load4
-Load4Padding.PaddingLeft = UDim.new(0, 5)
-
-Load4Stroke.Color = Color3.fromRGB(0, 255, 149)
-Load4Stroke.Name = "Load4Stroke"
-Load4Stroke.Parent = Load4
-
-TextCurrentBounty.Name = "TextCurrentBounty"
-TextCurrentBounty.Parent = Load4
-TextCurrentBounty.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextCurrentBounty.BackgroundTransparency = 1.000
-TextCurrentBounty.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextCurrentBounty.BorderSizePixel = 0
-TextCurrentBounty.Position = UDim2.new(-0.0195951294, 0, 0.0548391044, 0)
-TextCurrentBounty.Size = UDim2.new(0, 276, 0, 31)
-TextCurrentBounty.Font = Enum.Font.Highway
-TextCurrentBounty.Text = "5983957"
-TextCurrentBounty.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextCurrentBounty.TextSize = 18.000
-TextCurrentBounty.TextXAlignment = Enum.TextXAlignment.Right
-
-TextCurrentBountyPadding.Name = "TextCurrentBountyPadding"
-TextCurrentBountyPadding.Parent = TextCurrentBounty
-TextCurrentBountyPadding.PaddingLeft = UDim.new(0, 5)
-
-TextCurrentBountyStroke.Color = Color3.fromRGB(0, 255, 149)
-TextCurrentBountyStroke.Name = "TextCurrentBountyStroke"
-TextCurrentBountyStroke.Parent = TextCurrentBounty
-
-Load4Shadow.Name = "Load4Shadow"
-Load4Shadow.Parent = Load4
-Load4Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load4Shadow.BackgroundTransparency = 0.900
-Load4Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load4Shadow.BorderSizePixel = 0
-Load4Shadow.Position = UDim2.new(-0.0195951294, 0, -0.00967702549, 0)
-Load4Shadow.Size = UDim2.new(0, 284, 0, 31)
-Load4Shadow.Font = Enum.Font.Highway
-Load4Shadow.Text = "Current Bounty:"
-Load4Shadow.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load4Shadow.TextSize = 18.000
-Load4Shadow.TextXAlignment = Enum.TextXAlignment.Left
-
-Load4ShadowPadding.Name = "Load4ShadowPadding"
-Load4ShadowPadding.Parent = Load4Shadow
-Load4ShadowPadding.PaddingLeft = UDim.new(0, 5)
-
-Load4ShadowStroke.Color = Color3.fromRGB(0, 255, 149)
-Load4ShadowStroke.Name = "Load4ShadowStroke"
-Load4ShadowStroke.Parent = Load4Shadow
-
-HubName.Name = "HubName"
-HubName.Parent = MainFrame
-HubName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-HubName.BackgroundTransparency = 1.000
-HubName.BorderColor3 = Color3.fromRGB(0, 0, 0)
-HubName.BorderSizePixel = 0
-HubName.Position = UDim2.new(0.223000005, 0, 0.0320000015, 0)
-HubName.Size = UDim2.new(0, 226, 0, 25)
-HubName.Font = Enum.Font.GothamBold
-HubName.Text = "Alchemy Hub"
-HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
-HubName.TextSize = 25.000
-
-HubNameStroke.Color = Color3.fromRGB(0, 255, 149)
-HubNameStroke.Name = "HubNameStroke"
-HubNameStroke.Parent = HubName
-
-HubNamePadding.Name = "HubNamePadding"
-HubNamePadding.Parent = HubName
-HubNamePadding.PaddingLeft = UDim.new(0, 5)
-
-FrameLoadShadow.Name = "FrameLoadShadow"
-FrameLoadShadow.Parent = MainFrame
-FrameLoadShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-FrameLoadShadow.BackgroundTransparency = 1.000
-FrameLoadShadow.Position = UDim2.new(0.504999995, 0, 0.505999982, 2)
-FrameLoadShadow.Size = UDim2.new(0.896666646, 147, 0.828000009, 147)
-FrameLoadShadow.ZIndex = 0
-FrameLoadShadow.Image = "rbxassetid://297694300"
-FrameLoadShadow.ImageTransparency = 0.500
-FrameLoadShadow.ScaleType = Enum.ScaleType.Slice
-FrameLoadShadow.SliceCenter = Rect.new(85, 85, 427, 427)
-
-Load1.Name = "Load1"
-Load1.Parent = MainFrame
-Load1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load1.BackgroundTransparency = 0.900
-Load1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load1.BorderSizePixel = 0
-Load1.Position = UDim2.new(0.0300000291, 0, 0.30399999, 0)
-Load1.Size = UDim2.new(0, 284, 0, 31)
-Load1.Font = Enum.Font.Highway
-Load1.Text = "Earned:"
-Load1.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load1.TextSize = 18.000
-Load1.TextXAlignment = Enum.TextXAlignment.Left
-
-Load1Padding.Name = "Load1Padding"
-Load1Padding.Parent = Load1
-Load1Padding.PaddingLeft = UDim.new(0, 5)
-
-Load1Stroke.Color = Color3.fromRGB(0, 255, 149)
-Load1Stroke.Name = "Load1Stroke"
-Load1Stroke.Parent = Load1
-
-TextEarned.Name = "TextEarned"
-TextEarned.Parent = Load1
-TextEarned.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextEarned.BackgroundTransparency = 1.000
-TextEarned.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextEarned.BorderSizePixel = 0
-TextEarned.Position = UDim2.new(-0.0107526882, 0, 0.0459358469, 0)
-TextEarned.Size = UDim2.new(0, 272, 0, 31)
-TextEarned.Font = Enum.Font.Highway
-TextEarned.Text = "31327"
-TextEarned.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextEarned.TextSize = 18.000
-TextEarned.TextXAlignment = Enum.TextXAlignment.Right
-
-TextEarnedPadding.Name = "TextEarnedPadding"
-TextEarnedPadding.Parent = TextEarned
-TextEarnedPadding.PaddingLeft = UDim.new(0, 5)
-
-TextEarnedStroke.Color = Color3.fromRGB(0, 255, 149)
-TextEarnedStroke.Name = "TextEarnedStroke"
-TextEarnedStroke.Parent = TextEarned
-
-Load1Shadow.Name = "Load1Shadow"
-Load1Shadow.Parent = Load1
-Load1Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load1Shadow.BackgroundTransparency = 0.900
-Load1Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load1Shadow.BorderSizePixel = 0
-Load1Shadow.Position = UDim2.new(-0.0130107701, 0, 0.0459358469, 0)
-Load1Shadow.Size = UDim2.new(0, 281, 0, 31)
-Load1Shadow.Font = Enum.Font.Highway
-Load1Shadow.Text = "Earned:"
-Load1Shadow.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load1Shadow.TextSize = 18.000
-Load1Shadow.TextXAlignment = Enum.TextXAlignment.Left
-
-Load1ShadowPadding.Name = "Load1ShadowPadding"
-Load1ShadowPadding.Parent = Load1Shadow
-Load1ShadowPadding.PaddingLeft = UDim.new(0, 5)
-
-Load1ShadowStroke.Color = Color3.fromRGB(0, 255, 149)
-Load1ShadowStroke.Name = "Load1ShadowStroke"
-Load1ShadowStroke.Parent = Load1Shadow
-
-Load2.Name = "Load2"
-Load2.Parent = MainFrame
-Load2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load2.BackgroundTransparency = 0.900
-Load2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load2.BorderSizePixel = 0
-Load2.Position = UDim2.new(0.0300000794, 0, 0.43599999, 0)
-Load2.Size = UDim2.new(0, 283, 0, 31)
-Load2.Font = Enum.Font.Highway
-Load2.Text = "Time Elapsed:"
-Load2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load2.TextSize = 18.000
-Load2.TextXAlignment = Enum.TextXAlignment.Left
-
-Load2Padding.Name = "Load2Padding"
-Load2Padding.Parent = Load2
-Load2Padding.PaddingLeft = UDim.new(0, 5)
-
-Load2Stroke.Color = Color3.fromRGB(0, 255, 149)
-Load2Stroke.Name = "Load2Stroke"
-Load2Stroke.Parent = Load2
-
-TextTime.Name = "TextTime"
-TextTime.Parent = Load2
-TextTime.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextTime.BackgroundTransparency = 1.000
-TextTime.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextTime.BorderSizePixel = 0
-TextTime.Position = UDim2.new(-0.0252176188, 0, 0.0246463902, 0)
-TextTime.Size = UDim2.new(0, 276, 0, 31)
-TextTime.Font = Enum.Font.Highway
-TextTime.Text = "01:19:11"
-TextTime.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextTime.TextSize = 18.000
-TextTime.TextXAlignment = Enum.TextXAlignment.Right
-
-TextTimePadding.Name = "TextTimePadding"
-TextTimePadding.Parent = TextTime
-TextTimePadding.PaddingLeft = UDim.new(0, 5)
-
-TextTimeStroke.Color = Color3.fromRGB(0, 255, 149)
-TextTimeStroke.Name = "TextTimeStroke"
-TextTimeStroke.Parent = TextTime
-
-Load2Shadow.Name = "Load2Shadow"
-Load2Shadow.Parent = Load2
-Load2Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load2Shadow.BackgroundTransparency = 0.900
-Load2Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load2Shadow.BorderSizePixel = 0
-Load2Shadow.Position = UDim2.new(-0.0131655447, 0, -0.0156131871, 0)
-Load2Shadow.Size = UDim2.new(0, 281, 0, 31)
-Load2Shadow.Font = Enum.Font.Highway
-Load2Shadow.Text = "Time Elapsed:"
-Load2Shadow.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load2Shadow.TextSize = 18.000
-Load2Shadow.TextXAlignment = Enum.TextXAlignment.Left
-
-Load2ShadowPadding.Name = "Load2ShadowPadding"
-Load2ShadowPadding.Parent = Load2Shadow
-Load2ShadowPadding.PaddingLeft = UDim.new(0, 5)
-
-Load2ShadowStroke.Color = Color3.fromRGB(0, 255, 149)
-Load2ShadowStroke.Name = "Load2ShadowStroke"
-Load2ShadowStroke.Parent = Load2Shadow
-
-Load3.Name = "Load3"
-Load3.Parent = MainFrame
-Load3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load3.BackgroundTransparency = 0.900
-Load3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load3.BorderSizePixel = 0
-Load3.Position = UDim2.new(0.0269999523, 0, 0.560000002, 0)
-Load3.Size = UDim2.new(0, 284, 0, 33)
-Load3.Font = Enum.Font.Highway
-Load3.Text = "Clock:"
-Load3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load3.TextSize = 17.000
-Load3.TextXAlignment = Enum.TextXAlignment.Left
-
-Load3Padding.Name = "Load3Padding"
-Load3Padding.Parent = Load3
-Load3Padding.PaddingLeft = UDim.new(0, 5)
-
-Load3Stroke.Color = Color3.fromRGB(0, 255, 149)
-Load3Stroke.Name = "Load3Stroke"
-Load3Stroke.Parent = Load3
-
-TextTotalEarned.Name = "TextTotalEarned"
-TextTotalEarned.Parent = Load3
-TextTotalEarned.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextTotalEarned.BackgroundTransparency = 1.000
-TextTotalEarned.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextTotalEarned.BorderSizePixel = 0
-TextTotalEarned.Position = UDim2.new(-0.00747297844, 0, 0.0518720075, 0)
-TextTotalEarned.Size = UDim2.new(0, 272, 0, 31)
-TextTotalEarned.Font = Enum.Font.Highway
-TextTotalEarned.Text = "-2511316"
-TextTotalEarned.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextTotalEarned.TextSize = 18.000
-TextTotalEarned.TextWrapped = true
-TextTotalEarned.TextXAlignment = Enum.TextXAlignment.Right
-
-TextTotalEarnedStroke.Color = Color3.fromRGB(0, 255, 149)
-TextTotalEarnedStroke.Name = "TextTotalEarnedStroke"
-TextTotalEarnedStroke.Parent = TextTotalEarned
-
-TextTotalEarnedPadding.Name = "TextTotalEarnedPadding"
-TextTotalEarnedPadding.Parent = TextTotalEarned
-TextTotalEarnedPadding.PaddingLeft = UDim.new(0, 5)
-
-Load3Shadow.Name = "Load3Shadow"
-Load3Shadow.Parent = Load3
-Load3Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Load3Shadow.BackgroundTransparency = 0.900
-Load3Shadow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Load3Shadow.BorderSizePixel = 0
-Load3Shadow.Position = UDim2.new(-0.0195951294, 0, 0.0518720075, 0)
-Load3Shadow.Size = UDim2.new(0, 284, 0, 30)
-Load3Shadow.Font = Enum.Font.Highway
-Load3Shadow.Text = "Clock:"
-Load3Shadow.TextColor3 = Color3.fromRGB(255, 255, 255)
-Load3Shadow.TextSize = 17.000
-Load3Shadow.TextXAlignment = Enum.TextXAlignment.Left
-
-Load3ShadowPadding.Name = "Load3ShadowPadding"
-Load3ShadowPadding.Parent = Load3Shadow
-Load3ShadowPadding.PaddingLeft = UDim.new(0, 5)
-
-Load3ShadowStroke.Color = Color3.fromRGB(0, 255, 149)
-Load3ShadowStroke.Name = "Load3ShadowStroke"
-Load3ShadowStroke.Parent = Load3Shadow
-
-AlchemyHubUIToggle.MouseButton1Click:Connect(function()
-    SkipPlayer()
+getgenv().Config = {
+    ["Team"] = "Pirates",
+    ["Items"] = {
+        ["Melee"] = {["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["C"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+        },
+        ["Blox Fruit"] = {["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["C"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["V"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["F"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+        },
+        ["Sword"] = {["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+        },
+        ["Gun"] = {["Enable"] = true,
+            ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
+            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+        } 
+    },
+    ["Misc"] = {
+        ["Hide Health"] = {4500,6000},
+        ["Lock Camera"] = true,
+        ["Cam Farm"] = true,
+        ["FPS Boost"] = true,
+        ["Bypass TP"] = true, 
+        ["Skip Race V4"] = true,
+        ["Chat"] = {"Crazzy Hub Auto Bounty"},
+        ["Hop Server if find friend"] = true
+    }
+}
+repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players
+repeat task.wait() until game.Players.LocalPlayer
+repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
+--// Join Team
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    repeat task.wait()
+        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+            if getgenv().Config.Team == "Marines" then
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
+                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                        b:Fire() 
+                    end
+                    v.Function()
+                end 
+            else
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
+                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                        b:Fire() 
+                    end
+                    v.Function()
+                end 
+            end
+        end
+    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+end
+--// Start
+local plrs = game:GetService("Players")
+local lp = plrs.LocalPlayer
+getgenv().targ = nil
+getgenv().checked = {}
+getgenv().hop = false
+getgenv().StartUse = false
+function HopServer(bO)
+    pcall(function()
+        if not bO then
+            bO = 10
+        end
+        ticklon = tick()
+        repeat
+            task.wait()
+        until tick() - ticklon >= 1
+        local function Hop()
+            TweenTo(CFrame.new(math.random(1000,5000),10000,math.random(1000,5000)))
+            if not CheckInComBat() then
+                for r = 1, math.huge do
+                    TweenTo(CFrame.new(math.random(1000,5000),10000,math.random(1000,5000)))
+                    if ChooseRegion == nil or ChooseRegion == "" then
+                        ChooseRegion = "Singapore"
+                    else
+                        game:GetService("Players").LocalPlayer.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text = ChooseRegion
+                    end
+                    local bP = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(r)
+                    for k, v in pairs(bP) do
+                        if k ~= game.JobId and v["Count"] < bO then
+                            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", k)
+                        end
+                    end
+                end
+            end
+            return false
+        end
+        if not getgenv().Loaded then
+            local function bQ(v)
+                if v.Name == "ErrorPrompt" then
+                    if v.Visible then
+                        if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                            HopServer()
+                            v.Visible = false
+                        end
+                    end
+                    v:GetPropertyChangedSignal("Visible"):Connect(
+                        function()
+                            if v.Visible then
+                                if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                    HopServer()
+                                    v.Visible = false
+                                end
+                            end
+                        end
+                    )
+                end
+            end
+            for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+                bQ(v)
+            end
+            game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+            getgenv().Loaded = true
+        end
+        while task.wait(0.1) do
+            Hop()
+        end
+    end)
+end
+--// Target
+function FindTarget()
+    if getgenv().targ then
+        table.insert(getgenv().checked, getgenv().targ)
+    end
+    if getgenv().Config.Misc["Hop Server if find friend"] then
+        pcall(function()
+            for _, v in pairs(plrs:GetFriendsAsync(lp.UserId):GetChildren()) do
+                getgenv().hop = true
+                return
+            end
+        end)
+    end
+    Dist = math.huge
+    Enemy = nil
+    for i, v in pairs(plrs:GetChildren()) do
+        if v ~= lp and v and v.Team and (tostring(lp.Team) == "Pirates" or tostring(v.Team)) and string.find(string.lower(tostring(v.Team)), "es") then
+            if (lp.Data.Level.Value - v.Data.Level.Value < 600) and CalcDistance(GetBypassPos(WaitHRP(v).CFrame), WaitHRP(v).CFrame) < 2500 then
+                if not ({["Portal-Portal"] = true, ["Leopard-Leopard"] = true, ["Kitsune-Kitsune"] = true})[tostring(v.Data.DevilFruit.Value)] then
+                    if not table.find(getgenv().checked, v) and not (v.Backpack:FindFirstChild("Awakening") or v.Character:FindFirstChild("Awakening")) then 
+                        if CalcDistance(WaitHRP(v).CFrame, WaitHRP(lp).CFrame) < Dist then
+                            Enemy = v
+                            Dist = CalcDistance(WaitHRP(v).CFrame, WaitHRP(lp).CFrame)
+                        end
+                    end
+                end
+            end
+        end
+    end
+    if Enemy ~= nil then
+        getgenv().targ = Enemy
+        game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):FindFirstChild("SayMessageRequest"):FireServer(getgenv().Config.Misc.Chat[math.random(0, #getgenv().Config.Misc.Chat)], "All")
+    else
+        getgenv().hop = true
+    end
+end
+function CheckRaidTarget(Target) 
+    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+        if CalcDistance(WaitHRP(Target).CFrame, game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame) < 5000 then 
+            return true 
+        end 
+    end 
+    return false
+end
+function CheckNotify(Msg)
+    for r, k in pairs(lp.PlayerGui.Notifications:GetChildren()) do
+        if k and k.Text and k.Text ~= "Player not enable PvP" and string.find(string.lower(k.Text), Msg) then
+            k.Text = "Player not enable PvP"
+            return true
+        end
+    end
+    return false
+end
+local Fromtime = 0
+function CheckTarget()
+    if not getgenv().targ or not getgenv().targ.Parent or not getgenv().targ.Character or getgenv().targ.Character:WaitForChild("Humanoid").Health <= 0  then 
+        return FindTarget() 
+    end 
+    if (CheckNotify("died") or CheckNotify("tử trận") or CheckNotify("safe") or CheckNotify("an toàn")) and getgenv().targ:DistanceFromCharacter(lp.Character:WaitForChild("Head", 9).Position) <= 15 then
+        return FindTarget() 
+    end 
+    if CheckRaidTarget(getgenv().targ) then
+        return FindTarget() 
+    end
+    if lp.PlayerGui.Main.BottomHUDList.SafeZone.Visible and getgenv().targ:DistanceFromCharacter(lp.Character:WaitForChild("Head", 9).Position) <= 15 then
+        return FindTarget() 
+    end
+    if getgenv().targ:DistanceFromCharacter(lp.Character:WaitForChild("Head").Position) < 50 then 
+        if Fromtime > os.time() + 5 then 
+            if not lp.PlayerGui.Main.InCombat.Visible then
+                return FindTarget() 
+            end
+        end
+    else
+        Fromtime = os.time()
+    end
+    return true
+end
+--// Tween / Bypass
+if game.PlaceId == 2753915549 then
+    World1 = true
+    PortalTable = {
+        Vector3.new(-7894.6201171875, 5545.49169921875, -380.246346191406),
+        Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625),
+        Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875),
+        Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875)
+    }
+elseif game.PlaceId == 4442272183 then
+    World2 = true
+    PortalTable = {
+        Vector3.new(-288.46246337890625, 306.130615234375, 597.9988403320312),
+        Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625),
+        Vector3.new(923.21252441406, 126.9760055542, 32852.83203125),
+        Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422)
+    }
+elseif game.PlaceId == 7449423635 then
+    World3 = true
+    PortalTable = {
+        Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125),
+        Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953),
+        Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
+        Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
+        Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875),
+        Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)
+    }
+end
+function GetPortal(Pos)
+    local OldPortal, Dist = Vector3.new(0,0,0), math.huge
+    for _, Portal in pairs(PortalTable) do
+        if (Portal - Pos.Position).Magnitude < Dist and OldPortal ~= Portal then
+            OldPortal, Dist = Portal, (Portal - Pos.Position).Magnitude
+        end
+    end
+    return OldPortal
+end 
+function BypassTeleport(is)
+    if lp.Character:FindFirstChild("PartTele") then
+        if Tween then
+            Tween:Cancel()
+        end
+        if CheckInComBat() then
+            return
+        end
+        WaitHRP(lp).CFrame = is
+        lp.Character.PartTele.CFrame = WaitHRP(lp).CFrame
+        lp.Character:WaitForChild("Humanoid"):ChangeState(15)
+        task.wait(0.5)
+        repeat task.wait() until lp.Character:WaitForChild("Humanoid").Health <= 0
+        repeat task.wait()
+            if lp.Character:FindFirstChild("HumanoidRootPart") then
+                lp.Character.HumanoidRootPart.CFrame = is  
+            end
+            if lp.Character:FindFirstChild("PartTele") then
+                lp.Character.PartTele.CFrame = is
+            end
+            if lp.Character:FindFirstChild("PrimaryPart") then
+                lp.Character.PrimaryPart.CFrame = is  
+            end
+        until lp.Character:WaitForChild("Humanoid").Health > 0
+        if lp.Character:FindFirstChild("PartTele") then
+            lp.Character.PartTele.CFrame = WaitHRP(lp).CFrame 
+        end
+        task.wait(0.5)
+    end
+end
+function GetBypassPos(pos)
+    local a, b = nil, math.huge
+    for i, v in pairs(game.Workspace._WorldOrigin.PlayerSpawns:FindFirstChild(tostring(lp.Team)):GetChildren()) do
+        if tostring(v) ~= "Leviathan" and (v:GetModelCFrame().Position - pos.Position).Magnitude < b then
+            a = v:GetModelCFrame()
+            b = (v:GetModelCFrame().Position - pos.Position).Magnitude
+        end
+    end
+    return a
+end
+function RequestEntrance(check1)
+    game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack({"requestEntrance", check1}))
+    if lp.Character:FindFirstChild("PartTele") then
+        lp.Character.PartTele.CFrame = WaitHRP(lp).CFrame 
+    end
+    task.wait(0.1)
+end
+function WaitHRP(q0) 
+    if not q0 then return end
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
+end 
+function CalcDistance(I, II) 
+    if not II then 
+        II = lp.Character.PrimaryPart.CFrame 
+    end 
+    return (Vector3.new(I.X, 0, I.Z)-Vector3.new(II.X, 0, II.Z)).Magnitude 
+end 
+function CheckInComBat()
+    return lp.PlayerGui.Main.InCombat.Visible and lp.PlayerGui.Main.InCombat.Text and (string.find(string.lower(lp.PlayerGui.Main.InCombat.Text),"risk"))
+end 
+function TweenTo(Pos)
+    if not lp.Character.HumanoidRootPart:FindFirstChild("Hold") then
+        local Hold = Instance.new("BodyVelocity", lp.Character.HumanoidRootPart)
+        Hold.Name = "Hold"
+        Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        Hold.Velocity = Vector3.new(0, 0, 0)
+    end
+    lp.Character:WaitForChild("Humanoid").Sit = false
+    if not lp.Character:FindFirstChild("PartTele") then
+        local PartTele = Instance.new("Part", lp.Character) 
+        PartTele.Transparency = 1
+        PartTele.Size = Vector3.new(10,1,10)
+        PartTele.Name = "PartTele"
+        PartTele.Anchored = true
+        PartTele.CanCollide = false
+        PartTele.CFrame = WaitHRP(lp).CFrame 
+        PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+            task.wait(0.01)
+            WaitHRP(lp).CFrame = PartTele.CFrame
+        end)
+    end
+    Portal = GetPortal(Pos) 
+    Spawn = GetBypassPos(Pos) 
+    MyCFrame = WaitHRP(lp).CFrame
+    Distance = CalcDistance(MyCFrame, Pos)
+    if CalcDistance(Portal, Pos) < CalcDistance(Pos) and CalcDistance(Portal) > 500 then
+        return RequestEntrance(Portal)
+    end
+    if not CheckInComBat() and CalcDistance(Pos) - CalcDistance(Spawn, Pos) > 1000 and CalcDistance(Spawn) > 1000 then
+        return BypassTeleport(Spawn)
+    end
+    if lp.Character:FindFirstChild("PartTele") then
+        lp.Character.PartTele.CFrame = CFrame.new(lp.Character.PartTele.CFrame.X, Pos.Y, lp.Character.PartTele.CFrame.Z)
+    end
+    Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(Distance / 300, Enum.EasingStyle.Linear),{CFrame = Pos})
+    Tween:Play() 
+end
+function EquipWeapon(tooltip)
+    for _, item in pairs(lp.Backpack:GetChildren()) do 
+        if tostring(item.ToolTip) == "" then 
+            item.Parent = lp.Character
+        end
+        if item:IsA("Tool") and item.ToolTip == tooltip then
+            lp.Character:WaitForChild("Humanoid"):EquipTool(item)
+            return item.Name
+        end 
+    end 
+    return false
+end
+function Down(Key, Cooldown)
+    pcall(function()
+        game:GetService("VirtualInputManager"):SendKeyEvent(true, Key, false, game)
+        task.wait(Cooldown)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false, Key, false, game)
+    end)
+end
+CombatFrameworkR = require(lp.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if typeof(y) == "table" then
+            pcall(function()
+                if getgenv().targ and getgenv().targ.Parent and CalcDistance(WaitHRP(lp).CFrame, WaitHRP(getgenv().targ).CFrame) <= 100 then
+                    if getgenv().Config.Misc["Lock Camera"] then
+                        game.Workspace.CurrentCamera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.Position, WaitHRP(getgenv().targ).Position)
+                    end
+                    if getgenv().StartUse == false then
+                        y.activeController.hitboxMagnitude = 60
+                        y.activeController.active = false
+                        y.activeController.focusStart = 1655503339.0980349
+                        y.activeController.increment = 1
+                        y.activeController.blocking = false
+                        y.activeController.attacking = false
+                        y.activeController.humanoid.AutoRotate = true
+                        game:GetService("VirtualUser"):CaptureController()
+                        game:GetService("VirtualUser"):Button1Down(Vector2.new(0,1,0,1))
+                    end
+                end
+            end)
+        end
+    end)
 end)
-ServerHop.MouseButton1Click:Connect(function()
-    setclipboard("https://discord.gg/dUdzZskBCC")
+aim = true
+spawn(function()
+    local gg = getrawmetatable(game)
+    local old = gg.__namecall
+    setreadonly(gg,false)
+    gg.__namecall = newcclosure(function(...)
+        local method = getnamecallmethod()
+        local args = {...}
+        if tostring(method) == "FireServer" then
+            if tostring(args[1]) == "RemoteEvent" then
+                if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                    if aim and CFrameHunt ~= nil then
+                        args[2] = CFrameHunt.Position
+                        return old(unpack(args))
+                    end
+                end
+            end
+        end
+        return old(...)
+    end)
 end)
+local Mouse = lp:GetMouse()
+Mouse.Button1Down:Connect(function()
+    pcall(function()
+        if getgenv().targ ~= nil and getgenv().targ.Parent then
+            local args = {
+                 [1] = WaitHRP(getgenv().targ).Position,
+                 [2] = WaitHRP(getgenv().targ)
+            }
+            game:GetService("Players").LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name].RemoteFunctionShoot:InvokeServer(unpack(args))
+         end
+    end)
+end)
+spawn(function()
+    while task.wait() do 
+        if getgenv().targ and getgenv().targ.Parent and tonumber(lp.Character:WaitForChild("Humanoid").Health) > 0 then
+            if lp.PlayerGui.Main.PvpDisabled.Visible == true then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+            end
+            if not lp.Character:FindFirstChild("HasBuso") then
+                game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Buso")
+            end
+            if lp:FindFirstChild("PlayerGui") and lp.PlayerGui:FindFirstChild("ScreenGui") and lp.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+            else
+                game:service("VirtualUser"):CaptureController()
+                game:service("VirtualUser"):SetKeyDown("0x65")
+                game:service("VirtualUser"):SetKeyUp("0x65")
+            end 
+            for Weapon, WeaponData in pairs(Config.Items) do
+                if WeaponData["Enable"] and getgenv().targ and getgenv().targ.Parent 
+                and (WaitHRP(lp).Position - WaitHRP(getgenv().targ).Position).Magnitude <= 500 and tonumber(lp.Character:WaitForChild("Humanoid").Health) > 0 then
+                    EqWeapon = EquipWeapon(Weapon)
+                    time = tick()
+                    if EqWeapon then
+                        for Skill, SkillData in pairs(WeaponData) do
+                            if Skill ~= "Enable" and WeaponData["Enable"] and SkillData.Enable 
+                            and (WaitHRP(lp).Position - WaitHRP(getgenv().targ).Position).Magnitude <= 500 then
+                                if lp.PlayerGui.Main.Skills:FindFirstChild(EqWeapon) 
+                                and lp.PlayerGui.Main.Skills[EqWeapon]:FindFirstChild(Skill) then 
+                                    if getgenv().targ and getgenv().targ.Parent and (WaitHRP(lp).Position - WaitHRP(getgenv().targ).Position).Magnitude <= 100
+                                    and lp.PlayerGui.Main.Skills[EqWeapon][Skill].Cooldown.AbsoluteSize.X <= 0 then
+                                        if time < tick() + 100 then
+                                            getgenv().StartUse = true
+                                            Down(Skill, SkillData["Hold Time"])
+                                            repeat task.wait() until lp.Character:FindFirstChild("Busy") and not lp.Character.Busy.Value
+                                            task.wait(0.1)
+                                            getgenv().StartUse = false
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    task.wait(1)
+                end
+            end
+        end
+    end
+end)
+function CheckAntiCheatBypass()
+    for i,v in pairs(lp.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock" or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+    end
+    for i,v in pairs(lp.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans" or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+    end
+end
+CheckAntiCheatBypass()
+if getgenv().Config.Misc["FPS Boost"] then
+    for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        pcall(function()
+            if v.Transparency and v.Parent ~= game.Players.LocalPlayer.Character then
+                v.Transparency = 1
+            end
+        end)
+    end
+end
+CamFarm = getgenv().Config.Misc["Cam Farm"]
+if not CamFarm then
+    game.Players.LocalPlayer.CameraMinZoomDistance = 127
+    game.Players.LocalPlayer.CameraMaxZoomDistance = 127
+    game.Players.LocalPlayer.CameraMaxZoomDistance = 127
+    game.Players.LocalPlayer.CameraMinZoomDistance = 0
+else
+    game.Players.LocalPlayer.CameraMinZoomDistance = 0
+    game.Players.LocalPlayer.CameraMaxZoomDistance = 0
+    game.Players.LocalPlayer.CameraMaxZoomDistance = 127
+    game.Players.LocalPlayer.CameraMinZoomDistance = 0
+end
+local radius = 15
+local angle = 0
+function getNextPosition(center)
+    angle = angle + 20
+    return center + Vector3.new(math.sin(math.rad(angle)) * radius, 15, math.cos(math.rad(angle)) * radius)
+end
+while task.wait() do 
+    if getgenv().hop then 
+        HopServer()
+    else
+        if CheckTarget() then
+            if tonumber(lp.Character:WaitForChild("Humanoid").Health) > 0 
+            and (tonumber(lp.Character:WaitForChild("Humanoid").Health) < getgenv().Config.Misc["Hide Health"][1] 
+            or (hide and tonumber(lp.Character:WaitForChild("Humanoid").Health) < getgenv().Config.Misc["Hide Health"][2])) then 
+                hide = true 
+                TweenTo(WaitHRP(getgenv().targ).CFrame + Vector3.new(0,math.random(1000,5000), 0)) 
+            else
+                hide = false
+                CFrameHunt = WaitHRP(getgenv().targ).CFrame
+                digit = CFrameHunt + WaitHRP(getgenv().targ).Velocity / 2
+                if digit.Y < 10 then 
+                    digit = CFrame.new(digit.X, 10, digit.Z) 
+                end 
+                if getgenv().targ.Character:FindFirstChild("Busy") and getgenv().targ.Character.Busy.Value then
+                    TweenTo(getNextPosition(WaitHRP(getgenv().targ).CFrame))
+                else
+                    if getgenv().targ.Character:FindFirstChild("Humanoid") and getgenv().targ.Character.Humanoid.MoveDirection.Magnitude <= 0 then
+                        TweenTo(CFrameHunt*CFrame.new(1,4,-2))
+                    else
+                        TweenTo(digit*CFrame.new(1,4,-2))
+                    end
+                end
+            end
+        end
+    end
+end

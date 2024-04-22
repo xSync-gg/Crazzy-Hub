@@ -1,3 +1,4 @@
+--a
 --// Join Team
 if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
     repeat task.wait()
@@ -497,4 +498,14 @@ while task.wait() do
             end
         end
     end
+end
+
+if getgenv().Config.Misc["Use Race V3"] then
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,"T",false,game)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,"T",false,game)
+end
+
+if getgenv().Config.Misc["Use Race V4"] then
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
 end

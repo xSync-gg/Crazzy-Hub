@@ -1,3 +1,4 @@
+--a
 local AngelM1 = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.M1)
 local Utils = require(game.ReplicatedStorage.Util)
 local plr = game.Players.LocalPlayer
@@ -20,28 +21,14 @@ tool.Activated:Connect(function()
     })
     mode = mode % 4 + 1
 end)
-
-local centerPosition = Vector3.new(0, 0, 0)
-local proximityRadius = 10
-local plr = game:GetService("Players"):GetPlayers()
-for _, player in ipairs(plr) do
-    local character = player.Character
-    if character then
-        local playerPos = character.PrimaryPart.Position
-        local distance = (playerPos - centerPosition).magnitude
-        if distance <= proximityRadius then
-            local nearplayer = player.Name
-        end
-    end
-end
-
+local plr = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
 local AngelZ = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.Z)
 local AngelZCharge = require(game:GetService("ReplicatedStorage").Effect.Container.Angel.ZCharge)
 local AngelZTeleport = game:GetService("ReplicatedStorage").Effect.Container.Angel.ZTeleport
 local Utils = require(game.ReplicatedStorage.Util)
 local plr = game.Players.LocalPlayer
-local char = plr.Character
-local target = nearplayer -- mục tiêu bị xích
+local char = plr
+local target = game.Players["arktung5a5"].Character -- mục tiêu bị xích
 local tool = Instance.new("Tool", plr.Backpack)
 tool.Name = "Z"
 tool.RequiresHandle = false

@@ -1,12 +1,13 @@
+--a
 getgenv().Config = {
     ["Team"] = "Pirates",
     ["Items"] = {
         ["Melee"] = {["Enable"] = true,
             ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
             ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1},
-            ["C"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+            ["C"] = {["Enable"] = true, ["Hold Time"] = 3}
         },
-        ["Blox Fruit"] = {["Enable"] = true,
+        ["Blox Fruit"] = {["Enable"] = false,
             ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
             ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1},
             ["C"] = {["Enable"] = true, ["Hold Time"] = 0.1},
@@ -24,9 +25,9 @@ getgenv().Config = {
     },
     ["Misc"] = {
         ["Hide Health"] = {4500,6000},
-        ["Lock Camera"] = true,
-        ["Cam Farm"] = true,
-        ["FPS Boost"] = true,
+        ["Lock Camera"] = false,
+        ["Cam Farm"] = false,
+        ["FPS Boost"] = false,
         ["Bypass TP"] = true, 
         ["Skip Race V4"] = true,
         ["Chat"] = {"Crazzy Hub Auto Bounty"},

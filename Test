@@ -1,3 +1,4 @@
+--a
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -2412,7 +2413,7 @@ if _G.FastAttackFaiFao_Mode == "Normal" then
 elseif _G.FastAttackFaiFao_Mode == "Fast" then
     _G.Fast_Delay = 0.15
 elseif _G.FastAttackFaiFao_Mode == "Extreme" then
-    _G.Fast_Delay = 0.05
+    _G.Fast_Delay = 0.015
 end
 
 local MainFarm = Tabs.Main:AddSection("Main Farm")

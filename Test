@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -3056,7 +3057,7 @@ function Auto_Farm_Level_Fast()
 		end;
 		if dL >= 15 and dL <= 69 then
 			for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
-				if z.Name == "Royal Squad" then
+				if z.Name == "Shanda" then
 					if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
 						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
 						repeat

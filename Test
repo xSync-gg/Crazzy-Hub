@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;

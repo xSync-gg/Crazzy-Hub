@@ -1,4 +1,3 @@
---a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -3101,7 +3100,6 @@ function Auto_Farm_Level_Fast()
 							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
 						end;
 						EquipWeapon(_G.SelectWeapon)
-                        CFrame.new(0, 30, 0) * CFrame.Angles(math.rad(0), 0, 0)
 						aw(game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5))
 						game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.Size = Vector3.new(120, 120, 120)
 						if (game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 6 then

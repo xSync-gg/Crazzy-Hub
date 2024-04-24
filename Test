@@ -5271,7 +5271,7 @@ coroutine.wrap(function()
 						a6 = tick()
 					end
 				elseif _G.FastType == "Fast" then
-					if tick() - a6 > .1 then
+					if tick() - a6 > 0.05 then
 						wait(0)
 						a6 = tick()
 					end

@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -2866,6 +2867,8 @@ dl:Toggle("Auto Farm Level", _G.Settings.AutoFarm, function(value)
 	if value == false then
 		aw(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 	end
+    local aE = {[1] = "AddPoint", [2] = "Melee", [3] = 100}
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
 end)
 dl:Toggle("SafeMode", _G.Settings.SafeMode, function(value)
 	_G.SafeMode = value;
@@ -2938,6 +2941,8 @@ end)
 if World1 then
 	dl:Toggle("Auto FaramFast 1-300", true, function(value)
 		_G.AutoFarmFast = value
+        local aE = {[1] = "AddPoint", [2] = "Melee", [3] = 100}
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
 	end)
 end;
 dl:Toggle("BypassTp[For All Teleport]", _G.BypassTP, function(value)
@@ -3114,6 +3119,10 @@ function Auto_Farm_Level_Fast()
 							_G.FastAttack = true
 						end
 					until game.Players[getgenv().SelectPly].Character.Humanoid.Health <= 0 or not Auto_Farm_Level_Fast() or dL >= 310
+                    _G.NeareastFarm = true
+                    if dL <= 310 then
+                        _G.NeareastFarm = false
+                    end
 				end
 			end
 		end
@@ -3124,7 +3133,7 @@ spawn(function()
 		pcall(function()
 			if _G.BringMob then
 				for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 350 then
 						z.HumanoidRootPart.CFrame = PosMon;
 						z.HumanoidRootPart.CanCollide = false;
 						z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)

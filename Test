@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -542,7 +543,7 @@ task.spawn(function()
 		pcall(function()
 			if BringMob then
 				for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
-					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 300 then
 						if InMyNetWork(z.HumanoidRootPart) then
 							z.HumanoidRootPart.CFrame = PosMon;
 							z.Humanoid.JumpPower = 0;
@@ -569,7 +570,7 @@ task.spawn(function()
 		pcall(function()
 			if BringMob then
 				for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
-					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 300 then
 						z.HumanoidRootPart.CFrame = PosMon;
 						z.Humanoid.JumpPower = 0;
 						z.Humanoid.WalkSpeed = 0;
@@ -593,7 +594,7 @@ function InMyNetWork(a0)
 	if isnetworkowner then
 		return isnetworkowner(a0)
 	else
-		if (a0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+		if (a0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
 			return true
 		end;
 		return false
@@ -3110,7 +3111,7 @@ spawn(function()
 		pcall(function()
 			if _G.BringMob then
 				for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 300 then
 						z.HumanoidRootPart.CFrame = PosMon;
 						z.HumanoidRootPart.CanCollide = false;
 						z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)

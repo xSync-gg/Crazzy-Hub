@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -787,23 +788,15 @@ local function aw(...)
 	end;
 	local ax = {}
 	local Distance = (as.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude;
-	if Distance < 10 then
-		Speed = 20000
-	elseif Distance < 25 then
-		Speed = 10000
-	elseif Distance < 50 then
-		Speed = 5000
-	elseif Distance < 150 then
-		Speed = 2500
-	elseif Distance < 250 then
-		Speed = 1250
+	if Distance < 250 then
+		Speed = 600
 	elseif Distance < 500 then
-		Speed = 700
+		Speed = 350
 	elseif Distance < 750 then
-		Speed = 500
+		Speed = 300
 	elseif Distance >= 1000 then
 		Speed = 350
-	end;
+	end
 	if _G.BypassTP then
 		if Distance > 3000 and not AutoFarmMaterial and not _G.AutoGodHumanand and not _G.AutoRaids and not(game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice")) and not(Name == "Fishman Commando" or Name == "Fishman Warrior") then
 			pcall(function()

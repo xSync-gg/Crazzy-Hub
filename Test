@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -5267,32 +5268,23 @@ end)
 dm:Toggle("FastAttack", true, function(ei)
 	_G.FastAttack = value
 end)
-_G.FastType = "Fast"
-coroutine.wrap(function()
-	while wait(0) do
-		local a8 = a2.activeController;
-		if a8 and a8.equipped then
-			task.wait(0)
-			if FastAttack or _G.FastAttack then
+if _G.FastType == "Slow" then
+	_G.Fast_Delay = 5
+elseif _G.FastType == "Fast" then
+	_G.Fast_Delay = 0.025
+elseif _G.FastType == "Extreme" then
+	_G.Fast_Delay = 0
+end;
+task.spawn(function()
+	pcall(function()
+		while task.wait(_G.Fast_Delay) do
+            if FastAttack or _G.FastAttack then
 				yakmefan()
-				if _G.FastType == "Normal" then
-					if tick() - a6 > .9 then
-						a6 = tick()
-					end
-				elseif _G.FastType == "Fast" then
-					if tick() - a6 > .0 then
-						a6 = tick()
-					end
-				elseif _G.FastType == "Slow" then
-					if tick() - a6 > .3 then
-						a6 = tick()
-					end;
-					sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-				end
 			end
 		end
-	end
-end)()
+	end)
+end)
+
 local en = game.Players.LocalPlayer.Data.Level.Value;
 if en >= 15 and en <= 70 and _G.AutoFarmFast then
 	_G.FastType = "Fast"

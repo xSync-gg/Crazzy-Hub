@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
     Title = "Sync Hub",
@@ -76,30 +77,6 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 	c:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
 end)
 setfpscap(999)
-
-
-function LoadFunction()
-	u.MouseEnter:Connect(function()
-		j:Create(u, TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 80, 0, 80)}):Play()
-	end)
-	u.MouseLeave:Connect(function()
-		j:Create(u, TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 65, 0, 65)}):Play()
-	end)
-	local w = false
-	u.MouseButton1Down:Connect(function()
-		if w == false then
-			w = false
-			j:Create(u, TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Rotation = 180}):Play()
-			q:Play()
-			j:Create(u, TweenInfo.new(.4, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
-			wait(.5)
-			j:Create(u, TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Rotation = 0}):Play()
-			j:Create(u, TweenInfo.new(.4, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {ImageTransparency = 0}):Play()
-			wait(.5)
-		end
-	end)
-end
-LoadFunction()
 
 _G.Settings = {
 	AutoFarm = false,

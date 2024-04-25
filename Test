@@ -1,4 +1,3 @@
---a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -642,89 +641,65 @@ function DisabledDamage()
 		end
 	end)
 end;
-local a1 = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
-local a2 = getupvalues(a1)[2]
-local a3 = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
-local a4 = getupvalues(a3)[2]
-local a5 = require(game.ReplicatedStorage.CombatFramework.RigLib)
-local a6 = tick()
-function CameraShaker()
-	local a7 = require(game.ReplicatedStorage.Util.CameraShaker)
-	a7:Stop()
-end;
+
+local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+local CombatFrameworkR = getupvalues(CombatFramework)[2]
 function CurrentWeapon()
-	local a8 = a2.activeController;
-	local a9 = a8.blades[1]
-	if not a9 then
-		return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
-	end;
-	pcall(function()
-		while a9.Parent ~= game.Players.LocalPlayer.Character do
-			a9 = a9.Parent
-		end
+	local ac = CombatFrameworkR.activeController 
+	local val = ac.blades[1]
+	if not val then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
+	pcall(function() 
+		while val.Parent~=game.Players.LocalPlayer.Character do val=val.Parent end 
 	end)
-	if not a9 then
-		return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
-	end;
-	return a9
-end;
-function getAllBladeHits(aa)
-	local ab = {}
-	local Client = game.Players.LocalPlayer;
-	local ac = workspace.Characters:GetChildren()
-	local ad = game:GetService("Workspace").Enemies:GetChildren()
-	for y = 1, #ad do
-		local z = ad[y]
-		local ae = z:FindFirstChildOfClass("Humanoid")
-		if ae and ae.RootPart and ae.Health > 0 and Client:DistanceFromCharacter(ae.RootPart.Position) <= aa + 5 then
-			table.insert(ab, ae.RootPart)
+	if not val then 
+		return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name 
+	end 
+	return val
+end
+function getAllBladeHitsPlayers(val)
+	local Hits = {}
+	for i=1,#game:GetService("Workspace").Characters:GetChildren() do 
+		local Val = game:GetService("Workspace").Characters:GetChildren()[i] 
+		local Val1 = Val:FindFirstChildOfClass("Humanoid")
+		if Val.Name ~= game.Players.LocalPlayer.Name and Val1 and Val1.RootPart and Val1.Health > 0 and game.Players.LocalPlayer:DistanceFromCharacter(Val1.RootPart.Position) < val+5 then
+			table.insert(Hits,Val1.RootPart)
 		end
-	end;
-	for y = 1, #ac do
-		local z = ac[y]
-		if z ~= game.Players.LocalPlayer.Character then
-			local ae = z:FindFirstChildOfClass("Humanoid")
-			if ae and ae.RootPart and ae.Health > 0 and Client:DistanceFromCharacter(ae.RootPart.Position) <= aa + 5 then
-				table.insert(ab, ae.RootPart)
-			end
+	end
+	return Hits
+end
+function getAllBladeHits(val)
+	local Hits = {}
+	for i=1,#game:GetService("Workspace").Enemies:GetChildren() do 
+		local Val = game:GetService("Workspace").Enemies:GetChildren()[i] 
+		local Val1 = Val:FindFirstChildOfClass("Humanoid")
+		if Val1 and Val1.RootPart and Val1.Health > 0 and game.Players.LocalPlayer:DistanceFromCharacter(Val1.RootPart.Position) < val+5 then
+			table.insert(Hits,Val1.RootPart)
 		end
-	end;
-	return ab
-end;
-function yakmefan()
-	local a8 = a2.activeController;
-	if a8 and a8.equipped then
-		for af = 1, 1 do
-			local ag = getAllBladeHits(100)
-			if #ag > 0 then
-				local ah = debug.getupvalue(a8.attack, 5)
-				local ai = debug.getupvalue(a8.attack, 6)
-				local aj = debug.getupvalue(a8.attack, 4)
-				local ak = debug.getupvalue(a8.attack, 7)
-				local al = (ah * 798405 + aj * 727595) % ai;
-				local am = aj * 798405
-				(function()
-					al = (al * ai + am) % 1099511627776;
-					ah = math.floor(al / ai)
-					aj = al - ah * ai
-				end)()
-				ak = ak + 1;
-				debug.setupvalue(a8.attack, 5, ah)
-				debug.setupvalue(a8.attack, 6, ai)
-				debug.setupvalue(a8.attack, 4, aj)
-				debug.setupvalue(a8.attack, 7, ak)
-				for k, z in pairs(a8.animator.anims.basic) do
-					z:Play(0.01, 0.01, 0.01)
-				end;
-				if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and a8.blades and a8.blades[1] then
-					game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(CurrentWeapon()))
-					game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(al / 1099511627776 * 16777215), ak)
-					game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", ag, 1, "")
+	end
+	return Hits
+end
+function AttackFunc()
+	if CombatFrameworkR.activeController and CombatFrameworkR.activeController.equipped then
+		for indexincrement = 1, 1 do local bladehit = getAllBladeHits(100)
+			if #bladehit > 0 then 
+        local AcAttack8 = debug.getupvalue(CombatFrameworkR.activeController.attack, 5) 
+        local AcAttack7 = debug.getupvalue(CombatFrameworkR.activeController.attack, 4) 
+        local AcAttack10 = debug.getupvalue(CombatFrameworkR.activeController.attack, 7) 
+        local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % debug.getupvalue(CombatFrameworkR.activeController.attack, 6) 
+        local NumberAc13 = AcAttack7 * 798405 
+      (function() NumberAc12 = (NumberAc12 * debug.getupvalue(CombatFrameworkR.activeController.attack, 6) + NumberAc13) % 1099511627776 
+        AcAttack8 = math.floor(NumberAc12 / debug.getupvalue(CombatFrameworkR.activeController.attack, 6)) 
+        AcAttack7 = NumberAc12 - AcAttack8 * debug.getupvalue(CombatFrameworkR.activeController.attack, 6) 
+      end)()
+				AcAttack10 = AcAttack10 + 1  debug.setupvalue(CombatFrameworkR.activeController.attack, 5, AcAttack8) debug.setupvalue(CombatFrameworkR.activeController.attack, 6, debug.getupvalue(CombatFrameworkR.activeController.attack, 6)) debug.setupvalue(CombatFrameworkR.activeController.attack, 4, AcAttack7) debug.setupvalue(CombatFrameworkR.activeController.attack, 7, AcAttack10)
+				for k, v in pairs(CombatFrameworkR.activeController.animator.anims.basic) do v:Play(0.01,0.01,0.01) end                 
+				if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and CombatFrameworkR.activeController.blades and CombatFrameworkR.activeController.blades[1] then game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(CurrentWeapon())) game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(NumberAc12 / 1099511627776 * 16777215), AcAttack10) game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, indexincrement, "")
 				end
 			end
 		end
 	end
-end;
+end
+
 function Com(an, ...)
 	local ao = game:GetService('ReplicatedStorage').Remotes:FindFirstChild("Comm" .. an)
 	if ao:IsA("RemoteEvent") then
@@ -5279,7 +5254,7 @@ task.spawn(function()
 	pcall(function()
 		while task.wait(_G.Fast_Delay) do
             if FastAttack or _G.FastAttack then
-				yakmefan()
+				AttackFunc()
 			end
 		end
 	end)

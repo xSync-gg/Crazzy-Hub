@@ -1,4 +1,3 @@
---a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -322,170 +321,144 @@ for y, z in pairs(game.ReplicatedStorage:GetChildren()) do
 		P.Anchored = true
 	end
 end;
-local function Q()
-	local R = game:GetService("Players").LocalPlayer.Data.Level.Value;
-	if R >= 1 and R <= 9 then
-		if tostring(game.Players.LocalPlayer.Team) == "Marines" then
-			MobName = "Trainee"
-			QuestName = "MarineQuest"
-			QuestLevel = 1;
-			Mon = "Trainee"
-			NPCPosition = CFrame.new(-2709.67944, 24.5206585, 2104.24585, -0.744724929, -3.97967455e-08, -0.667371571, 4.32403588e-08, 1, -1.07884304e-07, 0.667371571, -1.09201515e-07, -0.744724929)
-		elseif tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-			MobName = "Bandit"
-			Mon = "Bandit"
-			QuestName = "BanditQuest1"
-			QuestLevel = 1;
-			NPCPosition = CFrame.new(1059.99731, 16.9222069, 1549.28162, -0.95466274, 7.29721794e-09, 0.297689587, 1.05190106e-08, 1, 9.22064114e-09, -0.297689587, 1.19340022e-08, -0.95466274)
-		end;
-		return {
-			[1] = QuestLevel,
-			[2] = NPCPosition,
-			[3] = MobName,
-			[4] = QuestName,
-			[5] = LevelRequire,
-			[6] = Mon,
-			[7] = MobCFrame
-		}
-	end;
-	if R >= 210 and R <= 249 then
-		MobName = "Dangerous Prisoner"
-		QuestName = "PrisonerQuest"
-		QuestLevel = 2;
-		Mon = "Dangerous Prisoner"
-		NPCPosition = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
-		local S = {}
-		local J = string.gsub(MobName, "Lv. ", "")
-		local K = string.gsub(J, "[%[%]]", "")
-		local L = string.gsub(K, "%d+", "")
-		local M = string.gsub(L, "%s+", "")
-		for y, z in pairs(game.workspace.EnemySpawns:GetChildren()) do
-			if z.Name == M then
-				table.insert(S, z.CFrame)
-			end;
-			MobCFrame = S
-		end;
-		return {
-			[1] = QuestLevel,
-			[2] = NPCPosition,
-			[3] = MobName,
-			[4] = QuestName,
-			[5] = LevelRequire,
-			[6] = Mon,
-			[7] = MobCFrame
-		}
-	end;
-	local T = require(game:GetService("ReplicatedStorage").GuideModule)
-	local U = require(game:GetService("ReplicatedStorage").Quests)
-	for y, z in pairs(T["Data"]["NPCList"]) do
-		for V, W in pairs(z["Levels"]) do
-			if R >= W then
-				if not LevelRequire then
-					LevelRequire = 0
+function CheckQuest()
+	local p = game.Players.LocalPlayer.Data.Level.Value;
+	local q = 0;
+	for NameQuest, r in pairs(require(game.ReplicatedStorage.Quests)) do
+		if NameQuest ~= "BartiloQuest" and NameQuest ~= "CitizenQuest" then
+			for LevelQuest, s in pairs(r) do
+				for t, u in pairs(s.Task) do
+					QuestReq2 = u
 				end;
-				if W > LevelRequire then
-					NPCPosition = y["CFrame"]
-					QuestLevel = V;
-					LevelRequire = W
-				end;
-				if #z["Levels"] == 3 and QuestLevel == 3 then
-					NPCPosition = y["CFrame"]
-					QuestLevel = 2;
-					LevelRequire = z["Levels"][2]
+				if QuestReq2 ~= 1 then
+					if s.LevelReq <= p and s.LevelReq >= q then
+						RealQuestData = {
+							NameQuest = NameQuest,
+							LevelQuest = LevelQuest,
+							LevelPassed = true,
+							NameMon = s.Name,
+							LevelReq = s.LevelReq
+						}
+						q = s.LevelReq
+					end
 				end
 			end
 		end
 	end;
-	if R >= 375 and R <= 399 then
-		if _G.AutoFarm and (NPCPosition.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 3000 then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-		end
+	if p >= 700 and World1 then
+		Mon = "Galley Captain"
+		LevelQuest = 2;
+		NameQuest = "FountainQuest"
+	elseif p >= 1500 and World2 then
+		Mon = "Water Fighter"
+		LevelQuest = 2;
+		NameQuest = "ForgottenQuest"
+	else
+		Mon = RealQuestData.NameMon;
+		LevelQuest = RealQuestData.LevelQuest;
+		NameQuest = RealQuestData.NameQuest
 	end;
-	if R >= 400 and R <= 449 then
-		if _G.AutoFarm and (NPCPosition.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 3000 then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-		end
-	end;
-	for y, z in pairs(U) do
-		for V, W in pairs(z) do
-			if W["LevelReq"] == LevelRequire and y ~= "CitizenQuest" then
-				QuestName = y;
-				for X, Y in pairs(W["Task"]) do
-					MobName = X;
-					Mon = string.split(X, " [Lv. " .. W["LevelReq"] .. "]")[1]
-				end
-			end
-		end
-	end;
-	if QuestName == "MarineQuest2" then
-		QuestName = "MarineQuest2"
-		QuestLevel = 1;
-		MobName = "Chief Petty Officer"
-		Mon = "Chief Petty Officer"
-		LevelRequire = 120
-	elseif QuestName == "ImpelQuest" then
-		QuestName = "PrisonerQuest"
-		QuestLevel = 2;
-		MobName = "Dangerous Prisoner"
-		Mon = "Dangerous Prisoner"
-		LevelRequire = 210;
-		NPCPosition = CFrame.new(5310.60547, 0.350014925, 474.946594, 0.0175017118, 0, 0.999846935, 0, 1, 0, -0.999846935, 0, 0.0175017118)
-	elseif QuestName == "SkyExp1Quest" then
-		if QuestLevel == 1 then
-			NPCPosition = CFrame.new(-4721.88867, 843.874695, -1949.96643, 0.996191859, -0, -0.0871884301, 0, 1, -0, 0.0871884301, 0, 0.996191859)
-		elseif QuestLevel == 2 then
-			NPCPosition = CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
-		end
-	elseif QuestName == "Area2Quest" and QuestLevel == 2 then
-		QuestName = "Area2Quest"
-		QuestLevel = 1;
-		MobName = "Swan Pirate"
-		Mon = "Swan Pirate"
-		LevelRequire = 775
-	end;
-	MobName = MobName:sub(1, #MobName)
-	if not MobName:find("Lv") then
-		for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-			MonLV = string.match(z.Name, "%d+")
-			if z.Name:find(MobName) and #z.Name > #MobName and tonumber(MonLV) <= R + 50 then
-				MobName = z.Name
-			end
-		end
-	end;
-	if not MobName:find("Lv") then
-		for y, z in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
-			MonLV = string.match(z.Name, "%d+")
-			if z.Name:find(MobName) and #z.Name > #MobName and tonumber(MonLV) <= R + 50 then
-				MobName = z.Name;
-				Mon = a
-			end
-		end
-	end;
-	local S = {}
-	local J = string.gsub(MobName, "Lv. ", "")
-	local K = string.gsub(J, "[%[%]]", "")
-	local L = string.gsub(K, "%d+", "")
-	local M = string.gsub(L, "%s+", "")
-	for y, z in pairs(game.workspace.EnemySpawns:GetChildren()) do
-		if z.Name == M then
-			table.insert(S, z.CFrame)
-		else
-			table.insert(S, nil)
-		end;
-		MobCFrame = S
-	end;
-	return {
-		[1] = QuestLevel,
-		[2] = NPCPosition,
-		[3] = MobName,
-		[4] = QuestName,
-		[5] = LevelRequire,
-		[6] = Mon,
-		[7] = MobCFrame,
-		[8] = MonQ,
-		[9] = MobCFrameNuber
-	}
+	NameMon = relmon[Mon] or Mon;
+	CFrameQuest = QuestPoint[NameQuest] + Vector3.new(0, 100, 0)
+	CFrameMon = EnemySpawn[NameMon]
 end;
+relmon = {
+	["Gorilla King"] = "The Gorilla King",
+	["Mil. Soldier"] = "Military Soldier",
+	["Mil. Spy"] = "Military Spy",
+	["Swan's Pirate"] = "Swan Pirate"
+}
+EnemySpawn = {}
+function SpawnPoint()
+	for o, v in pairs(game.Workspace.Enemies:GetChildren()) do
+		if v and v.HumanoidRootPart then
+			if not EnemySpawn[v.Name] then
+				EnemySpawn[v.Name] = v.HumanoidRootPart.CFrame
+			end
+		end
+	end;
+	for o, v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+		if v.Name and not table.find(EnemySpawn, v.Name) then
+			EnemySpawn[v.Name:gsub(" .Lv. %d+.", "")] = v.CFrame
+		end
+	end;
+	for o, v in pairs(getnilinstances()) do
+		if v and v.Name and not EnemySpawn[v.Name:gsub(" .Lv. %d+.", "")] then
+			if math.random(10, 70) == 25 then
+				task.wait()
+			end;
+			local w = gqgqj(v)
+			if w then
+				EnemySpawn[v.Name:gsub(" .Lv. %d+.", "")] = w
+			end
+		end
+	end
+end;
+function gqgqj(a)
+	if a and a:FindFirstChild"HumanoidRootPart" then
+		return a.HumanoidRootPart.CFrame
+	end;
+	if a:GetAttribute("CFrame") then
+		return a.CFrame
+	end
+end;
+SpawnPoint()
+function CFrameQuest()
+	QuestPoses = {}
+	for x, v in pairs(getnilinstances()) do
+		if v:IsA("Model") and v:FindFirstChild("Head") and v.Head:FindFirstChild("QuestBBG") and v.Head.QuestBBG.Title.Text == "QUEST" and v.Name ~= "Villager" then
+			QuestPoses[v.Name] = v:WaitForChild"HumanoidRootPart".CFrame * CFrame.new(0, -2, 2)
+		end
+	end;
+	for x, v in pairs(game.Workspace.NPCs:GetDescendants()) do
+		if v.Name == "QuestBBG" and v.Title.Text == "QUEST" and v.Parent.Parent.Name ~= "Villager" then
+			QuestPoses[v.Parent.Parent.Name] = v.Parent.Parent.HumanoidRootPart.CFrame * CFrame.new(0, -2, 2)
+		end
+	end;
+	DialoguesList = {}
+	for x, v in pairs(require(game.ReplicatedStorage.DialoguesList)) do
+		DialoguesList[v] = x
+	end;
+	local y = getscriptclosure(game:GetService("Players").LocalPlayer.PlayerScripts.NPC)
+	local z = {}
+	for A, v in pairs(debug.getprotos(y)) do
+		if #debug.getconstants(v) == 1 then
+			table.insert(z, debug.getconstant(v, 1))
+		end
+	end;
+	local B = false;
+	local C = {}
+	for A, v in pairs(debug.getconstants(y)) do
+		if type(v) == "string" then
+			if v == "Players" then
+				B = false
+			end;
+			if not B then
+				if v == "Blox Fruit Dealer" then
+					B = true
+				end
+			else
+			end;
+			if B then
+				table.insert(C, v)
+			end
+		end
+	end;
+	local D = {}
+	QuestPoint = {}
+	for A, v in pairs(C) do
+		if QuestPoses[v] then
+			D[z[A]] = C[A]
+		end
+	end;
+	for x, v in next, D do
+		QuestPoint[x] = QuestPoses[v]
+	end;
+	QuestPoint["SkyExp1Quest"] = CFrame.new(-7857.28516, 5544.34033, -382.321503, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
+end;
+CFrameQuest()
+CheckQuest()
+print(NameQuest, NameMon)
 spawn(function()
 	pcall(function()
 		game:GetService("RunService").Stepped:Connect(function()
@@ -2951,16 +2924,16 @@ spawn(function()
 					end
 				else
 					if dM.Visible == true then
-						if game:GetService("Workspace").Enemies:FindFirstChild(Q()[3]) then
+						if game:GetService("Workspace").Enemies:FindFirstChild(CheckQuest()[3]) then
 							for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if z.Name == Q()[3] then
+								if z.Name == CheckQuest()[3] then
 									if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
 										repeat
 											task.wait()
 											if _G.Auto_CFrame then
 												dK = 1
 											end;
-											if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Q()[6]) then
+											if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckQuest()[6]) then
 												game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
 											else
 												PosMon = z.HumanoidRootPart.CFrame;
@@ -2982,11 +2955,11 @@ spawn(function()
 							end
 						else
 							if _G.Auto_CFrame and not _G.AutoFarmFast then
-								aw(Q()[7][dK] * MethodFarm)
-								if (Q()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+								aw(CheckQuest()[7][dK] * MethodFarm)
+								if (CheckQuest()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
 									if dK == nil or dK == '' then
 										dK = 1
-									elseif dK >= #Q()[7] then
+									elseif dK >= #CheckQuest()[7] then
 										dK = 1
 									end;
 									dK = dK + 1;
@@ -2995,29 +2968,29 @@ spawn(function()
 							else
 								if not _G.AutoFarmFast then
 									if AttackRandomType_MonCFrame == 1 then
-										aw(Q()[7][1] * CFrame.new(0, 30, 20))
+										aw(CheckQuest()[7][1] * CFrame.new(0, 30, 20))
 									elseif AttackRandomType_MonCFrame == 2 then
-										aw(Q()[7][1] * CFrame.new(0, 30, -20))
+										aw(CheckQuest()[7][1] * CFrame.new(0, 30, -20))
 									elseif AttackRandomType_MonCFrame == 3 then
-										aw(Q()[7][1] * CFrame.new(20, 30, 0))
+										aw(CheckQuest()[7][1] * CFrame.new(20, 30, 0))
 									elseif AttackRandomType_MonCFrame == 4 then
-										aw(Q()[7][1] * CFrame.new(0, 30, -20))
+										aw(CheckQuest()[7][1] * CFrame.new(0, 30, -20))
 									elseif AttackRandomType_MonCFrame == 5 then
-										aw(Q()[7][1] * CFrame.new(-20, 30, 0))
+										aw(CheckQuest()[7][1] * CFrame.new(-20, 30, 0))
 									else
-										aw(Q()[7][1] * CFrame.new(0, 30, 20))
+										aw(CheckQuest()[7][1] * CFrame.new(0, 30, 20))
 									end
 								end
 							end
 						end
 					else
-						aw(Q()[2])
-						if (Q()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+						aw(CheckQuest()[2])
+						if (CheckQuest()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
 							BringMob = false;
 							wait(0.2)
-							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Q()[4], Q()[1])
+							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", CheckQuest()[4], CheckQuest()[1])
 							wait(0.5)
-							aw(Q()[7][1] * MethodFarm)
+							aw(CheckQuest()[7][1] * MethodFarm)
 						end
 					end
 				end
@@ -5247,9 +5220,9 @@ end)
 if _G.FastType == "Slow" then
 	_G.Fast_Delay = 5
 elseif _G.FastType == "Fast" then
-	_G.Fast_Delay = 0.025
+	_G.Fast_Delay = 0.05
 elseif _G.FastType == "Extreme" then
-	_G.Fast_Delay = 0
+	_G.Fast_Delay = 0.025
 end;
 task.spawn(function()
 	pcall(function()
@@ -7146,7 +7119,7 @@ function CheckMonFF(eK)
 	local eL = nil;
 	local eM = math.huge;
 	for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-		if z.Name == Q()[3] then
+		if z.Name == CheckQuest()[3] then
 			local eN, eO = workspace.CurrentCamera:WorldToViewportPoint(z[eK].Position)
 			local eP = Vector2.new(eN.x, eN.y)
 			local eQ = Vector2.new(workspace.CurrentCamera.ViewportSize.x / 2, workspace.CurrentCamera.ViewportSize.y / 2)
@@ -7168,7 +7141,7 @@ spawn(function()
 				[1] = PositionSkillMasteryGun
 			}
 			game:GetService("Players").LocalPlayer.Character[_G.SelectWeaponGun].RemoteEvent:FireServer(unpack(aE))
-			if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Q()[6]) then
+			if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckQuest()[6]) then
 				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
 			end
 		end
@@ -7208,13 +7181,13 @@ dr:Toggle("Auto Farm MasteryGun {Click the mouse to shoot}", _G.Settings.AutoFar
 			local dM = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest;
 			pcall(function()
 				if _G.AutoFarmGunMastery then
-					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Q()[6]) then
+					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckQuest()[6]) then
 						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
 					end;
 					if dM.Visible == true then
-						if game:GetService("Workspace").Enemies:FindFirstChild(Q()[3]) then
+						if game:GetService("Workspace").Enemies:FindFirstChild(CheckQuest()[3]) then
 							for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if z.Name == Q()[3] then
+								if z.Name == CheckQuest()[3] then
 									if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
 										PosMon = z.HumanoidRootPart.CFrame;
 										MonHumanoidRootPart = z.HumanoidRootPart;
@@ -7270,12 +7243,12 @@ dr:Toggle("Auto Farm MasteryGun {Click the mouse to shoot}", _G.Settings.AutoFar
 						else
 							_G.UseSkill = false;
 							if _G.Auto_CFrame then
-								aw(Q()[7][dK] * CFrame.new(0, 30, 5))
-								if (Q()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+								aw(CheckQuest()[7][dK] * CFrame.new(0, 30, 5))
+								if (CheckQuest()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
 									if dK == nil or dK == '' then
 										dK = 1;
 										print(dK)
-									elseif dK >= #Q()[7] then
+									elseif dK >= #CheckQuest()[7] then
 										dK = 1;
 										print(dK)
 									end;
@@ -7285,28 +7258,28 @@ dr:Toggle("Auto Farm MasteryGun {Click the mouse to shoot}", _G.Settings.AutoFar
 								end
 							else
 								if AttackRandomType_MonCFrame == 1 then
-									aw(Q()[7][1] * CFrame.new(0, 30, 20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, 20))
 								elseif AttackRandomType_MonCFrame == 2 then
-									aw(Q()[7][1] * CFrame.new(0, 30, -20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, -20))
 								elseif AttackRandomType_MonCFrame == 3 then
-									aw(Q()[7][1] * CFrame.new(20, 30, 0))
+									aw(CheckQuest()[7][1] * CFrame.new(20, 30, 0))
 								elseif AttackRandomType_MonCFrame == 4 then
-									aw(Q()[7][1] * CFrame.new(0, 30, -20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, -20))
 								elseif AttackRandomType_MonCFrame == 5 then
-									aw(Q()[7][1] * CFrame.new(-20, 30, 0))
+									aw(CheckQuest()[7][1] * CFrame.new(-20, 30, 0))
 								else
-									aw(Q()[7][1] * CFrame.new(0, 30, 20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, 20))
 								end
 							end
 						end
 					else
-						aw(Q()[2])
-						if (Q()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+						aw(CheckQuest()[2])
+						if (CheckQuest()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
 							BringMobFarm = false;
 							wait(0.2)
-							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Q()[4], Q()[1])
+							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", CheckQuest()[4], CheckQuest()[1])
 							wait(0.5)
-							aw(Q()[7][1] * CFrame.new(0, 30, 5))
+							aw(CheckQuest()[7][1] * CFrame.new(0, 30, 5))
 						end
 					end
 				end
@@ -7327,18 +7300,18 @@ dr:Toggle("Auto Farm MasteryFruit", _G.Settings.AutoFarmFruitMastery, function(v
 			local dM = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest;
 			pcall(function()
 				if _G.AutoFarmFruitMastery then
-					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Q()[6]) then
+					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckQuest()[6]) then
 						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
 					end;
 					if dM.Visible == true then
-						if game:GetService("Workspace").Enemies:FindFirstChild(Q()[3]) then
+						if game:GetService("Workspace").Enemies:FindFirstChild(CheckQuest()[3]) then
 							for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-								if z.Name == Q()[3] then
+								if z.Name == CheckQuest()[3] then
 									if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
 										PositionSkillMasteryDevilFruit = z.HumanoidRootPart.Position;
 										repeat
 											task.wait()
-											if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Q()[6]) then
+											if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckQuest()[6]) then
 												game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
 											else
 												if z.Humanoid.Health <= z.Humanoid.MaxHealth * _G.HealthMs / 100 then
@@ -7456,12 +7429,12 @@ dr:Toggle("Auto Farm MasteryFruit", _G.Settings.AutoFarmFruitMastery, function(v
 						else
 							_G.UseSkill = false;
 							if _G.Auto_CFrame then
-								aw(Q()[7][dK] * CFrame.new(0, 30, 5))
-								if (Q()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+								aw(CheckQuest()[7][dK] * CFrame.new(0, 30, 5))
+								if (CheckQuest()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
 									if dK == nil or dK == '' then
 										dK = 1;
 										print(dK)
-									elseif dK >= #Q()[7] then
+									elseif dK >= #CheckQuest()[7] then
 										dK = 1;
 										print(dK)
 									end;
@@ -7471,28 +7444,28 @@ dr:Toggle("Auto Farm MasteryFruit", _G.Settings.AutoFarmFruitMastery, function(v
 								end
 							else
 								if AttackRandomType_MonCFrame == 1 then
-									aw(Q()[7][1] * CFrame.new(0, 30, 20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, 20))
 								elseif AttackRandomType_MonCFrame == 2 then
-									aw(Q()[7][1] * CFrame.new(0, 30, -20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, -20))
 								elseif AttackRandomType_MonCFrame == 3 then
-									aw(Q()[7][1] * CFrame.new(20, 30, 0))
+									aw(CheckQuest()[7][1] * CFrame.new(20, 30, 0))
 								elseif AttackRandomType_MonCFrame == 4 then
-									aw(Q()[7][1] * CFrame.new(0, 30, -20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, -20))
 								elseif AttackRandomType_MonCFrame == 5 then
-									aw(Q()[7][1] * CFrame.new(-20, 30, 0))
+									aw(CheckQuest()[7][1] * CFrame.new(-20, 30, 0))
 								else
-									aw(Q()[7][1] * CFrame.new(0, 30, 20))
+									aw(CheckQuest()[7][1] * CFrame.new(0, 30, 20))
 								end
 							end
 						end
 					else
-						aw(Q()[2])
-						if (Q()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+						aw(CheckQuest()[2])
+						if (CheckQuest()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
 							BringMobFarm = false;
 							wait(0.2)
-							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Q()[4], Q()[1])
+							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", CheckQuest()[4], CheckQuest()[1])
 							wait(0.5)
-							aw(Q()[7][1] * CFrame.new(0, 30, 5))
+							aw(CheckQuest()[7][1] * CFrame.new(0, 30, 5))
 						end
 					end
 				end

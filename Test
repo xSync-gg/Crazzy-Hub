@@ -1,3 +1,4 @@
+--a
 repeat
 	wait(0)
 until game.Players.LocalPlayer;
@@ -114,7 +115,7 @@ u.Size = UDim2.new(0, 65, 0, 65)
 u.Draggable = true;
 u.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 u.BackgroundTransparency = 1;
-u.Image = "rbxassetid://16129235054"
+u.Image = "rbxassetid://15418687340"
 function LoadFunction()
 	u.MouseEnter:Connect(function()
 		j:Create(u, TweenInfo.new(.2, Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {
@@ -2838,7 +2839,7 @@ dk:Button("CopyLinkDiscord", function()
 	game:GetService("StarterGui"):SetCore("SendNotification", {
 		Title = "VectorHub",
 		Text = "คัดลอกเรียบร้อยแล้ว",
-		Icon = "rbxassetid://16129235054",
+		Icon = "rbxassetid://15418687340",
 		Duration = 3
 	})
 end)
@@ -3263,7 +3264,7 @@ if World1 then
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "VectorHub",
 			Text = "ปิดวาร์ปเร็ว",
-			Icon = "rbxassetid://16129235054",
+			Icon = "rbxassetid://15418687340",
 			Duration = 1
 		})
 	end)
@@ -6447,7 +6448,7 @@ spawn(function()
 			if _G.Settings.AutoObservation then
 				if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 6000 then
 					game:GetService("StarterGui"):SetCore("SendNotification", {
-						Icon = "rbxassetid://16129235054",
+						Icon = "rbxassetid://15418687340",
 						Title = "Observation",
 						Text = "You Have Max Observation"
 					})
@@ -8501,7 +8502,7 @@ dv:Toggle("Teleport To Mirage Island{Hop}", _G.Settings.MirageHop, function(valu
 	game:GetService("StarterGui"):SetCore("SendNotification", {
 		Title = "VectorHub",
 		Text = "HopServer...",
-		Icon = "rbxassetid://16129235054",
+		Icon = "rbxassetid://15418687340",
 		Duration = 5
 	})
 	if _G.MirageHop and not game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
@@ -8523,7 +8524,7 @@ spawn(function()
 					game:GetService("StarterGui"):SetCore("SendNotification", {
 						Title = "VectorHub",
 						Text = "เกาะลับไม่เกิด",
-						Icon = "rbxassetid://16129235054",
+						Icon = "rbxassetid://15418687340",
 						Duration = 1
 					})
 				end
@@ -9091,7 +9092,7 @@ spawn(function()
 				game:GetService("StarterGui"):SetCore("SendNotification", {
 					Title = "VectorHub",
 					Text = "HopServer...",
-					Icon = "rbxassetid://16129235054",
+					Icon = "rbxassetid://15418687340",
 					Duration = 5
 				})
 				while _G.AutoBuyLegendarySwordHop do
@@ -9172,7 +9173,7 @@ dy:Toggle("Auto Buy Color Haki Hop", _G.Settings.AutoBuyEnchanmentHakiHop, funct
 					game:GetService("StarterGui"):SetCore("SendNotification", {
 						Title = "VectorHub",
 						Text = "HopServer...",
-						Icon = "rbxassetid://16129235054",
+						Icon = "rbxassetid://15418687340",
 						Duration = 5
 					})
 					while _G.AutoBuyEnchanmentHakiHop do
@@ -9360,7 +9361,7 @@ dz:Button("Join JobID", function()
 	game:GetService("StarterGui"):SetCore("SendNotification", {
 		Title = "VectorHub",
 		Text = "Success JobID Please Wait",
-		Icon = "rbxassetid://16129235054",
+		Icon = "rbxassetid://15418687340",
 		Duration = 3
 	})
 end)
@@ -9369,7 +9370,7 @@ dz:Button("Copy JobID", function()
 	game:GetService("StarterGui"):SetCore("SendNotification", {
 		Title = "VectorHub",
 		Text = "Success Copy JobID",
-		Icon = "rbxassetid://16129235054",
+		Icon = "rbxassetid://15418687340",
 		Duration = 3
 	})
 end)

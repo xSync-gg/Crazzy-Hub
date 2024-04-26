@@ -1,4 +1,3 @@
---a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
     Title = "Sync Hub",
@@ -19,38 +18,27 @@ local Misc = Window:MakeTab({"Misc", "menu"})
 local Race = Window:MakeTab({"Race V4", "activity"})
 local Event = Window:MakeTab({"Event", "waves"})
 
-local nung = Instance.new("ScreenGui")
-local gay = Instance.new("TextButton")
-local sex = Instance.new("UICorner")
-local sexgay = Instance.new("ImageLabel")
-sex.Name = "sex"
-sex.Parent = gay
-sexgay.Name = "sexgay"
-sexgay.Parent = gay
-sexgay.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-sexgay.BackgroundTransparency = 1.000
-sexgay.BorderSizePixel = 0
-sexgay.Position = UDim2.new(0.234619886, 0, 0.239034846, 0)
-sexgay.Size = UDim2.new(0, 30, 0, 30)
-sexgay.Image = "rbxassetid://15418687340"
-nung.Name = "nung"
-nung.Parent = game.CoreGui
-nung.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-gay.Name = "gay"
-gay.Parent = nung
-gay.BackgroundColor3 = Color3.fromRGB(30,20,20)
-gay.BackgroundTransparency = 0.1
-gay.BorderSizePixel = 0
-gay.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-gay.Size = UDim2.new(0, 55, 0, 55)
-gay.Font = Enum.Font.SourceSans
-gay.Text = ""
-gay.TextColor3 = Color3.fromRGB(153, 51, 255)
-gay.TextSize = 20.000
-gay.Draggable = true
-gay.MouseButton1Click:Connect(function()
+local L_91_ = Instance.new("ScreenGui")
+local L_92_ = Instance.new("ImageButton")
+local L_93_ = Instance.new("UICorner")
+L_91_.Name = "ToggleUI"
+L_91_.Parent = game.CoreGui
+L_91_.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+L_92_.Name = "ToggleButton"
+L_92_.Parent = L_91_
+L_92_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+L_92_.BorderSizePixel = 0
+L_92_.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+L_92_.Size = UDim2.new(0, 50, 0, 50)
+L_92_.BackgroundTransparency = 1.000
+L_92_.Draggable = true
+L_92_.Image = "rbxassetid://16813434313"
+L_93_.CornerRadius = UDim.new(0, 10)
+L_93_.Parent = L_92_
+L_92_.MouseButton1Click:Connect(function()
     Window:Minimize()
 end)
+
 -----------------------------------------------------------------------------------------------------------------Function
 repeat
 	wait(0)
@@ -1286,6 +1274,212 @@ AutoFarmLevel:Callback(function(value)
 		aw(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 	end
 end)
+AttackRandomType_MonCFrame = 1;
+spawn(function()
+	while wait() do
+		AttackRandomType_MonCFrame = math.random(1, 5)
+		wait(0.3)
+	end
+end)
+local dK = 1;
+spawn(function()
+	while wait() do
+		local dL = game.Players.LocalPlayer.Data.Level.Value;
+		local dM = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest;
+		pcall(function()
+			if _G.AutoFarm then
+				if _G.AutoFarmFast and (dL >= 15 and dL <= 300) then
+					if dL >= 15 and dL <= 300 then
+						Auto_Farm_Level_Fast()
+						return
+					end
+				else
+					if dM.Visible == true then
+						if game:GetService("Workspace").Enemies:FindFirstChild(Q()[3]) then
+							for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+								if z.Name == Q()[3] then
+									if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
+										repeat
+											task.wait()
+											if _G.Auto_CFrame then
+												dK = 1
+											end;
+											if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Q()[6]) then
+												game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+											else
+												PosMon = z.HumanoidRootPart.CFrame;
+												z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+												z.HumanoidRootPart.CanCollide = false;
+												z.Humanoid.WalkSpeed = 0;
+												z.Head.CanCollide = false;
+												BringMob = true;
+												EquipWeapon(_G.SelectWeapon)
+												z.HumanoidRootPart.Transparency = 1;
+												aw(z.HumanoidRootPart.CFrame * MethodFarm)
+												if not _G.AutoFarm or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO then
+													_G.FastAttack = true
+												end
+											end
+										until not _G.AutoFarm or not z.Parent or z.Humanoid.Health <= 0 or dM.Visible == false or not z:FindFirstChild("HumanoidRootPart")
+									end
+								end
+							end
+						else
+							if _G.Auto_CFrame and not _G.AutoFarmFast then
+								aw(Q()[7][dK] * MethodFarm)
+								if (Q()[7][dK].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+									if dK == nil or dK == '' then
+										dK = 1
+									elseif dK >= #Q()[7] then
+										dK = 1
+									end;
+									dK = dK + 1;
+									wait(0.5)
+								end
+							else
+								if not _G.AutoFarmFast then
+									if AttackRandomType_MonCFrame == 1 then
+										aw(Q()[7][1] * CFrame.new(0, 30, 20))
+									elseif AttackRandomType_MonCFrame == 2 then
+										aw(Q()[7][1] * CFrame.new(0, 30, -20))
+									elseif AttackRandomType_MonCFrame == 3 then
+										aw(Q()[7][1] * CFrame.new(20, 30, 0))
+									elseif AttackRandomType_MonCFrame == 4 then
+										aw(Q()[7][1] * CFrame.new(0, 30, -20))
+									elseif AttackRandomType_MonCFrame == 5 then
+										aw(Q()[7][1] * CFrame.new(-20, 30, 0))
+									else
+										aw(Q()[7][1] * CFrame.new(0, 30, 20))
+									end
+								end
+							end
+						end
+					else
+						aw(Q()[2])
+						if (Q()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+							BringMob = false;
+							wait(0.2)
+							game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Q()[4], Q()[1])
+							wait(0.5)
+							aw(Q()[7][1] * MethodFarm)
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+
+if World1 then
+    local AutoFarmLevelFast = Main:AddToggle({
+        Name = "Auto Farm Level Fast [1 -> 300]",
+        Description = "Tự động cày cấp nhanh [1 -> 300]",
+        Default = true
+    })
+    AutoFarmLevelFast:Callback(function(value)
+		_G.AutoFarmFast = value
+    end)
+end
+_G.ChackPlayer = 0;
+_G.ChackPlayer2 = _G.ChackPlayer;
+local dN = {}
+function Auto_Farm_Level_Fast()
+	local dO = game.Players:GetPlayers()
+	local dP = game.Players.LocalPlayer.Data.Level.Value;
+	local dQ = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text;
+	local dR = string.split(dQ, " ")[2]
+	getgenv().SelectPly = string.split(dQ, " ")[2]
+	pcall(function()
+		local dL = game.Players.LocalPlayer.Data.Level.Value;
+		local dM = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest;
+		CFrameMon = CFrame.new(-7719.66895, 5611.42334, -1445.98816, 0.906745553, -1.43169192e-08, -0.421678245, 5.939971e-08, 1, 9.37764852e-08, 0.421678245, -1.10078972e-07, 0.906745553)
+		if _G.AutoFarm and dL >= 15 and dL <= 69 and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+		end;
+		if dL >= 15 and dL <= 69 then
+			for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
+				if z.Name == "Royal Squad" then
+					if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+						repeat
+							task.wait()
+							z.HumanoidRootPart.CanCollide = false;
+							z.Humanoid.WalkSpeed = 0;
+							z.Head.CanCollide = false;
+							BringMob = true;
+							EquipWeapon(_G.SelectWeapon)
+							if dL >= 70 and dL <= 310 then
+								if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+									game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+								end
+							end;
+							PosMon = z.HumanoidRootPart.CFrame;
+							z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+							z.HumanoidRootPart.Transparency = 1;
+							aw(z.HumanoidRootPart.CFrame * MethodFarm)
+							if not _G.AutoFarm or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO or _G.SuperFastAttack then
+								_G.FastAttack = true
+							end
+						until not z.Parent or not _G.AutoFarm or z.Humanoid.Health < 0;
+						aw(CFrameMon)
+					end
+				else
+					BringMob = false;
+					aw(CFrameMon)
+				end
+			end
+		elseif dL >= 70 and dL <= 310 then
+			if dM.Visible == false then
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+			elseif dM.Visible == true then
+				if string.find(dQ, "Defeat") then
+					repeat
+						task.wait()
+						if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+						end;
+						if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+						end;
+						EquipWeapon(_G.SelectWeapon)
+						aw(game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5))
+						game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.Size = Vector3.new(120, 120, 120)
+						if (game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 6 then
+							game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+							game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+						end;
+						if (game:GetService("Players")[getgenv().SelectPly].Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 6 then
+							game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+							game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+						end;
+						if not _G.AutoFarm or not _G.Auto_Farm_LevelO or _G.Auto_Farm_Level or _G.Auto_Farm_LevelO or _G.SuperFastAttack then
+							_G.FastAttack = true
+						end
+					until game.Players[getgenv().SelectPly].Character.Humanoid.Health <= 0 or not Auto_Farm_Level_Fast() or dL >= 310
+				end
+			end
+		end
+	end)
+end;
+spawn(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+		pcall(function()
+			if _G.BringMob then
+				for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+						z.HumanoidRootPart.CFrame = PosMon;
+						z.HumanoidRootPart.CanCollide = false;
+						z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+						if z.Humanoid:FindFirstChild("Animator") then
+							z.Humanoid.Animator:Destroy()
+						end;
+						sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+					end
+				end
+			end
+		end)
+	end)
+end)
 
 local AutoFarmNearest = Main:AddToggle({
     Name = "Auto Farm Nearest",
@@ -1340,6 +1534,10 @@ spawn(function()
 		end
 	end
 end)
+
+local ChestFarm = Main:AddSection({"Chest Farm"})
+
+
 -----------------------------------------------------------------------------------------------------------------Setting Tab
 local SafeMode = Set:AddToggle({
     Name = "Safe Mode",
@@ -1366,6 +1564,16 @@ spawn(function()
         task.wait()
     end
 end)
+
+local BypassTP = Set:AddToggle({
+    Name = "Byoass TP",
+    Description = "Dịch chuyển nhanh",
+    Default = false
+})
+SafeMode:Callback(function(value)
+	_G.BypassTP = value
+end)
+
 -----------------------------------------------------------------------------------------------------------------Other Farm Tab
 
 -----------------------------------------------------------------------------------------------------------------Stats Tab

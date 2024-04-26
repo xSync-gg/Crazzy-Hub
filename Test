@@ -1,9 +1,8 @@
---a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
-    Title = "Sync Hub",
+    Title = "Crazzy Hub V3",
     SubTitle = "by ! xSync",
-    SaveFolder = "Sync Hub"
+    SaveFolder = "Crazzy_Hub"
 })
 
 local Main = Window:MakeTab({"Main", "home"})
@@ -32,7 +31,7 @@ sexgay.BackgroundTransparency = 1.000
 sexgay.BorderSizePixel = 0
 sexgay.Position = UDim2.new(0.234619886, 0, 0.239034846, 0)
 sexgay.Size = UDim2.new(0, 30, 0, 30)
-sexgay.Image = "rbxassetid://15418687340"
+sexgay.Image = "rbxassetid://15660296675"
 nung.Name = "nung"
 nung.Parent = game.CoreGui
 nung.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -272,16 +271,16 @@ _G.Settings = {
 
 function LoadSettings()
 	if readfile and writefile and isfile and isfolder then
-		if not isfolder("Sync_Hub") then
-			makefolder("Sync_Hub")
+		if not isfolder("Crazzy_Hub") then
+			makefolder("Crazzy_Hub")
 		end
-		if not isfolder("Sync_Hub/Blox Fruits/") then
-			makefolder("Sync_Hub/Blox Fruits/")
+		if not isfolder("Crazzy_Hub/Blox Fruits/") then
+			makefolder("Crazzy_Hub/Blox Fruits/")
 		end
-		if not isfile("Sync_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-			writefile("Sync_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Settings))
+		if not isfile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+			writefile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Settings))
 		else
-			local x = game:GetService("HttpService"):JSONDecode(readfile("Sync_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
+			local x = game:GetService("HttpService"):JSONDecode(readfile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
 			for y, z in pairs(x) do
 				_G.Settings[y] = z
 			end
@@ -293,15 +292,15 @@ end
 
 function SaveSettings()
 	if readfile and writefile and isfile and isfolder then
-		if not isfile("Sync_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+		if not isfile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
 			LoadSettings()
 		else
-			local x = game:GetService("HttpService"):JSONDecode(readfile("Sync_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
+			local x = game:GetService("HttpService"):JSONDecode(readfile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
 			local A = {}
 			for y, z in pairs(_G.Settings) do
 				A[y] = z
 			end
-			writefile("Sync_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(A))
+			writefile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(A))
 		end
 	else
 		return
@@ -1418,7 +1417,7 @@ local SelectWeapn = Main:AddDropdown({
 	Description = "Chọn vũ khí",
 	Options = {"Melee", "Sword", "Fruit"},
 	Default = "Melee",
-	Flag = "",
+	Flag = "Melee",
 	Callback = function(value)
 		SelectWeapon = value
 	end
@@ -1468,7 +1467,7 @@ local SelectFastAttackSpeed = Main:AddDropdown({
 	Description = "Chọn tốc độ đánh",
 	Options = {"Slow", "Fast", "Extreme"},
 	Default = "Fast",
-	Flag = "",
+	Flag = "Fast",
 	Callback = function(value)
 		_G.FastType = value
 	end
@@ -1486,7 +1485,7 @@ local SelectMethodFarm = Main:AddDropdown({
 	Description = "Chọn cách cày",
 	Options = {"Upper", "Behind", "Below"},
 	Default = "Upper",
-	Flag = "",
+	Flag = "Upper",
 	Callback = function(value)
 		_G.Method = value
 	end
@@ -1616,6 +1615,20 @@ spawn(function()
 				end
 			end
 		end)
+	end
+end)
+spawn(function()
+	while task.wait() do
+		if _G.AutoStatsMelee then
+			if game:GetService("Players").LocalPlayer.Data.Stats.Melee.Level.Value <= 2549 then
+				local aE = {
+					[1] = "AddPoint",
+					[2] = "Melee",
+					[3] = 100
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
+			end
+		end
 	end
 end)
 
@@ -4038,7 +4051,69 @@ task.spawn(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------Stats Tab
+local SelectStats = Stats:AddDropdown({
+	Name = "Select Stats",
+	Description = "Chọn stats",
+	Options = {"Melee",	"Defense", "Sword", "Gun", "Fruit"},
+	Default = "Melee",
+	Flag = "Melee",
+	Callback = function(value)
+		_G.SelectStats = value
+	end
+})
 
+local AutoStatsSelected = Stats:AddToggle({
+    Name = "Auto Stats Selected",
+    Description = "Tự động thêm điểm",
+    Default = false
+})
+AutoStatsSelected:Callback(function(value)
+	_G.EnabledAutoStats = value
+end)
+spawn(function()
+	pcall(function()
+		while task.wait() do
+			if _G.EnabledAutoStats then
+				if _G.SelectStats == "Melee" then
+					local aE = {
+						[1] = "AddPoint",
+						[2] = "Melee",
+						[3] = 100
+					}
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
+				elseif _G.SelectStats == "Defense" then
+					local aE = {
+						[1] = "AddPoint",
+						[2] = "Defense",
+						[3] = 100
+					}
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
+				elseif _G.SelectStats == "Sword" then
+					local aE = {
+						[1] = "AddPoint",
+						[2] = "Sword",
+						[3] = 100
+					}
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
+				elseif _G.SelectStats == "Gun" then
+					local aE = {
+						[1] = "AddPoint",
+						[2] = "Gun",
+						[3] = 100
+					}
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
+				elseif _G.SelectStats == "Fruit" then
+					local aE = {
+						[1] = "AddPoint",
+						[2] = "Demon Fruit",
+						[3] = 100
+					}
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(aE))
+				end
+			end
+		end
+	end)
+end)
 -----------------------------------------------------------------------------------------------------------------Teleport Tab
 
 -----------------------------------------------------------------------------------------------------------------Player Tab

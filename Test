@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
     Title = "Crazzy Hub V3",
@@ -31,7 +32,7 @@ sexgay.BackgroundTransparency = 1.000
 sexgay.BorderSizePixel = 0
 sexgay.Position = UDim2.new(0.234619886, 0, 0.239034846, 0)
 sexgay.Size = UDim2.new(0, 30, 0, 30)
-sexgay.Image = "rbxassetid://15660296675"
+sexgay.Image = "rbxassetid://15689000757"
 nung.Name = "nung"
 nung.Parent = game.CoreGui
 nung.ZIndexBehavior = Enum.ZIndexBehavior.Sibling

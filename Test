@@ -1,4 +1,3 @@
---a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
     Title = "Sync Hub",
@@ -643,7 +642,7 @@ task.spawn(function()
 		pcall(function()
 			if BringMob then
 				for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
-					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= _G.BringMobDis then
+					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= _G.DistanceBring then
 						if InMyNetWork(z.HumanoidRootPart) then
 							z.HumanoidRootPart.CFrame = PosMon
 							z.Humanoid.JumpPower = 0
@@ -671,7 +670,7 @@ task.spawn(function()
 		pcall(function()
 			if BringMob then
 				for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
-					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= _G.BringMobDis then
+					if not string.find(z.Name, "Boss") and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= _G.DistanceBring then
 						z.HumanoidRootPart.CFrame = PosMon
 						z.Humanoid.JumpPower = 0
 						z.Humanoid.WalkSpeed = 0
@@ -696,7 +695,7 @@ function InMyNetWork(a0)
 	if isnetworkowner then
 		return isnetworkowner(a0)
 	else
-		if (a0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.BringMobDis then
+		if (a0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.DistanceBring then
 			return true
 		end
 		return false
@@ -1407,7 +1406,7 @@ end
 -----------------------------------------------------------------------------------------------------------------Main Tab
 Main:AddDiscordInvite({
 	Name = "Join Crazzy Hub Please",
-	Logo = "rbxassetid://15298567397",
+	Logo = "rbxassetid://15660296675",
 	Invite = "https://discord.gg/4ENnwm9wEQ"
 })
 
@@ -1470,14 +1469,14 @@ local SelectFastAttackSpeed = Main:AddDropdown({
 	Default = "Fast",
 	Flag = "",
 	Callback = function(value)
-		SelectSpeedFast = value
+		_G.FastType = value
 	end
 })
-if SelectSpeedFast == "Slow" then
+if _G.FastType == "Slow" then
 	_G.Fast_Delay = 3
-elseif SelectSpeedFast == "Fast" then
+elseif _G.FastType == "Fast" then
 	_G.Fast_Delay = 0.05
-elseif SelectSpeedFast == "Extreme" then
+elseif _G.FastType == "Extreme" then
 	_G.Fast_Delay = 0.025
 end
 
@@ -1715,7 +1714,7 @@ spawn(function()
 		pcall(function()
 			if _G.BringMob then
 				for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= 200 then
+					if _G.AutoFarm and BringMob and z.Name == Mon and (z.HumanoidRootPart.Position - PosMon.Position).magnitude <= _G.DistanceBring then
 						z.HumanoidRootPart.CFrame = PosMon;
 						z.HumanoidRootPart.CanCollide = false;
 						z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
@@ -1815,7 +1814,7 @@ spawn(function()
 	game:GetService("RunService").Heartbeat:Connect(function()
 		pcall(function()
 			for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-				if _G.BringMob and _G.AutoFarmBone and StartMagnetBoneMon and (z.Name == "Reborn Skeleton" or z.Name == "Living Zombie" or z.Name == "Demonic Soul" or z.Name == "Posessed Mummy") and (z.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 350 then
+				if _G.BringMob and _G.AutoFarmBone and StartMagnetBoneMon and (z.Name == "Reborn Skeleton" or z.Name == "Living Zombie" or z.Name == "Demonic Soul" or z.Name == "Posessed Mummy") and (z.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= _G.DistanceBring then
 					z.HumanoidRootPart.CFrame = PosMonBone;
 					z.HumanoidRootPart.CanCollide = false;
 					z.Humanoid.JumpPower = 0;
@@ -2298,6 +2297,46 @@ spawn(function()
     end
 end)
 
+local m = game:GetService("RunService")
+local WhiteScreen = Set:AddToggle({
+    Name = "White Screen",
+    Description = "Màn hình trắng",
+    Default = false
+})
+WhiteScreen:Callback(function(value)
+	_G.WhiteScreen = value;
+	if value then
+		game.RunService:Set3dRenderingEnabled(false)
+	else
+		game.RunService:Set3dRenderingEnabled(true)
+	end
+end)
+
+local BlackScreen = Set:AddToggle({
+    Name = "Black Screen",
+    Description = "Màn hình đen",
+    Default = false
+})
+BlackScreen:Callback(function(value)
+	_G.BlackScreen = value;
+	if value then
+		game.RunService:Set3dRenderingEnabled(false)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = UDim2.new(500, 0, 500, 500)
+	else
+		game.RunService:Set3dRenderingEnabled(true)
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = UDim2.new(1, 0, 500, 500)
+	end
+end)
+
+local DisableNotification = Set:AddToggle({
+    Name = "Disable Notification",
+    Description = "Tắt thông báo",
+    Default = false
+})
+DisableNotification:Callback(function(value)
+	game:GetService("Players").LocalPlayer.PlayerGui.Notifications.Enabled = not game:GetService("Players").LocalPlayer.PlayerGui.Notifications.Enabled
+end)
+
 local BypassTP = Set:AddToggle({
     Name = "Bypass TP",
     Description = "Dịch chuyển nhanh",
@@ -2305,6 +2344,57 @@ local BypassTP = Set:AddToggle({
 })
 BypassTP:Callback(function(value)
 	_G.BypassTP = value
+end)
+
+local AutoTurnOnKenHaki = Set:AddToggle({
+    Name = "Auto Turn On Ken Haki",
+    Description = "Tự động bật haki quan sát",
+    Default = false
+})
+AutoTurnOnKenHaki:Callback(function(value)
+	_G.AutoKen = value
+end)
+spawn(function()
+	while wait() do
+		if _G.AutoKen then
+			local aE = {
+				[1] = "Ken",
+				[2] = true
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommE:FireServer(unpack(aE))
+		end
+	end
+end)
+
+_G.Auto_CFrame = true;
+local DisableDamge = Set:AddToggle({
+    Name = "Disabl eDamge",
+    Description = "Tắt số damge hiện lên",
+    Default = true
+})
+DisableDamge:Callback(function(value)
+	_G.Disdamage = value;
+	DisabledDamage()
+end)
+
+local AutoTurnOnBusoHaki = Set:AddToggle({
+    Name = "Auto Turn On Buso Haki",
+    Description = "Tự động bật haki",
+    Default = true
+})
+AutoTurnOnBusoHaki:Callback(function(value)
+	_G.AutoHaki = value
+end)
+task.spawn(function()
+	while task.wait() do
+		pcall(function()
+			if _G.AutoHaki then
+				if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+				end
+			end
+		end)
+	end
 end)
 
 local FastAttack = Set:AddToggle({
@@ -2324,6 +2414,62 @@ task.spawn(function()
 		end
 	end)
 end)
+local en = game.Players.LocalPlayer.Data.Level.Value;
+if en >= 15 and en <= 70 and _G.AutoFarmFast then
+	_G.FastType = "Extreme"
+elseif en >= 70 then
+	_G.FastType = "Fast"
+end;
+for y, z in pairs(game.ReplicatedStorage:GetChildren()) do
+	if z.Name == "Cake Prince" or z.Name == "Dough King" or z.Name == "Cyborg" or z.Name == "The Gorilla King" or z.Name == "Wysper" or z.Name == "Thunder God" or z.Name == "Mob Leader" or z.Name == "Bobby" or z.Name == "Saber Expert" or z.Name == "Warden" or z.Name == "Chief Warden" or z.Name == "Swan" or z.Name == "Magma Admiral" or z.Name == "Fishman Lord" or z.Name == "Wysper" or z.Name == "Ice Admiral" or z.Name == "Diamond" or z.Name == "Jeremy" or z.Name == "Fajita" or z.Name == "Don Swan" or z.Name == "Smoke Admiral" or z.Name == "Awakened Ice Admiral" or z.Name == "Tide Keeper" or z.Name == "Darkbeard" or z.Name == "Stone" or z.Name == "Island Empress" or z.Name == "Kilo Admiral" or z.Name == "Captain Elephant" or z.Name == "Beautiful Pirate" or z.Name == "Longma" or z.Name == "Cake Queen" or z.Name == "Greybeard" or z.Name == "Order" or z.Name == "Cursed Captain" or z.Name == "Soul Reaper" or z.Name == "Rip indra" or z.Name == "Mihawk Boss" or z.Name == "Cake Prince" or z.Name == "Dough King" or z.Name == "Cursed Skeleton Boss" then
+		if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
+			_G.FastType = "Extreme"
+		end
+	end
+end;
+task.spawn(function()
+	while _G.FastAttack do
+		wait(0)
+		require(game.ReplicatedStorage.Util.CameraShaker):Stop()
+		Bruh = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+		Ryu = debug.getupvalues(Bruh)[2]
+		task.wait(0.04)
+		if typeof(Ryu) == "table" then
+			pcall(function()
+				Ryu.activeController.timeToNextAttack = 0;
+				Ryu.activeController.timeToNextAttack = math.huge ^ math.huge ^ math.huge;
+				Ryu.activeController.active = false;
+				Ryu.activeController.timeToNextBlock = 0;
+				Ryu.activeController.focusStart = 1655503339.0980349;
+				Ryu.activeController.blocking = false;
+				Ryu.activeController.attacking = false;
+				Ryu.activeController.hitboxMagnitude = 200;
+				Ryu.activeController.humanoid.AutoRotate = true;
+				Ryu.activeController.increment = 1 + 1 / 0.5
+			end)
+		end
+	end
+end)
+
+local BringMob = Set:AddToggle({
+    Name = "Bring Mob",
+    Description = "Gom Quái",
+    Default = true
+})
+BringMob:Callback(function(value)
+	_G.BringMob = value
+end)
+
+Set:AddSlider({
+	Name = "Bring Mob Distance",
+	Min = 1,
+	Max = 350,
+	Increase = 1,
+	Default = 300,
+	Callback = function(value)
+		_G.DistanceBring = value
+	end
+})
 
 Set:AddSlider({
 	Name = "Distance Farm",

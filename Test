@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
     Title = "Sync Hub",
@@ -1404,6 +1405,108 @@ local function bf(W)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------Main Tab
+Main:AddDiscordInvite({
+	Name = "Join Crazzy Hub Please",
+	Logo = "rbxassetid://15298567397",
+	Invite = "https://discord.gg/4ENnwm9wEQ"
+})
+
+local ConfigFarm = Main:AddSection({"Config Farm"})
+
+local SelectWeapn = Main:AddDropdown({
+	Name = "Select Weapon",
+	Description = "Chọn vũ khí",
+	Options = {"Melee", "Sword", "Fruit"},
+	Default = "Melee",
+	Flag = "",
+	Callback = function(value)
+		SelectWeapon = value
+	end
+})
+task.spawn(function()
+	while wait() do
+		pcall(function()
+			if SelectWeapon == "Melee" then
+				for y, z in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if z.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(z.Name)) then
+							_G.SelectWeapon = z.Name
+						end
+					end
+				end
+			elseif SelectWeapon == "Sword" then
+				for y, z in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if z.ToolTip == "Sword" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(z.Name)) then
+							_G.SelectWeapon = z.Name
+						end
+					end
+				end
+			elseif SelectWeapon == "Fruit" then
+				for y, z in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if z.ToolTip == "Blox Fruit" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(z.Name)) then
+							_G.SelectWeapon = z.Name
+						end
+					end
+				end
+			else
+				for y, z in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if z.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(z.Name)) then
+							_G.SelectWeapon = z.Name
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+
+local SelectFastAttackSpeed = Main:AddDropdown({
+	Name = "Select Fast Attack Speed",
+	Description = "Chọn tốc độ đánh",
+	Options = {"Slow", "Fast", "Extreme"},
+	Default = "Fast",
+	Flag = "",
+	Callback = function(value)
+		SelectSpeedFast = value
+	end
+})
+if SelectSpeedFast == "Slow" then
+	_G.Fast_Delay = 3
+elseif SelectSpeedFast == "Fast" then
+	_G.Fast_Delay = 0.05
+elseif SelectSpeedFast == "Extreme" then
+	_G.Fast_Delay = 0.025
+end
+
+local SelectMethodFarm = Main:AddDropdown({
+	Name = "Select Method Farm",
+	Description = "Chọn cách cày",
+	Options = {"Upper", "Behind", "Below"},
+	Default = "Upper",
+	Flag = "",
+	Callback = function(value)
+		_G.Method = value
+	end
+})
+task.spawn(function()
+	while task.wait(0) do
+		pcall(function()
+			if _G.Method == "Behind" then
+				MethodFarm = CFrame.new(0, 0, _G.DistanceAutoFarm)
+			elseif _G.Method == "Below" then
+				MethodFarm = CFrame.new(0, -_G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(90), 0, 0)
+			elseif _G.Method == "Upper" then
+				MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(0), 0, 0)
+			else
+				MethodFarm = CFrame.new(0, _G.DistanceAutoFarm, 0)
+			end
+		end)
+	end
+end)
+
 local MainFarm = Main:AddSection({"Main Farm"})
 
 local AutoFarmLevel = Main:AddToggle({
@@ -1681,6 +1784,348 @@ spawn(function()
 	end
 end)
 
+local BoneFarm = Main:AddSection({"Bone Farm"})
+
+local e4 = 0;
+local e5 = Main:AddParagraph({"Bone : " .. e4, true})
+spawn(function()
+	while task.wait() do
+		local e6 = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Check")
+		e5:Set('Bone : ' .. e6)
+		wait(1)
+	end
+end)
+
+local AutoFarmBone = Main:AddToggle({
+    Name = "Auto Farm Bone",
+    Description = "Tự động cày xương",
+    Default = false
+})
+AutoFarmBone:Callback(function(value)
+	_G.AutoFarmBone = value;
+	_G.Settings.AutoFarmBone = value;
+	SaveSettings()
+	if value == false then
+		task.wait()
+		aw(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+		task.wait()
+	end
+end)
+spawn(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+		pcall(function()
+			for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				if _G.BringMob and _G.AutoFarmBone and StartMagnetBoneMon and (z.Name == "Reborn Skeleton" or z.Name == "Living Zombie" or z.Name == "Demonic Soul" or z.Name == "Posessed Mummy") and (z.HumanoidRootPart.Position - PosMonBone.Position).magnitude <= 350 then
+					z.HumanoidRootPart.CFrame = PosMonBone;
+					z.HumanoidRootPart.CanCollide = false;
+					z.Humanoid.JumpPower = 0;
+					z.Humanoid.WalkSpeed = 0;
+					z.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+					if z.Humanoid:FindFirstChild("Animator") then
+						z.Humanoid.Animator:Destroy()
+					end;
+					sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+				end
+			end
+		end)
+	end)
+end)
+local e7 = 1;
+	local e8 = {
+		["Mon"] = {
+			"Reborn Skeleton",
+			"Demonic Soul",
+			"Living Zombie",
+			"Posessed Mummy"
+		},
+		["Boss"] = {
+			"Soul Reaper"
+		},
+		["Item"] = "Hallow Essence"
+	}
+	local e9 = 1;
+	function GetBone_CFrame_Mon()
+		local S = {}
+		for H, Mon in ipairs(e8["Mon"]) do
+			local J = Mon:gsub("Lv. ", ""):gsub("[%[%]]", ""):gsub("%d+", ""):gsub("%s+", "")
+			for H, z in ipairs(game.workspace.EnemySpawns:GetChildren()) do
+				if z.Name == J then
+					table.insert(S, z.CFrame)
+				end
+			end
+		end;
+		return S
+	end;
+	spawn(function()
+		while wait() do
+			pcall(function()
+				if _G.AutoFarmBone then
+					for H, ea in ipairs(e8["Boss"]) do
+						local eb = e8["Item"]
+						if game:GetService("Workspace").Enemies:FindFirstChild(ea) or game:GetService("ReplicatedStorage"):FindFirstChild(ea) then
+							for H, ec in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+								if string.find(ec.Name, ea) then
+									if ec:FindFirstChild("Humanoid") and ec:FindFirstChild("HumanoidRootPart") and ec.Humanoid.Health > 0 then
+										repeat
+											wait()
+											EquipWeapon(_G.SelectWeapon)
+											ec.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+											BringMob = true;
+											aw(ec.HumanoidRootPart.CFrame * MethodFarm)
+											if (ec.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+												_G.FastAttack = true
+											end
+										until not _G.AutoFarmBone or ec.Humanoid.Health <= 0 or not ec.Parent or ec.Humanoid.Health <= 0;
+										BringMob = false
+									end
+								end
+							end
+						else
+							if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(eb) or game:GetService("Players").LocalPlayer.Character:FindFirstChild(eb) then
+								EquipWeapon(eb)
+								aw(workspace.Map["Haunted Castle"].Summoner.Detection.CFrame)
+							else
+								if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false and _G.AceetpQuestBone == true then
+									local ed = game.Players.LocalPlayer.Data.Level.Value;
+									local ee = CFrame.new(-9513.88477, 172.1306, 6073.37061, -0.906221628, 7.55508509e-08, 0.422802985, 5.79426853e-08, 1, -5.44980487e-08, -0.422802985, -2.48889691e-08, -0.906221628)
+									repeat
+										wait()
+										aw(ee)
+									until (ee.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2 or not _G.AceetpQuestBone;
+									if ed <= 2049 then
+										local aE = {
+											[1] = "StartQuest",
+											[2] = "HauntedQuest2",
+											[3] = 1
+										}
+										game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(aE))
+									else
+										local aE = {
+											[1] = "StartQuest",
+											[2] = "HauntedQuest2",
+											[3] = 2
+										}
+										game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(aE))
+									end
+								elseif _G.AutoFarmBone or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true or not _G.AceetpQuestBone then
+									for H, ef in next, e8["Mon"] do
+										if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
+											for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+												if string.find(z.Name, ef) then
+													if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
+														repeat
+															wait()
+															PosMon = z.HumanoidRootPart.CFrame;
+															EquipWeapon(_G.SelectWeapon)
+															z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+															BringMob = true;
+															aw(z.HumanoidRootPart.CFrame * MethodFarm)
+															if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+																_G.FastAttack = true
+															end
+														until not _G.AutoFarmBone or z.Humanoid.Health <= 0 or not z.Parent or z.Humanoid.Health <= 0
+													elseif (CFrame.new(-9513.88477, 172.1306, 6073.37061, -0.906221628, 7.55508509e-08, 0.422802985, 5.79426853e-08, 1, -5.44980487e-08, -0.422802985, -2.48889691e-08, -0.906221628).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false and _G.AceetpQuestBone then
+														local CFrameMon = CFrame.new(-9513.88477, 172.1306, 6073.37061, -0.906221628, 7.55508509e-08, 0.422802985, 5.79426853e-08, 1, -5.44980487e-08, -0.422802985, -2.48889691e-08, -0.906221628)
+														repeat
+															wait()
+															aw(CFrameMon)
+														until (CFrameMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 or not _G.AutoFarmBone
+													end
+												end
+											end
+										else
+											if _G.Auto_CFrame then
+												aw(GetBone_CFrame_Mon()[e9] * MethodFarm)
+												if (GetBone_CFrame_Mon()[e9].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+													if e9 == nil or e9 == '' then
+														e9 = 1
+													elseif e9 >= #GetBone_CFrame_Mon() then
+														e9 = 1
+													end;
+													e9 = e9 + 1;
+													wait(0.5)
+												end
+											else
+												if AttackRandomType_MonCFrame == 1 then
+													aw(GetBone_CFrame_Mon()[1] * CFrame.new(0, 30, 20))
+												elseif AttackRandomType_MonCFrame == 2 then
+													aw(GetBone_CFrame_Mon()[1] * CFrame.new(0, 30, -20))
+												elseif AttackRandomType_MonCFrame == 3 then
+													aw(GetBone_CFrame_Mon()[1] * CFrame.new(20, 30, 0))
+												elseif AttackRandomType_MonCFrame == 4 then
+													aw(GetBone_CFrame_Mon()[1] * CFrame.new(0, 30, -20))
+												elseif AttackRandomType_MonCFrame == 5 then
+													aw(GetBone_CFrame_Mon()[1] * CFrame.new(-20, 30, 0))
+												else
+													aw(GetBone_CFrame_Mon()[1] * CFrame.new(0, 30, 20))
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end)
+		end
+	end)
+
+local AcceptQuest = Main:AddToggle({
+    Name = "Accept Quest",
+    Description = "Nhận nhiệm vụ",
+    Default = false
+})
+AcceptQuest:Callback(function(value)
+	_G.AceetpQuestBone = value
+end)
+
+local AutoRandomBone = Main:AddToggle({
+    Name = "Auto Random Bone",
+    Description = "Tự động random xương",
+    Default = false
+})
+AutoRandomBone:Callback(function(value)
+	_G.AutoRandomBone = value
+end)
+spawn(function()
+	while wait(.0) do
+		if _G.AutoRandomBone then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Buy", 1, 1)
+		end
+	end
+end)
+
+local CakeFarm = Main:AddSection({"Cake Farm"})
+
+local eg = Main:AddParagraph({"Need Kill : N/A", true})
+spawn(function()
+	while true do
+		pcall(function()
+			local eh = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+			if string.len(eh) == 88 then
+				eg:Set("Need Kill : " .. string.sub(eh, 39, 41))
+			elseif string.len(eh) == 87 then
+				eg:Set("Need Kill : " .. string.sub(eh, 39, 40))
+			elseif string.len(eh) == 86 then
+				eg:Set("Need Kill : " .. string.sub(eh, 39, 39))
+			else
+				eg:Set("Boss Is Spawning..")
+			end
+		end)
+		wait(1)
+	end
+end)
+
+local AutoFarmCakePrince = Main:AddToggle({
+    Name = "Auto Farm Cake Prince",
+    Description = "Tự động cày tư lệnh bột",
+    Default = false
+})
+AutoFarmCakePrince:Callback(function(value)
+	_G.AutoCakePrince = value;
+	if value == false then
+		aw(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+	end
+end)
+spawn(function()
+	while wait() do
+		if _G.AutoCakePrince then
+			pcall(function()
+				if game.ReplicatedStorage:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or game.ReplicatedStorage:FindFirstChild("Dough King") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+					if _G.BypassTP then
+						_G.BypassTP = false
+					end;
+					if not game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+						for H, ei in pairs(game.ReplicatedStorage:GetChildren()) do
+							if ei.Name == "Cake Prince" or ei.Name == "Dough King" then
+								if (ei.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+									_G.BypassTP = false;
+									wait(1.5)
+									aw(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+									return
+								end
+							end
+						end
+					end;
+					for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if z.Name == "Cake Prince" then
+							if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 then
+								repeat
+									task.wait()
+									if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+										aw(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+										return
+									end;
+									EquipWeapon(_G.SelectWeapon)
+									z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+									BringMob = true;
+									aw(z.HumanoidRootPart.CFrame * MethodFarm)
+									if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+										_G.FastAttack = true
+									end;
+									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+								until not _G.AutoCakePrince or not z.Parent or z.Humanoid.Health <= 0
+							end
+						else
+							for H, ei in pairs(game.ReplicatedStorage:GetChildren()) do
+								if ei.Name == "Cake Prince" or ei.Name == "Dough King" then
+									if (ei.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+										aw(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+										return
+									end
+								end
+							end
+						end
+					end
+				else
+					if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or game.ReplicatedStorage:FindFirstChild("Cake Prince") then
+						for H, ei in pairs(game.ReplicatedStorage:GetChildren()) do
+							if ei.Name == "Cake Prince" or ei.Name == "Dough King" then
+								if (ei.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+									aw(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+									return
+								end
+							end
+						end
+					else
+						if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter") then
+							for y, z in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+								if (z.Name == "Baking Staff" or z.Name == "Head Baker" or z.Name == "Cake Guard" or z.Name == "Cookie Crafter") and z.Humanoid.Health > 0 then
+									repeat
+										wait()
+										PosMon = z.HumanoidRootPart.CFrame;
+										EquipWeapon(_G.SelectWeapon)
+										z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+										BringMob = true;
+										aw(z.HumanoidRootPart.CFrame * MethodFarm)
+										if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+											_G.FastAttack = true
+										end
+									until _G.AutoCakePrince == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not z.Parent or z.Humanoid.Health <= 0
+								end
+							end
+						else
+							BringMob = false;
+							aw(GetCake_CFrame_Mon() * MethodFarm)
+							wait(0.5)
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
+
+local AutoSpawnCakePrince = Main:AddToggle({
+    Name = "Auto Spawn Cake Prince",
+    Description = "Tự động triệu hồi tư lệnh bột",
+    Default = true
+})
+AutoSpawnCakePrince:Callback(function(value)
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner", value)
+end)
+
 local ChestFarm = Main:AddSection({"Chest Farm"})
 
 local AutoFarmChestTween = Main:AddToggle({
@@ -1759,6 +2204,73 @@ spawn(function()
 		end
 	end
 end)
+
+local MaterialFarm = Main:AddSection({"Material Farm"})
+
+local SelectMaterial = Main:AddDropdown({
+	Name = "Select Material",
+	Description = "Chọn nguyên liệu",
+	Options = bc,
+	Default = "",
+	Flag = "",
+	Callback = function(value)
+		SelectModeMaterial = value
+	end
+})
+
+local AutoFarmSeletecMaterial = Main:AddToggle({
+    Name = "Auto Farm Selected Material",
+    Description = "Tự động cày nguyên liệu đã chọn",
+    Default = false
+})
+AutoFarmSeletecMaterial:Callback(function(value)
+	AutoFarmMaterial = value;
+end)
+spawn(function()
+	while wait() do
+		if AutoFarmMaterial then
+			pcall(function()
+				if SelectModeMaterial ~= "" then
+					bf(SelectModeMaterial)
+					if bd(MaterialMob) then
+						for ej, W in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if AutoFarmMaterial and table.find(MaterialMob, W.Name) and W:FindFirstChild("HumanoidRootPart") and W:FindFirstChild("Humanoid") and W.Humanoid.Health > 0 then
+								repeat
+									task.wait()
+									FarmtoTarget = aw(W.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1))
+									if W:FindFirstChild("HumanoidRootPart") and W:FindFirstChild("Humanoid") and (W.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 150 then
+										if FarmtoTarget then
+											FarmtoTarget:Stop()
+										end;
+										for ek, el in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+											if el.Name == W.Name then
+												el.HumanoidRootPart.CFrame = W.HumanoidRootPart.CFrame;
+												el.Humanoid.JumpPower = 0;
+												el.Humanoid.WalkSpeed = 0;
+												el.HumanoidRootPart.CanCollide = false;
+												el.Humanoid:ChangeState(14)
+												el.Humanoid:ChangeState(11)
+												el.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+												FastAttack = true;
+												game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = W.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1)
+											end
+										end
+									end
+								until not bd(MaterialMob) or not AutoFarmMaterial or W.Humanoid.Health <= 0 or not W.Parent;
+								FastAttack = false
+							end
+						end
+					else
+						FastAttack = false;
+						aw(CFrameMon)
+					end
+				end
+			end)
+		else
+			break
+		end
+	end
+end)
 -----------------------------------------------------------------------------------------------------------------Setting Tab
 local SafeMode = Set:AddToggle({
     Name = "Safe Mode",
@@ -1787,14 +2299,42 @@ spawn(function()
 end)
 
 local BypassTP = Set:AddToggle({
-    Name = "Byoass TP",
+    Name = "Bypass TP",
     Description = "Dịch chuyển nhanh",
     Default = false
 })
-SafeMode:Callback(function(value)
+BypassTP:Callback(function(value)
 	_G.BypassTP = value
 end)
 
+local FastAttack = Set:AddToggle({
+    Name = "Fast Attack",
+    Description = "Đánh nhanh",
+    Default = true
+})
+FastAttack:Callback(function(value)
+	_G.FastAttack = value
+end)
+task.spawn(function()
+	pcall(function()
+		while task.wait(_G.Fast_Delay) do
+			if FastAttack or _G.FastAttack then
+				AttackFunc()
+			end
+		end
+	end)
+end)
+
+Set:AddSlider({
+	Name = "Distance Farm",
+	Min = 1,
+	Max = 50,
+	Increase = 1,
+	Default = 30,
+	Callback = function(value)
+		_G.DistanceAutoFarm = value
+	end
+})
 -----------------------------------------------------------------------------------------------------------------Other Farm Tab
 local AutoEvoRaceV2 = Farm:AddToggle({
     Name = "Auto Evo Race V2",
@@ -2484,6 +3024,54 @@ spawn(function()
 				end
 			end
 		end
+	end
+end)
+
+local AutoCastleRaid = Farm:AddToggle({
+    Name = "Auto Castle Raid",
+    Description = "Tự động đánh quái ở pháo đài",
+    Default = false
+})
+AutoCastleRaid:Callback(function(value)
+	_G.AutoCastleRaid = value;
+	if value == false then
+		aw(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+	end
+end)
+spawn(function()
+	while wait() do
+		pcall(function()
+			if _G.AutoCastleRaid then
+				if (CFrame.new(-5118.48682, 314.54129, -2958.64404, -0.387232125, 1.81507858e-08, 0.921982229, -7.54388907e-08, 1, -5.13709999e-08, -0.921982229, -8.94458196e-08, -0.387232125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000 then
+					for y, z in pairs(game.Workspace.Enemies:GetChildren()) do
+						if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 and (z.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 1000 then
+							repeat
+								wait()
+								PosMon = z.HumanoidRootPart.CFrame;
+								EquipWeapon(_G.SelectWeapon)
+								z.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+								BringMob = true;
+								aw(z.HumanoidRootPart.CFrame * MethodFarm)
+								if (z.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+									game:GetService("VirtualUser"):CaptureController()
+									game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+								end
+							until not _G.AutoCastleRaid or not z.Parent or z.Humanoid.Health <= 0;
+							BringMob = false
+						end
+					end
+				else
+					if (CFrame.new(-5118.48682, 314.54129, -2958.64404, -0.387232125, 1.81507858e-08, 0.921982229, -7.54388907e-08, 1, -5.13709999e-08, -0.921982229, -8.94458196e-08, -0.387232125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000 then
+						for y, z in pairs(game.ReplicatedStorage:GetChildren()) do
+							if z:FindFirstChild("Humanoid") and z:FindFirstChild("HumanoidRootPart") and z.Humanoid.Health > 0 and (z.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 1000 then
+								aw(z.HumanoidRootPart.CFrame * MethodFarm)
+							end
+						end
+					end;
+					aw(CFrame.new(-5118.48682, 314.54129, -2958.64404, -0.387232125, 1.81507858e-08, 0.921982229, -7.54388907e-08, 1, -5.13709999e-08, -0.921982229, -8.94458196e-08, -0.387232125))
+				end
+			end
+		end)
 	end
 end)
 

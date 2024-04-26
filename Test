@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 local Window = redzlib:MakeWindow({
     Title = "Sync Hub",
@@ -2334,7 +2335,16 @@ local DisableNotification = Set:AddToggle({
     Default = false
 })
 DisableNotification:Callback(function(value)
-	game:GetService("Players").LocalPlayer.PlayerGui.Notifications.Enabled = not game:GetService("Players").LocalPlayer.PlayerGui.Notifications.Enabled
+	_G.Remove_trct = value
+end)
+spawn(function()
+	while wait() do
+		if _G.Remove_trct then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
 end)
 
 local BypassTP = Set:AddToggle({
@@ -2368,7 +2378,7 @@ end)
 
 _G.Auto_CFrame = true;
 local DisableDamge = Set:AddToggle({
-    Name = "Disabl eDamge",
+    Name = "Disable Damge",
     Description = "Tắt số damge hiện lên",
     Default = true
 })

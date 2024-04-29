@@ -1,4 +1,3 @@
---a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -2142,7 +2141,16 @@ local DisableNotification = Set:AddToggle({
     Default = false
 })
 DisableNotification:Callback(function(value)
-    game:GetService("Players").LocalPlayer.PlayerGui.Notifications.Enabled = not game:GetService("Players").LocalPlayer.PlayerGui.Notifications.Enabled
+    _G.Remove_trct = value
+end)
+spawn(function()
+	while wait() do
+		if _G.Remove_trct then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
 end)
 
 local BlackScreen = Set:AddToggle({
@@ -2299,7 +2307,7 @@ local AutoEliteHunter = Farm:AddToggle({
 AutoEliteHunter:Callback(function(value)
     _G.AutoEliteHunter = value
     Elite()
-    if value == false then
+    if _G.AutoEliteHunter == false then
         toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
 end)
@@ -4818,7 +4826,7 @@ task.spawn(function()
     end
 end)
 ------------------------------------------------------------------------------------------------------------------------Stats Tab
-local AutoStatsMelee = Farm:AddToggle({
+local AutoStatsMelee = Stats:AddToggle({
     Name = "Auto Stats Melee",
     Description = "Tự động nâng điểm cận chiến",
     Default = false
@@ -4839,13 +4847,25 @@ spawn(function()
     end
 end)
 
-local AutoStatsMelee = Farm:AddToggle({
-    Name = "Auto Stats Melee",
-    Description = "Tự động nâng điểm cận chiến",
+local AutoStatsMelee = Stats:AddToggle({
+    Name = "Auto Stats Defense",
+    Description = "Tự động nâng điểm phòng thủ",
     Default = false
 })
 AutoStatsMelee:Callback(function(value)
-    _G.AutoStatsMelee = value
+    _G.AutoStatsDefense = value
+end)
+spawn(function()
+    while task.wait() do
+        if _G.AutoStatsDefense then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = 100
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
 end)
 ------------------------------------------------------------------------------------------------------------------------Teleport Tab
 
@@ -4856,7 +4876,7 @@ end)
 ------------------------------------------------------------------------------------------------------------------------Raid Tab
 
 ------------------------------------------------------------------------------------------------------------------------Shop Tab
-local AutoBuyAbility = Farm:AddToggle({
+local AutoBuyAbility = Shop:AddToggle({
     Name = "Auto Buy Ability",
     Description = "Tự động mua kĩ năng",
     Default = false

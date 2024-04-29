@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -170,49 +171,6 @@ _G.Settings = {
     AutoRaids = false,
     AutoNextPlace = false
 }
-
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Crazzy_Hub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            local Array = {}
-            for i, v in pairs(_G.Settings) do
-                Array[i] = v
-            end
-            writefile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(Array))
-        end
-    else
-        return 
-    end
-end
-
-function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfolder("Crazzy_Hub") then
-            makefolder("Crazzy_Hub")
-        end
-        if not isfolder("Crazzy_Hub/Blox Fruits/") then
-            makefolder("Crazzy_Hub/Blox Fruits/")
-        end
-        if not isfile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            writefile("Crazzy_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(_G.Settings))
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Crazzy_Hub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            for i, v in pairs(Decode) do
-                _G.Settings[i] = v
-            end
-        end
-    else
-        return 
-    end
-end
-LoadSettings()
 
 game:GetService("Players").LocalPlayer.Idled:connect(function()
     game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
@@ -1417,7 +1375,6 @@ AutoFarmLevel:Callback(function(value)
     _G.AutoFarm = value
     _G.Settings.AutoFarm = value
     _G.AutoBuyAbility = value
-    SaveSettings()
     if value == false then
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
@@ -1637,7 +1594,6 @@ local AutoFarmNearest = Main:AddToggle({
 AutoFarmNearest:Callback(function(value)
     _G.AutoFarm = value
     _G.Settings.AutoFarm = value
-    SaveSettings()
     if value == false then
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
@@ -1691,7 +1647,6 @@ local AutoFarmBone = Main:AddToggle({
 AutoFarmBone:Callback(function(value)
     _G.AutoFarmBone  = value
     _G.Settings.AutoFarmBone = value
-    SaveSettings()
     if value == false then
         task.wait()
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
@@ -1995,7 +1950,6 @@ local AutoFarmChestTween = Main:AddToggle({
 AutoFarmChestTween:Callback(function(value)
     _G.AutoFarmChest = value
     _G.Settings.AutoFarmChest = value
-    SaveSettings()
     if value == false then
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
@@ -2229,7 +2183,6 @@ local SafeMode = Set:AddToggle({
 SafeMode:Callback(function(value)
     _G.SafeMode = value
     _G.Settings.SafeMode = value
-    SaveSettings()
 end)
 spawn(function()
     while _G.Settings.SafeMode do task.wait()
@@ -3302,8 +3255,7 @@ local AutoBartiloQuest = Farm:AddToggle({
 })
 AutoBartiloQuest:Callback(function(value)
     _G.AutoBartiloQuest   = value
-    _G.Settings.AutoBartiloQuest = value
-    SaveSettings() 
+    _G.Settings.AutoBartiloQuest = value 
     if value == false then
         task.wait()
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
@@ -4866,7 +4818,35 @@ task.spawn(function()
     end
 end)
 ------------------------------------------------------------------------------------------------------------------------Stats Tab
+local AutoStatsMelee = Farm:AddToggle({
+    Name = "Auto Stats Melee",
+    Description = "Tự động nâng điểm cận chiến",
+    Default = false
+})
+AutoStatsMelee:Callback(function(value)
+    _G.AutoStatsMelee = value
+end)
+spawn(function()
+    while task.wait() do
+        if _G.AutoStatsMelee then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = 100
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
 
+local AutoStatsMelee = Farm:AddToggle({
+    Name = "Auto Stats Melee",
+    Description = "Tự động nâng điểm cận chiến",
+    Default = false
+})
+AutoStatsMelee:Callback(function(value)
+    _G.AutoStatsMelee = value
+end)
 ------------------------------------------------------------------------------------------------------------------------Teleport Tab
 
 ------------------------------------------------------------------------------------------------------------------------Player Tab

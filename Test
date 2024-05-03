@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -332,14 +333,10 @@ local EnemiesDropdown = Main:AddDropdown({
     end
 })
 
-local RefreshMonsterList = Main:AddButton({
-    Name = "Refresh Monster List",
-    Description = "Làm mới danh sách quái"
-})
-RefreshMonsterList:Callback(function(value)
+Main:AddButton({"Refresh Monster List", function()
     RefreshEnemies(LocalPlayer.World.Value)
     EnemiesDropdown:Refresh(Setting.AutoFarm.EnemiesList)
-end)
+end})
 
 local AutoFarmSelectedMonster = Main:AddToggle({
     Name = "Auto Farm Selected Monster",

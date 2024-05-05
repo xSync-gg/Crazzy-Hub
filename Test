@@ -1,4 +1,3 @@
---a
 if debug.info(1, "l") ~= 1 then
     game.Players.LocalPlayer:Kick("Safe dude..")
         while true do end
@@ -206,7 +205,7 @@ ImageButton.Size = UDim2.new(0, 45, 0, 45)
 ImageButton.Draggable = true
 ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageButton.BackgroundTransparency = 1
-ImageButton.Image = "rbxassetid://17383887099" -- กำหนดรูปภาพให้กับ ImageButton 
+ImageButton.Image = "rbxassetid://14645512457" -- กำหนดรูปภาพให้กับ ImageButton 
 -- เมื่อคลิกปุ่มใน ImageButton
 function LoadFunction()    
         ImageButton.MouseEnter:Connect(function()
@@ -633,8 +632,8 @@ spawn(function()
                 end
                 if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
                     local Highlight = Instance.new("Highlight")
-                    Highlight.FillColor = Color3.fromRGB(128, 128, 128)
-                    Highlight.OutlineColor = Color3.fromRGB(128, 128, 128)
+                    Highlight.FillColor = Color3.new(0, 86, 255)
+                    Highlight.OutlineColor = Color3.new(0,86,255)
                     Highlight.Parent = game.Players.LocalPlayer.Character
                 end
             else	
@@ -1046,8 +1045,8 @@ local info = TweenInfo.new(
 local tweenw, err = pcall(function()
     if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
 		local Highlight = Instance.new("Highlight")
-        Highlight.FillColor = Color3.fromRGB(128, 128, 128)
-        Highlight.OutlineColor = Color3.fromRGB(128, 128, 128)
+        Highlight.FillColor = Color3.new(0.266667, 0.854902, 0.921569)
+        Highlight.OutlineColor = Color3.new(0.266667, 0.854902, 0.921569)
 		Highlight.Parent = game.Players.LocalPlayer.Character;
 		end
 tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = RealTarget })
@@ -1178,8 +1177,8 @@ local info = TweenInfo.new(
     tween, err = pcall(function()
         if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
             local Highlight = Instance.new("Highlight")
-            Highlight.FillColor = Color3.fromRGB(128, 128, 128)
-            Highlight.OutlineColor = Color3.fromRGB(128, 128, 128)
+            Highlight.FillColor = Color3.new(0.266667, 0.854902, 0.921569)
+            Highlight.OutlineColor = Color3.new(0.266667, 0.854902, 0.921569)
             Highlight.Parent = game.Players.LocalPlayer.Character;
             end
     tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = gotoCFrame })

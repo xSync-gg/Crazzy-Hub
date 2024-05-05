@@ -1,3 +1,4 @@
+--a
 if debug.info(1, "l") ~= 1 then
     game.Players.LocalPlayer:Kick("Safe dude..")
         while true do end
@@ -632,8 +633,8 @@ spawn(function()
                 end
                 if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
                     local Highlight = Instance.new("Highlight")
-                    Highlight.FillColor = Color3.new(0, 86, 255)
-                    Highlight.OutlineColor = Color3.new(0,86,255)
+                    Highlight.FillColor = Color3.fromRGB(128, 128, 128)
+                    Highlight.OutlineColor = Color3.fromRGB(128, 128, 128)
                     Highlight.Parent = game.Players.LocalPlayer.Character
                 end
             else	
@@ -1045,8 +1046,8 @@ local info = TweenInfo.new(
 local tweenw, err = pcall(function()
     if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
 		local Highlight = Instance.new("Highlight")
-        Highlight.FillColor = Color3.new(0.266667, 0.854902, 0.921569)
-        Highlight.OutlineColor = Color3.new(0.266667, 0.854902, 0.921569)
+        Highlight.FillColor = Color3.fromRGB(128, 128, 128)
+        Highlight.OutlineColor = Color3.fromRGB(128, 128, 128)
 		Highlight.Parent = game.Players.LocalPlayer.Character;
 		end
 tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = RealTarget })
@@ -1177,8 +1178,8 @@ local info = TweenInfo.new(
     tween, err = pcall(function()
         if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
             local Highlight = Instance.new("Highlight")
-            Highlight.FillColor = Color3.new(0.266667, 0.854902, 0.921569)
-            Highlight.OutlineColor = Color3.new(0.266667, 0.854902, 0.921569)
+            Highlight.FillColor = Color3.fromRGB(128, 128, 128)
+            Highlight.OutlineColor = Color3.fromRGB(128, 128, 128)
             Highlight.Parent = game.Players.LocalPlayer.Character;
             end
     tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = gotoCFrame })

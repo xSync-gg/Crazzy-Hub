@@ -1,4 +1,3 @@
---a
 if debug.info(1, "l") ~= 1 then
     game.Players.LocalPlayer:Kick("Safe dude..")
         while true do end
@@ -1046,8 +1045,8 @@ local info = TweenInfo.new(
 local tweenw, err = pcall(function()
     if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
 		local Highlight = Instance.new("Highlight")
-        Highlight.FillColor = Color3.new(0, 1, 0)
-        Highlight.OutlineColor = Color3.new(0, 1, 0)
+        Highlight.FillColor = Color3.new(0.266667, 0.854902, 0.921569)
+        Highlight.OutlineColor = Color3.new(0.266667, 0.854902, 0.921569)
 		Highlight.Parent = game.Players.LocalPlayer.Character;
 		end
 tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = RealTarget })
@@ -1178,8 +1177,8 @@ local info = TweenInfo.new(
     tween, err = pcall(function()
         if not game.Players.LocalPlayer.Character:FindFirstChild("Highlight") then
             local Highlight = Instance.new("Highlight")
-            Highlight.FillColor = Color3.new(0, 1, 0)
-            Highlight.OutlineColor = Color3.new(0, 1, 0)
+            Highlight.FillColor = Color3.new(0.266667, 0.854902, 0.921569)
+            Highlight.OutlineColor = Color3.new(0.266667, 0.854902, 0.921569)
             Highlight.Parent = game.Players.LocalPlayer.Character;
             end
     tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, { CFrame = gotoCFrame })

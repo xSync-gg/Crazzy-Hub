@@ -205,7 +205,7 @@ ImageButton.Size = UDim2.new(0, 45, 0, 45)
 ImageButton.Draggable = true
 ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageButton.BackgroundTransparency = 1
-ImageButton.Image = "rbxassetid://14645512457" -- กำหนดรูปภาพให้กับ ImageButton 
+ImageButton.Image = "rbxassetid://17383887099" -- กำหนดรูปภาพให้กับ ImageButton 
 -- เมื่อคลิกปุ่มใน ImageButton
 function LoadFunction()    
         ImageButton.MouseEnter:Connect(function()

@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -164,7 +165,7 @@ function SaveSettings()
                 Array[i] = v
             end
             writefile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(Array))
+            game:GetService("HttpService"):JSONEncode(Array))
         end
     else
         return 
@@ -1330,6 +1331,138 @@ local function CheckMaterial(v1)
     end
 end
 ----------------------------------------------------------------------------------------------------------------Main Tab
+local ConfigFarm = Main:AddSection({"Config Farm"})
+
+local SelectWeapon = Main:AddDropdown({
+    Name = "Select Weapon",
+    Options = {"Melee", "Sword", "Fruit"},
+    Default = "Melee",
+    Flag = "",
+    Callback = function(value)
+        SelectWeapon = value
+    end
+})
+task.spawn(function()
+	while wait() do
+		pcall(function()
+			if SelectWeapon == "Melee" then
+				for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif SelectWeapon == "Sword" then
+				for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Sword" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif SelectWeapon == "Fruit" then
+				for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Blox Fruit" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			else
+				for i , v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+
+local FastAttackSpeed = Main:AddDropdown({
+    Name = "Fast Attack Speed",
+    Options = {"Slow", "Normal", "Fast", "Extreme", "Ultra"},
+    Default = "Slow",
+    Flag = "",
+    Callback = function(value)
+        _G.FastType = value
+    end
+})
+if _G.FastType == "Slow" then
+	_G.Fast_Delay = 1
+elseif _G.FastType == "Normal" then
+	_G.Fast_Delay = 0.15
+elseif _G.FastType == "Fast" then
+	_G.Fast_Delay = 0.05
+elseif _G.FastType == "Extreme" then
+	_G.Fast_Delay = 0.025
+elseif _G.FastType == "Ultra" then
+	_G.Fast_Delay = 0
+end;
+task.spawn(function()
+	pcall(function()
+		while task.wait(_G.Fast_Delay) do
+			if FastAttack or _G.FastAttack then
+				yakmefan()
+			end
+		end
+	end)
+end)
+task.spawn(function()
+    while _G.FastAttack do task.wait()
+    require(game.ReplicatedStorage.Util.CameraShaker):Stop()
+    Bruh = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+    Ryu = debug.getupvalues(Bruh)[2]
+    task.spawn(function()
+        while true do task.wait()
+            if _G.FastAttack then
+                if typeof(Ryu) == "table" then
+                    pcall(function()
+                        --Ryu.activeController.timeToNextAttack = -(math.huge^math.huge^math.huge)
+                        Ryu.activeController.timeToNextAttack = 0
+                        Ryu.activeController.active = false
+                        Ryu.activeController.timeToNextBlock = 0
+                        Ryu.activeController.focusStart = 0
+                        Ryu.activeController.increment = 4
+                        Ryu.activeController.blocking = false
+                        Ryu.activeController.attacking = false
+                        Ryu.activeController.humanoid.AutoRotate = false
+                        end)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+local FarmMethod = Main:AddDropdown({
+    Name = "Farm Method",
+    Options = {"Upper", "Behind", "Below"},
+    Default = "Upper",
+    Flag = "",
+    Callback = function(value)
+        _G.Method = value
+    end
+})
+task.spawn(function()
+    while task.wait(0) do
+        pcall(function()
+            if _G.Method == "Behind" then
+                MethodFarm = CFrame.new(0, 0,  _G.DistanceAutoFarm)
+            elseif _G.Method == "Below" then
+                MethodFarm = CFrame.new(0, - _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(90), 0, 0)
+            elseif _G.Method == "Upper" then
+                MethodFarm = CFrame.new(0,  _G.DistanceAutoFarm, 0) * CFrame.Angles(math.rad(0), 0, 0)
+            else
+                MethodFarm = CFrame.new(0,  _G.DistanceAutoFarm, 0)
+            end
+        end)
+    end
+end)
+
 local MainFarm = Main:AddSection({"Main Farm"})
 
 local AutoFarmLevel = Main:AddToggle({
@@ -1806,6 +1939,138 @@ spawn(function()
     end
 end)
 
+local CakeFarm = Main:AddSection({"Cake Farm"})
+
+local MobKilledLabel = Main:AddParagraph({"Need Kill : N/A"})
+spawn(function()
+    while true do
+        pcall(function()
+            local cakeStatus = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+            if string.len(cakeStatus) == 88 then
+                MobKilledLabel:Set({"Need Kill : " .. string.sub(cakeStatus, 39, 41)})
+            elseif string.len(cakeStatus) == 87 then
+                MobKilledLabel:Set({"Need Kill : " .. string.sub(cakeStatus, 39, 40)})
+            elseif string.len(cakeStatus) == 86 then
+                MobKilledLabel:Set({"Need Kill : " .. string.sub(cakeStatus, 39, 39)})
+            else
+                MobKilledLabel:Set({"Boss Are Spawning"})
+            end
+        end)
+        wait(1)
+    end
+end)
+
+local AutoFarmCakePrince = Main:AddToggle({
+    Name = "Auto Farm Cake Prince",
+    Default = false
+})
+AutoFarmCakePrince:Callback(function(value)
+    _G.AutoCakePrince  = value
+    if value == false then
+        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+end)
+spawn(function()
+	while wait() do
+		if _G.AutoCakePrince then
+			pcall(function()
+				if game.ReplicatedStorage:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or  game.ReplicatedStorage:FindFirstChild("Dough King") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+					if _G.BypassTP then
+						_G.BypassTP = false
+					end
+					if not game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+						for _, x in pairs(game.ReplicatedStorage:GetChildren()) do 
+							if x.Name == "Cake Prince" or x.Name == "Dough King" then
+								if (x.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+									_G.BypassTP = false
+									wait(1.5)
+									toTarget(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+									return
+								end
+							end
+						end
+					end
+					for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if v.Name == "Cake Prince" then
+							if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+								repeat
+									task.wait()
+									if (v.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+										toTarget(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+										return
+									end
+									EquipWeapon(_G.SelectWeapon)
+									v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)  
+									BringMob = true
+									toTarget(v.HumanoidRootPart.CFrame * MethodFarm)
+									if (v.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+										_G.FastAttack = true
+									end
+									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+								until not _G.AutoCakePrince or not v.Parent or v.Humanoid.Health <= 0
+							end
+						else
+							for _, x in pairs(game.ReplicatedStorage:GetChildren()) do 
+								if x.Name == "Cake Prince" or x.Name == "Dough King" then
+									if (x.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+										toTarget(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+										return
+									end
+								end
+							end
+						end
+					end
+				else 
+					if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or game.ReplicatedStorage:FindFirstChild("Cake Prince") then
+						for _, x in pairs(game.ReplicatedStorage:GetChildren()) do 
+							if x.Name == "Cake Prince" or x.Name == "Dough King" then
+								if (x.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+									toTarget(CFrame.new(-2145.89722, 70.0088272, -12399.6016, 0.99999702, 1.58276379e-08, 0.00245277886, -1.57982978e-08, 1, -1.19813057e-08, -0.00245277886, 1.19425199e-08, 0.99999702))
+									return
+								end
+							end
+						end
+					else
+						if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter")  then
+							for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do  
+								if (v.Name == "Baking Staff" or v.Name == "Head Baker" or v.Name == "Cake Guard" or v.Name == "Cookie Crafter") and v.Humanoid.Health > 0 then
+									repeat
+										wait()
+										PosMon = v.HumanoidRootPart.CFrame
+										EquipWeapon(_G.SelectWeapon)
+										v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)  
+										BringMob = true
+										toTarget(v.HumanoidRootPart.CFrame * MethodFarm)
+										if (v.HumanoidRootPart.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+											_G.FastAttack = true
+										end
+									until _G.AutoCakePrince == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not v.Parent or v.Humanoid.Health <= 0
+								end
+							end
+						else
+							BringMob = false
+							toTarget(GetCake_CFrame_Mon() * MethodFarm)
+							wait(0.5)
+						end
+					end
+				end
+			end)
+		end
+	end
+end)
+
+local AutoSpawnCakePrince = Main:AddToggle({
+    Name = "Auto Spawn Cake Prince",
+    Default = true
+})
+AutoSpawnCakePrince:Callback(function(value)
+    _G.Spawnka = value
+end)
+while _G.Spawnka do 
+    wait()
+    game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+end
+
 local ChestFarm = Main:AddSection({"Chest Farm"})
 
 local AutoFarmChest = Main:AddToggle({
@@ -1881,23 +2146,135 @@ spawn(function()
 		end
 	end
 end)
+
+local MaterialFarm = Main:AddSection({"Material Farm"})
+
+local SelectMaterial = Main:AddDropdown({
+    Name = "Select Material",
+    Options = AllMaterial,
+    Default = "",
+    Flag = "",
+    Callback = function(value)
+        SelectModeMaterial = value
+    end
+})
+
+local AutoFarmSelectedMaterial = Main:AddToggle({
+    Name = "Auto Farm Selected Material",
+    Default = false
+})
+AutoFarmSelectedMaterial:Callback(function(value)
+    AutoFarmMaterial = value
+    if value == false then
+        toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.Position,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+end)
+task.spawn(function()
+	while task.wait() do
+		if AutoFarmMaterial then
+			xpcall(function()
+				if (SelectModeMaterial ~= "") then
+					CheckMaterial(SelectModeMaterial);
+					if CustomFindFirstChild(MaterialMob) then
+						for v0, v1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if (AutoFarmMaterial and table.find(MaterialMob, v1.Name) and v1:FindFirstChild("HumanoidRootPart") and v1:FindFirstChild("Humanoid") and (v1.Humanoid.Health > 0)) then
+								repeat
+									task.wait();
+									FarmtoTarget = toTarget(v1.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1));
+									if (v1:FindFirstChild("HumanoidRootPart") and v1:FindFirstChild("Humanoid") and ((v1.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 150)) then
+										if FarmtoTarget then
+											FarmtoTarget:Stop();
+										end
+										FastAttack = true;
+										EquipWeapon(_G.SelectWeapon);
+										spawn(function()
+											for v4, v5 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+												if (v5.Name == v1.Name) then
+													spawn(function()
+														if InMyNetWork(v5.HumanoidRootPart) then
+															v5.HumanoidRootPart.CFrame = v1.HumanoidRootPart.CFrame;
+															v5.Humanoid.JumpPower = 0;
+															v5.Humanoid.WalkSpeed = 0;
+															v5.HumanoidRootPart.CanCollide = false;
+															v5.Humanoid:ChangeState(14);
+															v5.Humanoid:ChangeState(16);
+															v5.Humanoid:ChangeState(11);
+															v5.HumanoidRootPart.Size = Vector3.new(55, 55, 55);
+														end
+													end);
+												end
+											end
+										end);
+										if (game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and (game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 150)) then
+											game:service("VirtualInputManager"):SendKeyEvent(true, "V", false, game);
+											game:service("VirtualInputManager"):SendKeyEvent(false, "V", false, game);
+										end
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v1.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1);
+									end
+								until not CustomFindFirstChild(MaterialMob) or not AutoFarmMaterial or (v1.Humanoid.Health <= 0) or not v1.Parent
+								FastAttack = false;
+							end
+						end
+					else
+						FastAttack = false;
+						Modstween = toTarget(CFrameMon);
+						if (World1 and (table.find(MaterialMob, "Fishman Commando")) and ((CFrameMon.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).magnitude > 50000)) then
+							if Modstween then
+								Modstween:Stop();
+							end
+							wait(0.5);
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+								"requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875));
+						elseif (World1 and not (table.find(MaterialMob, "Fishman Commando")) and ((CFrameMon.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).magnitude > 50000)) then
+							if Modstween then
+								Modstween:Stop();
+							end
+							wait(0.5);
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+								"requestEntrance", Vector3.new(3864.8515625, 6.6796875, -1926.7841796875));
+						elseif (World1 and (table.find(MaterialMob, "God's Guard")) and ((CFrameMon.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).magnitude > 3000)) then
+							if Modstween then
+								Modstween:Stop();
+							end
+							wait(0.5);
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+								"requestEntrance",
+								Vector3.new(-4607.8227539063, 872.54248046875, -1667.5568847656));
+						elseif ((CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 150) then
+							if Modstween then 
+								Modstween:Stop()
+								spawn(function()
+									if posrandom <= 1 then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameMon * CFrame.new(0, 0, 35)
+										posrandom = posrandom + 0.1
+									elseif posrandom >= 1 and posrandom <= 2 then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameMon * CFrame.new(35, 0, 0)
+										posrandom = posrandom + 0.1
+									elseif posrandom >= 2 and posrandom <= 3 then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameMon * CFrame.new(0, 0, -35)
+										posrandom = posrandom + 0.1
+									elseif posrandom >= 3 and posrandom <= 4  then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameMon * CFrame.new(-35, 0, 0)
+										posrandom = posrandom + 0.1
+									elseif posrandom >= 4 and posrandom <= 5 then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameMon * CFrame.new(35, 0, 0)
+										posrandom = 0
+									end
+								end)
+							end
+						   -- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameMon;
+						end
+					end
+				end
+			end, function(x)
+			   
+			end)
+		else
+			break;
+		end
+	end
+end)
 ----------------------------------------------------------------------------------------------------------------Setting Tab
-local ThemeSetting = Set:AddSection({"Theme Setting"})
-
-Set:AddButton({"Dark Theme", function()
-    redzlib:SetTheme("Dark")
-end})
-  
-Set:AddButton({"Darker Theme", function()
-    redzlib:SetTheme("Darker")
-end})
-  
-Set:AddButton({"Purple Theme", function()
-    redzlib:SetTheme("Purple")
-end})
-
-local FarmSetting = Set:AddSection({"Farm Setting"})
-
 local SafeMode = Set:AddToggle({
     Name = "Safe Mode",
     Default = _G.Settings.SafeMode
@@ -1924,6 +2301,141 @@ spawn(function()
 		task.wait()
 	end
 end)
+
+local DisableNotification = Set:AddToggle({
+    Name = "Disable Notification",
+    Default = false
+})
+DisableNotification:Callback(function(value)
+    _G.Remove_trct = value
+end)
+spawn(function()
+	while wait() do
+		if _G.Remove_trct then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
+end)
+
+
+local BlackScreen = Set:AddToggle({
+    Name = "Black Screen",
+    Default = false
+})
+BlackScreen:Callback(function(value)
+    _G.BlackScreen = value
+    if value then
+        game.RunService:Set3dRenderingEnabled(false)
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = UDim2.new(500, 0, 500, 500)
+    else
+        game.RunService:Set3dRenderingEnabled(true)
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.Blackscreen.Size = UDim2.new(1, 0, 500, 500)
+    end
+end)
+
+local RunService = game:GetService("RunService")
+local WhiteScreen = Set:AddToggle({
+    Name = "White Screen",
+    Default = false
+})
+WhiteScreen:Callback(function(value)
+    _G.WhiteScreen = value
+    if value then
+        game.RunService:Set3dRenderingEnabled(false)
+    else
+        game.RunService:Set3dRenderingEnabled(true)
+    end
+end)
+
+local AutoTurnOnKenHaki = Set:AddToggle({
+    Name = "Auto Turn On Ken Haki",
+    Default = false
+})
+AutoTurnOnKenHaki:Callback(function(value)
+    _G.AutoKen = value
+end)
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.AutoKen then  
+                if game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and game.Players.LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                else
+                    wait(1)
+                    game:service('VirtualUser'):CaptureController()
+                    game:service('VirtualUser'):SetKeyDown('0x65')
+                    wait(2)
+                    game:service('VirtualUser'):SetKeyUp('0x65')
+                end
+            end
+        end)
+    end
+end)
+
+local DisableCameraShaker = Set:AddToggle({
+    Name = "Disable Camera Shaker",
+    Default = true
+})
+DisableCameraShaker:Callback(function(value)
+    _G.CameraShaker = value
+    CameraShaker()
+end)
+
+local RemoveDamgeText = Set:AddToggle({
+    Name = "Remove Damge Text",
+    Default = true
+})
+RemoveDamgeText:Callback(function(value)
+    _G.Disdamage = value
+    DisabledDamage()
+end)
+
+local AutoTurnOnBusoHaki = Set:AddToggle({
+    Name = "Auto Turn On Buso Haki",
+    Default = true
+})
+AutoTurnOnBusoHaki:Callback(function(value)
+    _G.AutoHaki = value
+end)
+task.spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.AutoHaki then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
+            end
+        end)
+    end
+end)
+
+local FastAttack = Set:AddToggle({
+    Name = "Fast Attack",
+    Default = true
+})
+FastAttack:Callback(function(value)
+    _G.FastAttack = value
+end)
+
+local BringMob = Set:AddToggle({
+    Name = "Bring Mob",
+    Default = true
+})
+BringMob:Callback(function(value)
+    _G.BringMob = value
+end)
+
+Set:AddSlider({
+    Name = "Distance Farm",
+    Min = 1,
+    Max = 50,
+    Increase = 1,
+    Default = 30,
+    Callback = function(value)
+        _G.DistanceAutoFarm = value
+    end
+})
 ----------------------------------------------------------------------------------------------------------------Other Farm Tab
 local AutoSoulGuitar = Farm:AddToggle({
     Name = "Auto Soul Guitar",
@@ -4659,7 +5171,19 @@ task.spawn(function()
     end
 end)
 ----------------------------------------------------------------------------------------------------------------Misc Tab
+local ThemeChanger = Misc:AddSection({"Theme Changer"})
 
+Misc:AddButton({"Dark Theme", function()
+    redzlib:SetTheme("Dark")
+end})
+  
+Misc:AddButton({"Darker Theme", function()
+    redzlib:SetTheme("Darker")
+end})
+  
+Misc:AddButton({"Purple Theme", function()
+    redzlib:SetTheme("Purple")
+end})
 ----------------------------------------------------------------------------------------------------------------Race V4 Tab
 
 ----------------------------------------------------------------------------------------------------------------Event Tab

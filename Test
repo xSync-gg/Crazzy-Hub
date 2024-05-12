@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -600,79 +601,88 @@ function CameraShaker()
     Camera:Stop()
 end
     
-local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
-local CombatFrameworkR = getupvalues(CombatFramework)[2]
-local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
-local RigControllerR = getupvalues(RigController)[2]
-local realbhit = require(game.ReplicatedStorage.CombatFramework.RigLib)
-local cooldownfastattack = tick()
-function CurrentWeapon()
-    local ac = CombatFrameworkR.activeController
-    local ret = ac.blades[1]
-    if not ret then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
-    pcall(function()
-        while ret.Parent ~= game.Players.LocalPlayer.Character do ret = ret.Parent end
-    end)
-    if not ret then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
-    return ret
-end
 
-function getAllBladeHits(Sizes)
-    local Hits = {}
-    local Client = game.Players.LocalPlayer
-    local Characters = workspace.Characters:GetChildren()
-    local Enemies = game:GetService("Workspace").Enemies:GetChildren()
-    for i = 1, #Enemies do
-    local v = Enemies[i]
-    local Human = v:FindFirstChildOfClass("Humanoid")
-    if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) <= Sizes + 5 then
-        table.insert(Hits, Human.RootPart)
-    end
-    end
-    for i = 1,#Characters do local v = Characters[i]
-        if v ~= game.Players.LocalPlayer.Character then
-            local Human = v:FindFirstChildOfClass("Humanoid")
-            if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) <= Sizes + 5 then
-                table.insert(Hits,Human.RootPart)
-            end
-        end
-    end
-    return Hits
-end
-
-function AttackFunc()
-    local ac = CombatFrameworkR.activeController
-    if ac and ac.equipped then
-        for Ryuen = 1, 1 do
-            local bladehit = getAllBladeHits(60)
-            if #bladehit > 0 then
-                local AcAttack8 = debug.getupvalue(ac.attack, 5)
-                local AcAttack9 = debug.getupvalue(ac.attack, 6)
-                local AcAttack7 = debug.getupvalue(ac.attack, 4)
-                local AcAttack10 = debug.getupvalue(ac.attack, 7)
-                local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
-                local NumberAc13 = AcAttack7 * 798405
-                (function() 
-                    NumberAc12 = (NumberAc12 * AcAttack9 + NumberAc13) % 1099511627776
-                    AcAttack8 = math.floor(NumberAc12 / AcAttack9)
-                    AcAttack7 = NumberAc12 - AcAttack8 * AcAttack9
-                end)()
-                AcAttack10 = AcAttack10 + 1
-                debug.setupvalue(ac.attack, 5, AcAttack8)
-                debug.setupvalue(ac.attack, 6, AcAttack9)
-                debug.setupvalue(ac.attack, 4, AcAttack7)
-                debug.setupvalue(ac.attack, 7, AcAttack10)
-                for k, v in pairs(ac.animator.anims.basic) do
-                    v:Play(0.01,0.01,0.01)
-                end  
-                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and ac.blades and ac.blades[1] then
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(CurrentWeapon()))
-                    game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(NumberAc12 / 1099511627776 * 16777215), AcAttack10)
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "") 
-                end
-            end
-        end
-    end
+local FastAttack do
+	FastAttack = {}
+	local CombatLib = getupvalue(require(CombatFramework), 2)
+	local LibModule = require(RigLib)
+	local _getBladeHits = LibModule.getBladeHits
+	local RigControllerEvent = WaitChilds(ReplicatedStorage, "RigControllerEvent")
+	local Validator = WaitChilds(Remotes, "Validator")
+	local function getBladeHits(plrChar, Handle, Distance)
+		local BladeHit = _getBladeHits(plrChar, Handle, (( AttackDistance and 60 ) or Distance ))
+		local NewHits, Verify = {}, {}
+		for _, EnemiePart in pairs(BladeHit) do
+			local Enemie = EnemiePart.Parent
+			if not Verify[Enemie] and Enemie:FindFirstChild("Humanoid") then
+				table.insert(NewHits, Enemie.PrimaryPart)
+				Verify[Enemie] = true
+			end
+		end
+		return NewHits
+	end
+	function Module.BladeHitAttack() -- Source?
+		if not getgenv().FastAttack then
+			VirtualUser:CaptureController()
+			VirtualUser:Button1Down(Vector2.new(1e4, 1e4))
+			return
+		end
+		pcall(function()
+			local AC = CombatLib.activeController
+			if AC.blades and AC.blades[1] then
+				if Module.IsAlive(Player.Character) then
+					local BladeHits = getBladeHits(Player.Character, AC.blades, 60)
+					if #BladeHits > 0 then
+						local Val1 = getupvalue(AC.attack, 5) -- A
+						local Val2 = getupvalue(AC.attack, 6) -- B
+						local Val3 = getupvalue(AC.attack, 4) -- C
+						local Val4 = getupvalue(AC.attack, 7) -- D
+						local Val5 = ((Val1 * 798405 + Val3 * 727595) % Val2)
+						local Val6 = (Val3 * 798405)
+						Val5 = ((Val5 * Val2 + Val6) % 1099511627776)
+						Val1 = (math.floor(Val5 / Val2))
+						Val3 = (Val5 - Val1 * Val2)
+						Val4 = (Val4 + 1)
+						setupvalue(AC.attack, 5, Val1)
+						setupvalue(AC.attack, 6, Val2)
+						setupvalue(AC.attack, 4, Val3)
+						setupvalue(AC.attack, 7, Val4)
+						local Blade = (Player.Character:FindFirstChildOfClass("Tool"))
+						if Blade then
+							AC.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
+							RigControllerEvent:FireServer("weaponChange", Blade.Name)
+							Validator:FireServer(math.floor(Val5 / 1099511627776 * 16777215), Val4)
+							RigControllerEvent:FireServer("hit", BladeHits, 1, "")
+						end
+					end
+				end
+			end
+		end)
+	end
+	local Debounce
+	function Module.PlayerClick()
+		local Delay = (AutoClickDelay or 0.125)
+		if not Debounce or (tick() - Debounce) >= math.clamp(Delay, 0.125, 1) then
+			task.spawn(Module.BladeHitAttack)
+			Debounce = tick()
+		end
+	end
+	function Module.requestClick()
+		if AutoClick and ClickRequest then
+			if Module.IsAlive(Player.Character) and Player.Character:FindFirstChildOfClass("Tool") then
+				for _, Enemie in pairs(Enemies:GetChildren()) do
+					if Module.IsAlive(Enemie) then
+						local EnemiePP = Enemie.PrimaryPart
+						if EnemiePP and Player:DistanceFromCharacter(EnemiePP.Position) < 60 then
+							Module.PlayerClick()
+							break
+						end
+					end
+				end
+			end
+		end
+	end
+	LibModule.getBladeHits = getBladeHits
 end
 
 function AttackPlayers()
@@ -1300,41 +1310,30 @@ elseif _G.FastType == "Fast" then
 elseif _G.FastType == "Extreme" then
 	_G.Fast_Delay = 0
 end
+task.spawn(function() -- Fast Attack
+    while task.wait() do
+        if FastAttack or _G.FastAttack then
+        pcall(function()
+          local AC = CF.activeController
+          AC.timeToNextAttack = 0
+          AC.attacking = false
+          AC.timeToNextBlock = 0
+          AC.increment = 4
+          AC.blocking = false
+          AC.humanoid.AutoRotate = true
+        end)
+      end
+    end
+  end)
+  
 task.spawn(function()
 	pcall(function()
 		while task.wait(_G.Fast_Delay) do
 			if FastAttack or _G.FastAttack then
-                AttackFunc()
+                Module.BladeHitAttack()
 			end
 		end
 	end)
-end)
-local Time = 0.035
-task.spawn(function()
-    while _G.FastAttack do task.wait()
-    require(game.ReplicatedStorage.Util.CameraShaker):Stop()
-    Bruh = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
-    Ryu = debug.getupvalues(Bruh)[2]
-    task.spawn(function()
-        while true do task.wait()
-            if _G.FastAttack then
-                if typeof(Ryu) == "table" then
-                    pcall(function()
-                        --Ryu.activeController.timeToNextAttack = -(math.huge^math.huge^math.huge)
-                        Ryu.activeController.timeToNextAttack = 0
-                        Ryu.activeController.active = false
-                        Ryu.activeController.timeToNextBlock = 0
-                        Ryu.activeController.focusStart = 0
-                        Ryu.activeController.increment = 4
-                        Ryu.activeController.blocking = false
-                        Ryu.activeController.attacking = false
-                        Ryu.activeController.humanoid.AutoRotate = false
-                        end)
-                    end
-                end
-            end
-        end)
-    end
 end)
 
 local MethodFarm = Main:AddDropdown({

@@ -1,4 +1,3 @@
---a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -601,89 +600,87 @@ function CameraShaker()
     Camera:Stop()
 end
     
-
-local FastAttack do
-	FastAttack = {}
-	local CombatLib = getupvalue(require(CombatFramework), 2)
-	local LibModule = require(RigLib)
-	local _getBladeHits = LibModule.getBladeHits
-	local RigControllerEvent = WaitChilds(ReplicatedStorage, "RigControllerEvent")
-	local Validator = WaitChilds(Remotes, "Validator")
-	local function getBladeHits(plrChar, Handle, Distance)
-		local BladeHit = _getBladeHits(plrChar, Handle, (( AttackDistance and 60 ) or Distance ))
-		local NewHits, Verify = {}, {}
-		for _, EnemiePart in pairs(BladeHit) do
-			local Enemie = EnemiePart.Parent
-			if not Verify[Enemie] and Enemie:FindFirstChild("Humanoid") then
-				table.insert(NewHits, Enemie.PrimaryPart)
-				Verify[Enemie] = true
-			end
-		end
-		return NewHits
-	end
-	function Module.BladeHitAttack() -- Source?
-		if not getgenv().FastAttack then
-			VirtualUser:CaptureController()
-			VirtualUser:Button1Down(Vector2.new(1e4, 1e4))
-			return
-		end
-		pcall(function()
-			local AC = CombatLib.activeController
-			if AC.blades and AC.blades[1] then
-				if Module.IsAlive(Player.Character) then
-					local BladeHits = getBladeHits(Player.Character, AC.blades, 60)
-					if #BladeHits > 0 then
-						local Val1 = getupvalue(AC.attack, 5) -- A
-						local Val2 = getupvalue(AC.attack, 6) -- B
-						local Val3 = getupvalue(AC.attack, 4) -- C
-						local Val4 = getupvalue(AC.attack, 7) -- D
-						local Val5 = ((Val1 * 798405 + Val3 * 727595) % Val2)
-						local Val6 = (Val3 * 798405)
-						Val5 = ((Val5 * Val2 + Val6) % 1099511627776)
-						Val1 = (math.floor(Val5 / Val2))
-						Val3 = (Val5 - Val1 * Val2)
-						Val4 = (Val4 + 1)
-						setupvalue(AC.attack, 5, Val1)
-						setupvalue(AC.attack, 6, Val2)
-						setupvalue(AC.attack, 4, Val3)
-						setupvalue(AC.attack, 7, Val4)
-						local Blade = (Player.Character:FindFirstChildOfClass("Tool"))
-						if Blade then
-							AC.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
-							RigControllerEvent:FireServer("weaponChange", Blade.Name)
-							Validator:FireServer(math.floor(Val5 / 1099511627776 * 16777215), Val4)
-							RigControllerEvent:FireServer("hit", BladeHits, 1, "")
-						end
-					end
-				end
-			end
-		end)
-	end
-	local Debounce
-	function Module.PlayerClick()
-		local Delay = (AutoClickDelay or 0.125)
-		if not Debounce or (tick() - Debounce) >= math.clamp(Delay, 0.125, 1) then
-			task.spawn(Module.BladeHitAttack)
-			Debounce = tick()
-		end
-	end
-	function Module.requestClick()
-		if AutoClick and ClickRequest then
-			if Module.IsAlive(Player.Character) and Player.Character:FindFirstChildOfClass("Tool") then
-				for _, Enemie in pairs(Enemies:GetChildren()) do
-					if Module.IsAlive(Enemie) then
-						local EnemiePP = Enemie.PrimaryPart
-						if EnemiePP and Player:DistanceFromCharacter(EnemiePP.Position) < 60 then
-							Module.PlayerClick()
-							break
-						end
-					end
-				end
-			end
-		end
-	end
-	LibModule.getBladeHits = getBladeHits
+FastAttack = {}
+local CombatLib = getupvalue(require(CombatFramework), 2)
+local LibModule = require(RigLib)
+local _getBladeHits = LibModule.getBladeHits
+local RigControllerEvent = WaitChilds(ReplicatedStorage, "RigControllerEvent")
+local Validator = WaitChilds(Remotes, "Validator")
+local function getBladeHits(plrChar, Handle, Distance)
+    local BladeHit = _getBladeHits(plrChar, Handle, (( AttackDistance and 60 ) or Distance ))
+    local NewHits, Verify = {}, {}
+    for _, EnemiePart in pairs(BladeHit) do
+        local Enemie = EnemiePart.Parent
+        if not Verify[Enemie] and Enemie:FindFirstChild("Humanoid") then
+            table.insert(NewHits, Enemie.PrimaryPart)
+            Verify[Enemie] = true
+        end
+    end
+    return NewHits
 end
+function Module.BladeHitAttack() -- Source?
+    if not getgenv().FastAttack then
+        VirtualUser:CaptureController()
+        VirtualUser:Button1Down(Vector2.new(1e4, 1e4))
+        return
+    end
+    pcall(function()
+        local AC = CombatLib.activeController
+        if AC.blades and AC.blades[1] then
+            if Module.IsAlive(Player.Character) then
+                local BladeHits = getBladeHits(Player.Character, AC.blades, 60)
+                if #BladeHits > 0 then
+                    local Val1 = getupvalue(AC.attack, 5) -- A
+                    local Val2 = getupvalue(AC.attack, 6) -- B
+                    local Val3 = getupvalue(AC.attack, 4) -- C
+                    local Val4 = getupvalue(AC.attack, 7) -- D
+                    local Val5 = ((Val1 * 798405 + Val3 * 727595) % Val2)
+                    local Val6 = (Val3 * 798405)
+                    Val5 = ((Val5 * Val2 + Val6) % 1099511627776)
+                    Val1 = (math.floor(Val5 / Val2))
+                    Val3 = (Val5 - Val1 * Val2)
+                    Val4 = (Val4 + 1)
+                    setupvalue(AC.attack, 5, Val1)
+                    setupvalue(AC.attack, 6, Val2)
+                    setupvalue(AC.attack, 4, Val3)
+                    setupvalue(AC.attack, 7, Val4)
+                    local Blade = (Player.Character:FindFirstChildOfClass("Tool"))
+                    if Blade then
+                        AC.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
+                        RigControllerEvent:FireServer("weaponChange", Blade.Name)
+                        Validator:FireServer(math.floor(Val5 / 1099511627776 * 16777215), Val4)
+                        RigControllerEvent:FireServer("hit", BladeHits, 1, "")
+                    end
+                end
+            end
+        end
+    end)
+end
+local Debounce
+function Module.PlayerClick()
+    local Delay = (AutoClickDelay or 0.125)
+    if not Debounce or (tick() - Debounce) >= math.clamp(Delay, 0.125, 1) then
+        task.spawn(Module.BladeHitAttack)
+        Debounce = tick()
+    end
+end
+function Module.requestClick()
+    if AutoClick and ClickRequest then
+        if Module.IsAlive(Player.Character) and Player.Character:FindFirstChildOfClass("Tool") then
+            for _, Enemie in pairs(Enemies:GetChildren()) do
+                if Module.IsAlive(Enemie) then
+                    local EnemiePP = Enemie.PrimaryPart
+                    if EnemiePP and Player:DistanceFromCharacter(EnemiePP.Position) < 60 then
+                        Module.PlayerClick()
+                        break
+                    end
+                end
+            end
+        end
+    end
+end
+LibModule.getBladeHits = getBladeHits
+
 
 function AttackPlayers()
     local ac = CombatFrameworkR.activeController
@@ -1312,7 +1309,7 @@ elseif _G.FastType == "Extreme" then
 end
 task.spawn(function() -- Fast Attack
     while task.wait() do
-        if FastAttack or _G.FastAttack then
+        if _G.FastAttack then
         pcall(function()
           local AC = CF.activeController
           AC.timeToNextAttack = 0

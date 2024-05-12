@@ -1,4 +1,3 @@
---a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -153,25 +152,6 @@ _G.Settings = {
     AutoNextPlace = false
 }
 
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Shit_Hub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            local Array = {}
-            for i, v in pairs(_G.Settings) do
-                Array[i] = v
-            end
-            writefile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-            game:GetService("HttpService"):JSONEncode(Array))
-        end
-    else
-        return 
-    end
-end
-
 function LoadSettings()
     if readfile and writefile and isfile and isfolder then
         if not isfolder("Shit_Hub") then
@@ -189,6 +169,25 @@ function LoadSettings()
             for i, v in pairs(Decode) do
                 _G.Settings[i] = v
             end
+        end
+    else
+        return 
+    end
+end
+
+function SaveSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            LoadSettings()
+        else
+            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Shit_Hub/Blox Fruits/" ..
+                game.Players.LocalPlayer.Name .. ".json"))
+            local Array = {}
+            for i, v in pairs(_G.Settings) do
+                Array[i] = v
+            end
+            writefile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+            game:GetService("HttpService"):JSONEncode(Array))
         end
     else
         return 

@@ -1,3 +1,4 @@
+--a
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
 
 local Window = redzlib:MakeWindow({
@@ -151,49 +152,6 @@ _G.Settings = {
     AutoRaids = false,
     AutoNextPlace = false
 }
-
-function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfolder("Shit_Hub") then
-            makefolder("Shit_Hub")
-        end
-        if not isfolder("Shit_Hub/Blox Fruits/") then
-            makefolder("Shit_Hub/Blox Fruits/")
-        end
-        if not isfile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            writefile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(_G.Settings))
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Shit_Hub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            for i, v in pairs(Decode) do
-                _G.Settings[i] = v
-            end
-        end
-    else
-        return 
-    end
-end
-
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local Decode = game:GetService("HttpService"):JSONDecode(readfile("Shit_Hub/Blox Fruits/" ..
-                game.Players.LocalPlayer.Name .. ".json"))
-            local Array = {}
-            for i, v in pairs(_G.Settings) do
-                Array[i] = v
-            end
-            writefile("Shit_Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-            game:GetService("HttpService"):JSONEncode(Array))
-        end
-    else
-        return 
-    end
-end
-LoadSettings()
 
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TweenService = game:GetService("TweenService")
@@ -1691,7 +1649,6 @@ local AutoFarmLevel = Main:AddToggle({
 AutoFarmLevel:Callback(function(value)
     _G.NeareastFarm = value
     _G.Settings.NeareastFarm = value
-    SaveSettings() 
     if value == false then
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
@@ -3131,7 +3088,6 @@ local AutoBartiloQuest = Farm:AddToggle({
 AutoBartiloQuest:Callback(function(value)
     _G.AutoBartiloQuest = value
     _G.Settings.AutoBartiloQuest = value
-    SaveSettings() 
     if value == false then
         task.wait()
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
